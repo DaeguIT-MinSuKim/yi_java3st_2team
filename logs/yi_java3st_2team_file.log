@@ -1,0 +1,6 @@
+[TRACE] [2020-02-10 18:42:54] setUpBeforeClass()
+[TRACE] [2020-02-10 18:42:54] setUp()
+[TRACE] [2020-02-10 18:42:54] testGetConnection()
+[TRACE] [2020-02-10 18:42:54] HikariProxyConnection@381678167 wrapping com.mysql.jdbc.JDBC4Connection@5c2e5c5a
+[TRACE] [2020-02-10 18:42:54] tearDown()
+[TRACE] [2020-02-10 18:42:54] tearDownAfterClass()
