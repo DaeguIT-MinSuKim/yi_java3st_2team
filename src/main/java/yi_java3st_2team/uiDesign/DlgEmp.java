@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class DlgEmp extends JDialog {
@@ -24,7 +25,7 @@ public class DlgEmp extends JDialog {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JTextField textField_8;
+	private JComboBox comboBox;
 
 	/**
 	 * Launch the application.
@@ -137,9 +138,8 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_8 = new JTextField();
-			textField_8.setColumns(10);
-			contentPanel.add(textField_8);
+			comboBox = new JComboBox();
+			contentPanel.add(comboBox);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -159,4 +159,7 @@ public class DlgEmp extends JDialog {
 		}
 	}
 
+	public JTextField getTextField() {
+		return textField;
+	}
 }

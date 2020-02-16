@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
-public class EmployeeSearchFrame extends JFrame {
+public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pCenter;
@@ -39,26 +39,14 @@ public class EmployeeSearchFrame extends JFrame {
 	private JLabel lblImg;
 	private JLabel lblNewLabel;
 	private JPanel pWest;
-	private JPanel pcNorth;
 	private JLabel lblCust;
 	private JLabel lblAuth;
-	private JPanel panel;
-	private JLabel lblNewLabel_1;
-	private JPanel panel_1;
-	private JPanel panel_2;
-	private JPanel panel_3;
-	private JPanel panel_4;
-	private JLabel lblNewLabel_2;
-	private JPanel pcCenter;
-	private JPanel panel_5;
-	private JPanel panel_6;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JScrollPane scrollPane;
-	private JTable table;
-	private JTextField textField;
-	private JLabel lblNewLabel_3;
 	private DlgEmp dlgEmp;
+	private JPanel pLog;
+	private JPanel pMainLogo;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -67,7 +55,7 @@ public class EmployeeSearchFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmployeeSearchFrame frame = new EmployeeSearchFrame();
+					MainFrame frame = new MainFrame();
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -80,7 +68,7 @@ public class EmployeeSearchFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EmployeeSearchFrame() {
+	public MainFrame() {
 		initialize();
 	}
 	private void initialize() {
@@ -112,7 +100,7 @@ public class EmployeeSearchFrame extends JFrame {
 		pEmployee.setBackground(new Color(18,66,43));
 		
 		lblNewLabel = new JLabel("사원");
-		lblNewLabel.setForeground(new Color(254,208,64));
+		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		pEmployee.add(lblNewLabel, BorderLayout.SOUTH);
@@ -145,123 +133,29 @@ public class EmployeeSearchFrame extends JFrame {
 		contentPane.add(pCenter, BorderLayout.CENTER);
 		pCenter.setLayout(new BorderLayout(0, 0));
 		
-		pcNorth = new JPanel();
-		pcNorth.setBorder(new EmptyBorder(20, 20, 20, 20));
-		pCenter.add(pcNorth, BorderLayout.NORTH);
-		pcNorth.setLayout(new GridLayout(0, 2, 10, 10));
+		pLog = new JPanel();
+		pCenter.add(pLog, BorderLayout.NORTH);
 		
-		lblNewLabel_3 = new JLabel("사원 이름 입력");
-		lblNewLabel_3.setBorder(new EmptyBorder(10, 10, 10, 10));
-		lblNewLabel_3.setBackground(new Color(18,66,43));
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		pcNorth.add(lblNewLabel_3);
+		lblNewLabel_2 = new JLabel("User님 환영합니다");
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		pLog.add(lblNewLabel_2);
 		
-		textField = new JTextField();
-		textField.setBorder(new EmptyBorder(10, 10, 10, 10));
-		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		pcNorth.add(textField);
-		textField.setColumns(10);
-		
-		pcCenter = new JPanel();
-		pCenter.add(pcCenter, BorderLayout.CENTER);
-		pcCenter.setLayout(new BorderLayout(0, 0));
-		
-		panel_5 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_5.getLayout();
-		flowLayout.setHgap(40);
-		pcCenter.add(panel_5, BorderLayout.NORTH);
-		
-		btnNewButton = new JButton("조회");
+		btnNewButton = new JButton("로그아웃");
 		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		panel_5.add(btnNewButton);
+		pLog.add(btnNewButton);
 		
-		btnNewButton_1 = new JButton("취소");
-		btnNewButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		panel_5.add(btnNewButton_1);
+		pMainLogo = new JPanel();
+		pCenter.add(pMainLogo, BorderLayout.CENTER);
+		pMainLogo.setLayout(new BorderLayout(0, 0));
 		
-		panel_6 = new JPanel();
-		pcCenter.add(panel_6, BorderLayout.CENTER);
-		panel_6.setLayout(new BorderLayout(0, 0));
-		
-		scrollPane = new JScrollPane();
-		panel_6.add(scrollPane);
-		
-		table = new JTable();
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] {
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null,null,null}
-				},
-				new String[] {
-					"코드", "이름", "직책", "권한", "월급", "연락처", "아이디", "비밀번호", "부서"
-				}
-		);
-		table.setModel(model);
-		scrollPane.setViewportView(table);
-		TableColumnModel cModel = table.getColumnModel();
-		for(int i=0;i<cModel.getColumnCount();i++) {
-			cModel.getColumn(i).setPreferredWidth(100);
-		}
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\mLogo.png"));
+		pMainLogo.add(lblNewLabel_1);
 		
 		pWest = new JPanel();
 		contentPane.add(pWest, BorderLayout.WEST);
 		pWest.setLayout(new GridLayout(5, 0, 0, 0));
-		
-		panel = new JPanel();
-		pWest.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
-		panel.setBackground(new Color(18,66,43));
-		
-		lblNewLabel_1 = new JLabel("사원검색");
-		lblNewLabel_1.setForeground(new Color(254,208,64));
-		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblNewLabel_1.setBackground(new Color(18,66,43));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(lblNewLabel_1);
-		
-		panel_1 = new JPanel();
-		pWest.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.setBackground(new Color(18,66,43));
-		
-		lblNewLabel_2 = new JLabel("사원정보조회");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		lblNewLabel_2.setBackground(new Color(18,66,43));
-		panel_1.add(lblNewLabel_2, BorderLayout.CENTER);
-		
-		panel_2 = new JPanel();
-		panel_2.setBackground(new Color(18,66,43));
-		pWest.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
-		
-		panel_3 = new JPanel();
-		panel_3.setBackground(new Color(18,66,43));
-		pWest.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
-		
-		panel_4 = new JPanel();
-		panel_4.setBackground(new Color(18,66,43));
-		pWest.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JPopupMenu popMenu = new JPopupMenu();
 		JMenuItem add = new JMenuItem("추가");
@@ -277,7 +171,6 @@ public class EmployeeSearchFrame extends JFrame {
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					dlgEmp.setTitle("사원 " + e.getActionCommand());
-					dlgEmp.getTextField().setEditable(false);
 					dlgEmp.setModal(true);
 					dlgEmp.setVisible(true);
 				}
@@ -300,8 +193,6 @@ public class EmployeeSearchFrame extends JFrame {
 		popMenu.add(add);
 		popMenu.add(up);
 		popMenu.add(del);
-		table.setComponentPopupMenu(popMenu);
-		scrollPane.setComponentPopupMenu(popMenu);
 		
 	}
 
