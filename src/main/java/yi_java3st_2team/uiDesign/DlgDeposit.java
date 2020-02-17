@@ -52,6 +52,7 @@ public class DlgDeposit extends JDialog {
 		}
 		{
 			textField = new JTextField();
+			textField.setEditable(false);
 			contentPanel.add(textField);
 			textField.setColumns(10);
 		}

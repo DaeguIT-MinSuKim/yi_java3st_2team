@@ -1,3 +1,5 @@
+
+
 package yi_java3st_2team.uiDesign;
 
 import java.awt.BorderLayout;
@@ -27,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 @SuppressWarnings("serial")
-public class CardSearchFrame extends JFrame {
+public class BankBookStatisticMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel pCenter;
@@ -50,15 +52,7 @@ public class CardSearchFrame extends JFrame {
 	private JPanel panel_4;
 	private JLabel lblNewLabel_2;
 	private JPanel pcCenter;
-	private JPanel panel_5;
-	private JPanel panel_6;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JScrollPane scrollPane;
-	private JTable table;
-	private JTextField textField;
-	private JLabel lblNewLabel_3;
-	private DlgCard dlgCard;
+	private DlgBook dlgBook;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
@@ -74,6 +68,11 @@ public class CardSearchFrame extends JFrame {
 	private JPanel panel_11;
 	private JLabel label_6;
 	private JLabel label_7;
+	private JLabel lblNewLabel_3;
+	private JPanel panel_5;
+	private JPanel panel_6;
+	private JLabel label_8;
+	private JLabel label_9;
 
 	/**
 	 * Launch the application.
@@ -82,7 +81,7 @@ public class CardSearchFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CardSearchFrame frame = new CardSearchFrame();
+					BankBookStatisticMainFrame frame = new BankBookStatisticMainFrame();
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -95,11 +94,11 @@ public class CardSearchFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CardSearchFrame() {
+	public BankBookStatisticMainFrame() {
 		initialize();
 	}
 	private void initialize() {
-		dlgCard = new DlgCard();
+		dlgBook = new DlgBook();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 500);
@@ -161,78 +160,39 @@ public class CardSearchFrame extends JFrame {
 		pCenter.setLayout(new BorderLayout(0, 0));
 		
 		pcNorth = new JPanel();
-		pcNorth.setBorder(new EmptyBorder(20, 20, 20, 20));
+		pcNorth.setBorder(new EmptyBorder(5, 5, 5, 5));
 		pCenter.add(pcNorth, BorderLayout.NORTH);
 		pcNorth.setLayout(new GridLayout(0, 2, 10, 10));
 		
-		lblNewLabel_3 = new JLabel("고객코드 입력");
-		lblNewLabel_3.setBorder(new EmptyBorder(10, 10, 10, 10));
-		lblNewLabel_3.setBackground(new Color(18,66,43));
-		lblNewLabel_3.setForeground(Color.WHITE);
-		lblNewLabel_3.setOpaque(true);
-		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		pcNorth.add(lblNewLabel_3);
+		panel_5 = new JPanel();
+		panel_5.setBackground(new Color(18, 66, 43));
+		pcNorth.add(panel_5);
+		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		textField = new JTextField();
-		textField.setBorder(new EmptyBorder(10, 10, 10, 10));
-		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		pcNorth.add(textField);
-		textField.setColumns(10);
+		label_8 = new JLabel("통장 거래 내역 조회");
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
+		label_8.setForeground(Color.WHITE);
+		label_8.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		panel_5.add(label_8, BorderLayout.CENTER);
+		
+		panel_6 = new JPanel();
+		panel_6.setBackground(new Color(18, 66, 43));
+		pcNorth.add(panel_6);
+		panel_6.setLayout(new BorderLayout(0, 0));
+		
+		label_9 = new JLabel("통장 정보 조회");
+		label_9.setHorizontalAlignment(SwingConstants.CENTER);
+		label_9.setForeground(Color.WHITE);
+		label_9.setFont(new Font("맑은 고딕", Font.BOLD, 25));
+		panel_6.add(label_9, BorderLayout.CENTER);
 		
 		pcCenter = new JPanel();
 		pCenter.add(pcCenter, BorderLayout.CENTER);
 		pcCenter.setLayout(new BorderLayout(0, 0));
 		
-		panel_5 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel_5.getLayout();
-		flowLayout.setHgap(40);
-		pcCenter.add(panel_5, BorderLayout.NORTH);
-		
-		btnNewButton = new JButton("조회");
-		btnNewButton.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		panel_5.add(btnNewButton);
-		
-		btnNewButton_1 = new JButton("취소");
-		btnNewButton_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		panel_5.add(btnNewButton_1);
-		
-		panel_6 = new JPanel();
-		pcCenter.add(panel_6, BorderLayout.CENTER);
-		panel_6.setLayout(new BorderLayout(0, 0));
-		
-		scrollPane = new JScrollPane();
-		panel_6.add(scrollPane);
-		
-		table = new JTable();
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] {
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null},
-					{null,null,null,null,null,null,null}
-				},
-				new String[] {
-					"카드번호", "고객코드", "상품코드", "카드보안코드", "카드발급일", "카드한도", "카드잔액"
-				}
-		);
-		table.setModel(model);
-		scrollPane.setViewportView(table);
-		TableColumnModel cModel = table.getColumnModel();
-		for(int i=0;i<cModel.getColumnCount();i++) {
-			cModel.getColumn(i).setPreferredWidth(150);
-		}
+		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\mLogo.png").getImage().getScaledInstance(540, 250, 1)));
+		pcCenter.add(lblNewLabel_3, BorderLayout.CENTER);
 		
 		pWest = new JPanel();
 		contentPane.add(pWest, BorderLayout.WEST);
@@ -295,45 +255,6 @@ public class CardSearchFrame extends JFrame {
 		label_2.setBackground(new Color(18, 66, 43));
 		panel_4.add(label_2, BorderLayout.CENTER);
 		
-		JPopupMenu popMenu = new JPopupMenu();
-		JMenuItem add = new JMenuItem("추가");
-		JMenuItem up = new JMenuItem("수정");
-		JMenuItem del = new JMenuItem("삭제");
-		ActionListener popListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("추가")) {
-					dlgCard.setTitle("카드 " + e.getActionCommand());
-					dlgCard.setModal(true);
-					dlgCard.setVisible(true);
-				}
-				else if(e.getActionCommand().equals("수정")) {
-					dlgCard.setTitle("카드 " + e.getActionCommand());
-					dlgCard.setModal(true);
-					dlgCard.setVisible(true);
-				}
-				else {
-					int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
-					switch(res) {
-					case 0:
-						JOptionPane.showMessageDialog(null, "삭제가 완료되었습니다");
-						break;
-					case 1:
-						JOptionPane.showMessageDialog(null, "삭제가 취소되었습니다");
-						break;
-					}
-				}
-			}
-		};
-		add.addActionListener(popListener);
-		up.addActionListener(popListener);
-		del.addActionListener(popListener);
-		popMenu.add(add);
-		popMenu.add(up);
-		popMenu.add(del);
-		table.setComponentPopupMenu(popMenu);
-		scrollPane.setComponentPopupMenu(popMenu);
-		
 		pEast = new JPanel();
 		contentPane.add(pEast, BorderLayout.EAST);
 		pEast.setLayout(new GridLayout(3, 1, 0, 0));
@@ -345,7 +266,7 @@ public class CardSearchFrame extends JFrame {
 		
 		label_3 = new JLabel("통장관리");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setForeground(Color.white);
+		label_3.setForeground(new Color(254,208,64));
 		label_3.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		label_3.setBackground(new Color(18, 66, 43));
 		panel_7.add(label_3, BorderLayout.CENTER);
@@ -357,7 +278,7 @@ public class CardSearchFrame extends JFrame {
 		
 		label_4 = new JLabel("카드관리");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setForeground(new Color(254,208,64));
+		label_4.setForeground(Color.WHITE);
 		label_4.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		label_4.setBackground(new Color(18, 66, 43));
 		panel_8.add(label_4, BorderLayout.CENTER);
@@ -385,9 +306,9 @@ public class CardSearchFrame extends JFrame {
 		pSouth.add(panel_10);
 		panel_10.setLayout(new BorderLayout(0, 0));
 		
-		label_6 = new JLabel("카드 검색");
+		label_6 = new JLabel("통장검색");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setForeground(new Color(254,208,64));
+		label_6.setForeground(Color.white);
 		label_6.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		label_6.setBackground(new Color(18, 66, 43));
 		panel_10.add(label_6,BorderLayout.CENTER);
@@ -396,9 +317,9 @@ public class CardSearchFrame extends JFrame {
 		panel_11.setBackground(new Color(18, 66, 43));
 		pSouth.add(panel_11);
 		
-		label_7 = new JLabel("카드 조회");
+		label_7 = new JLabel("통장 조회");
 		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setForeground(Color.WHITE);
+		label_7.setForeground(new Color(254,208,64));
 		label_7.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		label_7.setBackground(new Color(18, 66, 43));
 		panel_11.add(label_7,BorderLayout.CENTER);

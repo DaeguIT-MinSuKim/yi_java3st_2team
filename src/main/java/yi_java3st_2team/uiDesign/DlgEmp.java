@@ -89,6 +89,7 @@ public class DlgEmp extends JDialog {
 		}
 		{
 			textField_3 = new JTextField();
+			textField_3.setEditable(false);
 			textField_3.setColumns(10);
 			contentPanel.add(textField_3);
 		}
