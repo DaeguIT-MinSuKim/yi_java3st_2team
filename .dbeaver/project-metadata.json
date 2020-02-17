@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170511b8081-5d561d7b19a8cd18"}}}
+=======
+{"resources":{"Scripts/Script.sql":{"sql-editor-data-source-id":"mysql5-170511e7c87-2305d14bff248bba"},"Scripts/V&V test.sql":{}}}
+>>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git

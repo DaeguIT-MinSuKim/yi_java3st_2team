@@ -60,6 +60,7 @@ public class CustShowStatisticsFrame extends JFrame {
 	private JLabel label_6;
 	private JLabel label_7;
 	private JLabel label_8;
+	private JLabel label_9;
 
 	/**
 	 * Launch the application.
@@ -263,6 +264,13 @@ public class CustShowStatisticsFrame extends JFrame {
 		panel_4.setBackground(new Color(18,66,43));
 		pWest.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
+		
+		label_9 = new JLabel("은행 업무 관리");
+		label_9.setHorizontalAlignment(SwingConstants.CENTER);
+		label_9.setForeground(Color.WHITE);
+		label_9.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		label_9.setBackground(new Color(18, 66, 43));
+		panel_4.add(label_9, BorderLayout.CENTER);
 	}
 
 }

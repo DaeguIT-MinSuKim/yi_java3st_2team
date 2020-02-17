@@ -196,26 +196,26 @@ public class CustomerDWSearchFrame extends JFrame {
 		table = new JTable();
 		DefaultTableModel model = new DefaultTableModel(
 				new Object[][] {
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null},
-					{null,null,null}
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null},
+					{null,null,null,null,null}
 				},
 				new String[] {
-					"고객명", "잔액", "일시"
+					"고객명","입출금 구분","금액","잔액","일시"
 				}
 		);
 		table.setModel(model);

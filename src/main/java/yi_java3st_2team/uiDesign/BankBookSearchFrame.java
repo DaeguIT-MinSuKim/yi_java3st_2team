@@ -71,6 +71,11 @@ public class BankBookSearchFrame extends JFrame {
 	private JLabel label_3;
 	private JLabel label_4;
 	private JLabel label_5;
+	private JPanel pSouth;
+	private JPanel panel_10;
+	private JPanel panel_11;
+	private JLabel label_6;
+	private JLabel label_7;
 
 	/**
 	 * Launch the application.
@@ -370,6 +375,35 @@ public class BankBookSearchFrame extends JFrame {
 		label_5.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		label_5.setBackground(new Color(18, 66, 43));
 		panel_9.add(label_5, BorderLayout.CENTER);
+		
+		pSouth = new JPanel();
+		pSouth.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.add(pSouth, BorderLayout.SOUTH);
+		pSouth.setLayout(new GridLayout(0, 2, 0, 0));
+		pSouth.setBackground(new Color(18, 66, 43));
+		
+		panel_10 = new JPanel();
+		panel_10.setBackground(new Color(18, 66, 43));
+		pSouth.add(panel_10);
+		panel_10.setLayout(new BorderLayout(0, 0));
+		
+		label_6 = new JLabel("통장검색");
+		label_6.setHorizontalAlignment(SwingConstants.CENTER);
+		label_6.setForeground(new Color(254,208,64));
+		label_6.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		label_6.setBackground(new Color(18, 66, 43));
+		panel_10.add(label_6,BorderLayout.CENTER);
+		
+		panel_11 = new JPanel();
+		panel_11.setBackground(new Color(18, 66, 43));
+		pSouth.add(panel_11);
+		
+		label_7 = new JLabel("통장 정보 조회");
+		label_7.setHorizontalAlignment(SwingConstants.CENTER);
+		label_7.setForeground(Color.WHITE);
+		label_7.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		label_7.setBackground(new Color(18, 66, 43));
+		panel_11.add(label_7,BorderLayout.CENTER);
 	}
 
 }
