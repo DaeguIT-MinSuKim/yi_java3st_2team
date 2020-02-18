@@ -4,7 +4,7 @@
 package yi_java3st_2team;
 
 public class Library {
-    public boolean someLibraryMethod() {
+    public boolean someLibraryMethod() { 
         return true;
     }
 }
