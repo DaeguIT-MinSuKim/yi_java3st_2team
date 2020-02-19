@@ -77,3 +77,8 @@ insert into performance values
 ('C002','B007','C001'),('C002','B007','C002'),('C002','B007','C003'),('C002','B007','C004'),('C002','B007','C005'),
 ('C003','B007','C001'),('C003','B007','C002'),('C003','B007','C003'),('C003','B007','C004'),('C003','B007','C005');
 select * from performance;
+
+select * from employee;
+insert into employee values ('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2);
+select empname from employee where empid='111' and emppwd=password('111');
+select * from employee where empAuth = 'CS';
