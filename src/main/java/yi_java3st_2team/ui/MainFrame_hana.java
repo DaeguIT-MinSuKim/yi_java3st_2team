@@ -16,7 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.designPanel.CustDWUIPanel;
 import yi_java3st_2team.ui.designPanel.CustInfoUIPanel;
+import yi_java3st_2team.ui.designPanel.CustPlanUIPanel;
+import yi_java3st_2team.ui.panel.CustPlanCenterNorthSearchPanel;
+import yi_java3st_2team.ui.panel.CustStatisticPanel;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
 import java.awt.FlowLayout;
@@ -179,7 +183,11 @@ public class MainFrame_hana extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				pCenter.removeAll();
+				CustStatisticPanel custStatistic = new CustStatisticPanel();
+				pCenter.add(custStatistic);
+				revalidate();
+				repaint();
 				
 			}
 		});
@@ -188,10 +196,34 @@ public class MainFrame_hana extends JFrame {
 		
 		mntmCustPlan = new JMenuItem("고객 상품관리");
 		mntmCustPlan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmCustPlan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustPlanUIPanel custplanUI = new CustPlanUIPanel();
+				pCenter.add(custplanUI);
+				revalidate();
+				repaint();
+				
+			}
+		});
 		mnCust.add(mntmCustPlan);
 		
 		mntmDepositWithdraw = new JMenuItem("입출금 관리");
 		mntmDepositWithdraw.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmDepositWithdraw.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustDWUIPanel custdwUI = new CustDWUIPanel();
+				pCenter.add(custdwUI);
+				revalidate();
+				repaint();
+				
+			}
+		});
 		mnCust.add(mntmDepositWithdraw);
 		
 		pBankWork = new JPanel();

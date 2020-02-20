@@ -3,12 +3,14 @@ package yi_java3st_2team.ui.designPanel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import yi_java3st_2team.ui.panel.CustInfoCenterNorthSearchPanel;
-import yi_java3st_2team.ui.service.CustomerService;
-import yi_java3st_2team.ui.panel.CustInfoCenterCenterTblPanel;
+import yi_java3st_2team.ui.panel.CustDWCenterCenterTblPanel;
 
-public class CustInfoUIPanel extends JPanel {
-	CustomerService custService = new CustomerService();
-	public CustInfoUIPanel() {
+public class CustDWUIPanel extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public CustDWUIPanel() {
 
 		initialize();
 	}
@@ -18,7 +20,7 @@ public class CustInfoUIPanel extends JPanel {
 		CustInfoCenterNorthSearchPanel panel = new CustInfoCenterNorthSearchPanel();
 		add(panel, BorderLayout.NORTH);
 		
-		CustInfoCenterCenterTblPanel panel_1 = new CustInfoCenterCenterTblPanel();
+		CustDWCenterCenterTblPanel panel_1 = new CustDWCenterCenterTblPanel();
 		add(panel_1, BorderLayout.CENTER);
 	}
 
