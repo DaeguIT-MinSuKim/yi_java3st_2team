@@ -50,28 +50,28 @@ public class MainFrame extends JFrame {
 	private JMenuBar mnBarBankWork;
 	private JMenu mnCust;
 	private JMenu mnBankWork;
-	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmEmpSearch;
 	private JMenuItem mnEmpAuth;
-	private JMenu mnNewMenu;
-	private JMenuItem mntmNewMenuItem_1;
-	private JMenuItem mntmNewMenuItem_2;
-	private JMenuItem mntmNewMenuItem_3;
-	private JMenuItem mntmNewMenuItem_4;
-	private JMenuItem mntmNewMenuItem_5;
-	private JMenuItem mntmNewMenuItem_6;
-	private JMenu mnNewMenu_1;
-	private JMenu mnNewMenu_2;
-	private JMenu menu;
-	private JMenuItem mntmNewMenuItem_7;
-	private JMenu mnNewMenu_4;
-	private JMenuItem mntmNewMenuItem_10;
-	private JMenuItem mntmNewMenuItem_11;
-	private JMenuItem menuItem;
-	private JMenu menu_1;
-	private JMenuItem menuItem_1;
-	private JMenuItem menuItem_2;
-	private JMenuItem menuItem_3;
-	private JMenuItem menuItem_4;
+	private JMenu mnEmpInfo;
+	private JMenuItem mntmWorkInfo;
+	private JMenuItem mntmStatistic;
+	private JMenuItem mntmCustInfo;
+	private JMenuItem mntmCustStatistic;
+	private JMenuItem mntmCustPlan;
+	private JMenuItem mntmDepositWithdraw;
+	private JMenu mnBankBook;
+	private JMenu mnCard;
+	private JMenu mnLoan;
+	private JMenuItem mntmBankBook;
+	private JMenu mnBankBookSearch;
+	private JMenuItem mntmBankBooTransInfo;
+	private JMenuItem mntmBankBookStatistic;
+	private JMenuItem mntmCard;
+	private JMenu muCardSearch;
+	private JMenuItem mntmCardTransInfo;
+	private JMenuItem mntmCardStatistic;
+	private JMenuItem mntmLoan;
+	private JMenuItem mntmLoanSearch;
 
 
 	public MainFrame() {
@@ -119,21 +119,21 @@ public class MainFrame extends JFrame {
 		mnEmp.setHorizontalAlignment(SwingConstants.CENTER);
 		mnBarEmp.add(mnEmp);
 		
-		mntmNewMenuItem = new JMenuItem("사원 검색");
-		mntmNewMenuItem.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnEmp.add(mntmNewMenuItem);
+		mntmEmpSearch = new JMenuItem("사원 검색");
+		mntmEmpSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmp.add(mntmEmpSearch);
 		
-		mnNewMenu = new JMenu("사원 정보");
-		mnNewMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnEmp.add(mnNewMenu);
+		mnEmpInfo = new JMenu("사원 정보");
+		mnEmpInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmp.add(mnEmpInfo);
 		
-		mntmNewMenuItem_1 = new JMenuItem("사원 업무 정보 조회");
-		mntmNewMenuItem_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu.add(mntmNewMenuItem_1);
+		mntmWorkInfo = new JMenuItem("사원 업무 정보 조회");
+		mntmWorkInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmpInfo.add(mntmWorkInfo);
 		
-		mntmNewMenuItem_2 = new JMenuItem("사원 현황 조회");
-		mntmNewMenuItem_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu.add(mntmNewMenuItem_2);
+		mntmStatistic = new JMenuItem("사원 현황 조회");
+		mntmStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmpInfo.add(mntmStatistic);
 		
 		mnEmpAuth = new JMenuItem("사원 권한");
 		mnEmpAuth.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -157,21 +157,21 @@ public class MainFrame extends JFrame {
 		mnCust.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		mnBarCust.add(mnCust);
 		
-		mntmNewMenuItem_3 = new JMenuItem("고객 개인정보");
-		mntmNewMenuItem_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnCust.add(mntmNewMenuItem_3);
+		mntmCustInfo = new JMenuItem("고객 개인정보");
+		mntmCustInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmCustInfo);
 		
-		mntmNewMenuItem_4 = new JMenuItem("고객 통계 정보");
-		mntmNewMenuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnCust.add(mntmNewMenuItem_4);
+		mntmCustStatistic = new JMenuItem("고객 통계 정보");
+		mntmCustStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmCustStatistic);
 		
-		mntmNewMenuItem_5 = new JMenuItem("고객 상품관리");
-		mntmNewMenuItem_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnCust.add(mntmNewMenuItem_5);
+		mntmCustPlan = new JMenuItem("고객 상품관리");
+		mntmCustPlan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmCustPlan);
 		
-		mntmNewMenuItem_6 = new JMenuItem("입출금 관리");
-		mntmNewMenuItem_6.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnCust.add(mntmNewMenuItem_6);
+		mntmDepositWithdraw = new JMenuItem("입출금 관리");
+		mntmDepositWithdraw.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmDepositWithdraw);
 		
 		pBankWork = new JPanel();
 		pBankWork.setBackground(Color.WHITE);
@@ -191,57 +191,57 @@ public class MainFrame extends JFrame {
 		mnBankWork.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		mnBarBankWork.add(mnBankWork);
 		
-		mnNewMenu_1 = new JMenu("통장 관리");
-		mnNewMenu_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnBankWork.add(mnNewMenu_1);
+		mnBankBook = new JMenu("통장 관리");
+		mnBankBook.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(mnBankBook);
 		
-		mntmNewMenuItem_7 = new JMenuItem("통장 관리");
-		mntmNewMenuItem_7.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_1.add(mntmNewMenuItem_7);
+		mntmBankBook = new JMenuItem("통장 관리");
+		mntmBankBook.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankBook.add(mntmBankBook);
 		
-		mnNewMenu_4 = new JMenu("통장 조회");
-		mnNewMenu_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_1.add(mnNewMenu_4);
+		mnBankBookSearch = new JMenu("통장 조회");
+		mnBankBookSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankBook.add(mnBankBookSearch);
 		
-		mntmNewMenuItem_10 = new JMenuItem("통장 거래 내역 조회");
-		mntmNewMenuItem_10.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_4.add(mntmNewMenuItem_10);
+		mntmBankBooTransInfo = new JMenuItem("통장 거래 내역 조회");
+		mntmBankBooTransInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankBookSearch.add(mntmBankBooTransInfo);
 		
-		mntmNewMenuItem_11 = new JMenuItem("통장 정보 조회");
-		mntmNewMenuItem_11.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_4.add(mntmNewMenuItem_11);
+		mntmBankBookStatistic = new JMenuItem("통장 정보 조회");
+		mntmBankBookStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankBookSearch.add(mntmBankBookStatistic);
 		
-		mnNewMenu_2 = new JMenu("카드 관리");
-		mnNewMenu_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnBankWork.add(mnNewMenu_2);
+		mnCard = new JMenu("카드 관리");
+		mnCard.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(mnCard);
 		
-		menuItem = new JMenuItem("카드 관리");
-		menuItem.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_2.add(menuItem);
+		mntmCard = new JMenuItem("카드 관리");
+		mntmCard.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCard.add(mntmCard);
 		
-		menu_1 = new JMenu("카드 조회");
-		menu_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnNewMenu_2.add(menu_1);
+		muCardSearch = new JMenu("카드 조회");
+		muCardSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCard.add(muCardSearch);
 		
-		menuItem_1 = new JMenuItem("카드 거래 내역 조회");
-		menuItem_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		menu_1.add(menuItem_1);
+		mntmCardTransInfo = new JMenuItem("카드 거래 내역 조회");
+		mntmCardTransInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		muCardSearch.add(mntmCardTransInfo);
 		
-		menuItem_2 = new JMenuItem("카드 정보 조회");
-		menuItem_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		menu_1.add(menuItem_2);
+		mntmCardStatistic = new JMenuItem("카드 정보 조회");
+		mntmCardStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		muCardSearch.add(mntmCardStatistic);
 		
-		menu = new JMenu("대출 관리");
-		menu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mnBankWork.add(menu);
+		mnLoan = new JMenu("대출 관리");
+		mnLoan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(mnLoan);
 		
-		menuItem_3 = new JMenuItem("대출 관리");
-		menuItem_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		menu.add(menuItem_3);
+		mntmLoan = new JMenuItem("대출 관리");
+		mntmLoan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnLoan.add(mntmLoan);
 		
-		menuItem_4 = new JMenuItem("대출 조회");
-		menuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		menu.add(menuItem_4);
+		mntmLoanSearch = new JMenuItem("대출 조회");
+		mntmLoanSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnLoan.add(mntmLoanSearch);
 		
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.WHITE);
