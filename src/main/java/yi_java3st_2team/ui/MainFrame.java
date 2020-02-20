@@ -2,127 +2,249 @@ package yi_java3st_2team.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
-import yi_java3st_2team.ui.absPanel.AbsCenterNorthMenuPanel;
-import yi_java3st_2team.ui.absPanel.AbsSouthMenuPanel;
-import yi_java3st_2team.ui.absPanel.AbsWestMenuPanel;
-import yi_java3st_2team.ui.panel.CardCenterNorthMenuPanel;
-import yi_java3st_2team.ui.panel.CardCenterStatisticPanel;
-import yi_java3st_2team.ui.panel.CardEastMenuPanel;
-import yi_java3st_2team.ui.panel.CardSouthMenuPanel;
-import yi_java3st_2team.ui.panel.CardWestMenuPanel;
+import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
+import java.awt.FlowLayout;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.SwingConstants;
+import java.awt.Insets;
+import javax.swing.UIManager;
+import java.awt.Cursor;
+import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-
 	private JPanel contentPane;
 	private JPanel pCenter;
 	private JPanel pNorth;
-	private JPanel pEmployee;
-	private JPanel pCust;
-	private JPanel pEmpAuth;
-	private JPanel pImg;
-	private JLabel lblImg;
-	private JLabel lblEmp;
-	private JLabel lblCust;
-	private JLabel lblAuth;
 	private JPanel pcNorth;
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
-	private EmployeeService service;
+	private EmployeeService empService;
+	private CardService cardService;
 	private Employee empAuth;
-	private JPanel pSouth;
-	private JPanel pWest;
-	private JPanel pEast;
-	private JLabel[] wMenus;
-	private JLabel[] eMenus;
-	private JLabel[] sMenus;
-	private JLabel[] cnMenus;
+	private JPanel pImg;
+	private JPanel pEmp;
+	private JPanel pCust;
+	private JPanel pBankWork;
+	private JLabel lblLogo;
+	private JMenuBar mnBarEmp;
+	private JMenu mnEmp;
+	private JMenuBar mnBarCust;
+	private JMenuBar mnBarBankWork;
+	private JMenu mnCust;
+	private JMenu mnBankWork;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mnEmpAuth;
+	private JMenu mnNewMenu;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
+	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
+	private JMenuItem mntmNewMenuItem_5;
+	private JMenuItem mntmNewMenuItem_6;
+	private JMenu mnNewMenu_1;
+	private JMenu mnNewMenu_2;
+	private JMenu menu;
+	private JMenuItem mntmNewMenuItem_7;
+	private JMenu mnNewMenu_4;
+	private JMenuItem mntmNewMenuItem_10;
+	private JMenuItem mntmNewMenuItem_11;
+	private JMenuItem menuItem;
+	private JMenu menu_1;
+	private JMenuItem menuItem_1;
+	private JMenuItem menuItem_2;
+	private JMenuItem menuItem_3;
+	private JMenuItem menuItem_4;
+
 
 	public MainFrame() {
 		initialize();
 	}
 	private void initialize() {
-		service = new EmployeeService();
-		wMenus = new JLabel[5];
-		eMenus = new JLabel[3];
-		sMenus = new JLabel[2];
-		cnMenus = new JLabel[2];
+		empService = new EmployeeService();
+		cardService = new CardService();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1000, 600);
+		setBounds(100, 100, 800, 500);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		pNorth = new JPanel();
+		pNorth.setBackground(Color.WHITE);
 		contentPane.add(pNorth, BorderLayout.NORTH);
 		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		pImg = new JPanel();
-		pImg.setBackground(new Color(18, 66, 43));
+		pImg.setBackground(Color.WHITE);
 		pNorth.add(pImg);
-		pImg.setLayout(new BorderLayout(0, 0));
 		
-		lblImg = new JLabel("");
-		lblImg.setIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png"));
-		lblImg.setBackground(new Color(18, 66, 43));
-		pImg.add(lblImg, BorderLayout.CENTER);
+		lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(System.getProperty("user.dir")+"//images//Logo.png"));
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		pImg.add(lblLogo);
 		
-		pEmployee = new JPanel();
-		pNorth.add(pEmployee);
-		pEmployee.setLayout(new BorderLayout(0, 0));
-		pEmployee.setBackground(new Color(18,66,43));
+		pEmp = new JPanel();
+		pEmp.setBackground(Color.WHITE);
+		pNorth.add(pEmp);
+		pEmp.setLayout(new BorderLayout(0, 0));
 		
-		lblEmp = new JLabel("사원");
-		lblEmp.setForeground(Color.WHITE);
-		lblEmp.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		lblEmp.setHorizontalAlignment(SwingConstants.CENTER);
-		pEmployee.add(lblEmp, BorderLayout.SOUTH);
+		mnBarEmp = new JMenuBar();
+		mnBarEmp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnBarEmp.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBarEmp.setBorder(UIManager.getBorder("Button.border"));
+		mnBarEmp.setBackground(Color.WHITE);
+		pEmp.add(mnBarEmp, BorderLayout.CENTER);
+		
+		mnEmp = new JMenu("사원 관리");
+		mnEmp.setBackground(Color.WHITE);
+		mnEmp.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		mnEmp.setHorizontalAlignment(SwingConstants.CENTER);
+		mnBarEmp.add(mnEmp);
+		
+		mntmNewMenuItem = new JMenuItem("사원 검색");
+		mntmNewMenuItem.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmp.add(mntmNewMenuItem);
+		
+		mnNewMenu = new JMenu("사원 정보");
+		mnNewMenu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmp.add(mnNewMenu);
+		
+		mntmNewMenuItem_1 = new JMenuItem("사원 업무 정보 조회");
+		mntmNewMenuItem_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		mntmNewMenuItem_2 = new JMenuItem("사원 현황 조회");
+		mntmNewMenuItem_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		mnEmpAuth = new JMenuItem("사원 권한");
+		mnEmpAuth.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnEmp.add(mnEmpAuth);
 		
 		pCust = new JPanel();
+		pCust.setBackground(Color.WHITE);
 		pNorth.add(pCust);
 		pCust.setLayout(new BorderLayout(0, 0));
-		pCust.setBackground(new Color(18,66,43));
 		
-		lblCust = new JLabel("고객정보");
-		lblCust.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCust.setForeground(Color.WHITE);
-		lblCust.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		pCust.add(lblCust, BorderLayout.SOUTH);
+		mnBarCust = new JMenuBar();
+		mnBarCust.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnBarCust.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBarCust.setBorder(UIManager.getBorder("Button.border"));
+		mnBarCust.setBackground(Color.WHITE);
+		pCust.add(mnBarCust, BorderLayout.CENTER);
 		
-		pEmpAuth = new JPanel();
-		pNorth.add(pEmpAuth);
-		pEmpAuth.setLayout(new BorderLayout(0, 0));
-		pEmpAuth.setBackground(new Color(18,66,43));
+		mnCust = new JMenu("고객 정보 관리");
+		mnCust.setBackground(Color.WHITE);
+		mnCust.setHorizontalAlignment(SwingConstants.CENTER);
+		mnCust.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		mnBarCust.add(mnCust);
 		
-		lblAuth = new JLabel("사원권한");
-		lblAuth.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAuth.setForeground(Color.WHITE);
-		lblAuth.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		pEmpAuth.add(lblAuth, BorderLayout.SOUTH);
+		mntmNewMenuItem_3 = new JMenuItem("고객 개인정보");
+		mntmNewMenuItem_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmNewMenuItem_3);
+		
+		mntmNewMenuItem_4 = new JMenuItem("고객 통계 정보");
+		mntmNewMenuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmNewMenuItem_4);
+		
+		mntmNewMenuItem_5 = new JMenuItem("고객 상품관리");
+		mntmNewMenuItem_5.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmNewMenuItem_5);
+		
+		mntmNewMenuItem_6 = new JMenuItem("입출금 관리");
+		mntmNewMenuItem_6.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnCust.add(mntmNewMenuItem_6);
+		
+		pBankWork = new JPanel();
+		pBankWork.setBackground(Color.WHITE);
+		pNorth.add(pBankWork);
+		pBankWork.setLayout(new BorderLayout(0, 0));
+		
+		mnBarBankWork = new JMenuBar();
+		mnBarBankWork.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mnBarBankWork.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBarBankWork.setBorder(UIManager.getBorder("Button.border"));
+		mnBarBankWork.setBackground(Color.WHITE);
+		pBankWork.add(mnBarBankWork, BorderLayout.CENTER);
+		
+		mnBankWork = new JMenu("은행 업무 관리");
+		mnBankWork.setBackground(SystemColor.menu);
+		mnBankWork.setHorizontalAlignment(SwingConstants.CENTER);
+		mnBankWork.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		mnBarBankWork.add(mnBankWork);
+		
+		mnNewMenu_1 = new JMenu("통장 관리");
+		mnNewMenu_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(mnNewMenu_1);
+		
+		mntmNewMenuItem_7 = new JMenuItem("통장 관리");
+		mntmNewMenuItem_7.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_1.add(mntmNewMenuItem_7);
+		
+		mnNewMenu_4 = new JMenu("통장 조회");
+		mnNewMenu_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_1.add(mnNewMenu_4);
+		
+		mntmNewMenuItem_10 = new JMenuItem("통장 거래 내역 조회");
+		mntmNewMenuItem_10.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_4.add(mntmNewMenuItem_10);
+		
+		mntmNewMenuItem_11 = new JMenuItem("통장 정보 조회");
+		mntmNewMenuItem_11.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_4.add(mntmNewMenuItem_11);
+		
+		mnNewMenu_2 = new JMenu("카드 관리");
+		mnNewMenu_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(mnNewMenu_2);
+		
+		menuItem = new JMenuItem("카드 관리");
+		menuItem.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_2.add(menuItem);
+		
+		menu_1 = new JMenu("카드 조회");
+		menu_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnNewMenu_2.add(menu_1);
+		
+		menuItem_1 = new JMenuItem("카드 거래 내역 조회");
+		menuItem_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		menu_1.add(menuItem_1);
+		
+		menuItem_2 = new JMenuItem("카드 정보 조회");
+		menuItem_2.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		menu_1.add(menuItem_2);
+		
+		menu = new JMenu("대출 관리");
+		menu.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mnBankWork.add(menu);
+		
+		menuItem_3 = new JMenuItem("대출 관리");
+		menuItem_3.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		menu.add(menuItem_3);
+		
+		menuItem_4 = new JMenuItem("대출 조회");
+		menuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		menu.add(menuItem_4);
 		
 		pCenter = new JPanel();
+		pCenter.setBackground(Color.WHITE);
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
 		pCenter.setForeground(new Color(255, 255, 255));
 		contentPane.add(pCenter, BorderLayout.CENTER);
@@ -131,228 +253,28 @@ public class MainFrame extends JFrame {
 		pcCenter = getMainLogoPanel();
 		pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
-		
-		initMouseListeners();
 	}
-	private void initMouseListeners() {
-		MouseListener cnMenu = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JLabel chkLabel = (JLabel)e.getSource();
-				switch(chkLabel.getText()) {
-				case "카드 거래 내역 조회":
-					cnMenus[0].setForeground(new Color(254,208,64));
-					
-					break;
-				case "카드 정보 조회":
-					cnMenus[1].setForeground(new Color(254,208,64));
-					setCenterCenterMenu();
-					break;
-				}
-			}
-			private void setCenterCenterMenu() {
-				pCenter.remove(pcCenter);
-				pcCenter = new CardCenterStatisticPanel();
-				pCenter.add(pcCenter,BorderLayout.CENTER);
-				repaint();
-				revalidate();
-			}	
-		};
-		MouseListener southMenu = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JLabel chkLabel = (JLabel)e.getSource();
-				switch(chkLabel.getText()) {
-				case "카드 검색":
-					break;
-				case "카드 조회":
-					sMenus[1].setForeground(new Color(254,208,64));
-					setCenterNorthMenu();
-					break;
-				}
-			}
-			private void setCenterNorthMenu() {
-				pcNorth = new CardCenterNorthMenuPanel();
-				initpcNorthPanel();
-				pCenter.add(pcNorth,BorderLayout.NORTH);
-				repaint();
-				revalidate();
-			}
-
-			private void initpcNorthPanel() {
-				cnMenus[0] = ((AbsCenterNorthMenuPanel) pcNorth).getLblMenu1();
-				cnMenus[1] = ((AbsCenterNorthMenuPanel) pcNorth).getLblMenu2();
-				for(JLabel menu : cnMenus) {
-					menu.addMouseListener(cnMenu);
-				}
-			}
-		};
-		
-		MouseListener eastMenu = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JLabel chkLabel = (JLabel)e.getSource();
-				switch(chkLabel.getText()) {
-				case "통장관리":
-					eMenus[0].setForeground(new Color(254,208,64));
-					setSouthMenuPanel();
-					break;
-				case "카드관리":
-					eMenus[1].setForeground(new Color(254,208,64));
-					setSouthMenuPanel();
-					break;
-				case "대출관리":
-					eMenus[2].setForeground(new Color(254,208,64));
-					setSouthMenuPanel();
-					break;
-				}
-			}
-			private void setSouthMenuPanel() {
-				pSouth = new CardSouthMenuPanel();
-				initSouthPanel();
-				contentPane.add(pSouth, BorderLayout.SOUTH);
-				repaint();
-				revalidate();
-			}
-			private void initSouthPanel() {
-				sMenus[0] = ((AbsSouthMenuPanel) pSouth).getLblMenu1();
-				sMenus[1] = ((AbsSouthMenuPanel) pSouth).getLblMenu2();
-				for(JLabel menu : sMenus) {
-					menu.addMouseListener(southMenu);
-				}
-			}
-			
-		};
-		MouseListener westMenu = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JLabel chkLabel = (JLabel)e.getSource();
-				switch(chkLabel.getText()) {
-				case "고객 개인 정보":
-					wMenus[0].setForeground(new Color(254,208,64));
-					setEastPanel();
-					break;
-				case "고객 통계 조회":
-					wMenus[1].setForeground(new Color(254,208,64));
-					setEastPanel();
-					break;
-				case "고객 상품관리":
-					wMenus[2].setForeground(new Color(254,208,64));
-					setEastPanel();
-					break;
-				case "입출금 관리":
-					wMenus[3].setForeground(new Color(254,208,64));
-					setEastPanel();
-					break;
-				case "은행 업무 관리":
-					wMenus[4].setForeground(new Color(254,208,64));
-					setEastPanel();
-					break;
-				}
-			}
-			private void setEastPanel() {
-				pEast = new CardEastMenuPanel();
-				initEastPanel();
-				contentPane.add(pEast, BorderLayout.EAST);
-				repaint();
-				revalidate();
-			}
-			private void initEastPanel() {
-				eMenus[0] = ((CardEastMenuPanel) pEast).getLblMenu1();
-				eMenus[1] = ((CardEastMenuPanel) pEast).getLblMenu2();
-				eMenus[2] = ((CardEastMenuPanel) pEast).getLblMenu3();
-				for(JLabel menu : eMenus) {
-					menu.addMouseListener(eastMenu);
-				}
-			}
-		};
-		MouseListener northMenu = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				initEmpAuth();
-				JLabel chkLabel = (JLabel)e.getSource();
-				switch(chkLabel.getText()) {
-				case "사원":
-					if(empAuth.getEmpAuth().equals("CS")) {
-						JOptionPane.showMessageDialog(null, "접근권한이 없습니다.");
-						return;
-					}
-					break;
-				case "고객정보":
-					if(empAuth.getEmpAuth().equals("HR")) {
-						JOptionPane.showMessageDialog(null, "접근권한이 없습니다.");
-						return;
-					}
-					lblCust.setForeground(new Color(254,208,64));
-					setWestPanel();
-					break;
-				case "사원권한":
-					if(empAuth.getEmpAuth().equals("CS")) {
-						JOptionPane.showMessageDialog(null, "접근권한이 없습니다.");
-						return;
-					}
-					break;
-				}
-			}
-
-			private void setWestPanel() {
-				pCenter.remove(pcNorth);
-				pWest = new CardWestMenuPanel();
-				initWestPanel();
-				contentPane.add(pWest, BorderLayout.WEST);
-				repaint();
-				revalidate();
-			}
-
-			private void initWestPanel() {
-				wMenus[0] = ((AbsWestMenuPanel) pWest).getLblMenu1();
-				wMenus[1] = ((AbsWestMenuPanel) pWest).getLblMenu2();
-				wMenus[2] = ((AbsWestMenuPanel) pWest).getLblMenu3();
-				wMenus[3] = ((AbsWestMenuPanel) pWest).getLblMenu4();
-				wMenus[4] = ((AbsWestMenuPanel) pWest).getLblMenu5();
-				for(JLabel menu : wMenus) {
-					menu.addMouseListener(westMenu);
-				}
-			}
-		};
-		lblEmp.addMouseListener(northMenu);
-		lblCust.addMouseListener(northMenu);
-		lblAuth.addMouseListener(northMenu);
-	}
+	
 	private JPanel getMainLogoPanel() {
 		JPanel panel = new JPanel();
-		String imgPath = System.getProperty("user.dir") + "//images//mLogo.png";
-		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(800, 400, 1)));
+		panel.setBackground(Color.WHITE);
+		String imgPath = System.getProperty("user.dir") + "//images//MainLogo.png";
+		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 250, 1)));
 		panel.add(mainLogo);
 		return panel;
 	}
 	private JPanel getLoginPanel() {
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setBackground(Color.WHITE);
 		lblGreeting = new JLabel();
-		lblGreeting.setFont(new Font("맑은 고딕",Font.BOLD,20));
-		JButton btnLogout = new JButton("로그 아웃");
-		btnLogout.setFont(new Font("맑은 고딕",Font.BOLD,20));
+		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		JButton btnLogout = new JButton("로그아웃");
+		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnLogout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(pEast!=null) {
-					contentPane.remove(pEast);
-					if(pSouth!=null) {
-						contentPane.remove(pSouth);
-					}
-				}
-				Component[] northComponents = pNorth.getComponents();
-				for(Component c : northComponents) {
-					if(lblEmp.getParent().hashCode()==c.hashCode()) {
-						lblEmp.setForeground(Color.white);
-					}
-					else if(lblCust.getParent().hashCode()==c.hashCode()) {
-						lblCust.setForeground(Color.white);
-					}
-					else {
-						lblAuth.setForeground(Color.white);
-					}
-				}
+				setMenuClear();
 				dispose();
 			}
 		});
@@ -365,12 +287,16 @@ public class MainFrame extends JFrame {
 			Employee emp = new Employee();
 			emp.setEmpName(lblGreeting.getText().substring(0,lblGreeting.getText().indexOf("님")));
 			if(empAuth==null) {
-				empAuth = service.GetEmpAuth(emp);
+				empAuth = empService.GetEmpAuth(emp);
+				empAuth.setEmpName(lblGreeting.getText().substring(0,lblGreeting.getText().indexOf("님")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	private void setMenuClear() {
+		
 	}
 
 	public JLabel getLblGreeting() {

@@ -32,18 +32,12 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pCenter;
 	private JPanel pNorth;
-	private JPanel pEmployee;
-	private JPanel pCust;
-	private JPanel pEmpAuth;
 	private JPanel pImg;
 	private JLabel lblINorthLogo;
-	private JLabel lblEmp;
 	private JPanel pcNorth;
 	private JLabel lblBankImg;
 	private JLabel lblGreeting;
 	private JPanel pcCenter;
-	private JLabel lblCust;
-	private JLabel lblAuth;
 	private JLabel lblNId;
 	private JTextField tfId;
 	private JLabel lblPass;
@@ -81,68 +75,37 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
-		//new Color(18,66,43) image와 같은 색
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		pNorth = new JPanel();
+		pNorth.setBackground(Color.WHITE);
 		contentPane.add(pNorth, BorderLayout.NORTH);
-		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
+		pNorth.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		pImg = new JPanel();
-		pImg.setBackground(new Color(18, 66, 43));
+		pImg.setBackground(Color.WHITE);
 		pNorth.add(pImg);
 		pImg.setLayout(new BorderLayout(0, 0));
 		
 		lblINorthLogo = new JLabel("");
-		lblINorthLogo.setIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png"));
-		lblINorthLogo.setBackground(new Color(18, 66, 43));
+		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png").getImage().getScaledInstance(200, 70, 1)));
+		lblINorthLogo.setBackground(Color.WHITE);
 		pImg.add(lblINorthLogo, BorderLayout.CENTER);
 		
-		pEmployee = new JPanel();
-		pNorth.add(pEmployee);
-		pEmployee.setLayout(new BorderLayout(0, 0));
-		pEmployee.setBackground(new Color(18,66,43));
-		
-		lblEmp = new JLabel("사원");
-		lblEmp.setForeground(SystemColor.window);
-		lblEmp.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		lblEmp.setHorizontalAlignment(SwingConstants.CENTER);
-		pEmployee.add(lblEmp, BorderLayout.SOUTH);
-		
-		pCust = new JPanel();
-		pNorth.add(pCust);
-		pCust.setLayout(new BorderLayout(0, 0));
-		pCust.setBackground(new Color(18,66,43));
-		
-		lblCust = new JLabel("고객정보");
-		lblCust.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCust.setForeground(Color.WHITE);
-		lblCust.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		pCust.add(lblCust, BorderLayout.SOUTH);
-		
-		pEmpAuth = new JPanel();
-		pNorth.add(pEmpAuth);
-		pEmpAuth.setLayout(new BorderLayout(0, 0));
-		pEmpAuth.setBackground(new Color(18,66,43));
-		
-		lblAuth = new JLabel("사원권한");
-		lblAuth.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAuth.setForeground(Color.WHITE);
-		lblAuth.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		pEmpAuth.add(lblAuth, BorderLayout.SOUTH);
-		
 		pCenter = new JPanel();
+		pCenter.setBackground(Color.WHITE);
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
 		pCenter.setForeground(new Color(255, 255, 255));
 		contentPane.add(pCenter, BorderLayout.CENTER);
 		pCenter.setLayout(new BorderLayout(0, 0));
 		
 		pcNorth = new JPanel();
+		pcNorth.setBackground(Color.WHITE);
 		FlowLayout flowLayout = (FlowLayout) pcNorth.getLayout();
 		flowLayout.setHgap(20);
 		pCenter.add(pcNorth, BorderLayout.NORTH);
@@ -157,44 +120,48 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcNorth.add(lblGreeting);
 		
 		pcCenter = new JPanel();
+		pcCenter.setBackground(Color.WHITE);
 		pcCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
 		pCenter.add(pcCenter, BorderLayout.CENTER);
 		pcCenter.setLayout(new GridLayout(0, 3, 20, 20));
 		
 		lblNId = new JLabel("User Id");
-		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lblNId.setHorizontalAlignment(SwingConstants.RIGHT);
 		pcCenter.add(lblNId);
 		
 		tfId = new JTextField();
+		tfId.setBackground(SystemColor.menu);
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(tfId);
 		tfId.setColumns(10);
 		
 		btnCheck = new JButton("확인");
 		btnCheck.addActionListener(this);
-		btnCheck.setForeground(Color.WHITE);
-		btnCheck.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		btnCheck.setBackground(new Color(18,66,43));
+		btnCheck.setForeground(Color.BLACK);
+		btnCheck.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		btnCheck.setBackground(SystemColor.menu);
 		pcCenter.add(btnCheck);
 		
 		lblPass = new JLabel("Password");
-		lblPass.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		lblPass.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lblPass.setHorizontalAlignment(SwingConstants.RIGHT);
 		pcCenter.add(lblPass);
 		
 		pfPass = new JPasswordField();
+		pfPass.setBackground(SystemColor.menu);
 		pfPass.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(pfPass);
 		
 		btnLogin = new JButton("Login");
 		btnLogin.addActionListener(this);
-		btnLogin.setForeground(Color.WHITE);
-		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		btnLogin.setBackground(new Color(18,66,43));
+		btnLogin.setForeground(Color.BLACK);
+		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		btnLogin.setBackground(SystemColor.menu);
 		pcCenter.add(btnLogin);
 		
 		panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		pcCenter.add(panel);
 	}
 

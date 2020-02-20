@@ -35,7 +35,34 @@ insert into card values
 ('2931332000000100','C005','B002','000',"2020-02-05 09:00:00",null,null);
 
 select * from card;
-#카드 부분은 추후 구현시 카드한도가 신용카드일때만 한도가 정해져야 하고, 카드잔액이 체크카드일시 예금계좌 잔액과 같아야 하므로 트리거가 필요함
+select * from card where planCode = 'B001';
+select accountBalance from bankbook where accountPlanCode in ('A001','A004');
+select * from card where plancode = 'B002';
+update card set cardBalance = null where plancode = 'B002';
+#신용 카드 한도 조정
+#1등급 : 10,000,000
+#2등급 : 9,000,000
+#3등급 : 8,000,000
+#4등급 : 7,000,000
+#5등급 : 6,000,000
+update card set cardLimit = 10000000 where custCode = 'C001' and plancode = 'B002';
+update card set cardLimit = 9000000 where custCode = 'C002' and plancode = 'B002';
+update card set cardLimit = 8000000 where custCode = 'C003' and plancode = 'B002';
+update card set cardLimit = 7000000 where custCode = 'C004' and plancode = 'B002';
+update card set cardLimit = 6000000 where custCode = 'C005' and plancode = 'B002';
+#체크 카드 통장에 있는 잔액에 따라 업데이트
+select * from bankbook where custcode = 'C002';
+select * from card where plancode = 'B001';
+update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C001' and b.accountPlanCode = 'A001') where plancode = 'B001';
+update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C002' and b.accountPlanCode = 'A004') where plancode = 'B001';
+update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C003' and b.accountPlanCode = 'A004') where plancode = 'B001';
+update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C004' and b.accountPlanCode = 'A004') where plancode = 'B001';
+update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C005' and b.accountPlanCode = 'A004') where plancode = 'B001';
+
+#테이블을 위한 카드 SQL
+select c.cardnum,cs.custname,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode;
+#카드 부분은 추후 구현시 카드한도가 신용카드일때만 한도가 정해져야 하고, 카드잔액이 체크카드일시 예금계좌 잔액과 같아야 하므로 트리거가 필요함 - 일단 테이블부터 구현 후 수정 필요
+
 insert into loan values
 ('293133-11-000001','C001','C001',"2020-02-05 09:00:00",0.01,100000000),
 ('293133-12-000002','C001','C002',"2020-02-05 09:00:00",0.02,100000000),
@@ -82,3 +109,4 @@ select * from employee;
 insert into employee values ('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2);
 select empname from employee where empid='111' and emppwd=password('111');
 select * from employee where empAuth = 'CS';
+select customer.custname,bankbook.accountBalance from customer left join bankbook on customer.`custCode` = bankbook.`custCode` where bankbook.`accountPlanCode` in ('A001','A004'); 

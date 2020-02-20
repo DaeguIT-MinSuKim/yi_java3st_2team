@@ -1,7 +1,6 @@
 package yi_java3st_2team.ui.absPanel;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -18,14 +17,12 @@ import javax.swing.table.TableRowSorter;
 @SuppressWarnings("serial")
 abstract public class AbsCenterTblPanel<T> extends JPanel {
 	private JTable table;
-	private List<T> itemList;
 	protected NotEditableModel model;
 	private JScrollPane scrollPane;
 	public AbsCenterTblPanel() {
 		initialize();
 	}
 	private void initialize() {
-		itemList = new ArrayList<>();
 		setLayout(new BorderLayout(0, 0));
 		
 		scrollPane = new JScrollPane();
@@ -35,8 +32,8 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 	}
-	protected void loadTableData(List<T> itemList) {
-		model = new NotEditableModel(getRows(), getColumns());
+	public void loadTableData(List<T> itemList) {
+		model = new NotEditableModel(getRows(itemList), getColumns());
 		table.setModel(model);
 		
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
@@ -46,10 +43,10 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 	}
 	protected abstract void setTblWidthAlign();
 	protected abstract String[] getColumns();
-	protected Object[][] getRows() {
+	protected Object[][] getRows(List<T> itemList) {
 		Object[][] rows = new Object[itemList.size()][];
 		for(int i=0;i<itemList.size();i++) {
-			rows[i] = toArray(null);
+			rows[i] = toArray(itemList.get(i));
 		}
 		return rows;
 	};

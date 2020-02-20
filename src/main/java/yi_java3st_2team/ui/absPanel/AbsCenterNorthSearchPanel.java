@@ -16,7 +16,9 @@ import java.awt.FlowLayout;
 public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	private JTextField tfSearch;
 	private JLabel lblSearch;
-
+	private JButton btnSearch;
+	private JButton btnCancel;
+	private JPanel pBtn;
 	public AbsCenterNorthSearchPanel() {
 		initialize();
 	}
@@ -30,7 +32,7 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		
 		lblSearch = new JLabel("");
 		lblSearch.setForeground(Color.white);
-		lblSearch.setBackground(new Color(18,66,43));
+		lblSearch.setBackground(Color.WHITE);
 		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,25));
 		lblSearch.setOpaque(true);
 		pSearch.add(lblSearch);
@@ -39,17 +41,27 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		pSearch.add(tfSearch);
 		tfSearch.setColumns(10);
 		
-		JPanel pBtn = new JPanel();
+		pBtn = new JPanel();
 		add(pBtn, BorderLayout.SOUTH);
 		pBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnSearch = new JButton("조회");
+		btnSearch = new JButton("조회");
 		btnSearch.setFont(new Font("맑은 고딕",Font.BOLD,20));
 		pBtn.add(btnSearch);
 		
-		JButton btnCancel = new JButton("취소");
+		btnCancel = new JButton("취소");
 		btnCancel.setFont(new Font("맑은 고딕",Font.BOLD,20));
 		pBtn.add(btnCancel);
+	}
+	public JTextField getTfSearch() {
+		return tfSearch;
+	}
+	
+	public JButton getBtnSearch() {
+		return btnSearch;
+	}
+	public JButton getBtnCancel() {
+		return btnCancel;
 	}
 	protected void setText(String text) {
 		lblSearch.setText(text);
