@@ -31,7 +31,7 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		pSearch.setLayout(new GridLayout(0, 2, 20, 20));
 		
 		lblSearch = new JLabel("");
-		lblSearch.setForeground(Color.white);
+		lblSearch.setForeground(Color.WHITE);
 		lblSearch.setBackground(Color.WHITE);
 		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,25));
 		lblSearch.setOpaque(true);
@@ -52,6 +52,12 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		btnCancel = new JButton("취소");
 		btnCancel.setFont(new Font("맑은 고딕",Font.BOLD,20));
 		pBtn.add(btnCancel);
+	}
+	
+	
+	
+	public JLabel getLblSearch() {
+		return lblSearch;
 	}
 	public JTextField getTfSearch() {
 		return tfSearch;
