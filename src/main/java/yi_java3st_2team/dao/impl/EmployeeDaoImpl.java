@@ -67,6 +67,24 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee selectEmpByName(Employee emp) {
+		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+				"   where empName=?";
+		
+		try (Connection con = MySqlDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setString(1, emp.getEmpName());
+			
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return getEmployee(rs);
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

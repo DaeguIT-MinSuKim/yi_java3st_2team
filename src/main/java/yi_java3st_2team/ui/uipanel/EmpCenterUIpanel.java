@@ -5,6 +5,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
 import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	private EmployeeUIService service;
 	private EmpCenterNorthSearchPanel pEmpSerch;
+	private EmpCenterTblPanel pEmpTblPanel;
 	
 	
 	public EmpCenterUIpanel() {
@@ -27,7 +29,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	
 		add(pEmpSerch);
 		
-		EmpCenterTblPanel pEmpTblPanel = new EmpCenterTblPanel();
+		pEmpTblPanel = new EmpCenterTblPanel();
 	    //리스트불러오기
 		pEmpTblPanel.loadTableData(service.showEmpList());
 		add(pEmpTblPanel);
@@ -50,7 +52,10 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	}
 	protected void pEmpSerchBtnSearchActionPerformed(ActionEvent e) {
 		String eName = pEmpSerch.getTfSearch().getText();
-		JOptionPane.showConfirmDialog(null, eName);
+	//	JOptionPane.showConfirmDialog(null, eName); 잘들어감
+	//	Employee emp = service.showPickedEmp(eName);
+	//	emp.setEmpName(eName);
+		
 		
 		
 	}

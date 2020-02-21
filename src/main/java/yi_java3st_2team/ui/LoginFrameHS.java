@@ -47,7 +47,7 @@ public class LoginFrameHS extends JFrame implements ActionListener {
 	private JPanel panel;
 	private LoginService service;
 	private boolean chkLogin;
-	private MainFrame main;
+	private MainFrameHS main;
 	private Employee chkEmp;
 	/**
 	 * Launch the application.
@@ -74,7 +74,7 @@ public class LoginFrameHS extends JFrame implements ActionListener {
 	}
 	private void initialize() {
 		service = new LoginService();
-		main = new MainFrame();
+		main = new MainFrameHS();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -93,7 +93,8 @@ public class LoginFrameHS extends JFrame implements ActionListener {
 		pImg.setLayout(new BorderLayout(0, 0));
 		
 		lblINorthLogo = new JLabel("");
-		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png").getImage().getScaledInstance(200, 70, 1)));
+		String dirPath = System.getProperty("user.dir")+"\\images\\logo.png";
+		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon(dirPath).getImage().getScaledInstance(200, 70, 1)));
 		lblINorthLogo.setBackground(Color.WHITE);
 		pImg.add(lblINorthLogo, BorderLayout.CENTER);
 		
