@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -22,6 +23,7 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 	public AbsCenterTblPanel() {
 		initialize();
 	}
+	
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -42,15 +44,19 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		setTblWidthAlign();
 	}
 	protected abstract void setTblWidthAlign();
+	
 	protected abstract String[] getColumns();
+	
 	protected Object[][] getRows(List<T> itemList) {
 		Object[][] rows = new Object[itemList.size()][];
 		for(int i=0;i<itemList.size();i++) {
 			rows[i] = toArray(itemList.get(i));
+			
 		}
 		return rows;
 	};
 	protected abstract Object[] toArray(T item);
+	
 	protected void setColumnWidth(int ...idx) {
 		TableColumnModel cModel = table.getColumnModel();
 		for(int i=0;i<cModel.getColumnCount();i++) {
@@ -81,6 +87,14 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		}
 		return selectedIdx;
 	}
+	
+	
+	public void setPopupMenu(JPopupMenu popupMenu) {
+		scrollPane.setComponentPopupMenu(popupMenu);
+		table.setComponentPopupMenu(popupMenu);
+	}
+	
+	
 	protected class NotEditableModel extends DefaultTableModel {
 
 		public NotEditableModel(Object[][] rows, String[] columns) {

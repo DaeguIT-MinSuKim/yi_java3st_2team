@@ -18,5 +18,9 @@ public class CustomerService {
 		return dao.selectCustomerAll();
 	}
 	
+	public Customer showCustomerByName(String custName) throws SQLException{
+		return dao.selectCustomerByName(custName);
+	}
+	
 	
 }

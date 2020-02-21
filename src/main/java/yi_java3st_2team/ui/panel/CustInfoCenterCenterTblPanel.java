@@ -17,7 +17,7 @@ public class CustInfoCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 	@Override
 	protected void setTblWidthAlign() {
 		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5);
-		setColumnWidth(100,100,100,100,100,100);
+		setColumnWidth(50,50,50,50,100,100);
 	}
 
 	@Override

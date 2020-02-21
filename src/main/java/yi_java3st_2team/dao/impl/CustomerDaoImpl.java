@@ -49,4 +49,24 @@ public class CustomerDaoImpl implements CustomerDao {
 		return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
 	}
 
+	@Override
+	public Customer selectCustomerByName(String custName) throws SQLException {
+		Customer customer = null;
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = ?";
+		try(Connection con = MySqlDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1, custName);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					return getCustomer(rs);
+				}
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
