@@ -30,8 +30,9 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
-		service = new CardService();
-		dlgCard = new DlgCard();
+		if(service==null) {
+			service = new CardService();
+		}
 		setLayout(new BorderLayout(0, 0));
 		
 		pNorth = new CardCenterNorthSearchPanel();
@@ -41,22 +42,15 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		
 		pCenter = new CardCenterTblPanel();
 		add(pCenter, BorderLayout.CENTER);
-		
-		try {
-			pCenter.loadTableData(service.showCards());
-			pCenter.setupPopMenu(getTblPopMenu());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		updateTable();
 	}
-
 	private JPopupMenu getTblPopMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 		ActionListener popMenuListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
+					dlgCard = new DlgCard();
 					dlgCard.initCmbModel(service);
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.setModal(true);
@@ -120,5 +114,23 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	}
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
 		pNorth.tfClear();
+	}
+	public void updateTable() {
+		try {
+			List<Card> list = service.showCards();
+			pCenter.loadTableData(list);
+			pCenter.setPopupMenu(getTblPopMenu());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void insertTable(Card card) {
+		try {
+			service.insertCard(card);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
