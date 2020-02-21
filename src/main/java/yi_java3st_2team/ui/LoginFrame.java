@@ -48,6 +48,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private LoginService service;
 	private boolean chkLogin;
 	private MainFrame_pis main;
+	
+	
+	
 	private Employee chkEmp;
 	/**
 	 * Launch the application.
