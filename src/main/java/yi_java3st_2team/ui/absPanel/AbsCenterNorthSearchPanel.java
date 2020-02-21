@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
@@ -31,9 +32,10 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		pSearch.setLayout(new GridLayout(0, 2, 20, 20));
 		
 		lblSearch = new JLabel("");
-		lblSearch.setForeground(Color.white);
+		lblSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSearch.setForeground(Color.black);
 		lblSearch.setBackground(Color.WHITE);
-		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,25));
+		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,16));
 		lblSearch.setOpaque(true);
 		pSearch.add(lblSearch);
 		

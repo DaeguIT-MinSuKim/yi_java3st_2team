@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel;
 
 import java.awt.FlowLayout;
@@ -34,7 +35,7 @@ import java.awt.Cursor;
 import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrameHS extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pCenter;
 	private JPanel pNorth;
@@ -78,10 +79,13 @@ public class MainFrame extends JFrame {
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
 
+	
+	//
+	private EmpCenterUIpanel pEmpUIPanel;
 
 	
 
-	public MainFrame() {
+	public MainFrameHS() {
 		initialize();
 	}
 	private void initialize() {
@@ -127,9 +131,33 @@ public class MainFrame extends JFrame {
 		mnBarEmp.add(mnEmp);
 		
 		mntmEmpSearch = new JMenuItem("사원 검색");
+		
 		mntmEmpSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mntmEmpSearch);
-
+//		//사원 검색에 마우스 리스너 달기 
+//		
+//		
+//		//마우스 리스너 현서
+//		MouseListener myMouseListener = new MouseAdapter() {
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				//사원검색 클릭하면 
+//				setCenterEmpSearchUIPanel();
+//			}
+//
+//			private void setCenterEmpSearchUIPanel() {
+//				pCenter.removeAll();
+//				pEmpUIPanel = new EmpCenterUIpanel();
+//	            pCenter.add(pEmpUIPanel,BorderLayout.CENTER);
+//	            repaint();
+//	            revalidate();
+//				
+//			}
+//
+//		};
+//		mntmEmpSearch.addMouseListener(myMouseListener);
+		
 		mnEmpInfo = new JMenu("사원 정보");
 		mnEmpInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mnEmpInfo);
@@ -260,6 +288,10 @@ public class MainFrame extends JFrame {
 		pcCenter = getMainLogoPanel();
 		pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
+		
+		
+		//액션리스너 밑쪽으로 빼기
+		mntmEmpSearch.addActionListener(this);
 	}
 	
 	private JPanel getMainLogoPanel() {
@@ -312,4 +344,20 @@ public class MainFrame extends JFrame {
 	
 	
 	
+	
+	
+	//액션리스너
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmEmpSearch) {
+			mntmEmpSearchActionPerformed(e); //사원관리 누르면 
+		}
+	}
+	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
+		//센터 지우고  센터에 패널 모프시키기 
+		pCenter.removeAll();
+		pEmpUIPanel = new EmpCenterUIpanel();
+        pCenter.add(pEmpUIPanel,BorderLayout.CENTER);
+        repaint();
+        revalidate();
+	}
 }
