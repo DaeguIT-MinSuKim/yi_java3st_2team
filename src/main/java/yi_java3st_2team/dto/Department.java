@@ -12,6 +12,12 @@ public class Department {
 		this.deptNo = deptNo;
 		this.deptName = deptName;
 	}
+	
+
+	public Department(int deptNo) {
+		super();
+		this.deptNo = deptNo;
+	}
 
 	public int getDeptNo() {
 		return deptNo;
@@ -25,5 +31,12 @@ public class Department {
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s(%d)", deptName,deptNo);
+	}
+	
+	
 	
 }

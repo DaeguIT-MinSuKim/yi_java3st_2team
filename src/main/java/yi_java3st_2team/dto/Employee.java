@@ -33,6 +33,8 @@ public class Employee {
 		this.empPwd = empPwd;
 	}
 
+	
+	
 	public String getEmpCode() {
 		return empCode;
 	}

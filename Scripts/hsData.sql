@@ -48,3 +48,4 @@ delimiter $
 delimiter ;
 
 call proc_total_avg();
+select convert(varchar(50), 

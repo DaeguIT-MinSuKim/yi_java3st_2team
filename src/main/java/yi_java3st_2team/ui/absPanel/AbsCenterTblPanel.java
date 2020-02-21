@@ -52,10 +52,20 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		return rows;
 	};
 	protected abstract Object[] toArray(T item);
+	
+	//
+//	protected void setColumnWidth(int ...idx) {
+//		TableColumnModel cModel = table.getColumnModel();
+//		for(int i=0;i<cModel.getColumnCount();i++) {
+//			cModel.getColumn(i).setWidth(idx[i]);
+//		}
+//	}
+	
 	protected void setColumnWidth(int ...idx) {
 		TableColumnModel cModel = table.getColumnModel();
-		for(int i=0;i<cModel.getColumnCount();i++) {
-			cModel.getColumn(i).setWidth(idx[i]);
+		for(int i=0; i< idx.length; i++) {
+			cModel.getColumn(i).setPreferredWidth(idx[i]);
+			
 		}
 	}
 	protected void setColumnAlign(int align, int...idx) {

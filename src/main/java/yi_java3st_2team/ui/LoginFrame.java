@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel panel;
 	private LoginService service;
 	private boolean chkLogin;
-	private MainFrame_pis main;
+	private MainFrame main;
 	private Employee chkEmp;
 	/**
 	 * Launch the application.
@@ -74,7 +74,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	}
 	private void initialize() {
 		service = new LoginService();
-		main = new MainFrame_pis();
+		main = new MainFrame();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -131,6 +131,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.add(lblNId);
 		
 		tfId = new JTextField();
+		//미리 아이디랑 비번 넣어두기
+		tfId.setText("111");
 		tfId.setBackground(SystemColor.menu);
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(tfId);
@@ -150,6 +152,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		pfPass = new JPasswordField();
 		pfPass.setBackground(SystemColor.menu);
+		pfPass.setText("111");
 		pfPass.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(pfPass);
 		
