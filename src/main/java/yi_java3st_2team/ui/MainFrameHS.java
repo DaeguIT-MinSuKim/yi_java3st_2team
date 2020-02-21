@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 import java.awt.Insets;
 import javax.swing.UIManager;
 import java.awt.Cursor;
+import java.awt.EventQueue;
 import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
@@ -83,6 +84,20 @@ public class MainFrameHS extends JFrame implements ActionListener {
 	//
 	private EmpCenterUIpanel pEmpUIPanel;
 
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainFrameHS frame = new MainFrameHS();
+					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	
 
 	public MainFrameHS() {

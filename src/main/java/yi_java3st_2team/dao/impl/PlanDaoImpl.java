@@ -9,6 +9,9 @@ import java.util.List;
 
 import yi_java3st_2team.dao.PlanDao;
 import yi_java3st_2team.ds.MySqlDataSource;
+import yi_java3st_2team.dto.BankBook;
+import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.Plan;
 
 public class PlanDaoImpl implements PlanDao {
@@ -45,6 +48,54 @@ public class PlanDaoImpl implements PlanDao {
 		String planDesc = rs.getString("planDesc");
 		String planDiv = rs.getString("planDiv");
 		return new Plan(planCode, planDetail, planName, planDesc, planDiv);
+	}
+
+	@Override
+	public List<Plan> selectPlanByBankBook() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ?";
+		try(Connection con = MySqlDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "A%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Plan> selectPlanByCard() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ?";
+		try(Connection con = MySqlDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "B%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Plan> selectPlanByLoan() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ?";
+		try(Connection con = MySqlDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "C%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
 	}
 
 }

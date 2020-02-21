@@ -49,9 +49,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private boolean chkLogin;
 	private MainFrame main;
 	private Employee chkEmp;
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -35,6 +35,11 @@ public class Employee {
 
 	
 	
+	public Employee(String empName) {
+		super();
+		this.empName = empName;
+	}
+
 	public String getEmpCode() {
 		return empCode;
 	}

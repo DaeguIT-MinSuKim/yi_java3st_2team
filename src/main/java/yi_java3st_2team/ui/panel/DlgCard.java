@@ -42,27 +42,13 @@ public class DlgCard extends JDialog implements ActionListener {
 	private JButton btnCancel;
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
+	private CardCenterUIPanel uiPanel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			DlgCard dialog = new DlgCard();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public DlgCard() {
 		initialize();
 	}
 	private void initialize() {
+		uiPanel = new CardCenterUIPanel();
 		setBounds(100, 100, 450, 450);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -235,12 +221,8 @@ public class DlgCard extends JDialog implements ActionListener {
 	}
 	public void initCmbModel(CardService service) {
 		try {
-			List<Customer> custList = new ArrayList<>();
-			List<Plan> planList = new ArrayList<>();
-			for(Card c : service.showCards()) {
-				custList.add(c.getCustCode());
-				planList.add(c.getPlanCode());
-			}
+			List<Customer> custList = service.showCusts();
+			List<Plan> planList = service.showPlansByCard();
 			DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
 			DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
 			cmbCust.setModel(cmbCustModel);
@@ -259,7 +241,27 @@ public class DlgCard extends JDialog implements ActionListener {
 		}
 	}
 	protected void btnOkActionPerformed(ActionEvent e) {
+		uiPanel.insertTable(getItem());
+		uiPanel.updateTable();
+		dispose();
 	}
+
+	private Card getItem() {
+		String cardNum = tfCardNum.getText();
+		Customer custCode = (Customer)cmbCust.getSelectedItem();
+		Plan planCode = (Plan)cmbPlan.getSelectedItem();
+		String cardSecuCode = tfCVS.getText();
+		Date cardIssueDate = tfCardIssueDate.getDate();
+		Card card = new Card(cardNum, custCode, planCode, cardSecuCode, cardIssueDate);
+		if(cardNum.substring(6, 7).equals("1")) {
+			card.setCardBalance(Long.parseLong(tfCardBalance.getText()));
+		}
+		else {
+			card.setCardLimit(Integer.parseInt(tfCardLimit.getText()));
+		}
+		return card;
+	}
+
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		cmbCust.setSelectedIndex(-1);
 		tfCardNum.setText("");

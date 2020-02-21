@@ -19,6 +19,12 @@ public class EmployeeUIService {
     	return empDao.selectEmployeeByAll();
     }
     
+    //사원 이름으로 검색
+    public Employee showPickedEmp(Employee emp){
+    	return empDao.selectEmpByName(emp);
+    }
+    
+   
     
     
     public void removeEmp(Employee emp) {
