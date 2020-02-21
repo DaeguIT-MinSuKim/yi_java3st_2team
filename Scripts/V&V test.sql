@@ -1,3 +1,4 @@
+use bank;
 select * from employee;
 select * from plan;
 select * from customer;
@@ -22,6 +23,7 @@ select * from bankbook;
 
 desc card;
 
+alter table card drop column cardname;
 insert into card values
 ('2931331000000010','C001','B001','111',"2020-02-05 09:00:00",null,null),
 ('2931332000000020','C001','B002','222',"2020-02-05 09:00:00",null,null),
@@ -33,6 +35,7 @@ insert into card values
 ('2931332000000080','C004','B002','888',"2020-02-05 09:00:00",null,null),
 ('2931331000000090','C005','B001','999',"2020-02-05 09:00:00",null,null),
 ('2931332000000100','C005','B002','000',"2020-02-05 09:00:00",null,null);
+
 
 select * from card;
 select * from card where planCode = 'B001';

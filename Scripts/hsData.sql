@@ -14,9 +14,10 @@ insert into department values
 select * from employee;
 -- 인사팀은 과장,차장,부장만 존재
 -- 인사팀
-('A001','나인사','부장','HR',6000000,'010-2222-2222','HRid1',password('testforHD1)',1),
-('A002','정아름','차장','HR',5000000,'010-2222-2222','HRid2',password('testforHD1)',1),
-('A003','이상원','과장','HR',4000000,'010-2222-2222','HRid3',password('testforHD1)',1),
+insert into employee values
+('A001','나인사','부장','HR',6000000,'010-2222-2222','HRid1',password('testforHD1'),1),
+('A002','정아름','차장','HR',5000000,'010-2222-2222','HRid2',password('testforHD1'),1),
+('A003','이상원','과장','HR',4000000,'010-2222-2222','HRid3',password('testforHD1'),1),
 -- 고객팀
 ('B001','나지점','지점장','AD',10000000,'010-1234-1234','ADid',password('testforAD'),2),
 ('B002','장현서','부지점장','CS',8000000,'010-4444-7767','CSid1',password('testforCS1'),2),

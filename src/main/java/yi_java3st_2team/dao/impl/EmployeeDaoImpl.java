@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import yi_java3st_2team.dao.EmployeeDao;
+import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
@@ -24,7 +25,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Employee getEmpIdPass(Employee emp) throws SQLException {
 		String sql = "select empname from employee where empid=? and emppwd=password(?)";
 		Employee employee = new Employee();
-		try(Connection con = MySqlDataSource.getConnection();
+		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpId());
 			pstmt.setString(2, emp.getEmpPwd());
@@ -47,7 +48,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Employee getEmpAuth(Employee emp) throws SQLException {
 		String sql = "select empauth from employee where empname = ?";
 		Employee employee = new Employee();
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpName());
 			try(ResultSet rs = pstmt.executeQuery()) {

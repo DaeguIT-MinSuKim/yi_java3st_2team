@@ -1,3 +1,4 @@
+use bank;
 select user(), database ();
 select * from customer c ;
 select * from plan p ;

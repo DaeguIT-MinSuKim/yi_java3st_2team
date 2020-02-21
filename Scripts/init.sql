@@ -246,10 +246,8 @@ ALTER TABLE bank.Performance
 		REFERENCES bank.Plan ( -- 고객상품
 			planCode -- 상품코드
 		);
-
-use mysql;
+/*
 grant all privileges on *.* to 'root'@'%' identified by 'bank';
-	
 create user if not exists 'hana'@'192.168.10.%';
 grant all privileges on bank.* to 'hana'@'192.168.10.%' identified by 'bank';
 flush privileges;
@@ -261,3 +259,4 @@ flush privileges;
 create user if not exists 'insun'@'192.168.10.%';
 grant all privileges on bank.* to 'insun'@'192.168.10.%' identified by 'bank';
 flush privileges;
+*/
