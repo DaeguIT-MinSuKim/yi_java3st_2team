@@ -30,6 +30,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new CustInfoCenterNorthSearchPanel();
+		panel.getBtnCancel().addActionListener(this);
 		panel.getBtnSearch().addActionListener(this);
 		add(panel, BorderLayout.NORTH);
 		
@@ -58,6 +59,9 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == panel.getBtnCancel()) {
+			panelBtnCancelActionPerformed(e);
+		}
 		if (e.getSource() == panel.getBtnSearch()) {
 			panelBtnSearchActionPerformed(e);
 		}
@@ -66,14 +70,24 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		String custName = panel.getTfSearch().getText();
 		try {
 			Customer newCust = custService.showCustomerByName(custName);
-			if(custName.equals(newCust.getCustName())) {
-				JOptionPane.showMessageDialog(null, "이미 조회된 고객입니다.");
+			//listForCustName.get(0).getName()
+			if(listForCustName.size()==0) {
+				listForCustName.add(newCust);
+			}else {
+				JOptionPane.showMessageDialog(null, "이미 고객이 조회되어 있습니다. 취소 후 다시 조회해주세요.");
+				return;
 			}
-			
-			listForCustName.add(newCust);
 			panel_1.loadTableData(listForCustName);
 		} catch (SQLException e1) {
 			System.out.println("해당 고객이 없습니다.");
+			e1.printStackTrace();
+		}
+	}
+	protected void panelBtnCancelActionPerformed(ActionEvent e) {
+		panel.tfClear();
+		try {
+			panel_1.loadTableData(custService.showCustomers());
+		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 	}

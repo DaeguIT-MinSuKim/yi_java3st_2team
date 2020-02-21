@@ -44,7 +44,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		
 		try {
 			pCenter.loadTableData(service.showCards());
-			pCenter.setupPopMenu(getTblPopMenu());
+			pCenter.setPopupMenu(getTblPopMenu());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
