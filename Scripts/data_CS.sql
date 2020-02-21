@@ -18,3 +18,8 @@ insert into plan values("A001", "AA001", "슈퍼정기예금", "가입자 맞춤
 					   ("C003", "CC001", "생활안정 대출", "생활비를 위한 카드론", "N");
 
 insert into plan values("A004", "AA002", "일반정기예금", "일반 정기예금", "N");
+
+
+-- test 
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer;
+select planCode, planDetail, planName, planDesc, planDiv from plan;

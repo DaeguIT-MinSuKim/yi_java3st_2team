@@ -135,6 +135,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		tfId.setText("111");
 		tfId.setBackground(SystemColor.menu);
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		tfId.setText("111");
 		pcCenter.add(tfId);
 		tfId.setColumns(10);
 		
@@ -154,6 +155,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pfPass.setBackground(SystemColor.menu);
 		pfPass.setText("111");
 		pfPass.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
+		pfPass.setText("111");
 		pcCenter.add(pfPass);
 		
 		btnLogin = new JButton("Login");
