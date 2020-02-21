@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -74,12 +75,16 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 	
 	protected abstract T getSelectedItem();
 	
-	protected int getSelectedRowIdx() {
+	public int getSelectedRowIdx() {
 		int selectedIdx = table.getSelectedRow();
 		if(selectedIdx==-1) {
 			throw new RuntimeException("선택부터 해주세요");
 		}
 		return selectedIdx;
+	}
+	public void setupPopMenu(JPopupMenu menu) {
+		scrollPane.setComponentPopupMenu(menu);
+		table.setComponentPopupMenu(menu);
 	}
 	protected class NotEditableModel extends DefaultTableModel {
 

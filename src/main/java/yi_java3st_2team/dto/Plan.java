@@ -49,5 +49,9 @@ public class Plan {
 	public void setPlanDiv(String planDiv) {
 		this.planDiv = planDiv;
 	}
+	@Override
+	public String toString() {
+		return String.format("%s", planName);
+	}
 	
 }

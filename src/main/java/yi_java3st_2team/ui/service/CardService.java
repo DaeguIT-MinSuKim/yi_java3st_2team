@@ -16,8 +16,8 @@ public class CardService {
 	public List<Card> showCards() throws SQLException {
 		return dao.showCards();
 	}
-	public Card showCardByCustCode(Card card) throws SQLException {
-		return dao.showCardByCustCode(card);
+	public List<Card> showCardByCustName(Card card) throws SQLException {
+		return dao.showCardByCustName(card);
 	}
 	public int insertCard(Card card) throws SQLException {
 		return dao.insertCard(card);

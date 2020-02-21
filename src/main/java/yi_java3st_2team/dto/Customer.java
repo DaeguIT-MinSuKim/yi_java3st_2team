@@ -7,7 +7,6 @@ public class Customer {
 	private int custCredit;
 	private String custAddr;
 	private String custTel;
-	private BankBook bankbook;
 	public Customer() {
 		
 	}
@@ -60,6 +59,11 @@ public class Customer {
 	}
 	public void setCustTel(String custTel) {
 		this.custTel = custTel;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s", custName);
 	}
 	
 }

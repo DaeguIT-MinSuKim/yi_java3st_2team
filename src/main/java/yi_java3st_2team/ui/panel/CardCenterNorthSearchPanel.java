@@ -7,7 +7,7 @@ import yi_java3st_2team.ui.absPanel.AbsCenterNorthSearchPanel;
 public class CardCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Card> {
 
 	public CardCenterNorthSearchPanel() {
-		setText("고객코드 검색");
+		setText("고객 이름 검색");
 	}
 
 	@Override
