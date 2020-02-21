@@ -72,7 +72,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   where empName=?";
 		
-		try (Connection con = MySqlDataSource.getConnection();
+		try (Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);){
 			
 			pstmt.setString(1, emp.getEmpName());
@@ -112,7 +112,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String sql="select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   order by empCode";
-		try (Connection con = MySqlDataSource.getConnection();
+		try (Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 						ResultSet rs = pstmt.executeQuery()){
 			List<Employee> list = new ArrayList<Employee>();
