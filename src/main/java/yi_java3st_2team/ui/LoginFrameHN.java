@@ -28,7 +28,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class LoginFrame extends JFrame implements ActionListener {
+public class LoginFrameHN extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pCenter;
 	private JPanel pNorth;
@@ -49,12 +49,14 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private boolean chkLogin;
 	private MainFrame main;
 	private Employee chkEmp;
-	
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
+					LoginFrameHN frame = new LoginFrameHN();
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -67,7 +69,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public LoginFrame() {
+	public LoginFrameHN() {
 		initialize();
 	}
 	private void initialize() {

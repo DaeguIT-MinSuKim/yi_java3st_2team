@@ -6,9 +6,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -19,10 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.designPanel.CustDWUIPanel;
+import yi_java3st_2team.ui.designPanel.CustInfoUIPanel;
+import yi_java3st_2team.ui.designPanel.CustPlanUIPanel;
+import yi_java3st_2team.ui.panel.CustPlanCenterNorthSearchPanel;
+import yi_java3st_2team.ui.panel.CustStatisticPanel;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
-import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel;
-
 import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -34,7 +34,7 @@ import java.awt.Cursor;
 import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class MainFrame_hana extends JFrame {
 	private JPanel contentPane;
 	private JPanel pCenter;
 	private JPanel pNorth;
@@ -79,9 +79,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem mntmLoanSearch;
 
 
-	
-
-	public MainFrame() {
+	public MainFrame_hana() {
 		initialize();
 	}
 	private void initialize() {
@@ -129,7 +127,7 @@ public class MainFrame extends JFrame {
 		mntmEmpSearch = new JMenuItem("사원 검색");
 		mntmEmpSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mntmEmpSearch);
-
+		
 		mnEmpInfo = new JMenu("사원 정보");
 		mnEmpInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mnEmpInfo);
@@ -166,18 +164,66 @@ public class MainFrame extends JFrame {
 		
 		mntmCustInfo = new JMenuItem("고객 개인정보");
 		mntmCustInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmCustInfo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustInfoUIPanel custinfoUI = new CustInfoUIPanel();
+				pCenter.add(custinfoUI);
+				revalidate();
+				repaint();
+			}
+		});
 		mnCust.add(mntmCustInfo);
 		
 		mntmCustStatistic = new JMenuItem("고객 통계 정보");
 		mntmCustStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmCustStatistic.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustStatisticPanel custStatistic = new CustStatisticPanel();
+				pCenter.add(custStatistic);
+				revalidate();
+				repaint();
+				
+			}
+		});
 		mnCust.add(mntmCustStatistic);
+		
 		
 		mntmCustPlan = new JMenuItem("고객 상품관리");
 		mntmCustPlan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmCustPlan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustPlanUIPanel custplanUI = new CustPlanUIPanel();
+				pCenter.add(custplanUI);
+				revalidate();
+				repaint();
+				
+			}
+		});
 		mnCust.add(mntmCustPlan);
 		
 		mntmDepositWithdraw = new JMenuItem("입출금 관리");
 		mntmDepositWithdraw.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmDepositWithdraw.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pCenter.removeAll();
+				CustDWUIPanel custdwUI = new CustDWUIPanel();
+				pCenter.add(custdwUI);
+				revalidate();
+				repaint();
+				
+			}
+		});
 		mnCust.add(mntmDepositWithdraw);
 		
 		pBankWork = new JPanel();
@@ -309,7 +355,4 @@ public class MainFrame extends JFrame {
 	public JLabel getLblGreeting() {
 		return lblGreeting;
 	}
-	
-	
-	
 }

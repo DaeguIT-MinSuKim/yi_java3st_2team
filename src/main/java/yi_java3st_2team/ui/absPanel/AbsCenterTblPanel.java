@@ -23,6 +23,7 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 	public AbsCenterTblPanel() {
 		initialize();
 	}
+	
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -43,19 +44,25 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		setTblWidthAlign();
 	}
 	protected abstract void setTblWidthAlign();
+	
 	protected abstract String[] getColumns();
+	
 	protected Object[][] getRows(List<T> itemList) {
 		Object[][] rows = new Object[itemList.size()][];
 		for(int i=0;i<itemList.size();i++) {
 			rows[i] = toArray(itemList.get(i));
+			
 		}
 		return rows;
 	};
 	protected abstract Object[] toArray(T item);
+	
+
 	protected void setColumnWidth(int ...idx) {
 		TableColumnModel cModel = table.getColumnModel();
-		for(int i=0;i<cModel.getColumnCount();i++) {
-			cModel.getColumn(i).setWidth(idx[i]);
+		for(int i=0; i< idx.length; i++) {
+			cModel.getColumn(i).setPreferredWidth(idx[i]);
+			
 		}
 	}
 	protected void setColumnAlign(int align, int...idx) {
@@ -82,10 +89,12 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		}
 		return selectedIdx;
 	}
-	public void setupPopMenu(JPopupMenu menu) {
-		scrollPane.setComponentPopupMenu(menu);
-		table.setComponentPopupMenu(menu);
+
+	public void setPopupMenu(JPopupMenu popupMenu) {
+		scrollPane.setComponentPopupMenu(popupMenu);
+		table.setComponentPopupMenu(popupMenu);
 	}
+
 	protected class NotEditableModel extends DefaultTableModel {
 
 		public NotEditableModel(Object[][] rows, String[] columns) {

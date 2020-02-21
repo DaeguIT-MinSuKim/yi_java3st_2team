@@ -1,3 +1,23 @@
+select user(), database();
+
+desc department;
+desc employee;
+desc performance;
+
+
+select * from department;
+
+insert into department values
+(1,'인사'),
+(2,'고객');
+
+select * from employee;
+-- 인사팀은 과장,차장,부장만 존재
+-- 인사팀
+('A001','나인사','부장','HR',6000000,'010-2222-2222','HRid1',password('testforHD1)',1),
+('A002','정아름','차장','HR',5000000,'010-2222-2222','HRid2',password('testforHD1)',1),
+('A003','이상원','과장','HR',4000000,'010-2222-2222','HRid3',password('testforHD1)',1),
+-- 고객팀
 ('B001','나지점','지점장','AD',10000000,'010-1234-1234','ADid',password('testforAD'),2),
 ('B002','장현서','부지점장','CS',8000000,'010-4444-7767','CSid1',password('testforCS1'),2),
 ('B003','박인선','부장','CS',6000000,'010-2992-2222','CSid2',password('testforCS2'),2),
@@ -5,6 +25,7 @@
 ('B005','현재승','과장','CS',4000000,'010-2282-4848','CSid4',password('testforCS4'),2),
 ('B006','황태원','대리','CS',3000000,'010-2902-5959','CSid5',password('testforCS5'),2),
 ('B007','나고객','사원','CS',2000000,'010-2212-7766','CSid6',password('testforCS6'),2);
+
 
 insert into performance values ('A001','A003','C001');
 select * from performance;
