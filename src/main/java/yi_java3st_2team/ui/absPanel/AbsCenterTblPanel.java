@@ -34,6 +34,11 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 	}
+	
+	public JTable getTable() {
+		return table;
+	}
+
 	public void loadTableData(List<T> itemList) {
 		model = new NotEditableModel(getRows(itemList), getColumns());
 		table.setModel(model);
