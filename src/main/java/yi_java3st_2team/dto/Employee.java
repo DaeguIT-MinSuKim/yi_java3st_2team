@@ -14,7 +14,7 @@ public class Employee {
 	public Employee() {
 		
 	}
-	
+
 	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
 			String empId, String empPwd, Department dept) {
 		this.empCode = empCode;

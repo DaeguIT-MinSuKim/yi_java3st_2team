@@ -3,11 +3,21 @@ package yi_java3st_2team.uiDesign;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import yi_java3st_2team.dto.Department;
+import yi_java3st_2team.dto.Employee;
+
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -17,22 +27,27 @@ import javax.swing.JComboBox;
 public class DlgEmp extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JComboBox comboBox;
+	private JTextField tfEmpCode;
+	private JTextField tfEmpName;
+	private JTextField tfEmpTitle;
+	private JTextField tfEmpAuth;
+	private JTextField tfEmpSalary;
+	private JTextField tfEmpTel;
+	private JTextField tfEmpId;
+	private JTextField tfEmpPwd;
+	private JComboBox<Department> cmbDept;
+	
+	//	
+	private static DlgEmp dialog;
+	private JButton btnOk;
+	private JButton btnCancel;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DlgEmp dialog = new DlgEmp();
+			dialog = new DlgEmp();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -58,9 +73,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(lblNewLabel);
 		}
 		{
-			textField = new JTextField();
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			tfEmpCode = new JTextField();
+			contentPanel.add(tfEmpCode);
+			tfEmpCode.setColumns(10);
 		}
 		{
 			JLabel label = new JLabel("이름");
@@ -68,9 +83,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setColumns(10);
-			contentPanel.add(textField_1);
+			tfEmpName = new JTextField();
+			tfEmpName.setColumns(10);
+			contentPanel.add(tfEmpName);
 		}
 		{
 			JLabel label = new JLabel("직책");
@@ -78,9 +93,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_2 = new JTextField();
-			textField_2.setColumns(10);
-			contentPanel.add(textField_2);
+			tfEmpTitle = new JTextField();
+			tfEmpTitle.setColumns(10);
+			contentPanel.add(tfEmpTitle);
 		}
 		{
 			JLabel label = new JLabel("권한");
@@ -88,10 +103,10 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_3 = new JTextField();
-			textField_3.setEditable(false);
-			textField_3.setColumns(10);
-			contentPanel.add(textField_3);
+			tfEmpAuth = new JTextField();
+			tfEmpAuth.setEditable(false);
+			tfEmpAuth.setColumns(10);
+			contentPanel.add(tfEmpAuth);
 		}
 		{
 			JLabel label = new JLabel("월급");
@@ -99,9 +114,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_4 = new JTextField();
-			textField_4.setColumns(10);
-			contentPanel.add(textField_4);
+			tfEmpSalary = new JTextField();
+			tfEmpSalary.setColumns(10);
+			contentPanel.add(tfEmpSalary);
 		}
 		{
 			JLabel label = new JLabel("연락처");
@@ -109,9 +124,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_5 = new JTextField();
-			textField_5.setColumns(10);
-			contentPanel.add(textField_5);
+			tfEmpTel = new JTextField();
+			tfEmpTel.setColumns(10);
+			contentPanel.add(tfEmpTel);
 		}
 		{
 			JLabel label = new JLabel("아이디");
@@ -119,9 +134,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_6 = new JTextField();
-			textField_6.setColumns(10);
-			contentPanel.add(textField_6);
+			tfEmpId = new JTextField();
+			tfEmpId.setColumns(10);
+			contentPanel.add(tfEmpId);
 		}
 		{
 			JLabel label = new JLabel("비밀번호");
@@ -129,9 +144,9 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			textField_7 = new JTextField();
-			textField_7.setColumns(10);
-			contentPanel.add(textField_7);
+			tfEmpPwd = new JTextField();
+			tfEmpPwd.setColumns(10);
+			contentPanel.add(tfEmpPwd);
 		}
 		{
 			JLabel label = new JLabel("부서");
@@ -139,28 +154,108 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(label);
 		}
 		{
-			comboBox = new JComboBox();
-			contentPanel.add(comboBox);
+			cmbDept = new JComboBox();
+			contentPanel.add(cmbDept);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
-				JButton btnOk = new JButton("확인");
+				btnOk = new JButton("확인");
 				btnOk.setActionCommand("확인");
+		//		btnOk.addActionListener(myActionListener);
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
-				JButton btnCancel = new JButton("취소");
+				btnCancel = new JButton("취소");
 				btnCancel.setActionCommand("취소");
+	//			btnCancel.addActionListener(myActionListener);
 				buttonPane.add(btnCancel);
 			}
 		}
 	}
-
-	public JTextField getTextField() {
-		return textField;
+	
+	public JButton getBtnCancel() {
+		return btnCancel;
 	}
+	
+	public JButton getBtnOk() {
+		return btnOk;
+	}	
+	
+	//추가로 바꾸기
+	public JButton getBtnAdd() {
+		btnOk.setText("추가");
+		return btnOk;
+	}
+	
+	public JButton getBtnUpdate() {
+		btnOk.setText("수정");
+		return btnOk;
+	}
+	ActionListener myActionListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//다이얼로그 창의 확인과 취소
+			if(e.getActionCommand() == "확인") {
+				
+			}if(e.getActionCommand() == "취소") {
+				dialog.setVisible(false); //아예 닫기는건 어떻게 하지?? 0222
+			}
+			
+		}
+	};
+	public JTextField getTextField() {
+		return tfEmpCode;
+	}
+	
+	public void setCmbDeptList(List<Department> deptList) {
+		DefaultComboBoxModel<Department> model = new DefaultComboBoxModel<>(new Vector<>(deptList));
+		cmbDept.setModel(model);
+		cmbDept.setSelectedIndex(-1);
+	}
+	
+	//다이얼로그의 값 insert위해 가져오기
+	public Employee getItem() {
+		String empCode = tfEmpCode.getText().trim();
+		String empName = tfEmpName.getText().trim();
+		String empTitle = tfEmpTitle.getText().trim();
+		String empAuth = null;  //null로 넣어도 되는걸까
+		int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
+		String empTel = tfEmpTel.getText().trim();
+		String empId = tfEmpId.getText().trim();
+		String empPwd = tfEmpPwd.getText().trim();
+		Department dept = (Department)cmbDept.getSelectedItem();
+		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+	}
+	
+
+	public void clearTf() {
+		tfEmpCode.setText("");
+		tfEmpName.setText("");
+		tfEmpTitle.setText("");
+		tfEmpAuth.setText("");
+		tfEmpSalary.setText("");
+		tfEmpTel.setText("");
+		tfEmpId.setText("");
+		tfEmpPwd.setText("");
+		cmbDept.setSelectedIndex(-1);
+	}
+	
+	public void setItem(Employee item) {
+		tfEmpCode.setText(item.getEmpCode());
+		tfEmpName.setText(item.getEmpName());
+		tfEmpTitle.setText(item.getEmpTitle());
+		tfEmpAuth.setText(item.getEmpAuth());
+		tfEmpSalary.setText(item.getEmpSalary()+"");
+		tfEmpTel.setText(item.getEmpTel());
+		tfEmpId.setText(item.getEmpId());
+		tfEmpPwd.setText(item.getEmpPwd());
+		cmbDept.setSelectedItem(item.getDept()); //이거 맞나 
+	}
+	
+	
 }

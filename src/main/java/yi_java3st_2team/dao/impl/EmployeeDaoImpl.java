@@ -67,23 +67,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee selectEmpByName(Employee emp) {
+	public Employee selectEmpByName(String empName) throws SQLException {
+		Employee emp = null;
 		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   where empName=?";
 		
 		try (Connection con = LocalDataSource.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
+				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(1, empName);
 			
-			try(ResultSet rs = pstmt.executeQuery()){
+			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
 					return getEmployee(rs);
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -91,19 +91,61 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int insertEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql = "insert into employee values(?,?,?,?,?,?,?,password(?),?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			pstmt.setString(1, emp.getEmpCode());
+			pstmt.setString(2, emp.getEmpName());
+			pstmt.setString(3, emp.getEmpTitle());
+			pstmt.setString(4, emp.getEmpAuth());
+			pstmt.setInt(5, emp.getEmpSalary());
+			pstmt.setString(6, emp.getEmpTel());
+			pstmt.setString(7, emp.getEmpId());
+			pstmt.setString(8, emp.getEmpPwd());
+			pstmt.setInt(9, emp.getDept().getDeptNo());
+			
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
 	@Override
 	public int updateEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql="update employee set empName=?,empTitle=?,empAuth=?,empSalary=?,empTel=?,empId=?,empPwd=password(?),deptNo=? where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			
+			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(2, emp.getEmpTitle());
+			pstmt.setString(3, emp.getEmpAuth());
+			pstmt.setInt(4, emp.getEmpSalary());
+			pstmt.setString(5, emp.getEmpTel());
+			pstmt.setString(6, emp.getEmpId());
+			pstmt.setString(7, emp.getEmpPwd());
+			pstmt.setInt(8, emp.getDept().getDeptNo());
+			pstmt.setString(9, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
+		
 	}
 
 	@Override
 	public int deleteEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql="delete from employee where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			pstmt.setString(1, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -139,5 +181,29 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Department dept= new Department(rs.getInt("d.deptNo")); //이부분 확인해보기
 	    dept.setDeptName(rs.getString("d.deptName"));
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+	}
+
+	@Override
+	public List<Department> selectDeptByAll() {
+		String sql="select deptNo, deptName from department order by deptNo";
+		try (Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+						ResultSet rs = pstmt.executeQuery()){
+			List<Department> list = new ArrayList<Department>();
+			
+			while(rs.next()) {
+				list.add(getDepartment(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return null;
+	}
+
+	private Department getDepartment(ResultSet rs) throws SQLException {
+		int deptNo = rs.getInt("deptNo");
+		String deptName =rs.getString("deptName");
+		return new Department(deptNo, deptName);
 	}
 }

@@ -65,6 +65,7 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pSouth.add(btnSearch, BorderLayout.EAST);
 	}
+	
 	protected void setLabelInit(JLabel ... menu) {
 		String[] texts = getTexts();
 		for(int i=0;i<menu.length;i++) {

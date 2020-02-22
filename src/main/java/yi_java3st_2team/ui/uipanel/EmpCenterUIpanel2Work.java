@@ -13,6 +13,7 @@ import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
 import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
 import yi_java3st_2team.uiDesign.DlgEmp;
 
 import java.awt.event.ActionListener;
@@ -21,15 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class EmpCenterUIpanel extends JPanel implements ActionListener {
+public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 	private EmployeeUIService service;
 	private EmpCenterNorthSearchPanel pEmpSerch;
-	private EmpCenterTblPanel pEmpTblPanel;
+	private EmpCenterTblPanel2Work pEmpTblPanel;
 	private DlgEmp dlgEmp;
 	
 	
 	
-	public EmpCenterUIpanel() {
+	public EmpCenterUIpanel2Work() {
 		service = new EmployeeUIService();
 		initialize();
 	}
@@ -40,9 +41,9 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	
 		add(pEmpSerch);
 		
-		pEmpTblPanel = new EmpCenterTblPanel();
+		pEmpTblPanel = new EmpCenterTblPanel2Work();
 	    //리스트불러오기
-		pEmpTblPanel.loadTableData(service.showEmpList());
+		//pEmpTblPanel.loadTableData(service.showEmpList());
 		add(pEmpTblPanel);
 		
 		//테이블 패널에 팝업메뉴달기

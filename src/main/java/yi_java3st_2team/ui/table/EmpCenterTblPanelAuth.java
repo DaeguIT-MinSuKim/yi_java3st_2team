@@ -6,25 +6,25 @@ import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
 
-public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
+public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 
 	private Employee employee; 
 
-	public EmpCenterTblPanel() {
+	public EmpCenterTblPanelAuth() {
 		
 	}
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5 );
-		setColumnAlign(SwingConstants.RIGHT, 4);
-        setColumnWidth(70,70,70,70,100,100);		
+		setColumnAlign(SwingConstants.CENTER,0,1,2,3 );
+
+        setColumnWidth(100,100,100,100);		
 	}
 
 	@Override
 	protected String[] getColumns() {
 		
-		return new String[] {"사원코드","사원이름","직책","실적","보너스","담당VIP"} ;
+		return new String[] {"사원코드","사원이름","직책","권한"} ;
 	}
 
 	
@@ -36,12 +36,12 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 				item.getEmpCode(),
 				item.getEmpName(),
 				item.getEmpTitle(), 
-				item.getEmpAuth(), 
-				String.format("%,d", item.getEmpSalary()), 
-				item.getEmpTel(), 
-				item.getEmpId(), 
-				item.getEmpPwd().replace(item.getEmpPwd(), "**********"), 
-				String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())};
+				item.getEmpAuth()}; 
+//				String.format("%,d", item.getEmpSalary()), 
+//				item.getEmpTel(), 
+//				item.getEmpId(), 
+//				item.getEmpPwd().replace(item.getEmpPwd(), "**********"), 
+//				String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())};
 	}
 
 	@Override

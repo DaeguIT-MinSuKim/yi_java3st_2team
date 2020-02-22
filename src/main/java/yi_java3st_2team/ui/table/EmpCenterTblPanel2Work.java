@@ -6,29 +6,27 @@ import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
 
-public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
+public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 
 	private Employee employee; 
 
-	public EmpCenterTblPanel() {
+	public EmpCenterTblPanel2Work() {
 		
 	}
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5 );
+		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5,6,7,8 );
 		setColumnAlign(SwingConstants.RIGHT, 4);
-        setColumnWidth(70,70,70,70,100,100);		
+        setColumnWidth(50,50,70,50,80,110,70,100,70);		
 	}
 
 	@Override
 	protected String[] getColumns() {
 		
-		return new String[] {"사원코드","사원이름","직책","실적","보너스","담당VIP"} ;
+		return new String[] {"코드","이름","직책","권한","월급","연락처","아이디","비밀번호","부서"} ;
 	}
 
-	
-	//뷰테이블로 다시 만들어야함
 	@Override
 	public Object[] toArray(Employee item) {
 		employee = item;
