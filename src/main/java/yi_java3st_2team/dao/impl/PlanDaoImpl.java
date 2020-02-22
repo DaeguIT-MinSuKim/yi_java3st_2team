@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import yi_java3st_2team.dao.PlanDao;
+import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
@@ -25,7 +26,7 @@ public class PlanDaoImpl implements PlanDao {
 	public List<Plan> selectPlanAll() throws SQLException {
 		List<Plan> list = null;
 		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan";
-		try(Connection con = MySqlDataSource.getConnection();
+		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();){
 			if(rs.next()) {
@@ -54,7 +55,7 @@ public class PlanDaoImpl implements PlanDao {
 	public List<Plan> selectPlanByBankBook() throws SQLException {
 		List<Plan> list = new ArrayList<>();
 		String sql = "select * from plan where planCode like ?";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, "A%");
 			try(ResultSet rs = pstmt.executeQuery()) {
@@ -70,7 +71,7 @@ public class PlanDaoImpl implements PlanDao {
 	public List<Plan> selectPlanByCard() throws SQLException {
 		List<Plan> list = new ArrayList<>();
 		String sql = "select * from plan where planCode like ?";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, "B%");
 			try(ResultSet rs = pstmt.executeQuery()) {
@@ -94,6 +95,29 @@ public class PlanDaoImpl implements PlanDao {
 					list.add(getPlan(rs));
 				}
 			}
+		}
+		return list;
+	}
+
+	
+	//!!!!!!!!!! 한글 깨짐 문제로 고객명으로 검색이 안돼서 상 코드 검색으로 임시변경함
+	@Override
+	public List<Plan> selectPlanByName(String planName) throws SQLException {
+		List<Plan> list = null;
+		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan where planCode =?";
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, planName);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(getPlan(rs));
+				}while(rs.next());
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return list;
 	}

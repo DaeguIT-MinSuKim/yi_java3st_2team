@@ -1,8 +1,10 @@
 select user(), database();
-
+use bank;
 desc department;
 desc employee;
 desc performance;
+
+ALTER TABLE employee convert to charset utf8;
 
 
 select * from department;
@@ -30,6 +32,8 @@ insert into employee values
 
 insert into performance values ('A001','A003','C001');
 select * from performance;
+
+
 
 
 -- 전체직원수

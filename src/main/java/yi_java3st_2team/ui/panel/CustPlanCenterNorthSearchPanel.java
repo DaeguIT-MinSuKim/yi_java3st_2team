@@ -22,7 +22,7 @@ public class CustPlanCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Pl
 	}
 
 	@Override
-	protected void tfClear() {
+	public void tfClear() {
 		this.getTfSearch().setText("");
 		
 	}

@@ -57,7 +57,7 @@ public class LoginFrameHN extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					LoginFrameHN frame = new LoginFrameHN();
-					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

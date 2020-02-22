@@ -15,6 +15,8 @@ CREATE TABLE bank.BankBook (
 )
 COMMENT '통장';
 
+ALTER TABLE bank.BankBook convert to charset utf8;
+
 -- 통장
 ALTER TABLE bank.BankBook
 	ADD CONSTRAINT PK_BankBook -- 통장 기본키
@@ -36,6 +38,8 @@ CREATE TABLE bank.Employee (
 )
 COMMENT '사원';
 
+ALTER TABLE bank.Employee convert to charset utf8;
+
 -- 사원
 ALTER TABLE bank.Employee
 	ADD CONSTRAINT PK_Employee -- 담당고객
@@ -49,6 +53,8 @@ CREATE TABLE bank.Department (
 	deptName VARCHAR(10) NULL     COMMENT '부서이름' -- 부서이름
 )
 COMMENT '부서';
+
+ALTER TABLE bank.department convert to charset utf8;
 
 -- 부서
 ALTER TABLE bank.Department
@@ -68,6 +74,8 @@ CREATE TABLE bank.Customer (
 )
 COMMENT '고객';
 
+ALTER TABLE bank.Customer convert to charset utf8;
+
 -- 고객
 ALTER TABLE bank.Customer
 	ADD CONSTRAINT PK_Customer -- 고객 기본키
@@ -84,6 +92,8 @@ CREATE TABLE bank.Plan (
 	planDiv    char(1)      NULL     COMMENT '상품구분코드' -- 상품구분코드
 )
 COMMENT '고객상품';
+
+ALTER TABLE bank.Plan convert to charset utf8;
 
 -- 고객상품
 ALTER TABLE bank.Plan
@@ -102,6 +112,8 @@ CREATE TABLE bank.Loan (
 	loanBalance    BIGINT   NULL     COMMENT '대출잔액' -- 대출잔액
 )
 COMMENT '대출';
+
+ALTER TABLE bank.Loan convert to charset utf8;
 
 -- 대출
 ALTER TABLE bank.Loan
@@ -123,6 +135,8 @@ CREATE TABLE bank.Card (
 )
 COMMENT '카드';
 
+ALTER TABLE bank.Card convert to charset utf8;
+
 -- 카드
 ALTER TABLE bank.Card
 	ADD CONSTRAINT PK_Card -- 카드 기본키
@@ -137,6 +151,8 @@ CREATE TABLE bank.Performance (
 	custCode char(4) NOT NULL COMMENT '고객코드' -- 고객코드
 )
 COMMENT '실적';
+
+ALTER TABLE bank.Performance convert to charset utf8;
 
 -- 실적
 ALTER TABLE bank.Performance
