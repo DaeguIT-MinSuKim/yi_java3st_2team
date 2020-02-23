@@ -1,7 +1,11 @@
 {
 	"folders": {},
 	"connections": {
+<<<<<<< HEAD
 		"mysql5-170686ba88c-6c65351260102da7": {
+=======
+		"mysql5-17068020f09-76d6a3cf1df4f04b": {
+>>>>>>> refs/heads/hana_CSteam
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "MySQL - localhost",

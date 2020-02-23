@@ -2,7 +2,13 @@ use bank;
 select user(), database ();
 select * from customer c ;
 select * from plan p ;
+select planCode, planDetail, planName, planDesc, planDiv from plan where planName like "%예금";
+select planCode, planDetail, planName, planDesc, planDiv from plan where planCode ="A001";
 
+
+ALTER TABLE plan convert to charset utf8;
+select * From customer where custName = "김가나";
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = "김가나";
 insert into customer values("C001", "김가나", "B", 1, "서울시 강남구", "123-1234-1234");
 insert into customer values("C002", "김다라", "S", 2, "서울시 마포구", "234-4578-5434"),
 						   ("C003", "김마바", "G", 3, "대구시 서구", "456-4567-4578"),

@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import yi_java3st_2team.dao.CustomerDao;
+import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.Customer;
 
@@ -23,7 +24,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	public List<Customer> selectCustomerAll() throws SQLException {
 		List<Customer> list = null;
 		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer";
-		try(Connection con = MySqlDataSource.getConnection();
+		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();){
 			if(rs.next()) {
@@ -49,11 +50,12 @@ public class CustomerDaoImpl implements CustomerDao {
 		return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
 	}
 
+	
+	//!!!!!!!!!! 한글 깨짐 문제로 고객명으로 검색이 안돼서 고객 코드 검색으로 임시변경함
 	@Override
 	public Customer selectCustomerByName(String custName) throws SQLException {
-		Customer customer = null;
-		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = ?";
-		try(Connection con = MySqlDataSource.getConnection();
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custCode = ?";
+		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			pstmt.setString(1, custName);
@@ -66,6 +68,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 

@@ -1,7 +1,10 @@
 use bank;
+select USER (), DATABASE ();
 select * from employee;
 select * from plan;
 select * from customer;
+
+ALTER TABLE Customer convert to charset utf8;
 
 insert into bankbook values 
 ('293133-11-000001','C001','A001',"2020-02-05 09:00:00",0.10,5000000),

@@ -10,6 +10,7 @@ import yi_java3st_2team.dto.Plan;
 
 public interface PlanDao {
 	abstract List<Plan> selectPlanAll() throws SQLException;
+	abstract List<Plan> selectPlanByName(String planName) throws SQLException;
 	abstract List<Plan> selectPlanByBankBook() throws SQLException;
 	abstract List<Plan> selectPlanByCard() throws SQLException;
 	abstract List<Plan> selectPlanByLoan() throws SQLException;

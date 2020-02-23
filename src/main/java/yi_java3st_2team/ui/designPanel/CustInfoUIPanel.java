@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.designPanel;
 
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class CustInfoUIPanel extends JPanel implements ActionListener {
 	CustomerService custService = new CustomerService();
 	private CustInfoCenterNorthSearchPanel panel;
-	private List<Customer> listForCustName = new ArrayList<>();
+	//private List<Customer> listForCustName = new ArrayList<>();
 	private CustInfoCenterCenterTblPanel panel_1;
 	public CustInfoUIPanel() {
 
@@ -48,6 +49,16 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		JPopupMenu popup = new JPopupMenu();
 		
 		JMenuItem addMenu = new JMenuItem("추가");
+		addMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DlgCustInfo dlgCustInfo = new DlgCustInfo();
+				dlgCustInfo.setVisible(true);
+				
+			}
+			
+		});
 		popup.add(addMenu);
 		
 		JMenuItem editMenu = new JMenuItem("수정");
@@ -67,15 +78,17 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void panelBtnSearchActionPerformed(ActionEvent e) {
-		String custName = panel.getTfSearch().getText();
+		String custName = panel.getTfSearch().getText().trim();
+		List<Customer> listForCustName = new ArrayList<>();
 		try {
 			Customer newCust = custService.showCustomerByName(custName);
-			//listForCustName.get(0).getName()
+			
 			if(listForCustName.size()==0) {
+				if(newCust==null) {
+					JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+					return;
+				}
 				listForCustName.add(newCust);
-			}else {
-				JOptionPane.showMessageDialog(null, "이미 고객이 조회되어 있습니다. 취소 후 다시 조회해주세요.");
-				return;
 			}
 			panel_1.loadTableData(listForCustName);
 		} catch (SQLException e1) {
