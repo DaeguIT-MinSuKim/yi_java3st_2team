@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.designPanel;
 
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -48,6 +49,16 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		JPopupMenu popup = new JPopupMenu();
 		
 		JMenuItem addMenu = new JMenuItem("추가");
+		addMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DlgCustInfo dlgCustInfo = new DlgCustInfo();
+				dlgCustInfo.setVisible(true);
+				
+			}
+			
+		});
 		popup.add(addMenu);
 		
 		JMenuItem editMenu = new JMenuItem("수정");
