@@ -12,8 +12,8 @@ import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
 import yi_java3st_2team.ui.service.EmployeeUIService;
-import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 import yi_java3st_2team.uiDesign.DlgEmp;
 
 import java.awt.event.ActionListener;

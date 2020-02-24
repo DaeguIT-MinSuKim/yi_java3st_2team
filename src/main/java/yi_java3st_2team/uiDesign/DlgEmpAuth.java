@@ -7,7 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import yi_java3st_2team.dto.Department;
+import yi_java3st_2team.dto.Employee;
+
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -16,17 +23,23 @@ import javax.swing.SwingConstants;
 public class DlgEmpAuth extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tfEmpCode;
+	private JTextField tfEmpName;
+	private JTextField tfEmpTitle;
+	private JTextField tfEmpAuth;
 
+	
+	
+	///
+	private JButton btnOk;
+	private JButton btnCancel;
+	private static DlgEmpAuth dialog;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DlgEmpAuth dialog = new DlgEmpAuth();
+			dialog = new DlgEmpAuth();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -47,64 +60,128 @@ public class DlgEmpAuth extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 2, 10, 10));
 		{
-			JLabel lblNewLabel = new JLabel("코드");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(lblNewLabel);
+			JLabel lblEmpCode = new JLabel("코드");
+			lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblEmpCode);
 		}
 		{
-			textField = new JTextField();
-			textField.setEditable(false);
-			contentPanel.add(textField);
-			textField.setColumns(10);
+			tfEmpCode = new JTextField();
+			tfEmpCode.setEditable(false);
+			contentPanel.add(tfEmpCode);
+			tfEmpCode.setColumns(10);
 		}
 		{
-			JLabel label = new JLabel("이름");
-			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(label);
+			JLabel lblEmpName = new JLabel("이름");
+			lblEmpName.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblEmpName);
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setEditable(false);
-			textField_1.setColumns(10);
-			contentPanel.add(textField_1);
+			tfEmpName = new JTextField();
+			tfEmpName.setEditable(false);
+			tfEmpName.setColumns(10);
+			contentPanel.add(tfEmpName);
 		}
 		{
-			JLabel label = new JLabel("직책");
-			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(label);
+			JLabel lblEmpTitle = new JLabel("직책");
+			lblEmpTitle.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblEmpTitle);
 		}
 		{
-			textField_2 = new JTextField();
-			textField_2.setEditable(false);
-			textField_2.setColumns(10);
-			contentPanel.add(textField_2);
+			tfEmpTitle = new JTextField();
+			tfEmpTitle.setEditable(false);
+			tfEmpTitle.setColumns(10);
+			contentPanel.add(tfEmpTitle);
 		}
 		{
-			JLabel label = new JLabel("권한");
-			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(label);
+			JLabel lblEmpAuth = new JLabel("권한");
+			lblEmpAuth.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblEmpAuth);
 		}
 		{
-			textField_3 = new JTextField();
-			textField_3.setColumns(10);
-			contentPanel.add(textField_3);
+			tfEmpAuth = new JTextField();
+			tfEmpAuth.setColumns(10);
+			contentPanel.add(tfEmpAuth);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
-				JButton btnOk = new JButton("확인");
+				btnOk = new JButton("확인");
 				btnOk.setActionCommand("확인");
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
-				JButton btnCancel = new JButton("취소");
+				btnCancel = new JButton("취소");
 				btnCancel.setActionCommand("취소");
 				buttonPane.add(btnCancel);
 			}
 		}
 	}
+	
+	//버튼들 외부에서 얻어올 수 있도록 
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
+	
+	public JButton getBtnOk() {
+		return btnOk;
+	}	
+	
+	//확인 버튼을 추가로 바꾸기
+	public JButton getBtnAdd() {
+		btnOk.setText("추가");
+		return btnOk;
+	}
+	//확인버튼을 수정으로
+	public JButton getBtnUpdate() {
+		btnOk.setText("수정");
+		return btnOk;
+	}
+	ActionListener myActionListener = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//다이얼로그 창의 확인과 취소
+			if(e.getActionCommand() == "확인") {
+				
+			}if(e.getActionCommand() == "취소") {
+				dialog.setVisible(false); //아예 닫기는건 어떻게 하지?? 0222
+			}
+			
+		}
+	};
+
+
+	
+	//다이얼로그의 값 insert위해 가져오기
+		public Employee getItem(Employee emp) { //넣어서 새로운  emp생성....?
+			String empCode = emp.getEmpCode();
+			String empName = emp.getEmpName();
+			String empTitle = emp.getEmpTitle();
+			String empAuth = tfEmpAuth.getText().trim();
+			int empSalary = emp.getEmpSalary();
+			String empTel = emp.getEmpTel();
+			String empId = emp.getEmpId();
+			String empPwd = emp.getEmpPwd();
+			Department dept = emp.getDept();
+			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+		}
+		
+
+		public void clearTf() {
+			tfEmpAuth.setText("");
+			//권한 부분만 삭제하면 되기에
+		}
+		
+		//수정 시 권한이 올라가도록
+		public void setItem(Employee item) {
+			tfEmpCode.setText(item.getEmpCode());
+			tfEmpName.setText(item.getEmpName());
+			tfEmpTitle.setText(item.getEmpTitle());
+			tfEmpAuth.setText(item.getEmpAuth());
+	
+		}
 
 }

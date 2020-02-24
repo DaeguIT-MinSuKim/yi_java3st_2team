@@ -1,25 +1,23 @@
 package yi_java3st_2team.ui.uipanel;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
-import yi_java3st_2team.dto.Department;
-import yi_java3st_2team.dto.Employee;
-import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
-import yi_java3st_2team.ui.service.EmployeeUIService;
-import yi_java3st_2team.ui.table.EmpCenterTblPanel;
-import yi_java3st_2team.uiDesign.DlgEmp;
-
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
+
+import javax.swing.BoxLayout;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
+import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
+import yi_java3st_2team.ui.service.EmployeeUIService;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
+import yi_java3st_2team.uiDesign.DlgEmp;
 
 public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	private EmployeeUIService service;
