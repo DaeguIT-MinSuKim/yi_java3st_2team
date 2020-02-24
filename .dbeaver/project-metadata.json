@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"},"Scripts/hsData.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/hsTest.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"}}}
-=======
-{"resources":{"Scripts/Script.sql":{"sql-editor-data-source-id":"mysql5-1706c555b92-344ae9bc0f7d96ff"},"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"},"Scripts/hsData.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"},"Scripts/hsTest.sql":{"sql-editor-data-source-id":"mysql5-17057e3b79b-62fb4f401d5cfdbd"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"}}}
->>>>>>> refs/heads/hana_CSteam
+{"resources":{"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-17076fde93f-4a65072115b98ca2"}}}

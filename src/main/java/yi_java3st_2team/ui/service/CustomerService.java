@@ -22,5 +22,16 @@ public class CustomerService {
 		return dao.selectCustomerByName(custName);
 	}
 	
+	public void AddCustomer(Customer customer) throws SQLException{
+		 dao.insertCustomer(customer);
+	}
+	
+	public int editCustomer(Customer customer) throws SQLException{
+		return dao.updateCustomer(customer);
+	}
+	
+	public int removeCustomer(Customer customer) throws SQLException{
+		return dao.deleteCustomer(customer);
+	}
 	
 }

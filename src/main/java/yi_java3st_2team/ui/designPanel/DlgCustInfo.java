@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.ui.service.CustomerService;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +31,11 @@ public class DlgCustInfo extends JDialog {
 	private JTextField tfCustTel;
 	private JComboBox cmbCustRank;
 	private JComboBox cmbCustCredit;
-
+	private CustInfoUIPanel custInfoUI = new CustInfoUIPanel();
+	private String[] rankList = {"B", "S", "G", "P", "D"};
+	private String[] creditList = {"1","2","3","4","5"};
+	private JButton okButton;	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +54,56 @@ public class DlgCustInfo extends JDialog {
 	 */
 	public DlgCustInfo() {
 		initialize();
+	}
+	
+	
+
+	public JButton getOkButton() {
+		return okButton;
+	}
+	
+	
+	
+	
+	
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+	public JTextField getTfCustCode() {
+		return tfCustCode;
+	}
+
+	public JTextField getTfCustName() {
+		return tfCustName;
+	}
+
+	public JTextField getTfCustAddr() {
+		return tfCustAddr;
+	}
+
+	public JTextField getTfCustTel() {
+		return tfCustTel;
+	}
+
+	public JComboBox getCmbCustRank() {
+		return cmbCustRank;
+	}
+
+	public JComboBox getCmbCustCredit() {
+		return cmbCustCredit;
+	}
+
+	public CustInfoUIPanel getCustInfoUI() {
+		return custInfoUI;
+	}
+
+	public String[] getRankList() {
+		return rankList;
+	}
+
+	public String[] getCreditList() {
+		return creditList;
 	}
 
 	private void initialize() {
@@ -82,7 +138,9 @@ public class DlgCustInfo extends JDialog {
 			contentPanel.add(lblCustRank);
 		}
 		{
-			cmbCustRank = new JComboBox();
+			cmbCustRank = new JComboBox(rankList);
+			cmbCustRank.setSelectedIndex(-1);
+			
 			contentPanel.add(cmbCustRank);
 		}
 		{
@@ -91,7 +149,8 @@ public class DlgCustInfo extends JDialog {
 			contentPanel.add(lblCustCredit);
 		}
 		{
-			cmbCustCredit = new JComboBox();
+			cmbCustCredit = new JComboBox(creditList);
+			cmbCustCredit.setSelectedIndex(-1);
 			contentPanel.add(cmbCustCredit);
 		}
 		{
@@ -119,17 +178,12 @@ public class DlgCustInfo extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						if(tfCustCode==null || tfCustName==null || cmbCustRank.getSelectedIndex()==-1
-						  || cmbCustCredit.getSelectedIndex()==-1 || tfCustAddr==null || tfCustTel==null) {
-							JOptionPane.showMessageDialog(null, "빈 칸을 모두 입력해주세요.");
-						}
-						
 						
 						
 					}
@@ -140,6 +194,12 @@ public class DlgCustInfo extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(null, "신규 고객 추가를 취소합니다.");
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -151,10 +211,27 @@ public class DlgCustInfo extends JDialog {
 		String custCode = tfCustCode.getText();
 		String custName = tfCustName.getText();
 		String custRank = (String) cmbCustRank.getSelectedItem();
-		int custCredit = (int) cmbCustCredit.getSelectedItem();
+		int custCredit = Integer.parseInt((String)cmbCustCredit.getSelectedItem());
 		String custAddr = tfCustAddr.getText();
 		String custTel = tfCustTel.getText();
 		return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
+	}
+	
+	public void setItem(Customer customer) {
+		tfCustCode.setText(customer.getCustCode());
+		tfCustName.setText(customer.getCustName());
+		cmbCustRank.setSelectedItem(customer.getCustRank());
+		cmbCustCredit.setSelectedItem(Integer.toString(customer.getCustCredit()));
+		tfCustAddr.setText(customer.getCustAddr());
+		tfCustTel.setText(customer.getCustTel());
+	}
+	
+	public void setActiontoAdd() {
+		okButton.setActionCommand("추가");
+	}
+	
+	public void setActiontoEdit() {
+		okButton.setActionCommand("수정");
 	}
 
 }

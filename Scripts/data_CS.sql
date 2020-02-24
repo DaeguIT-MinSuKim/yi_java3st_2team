@@ -30,3 +30,5 @@ insert into plan values("A004", "AA002", "일반정기예금", "일반 정기예
 -- test 
 select custCode, custName, custRank, custCredit, custAddr, custTel from customer;
 select planCode, planDetail, planName, planDesc, planDiv from plan;
+select custRank from customer;
+delete from customer where custCode = "C008";

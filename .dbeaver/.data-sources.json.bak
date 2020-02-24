@@ -1,14 +1,10 @@
 {
 	"folders": {},
 	"connections": {
-<<<<<<< HEAD
 		"mysql5-170686ba88c-6c65351260102da7": {
-=======
-		"mysql5-17068020f09-76d6a3cf1df4f04b": {
->>>>>>> refs/heads/hana_CSteam
 			"provider": "mysql",
 			"driver": "mysql5",
-			"name": "MySQL - localhost",
+			"name": "MySQL - localhost(root)",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
@@ -16,6 +12,20 @@
 				"port": "3306",
 				"url": "jdbc:mysql://localhost:3306/",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
+				"type": "dev"
+			}
+		},
+		"mysql5-1706c555b92-344ae9bc0f7d96ff": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - bank",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "bank",
+				"url": "jdbc:mysql://localhost:3306/bank",
 				"type": "dev",
 				"handlers": {}
 			}
