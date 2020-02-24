@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.table;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 	}
 
 	@Override
-	protected void updateRow(Card item, int updateIdx) {
+	public void updateRow(Card item, int updateIdx) {
 		model.setValueAt(item.getCardNum(), updateIdx, 0);
 		model.setValueAt(item.getCustCode().getCustName(), updateIdx, 1);
 		model.setValueAt(item.getPlanCode().getPlanName(), updateIdx, 2);
@@ -40,14 +41,23 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 	}
 
 	@Override
-	protected Card getSelectedItem() {
+	public Card getSelectedItem() {
 		int selIdx = getSelectedRowIdx();
 		String cardNum = (String)model.getValueAt(selIdx, 0);
-		Customer custCode = (Customer)model.getValueAt(selIdx, 1);
-		Plan planCode = (Plan)model.getValueAt(selIdx, 2);
+		Customer custCode = new Customer();
+		custCode.setCustName((String)model.getValueAt(selIdx, 1));
+		Plan planCode = new Plan();
+		planCode.setPlanName((String)model.getValueAt(selIdx, 2));
 		String cardDiv = (String)model.getValueAt(selIdx, 3);
 		String cardSecuCode = (String)model.getValueAt(selIdx, 4);
-		Date cardIssueDate = (Date)model.getValueAt(selIdx, 5);
+		String dateStr = (String)model.getValueAt(selIdx, 5);
+		Date cardIssueDate = null;
+		try {
+			cardIssueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Card card = new Card(cardNum, custCode, planCode, cardSecuCode, cardIssueDate);
 		if(cardDiv.equals("체크카드")) {
 			card.setCardBalance((long)model.getValueAt(selIdx, 6));

@@ -81,8 +81,11 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		}
 	}
 	protected abstract void updateRow(T item, int updateIdx);
-	protected void addItem(T item) {
+	public void addItem(T item) {
 		model.addRow(toArray(item));
+	}
+	public void removeItem(int delIdx) {
+		model.removeRow(delIdx);
 	}
 	
 	protected abstract T getSelectedItem();

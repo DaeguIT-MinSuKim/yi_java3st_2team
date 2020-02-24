@@ -23,4 +23,5 @@ dependencies {
 	compile group: 'com.jtattoo', name: 'JTattoo', version: '1.6.13'
     testImplementation 'junit:junit:4.12'
     compile group: 'com.toedter', name: 'jcalendar', version: '1.4'
+    compile group: 'org.jfree', name: 'jfreechart', version: '1.5.0'
 }

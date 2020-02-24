@@ -1,11 +1,16 @@
 package yi_java3st_2team.ui.absPanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -71,6 +76,21 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 		for(int i=0;i<menu.length;i++) {
 			menu[i].setFont(new Font("맑은 고딕",Font.PLAIN,20));
 			menu[i].setText(texts[i]);
+		}
+	}
+	protected void setLblMouseListener(JLabel... menus) {
+		MouseListener myLblListener = new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				for(JLabel menu : menus) {
+					menu.setForeground(Color.BLACK);
+				}
+				JLabel selMenu = (JLabel)e.getSource();
+				selMenu.setForeground(new Color(254,208,64));
+			}
+		};
+		for(int i=0;i<menus.length;i++) {
+			menus[i].addMouseListener(myLblListener);
 		}
 	}
 	abstract protected String[] getTexts();

@@ -49,6 +49,7 @@ public class LoginFrameIS extends JFrame implements ActionListener {
 	private boolean chkLogin;
 	private MainFrame_pis main;
 	private Employee chkEmp;
+	private static LoginFrameIS loginFrame;
 	/**
 	 * Launch the application.
 	 */
@@ -56,9 +57,11 @@ public class LoginFrameIS extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrameIS frame = new LoginFrameIS();
-					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					frame.setVisible(true);
+					if(loginFrame==null) {
+						loginFrame = new LoginFrameIS();
+						UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+						loginFrame.setVisible(true);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
