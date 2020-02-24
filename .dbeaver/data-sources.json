@@ -12,7 +12,23 @@
 				"port": "3306",
 				"database": "bank",
 				"url": "jdbc:mysql://localhost:3306/bank",
+<<<<<<< HEAD
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
+=======
+				"type": "dev"
+			}
+		},
+		"mysql5-17076fde93f-4a65072115b98ca2": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - localhost",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"url": "jdbc:mysql://localhost:3306/",
+>>>>>>> refs/heads/hana_CSteam2
 				"type": "dev",
 				"handlers": {}
 			}

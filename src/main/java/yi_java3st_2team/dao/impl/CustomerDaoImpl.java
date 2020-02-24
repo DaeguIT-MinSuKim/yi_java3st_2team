@@ -72,4 +72,56 @@ public class CustomerDaoImpl implements CustomerDao {
 		return null;
 	}
 
+	@Override
+	public void insertCustomer(Customer customer) throws SQLException {
+		String sql = "insert into customer values(?,?,?,?,?,?)";
+		try(Connection con = LocalDataSource.getConnection(); 
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1, customer.getCustCode());
+			pstmt.setString(2, customer.getCustName());
+			pstmt.setString(3, customer.getCustRank());
+			pstmt.setInt(4, customer.getCustCredit());
+			pstmt.setString(5, customer.getCustAddr());
+			pstmt.setString(6, customer.getCustTel());
+			
+			pstmt.executeUpdate();
+		}
+		
+	}
+
+	@Override
+	public int updateCustomer(Customer customer) throws SQLException {
+		String sql = "update customer set custCode = ?, custName =?, custRank=?, custCredit=?, custAddr=?, custTel=? where custCode=? ";
+		int res = -1;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, customer.getCustCode());
+			pstmt.setString(2, customer.getCustName());
+			pstmt.setString(3, customer.getCustRank());
+			pstmt.setInt(4, customer.getCustCredit());
+			pstmt.setString(5, customer.getCustAddr());
+			pstmt.setString(6, customer.getCustTel());
+			pstmt.setString(7, customer.getCustCode());
+			
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteCustomer(Customer customer) throws SQLException {
+		String sql = "delete from customer where custCode =?";
+		int res =  -1;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, customer.getCustCode());
+			
+			res=pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	
+
 }
