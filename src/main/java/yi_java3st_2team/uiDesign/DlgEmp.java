@@ -162,8 +162,8 @@ public class DlgEmp extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
-				btnOk = new JButton("확인");
-				btnOk.setActionCommand("확인");
+				btnOk = new JButton("추가");
+				btnOk.setActionCommand("추가");
 		//		btnOk.addActionListener(myActionListener);
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
@@ -185,16 +185,28 @@ public class DlgEmp extends JDialog {
 		return btnOk;
 	}	
 	
-	//추가로 바꾸기
-	public JButton getBtnAdd() {
-		btnOk.setText("추가");
-		return btnOk;
-	}
+	//안먹어서 추가를 기본으로 바꿈 
+//	//추가로 바꾸기
+//	public JButton getBtnAdd() {
+//		btnOk.setText("추가");
+//		return btnOk;
+//	}
 	
 	public JButton getBtnUpdate() {
+		btnOk.setActionCommand("수정");
 		btnOk.setText("수정");
 		return btnOk;
 	}
+	
+	public void setActionCommendToUpdate() {
+		btnOk.setActionCommand("수정");
+	}
+	
+//	//수정으로 바꾸는 함수
+//	public void setBtnName(String str) {
+//		btnOk.setText(str);
+//	}
+	
 	ActionListener myActionListener = new ActionListener() {
 		
 		@Override

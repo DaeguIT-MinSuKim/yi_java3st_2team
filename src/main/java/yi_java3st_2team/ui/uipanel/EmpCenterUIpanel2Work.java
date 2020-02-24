@@ -84,7 +84,7 @@ public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 				dlgEmp.setCmbDeptList(service.showDeptList());
 				dlgEmp.setVisible(true);
 				//다이얼로그의 추가 취소 버튼 가져와서 액션리스너 달기
-		        dlgEmp.getBtnAdd().addActionListener(myDlgActionListner);
+		        dlgEmp.getBtnOk().addActionListener(myDlgActionListner);
 		        dlgEmp.getBtnCancel().addActionListener(myDlgActionListner);
 				
 			//수정일때
