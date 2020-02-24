@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
-import yi_java3st_2team.ui.table.EmpCenterTblPanel;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
 import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.uipanel.EmpCenterUIpanelAuth;
@@ -155,29 +155,7 @@ public class MainFrameHS extends JFrame implements ActionListener {
 		
 		mntmEmpSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mntmEmpSearch);
-//		//사원 검색에 마우스 리스너 달기 
-//		
-//		
-//		//마우스 리스너 현서
-//		MouseListener myMouseListener = new MouseAdapter() {
-//
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				//사원검색 클릭하면 
-//				setCenterEmpSearchUIPanel();
-//			}
-//
-//			private void setCenterEmpSearchUIPanel() {
-//				pCenter.removeAll();
-//				pEmpUIPanel = new EmpCenterUIpanel();
-//	            pCenter.add(pEmpUIPanel,BorderLayout.CENTER);
-//	            repaint();
-//	            revalidate();
-//				
-//			}
-//
-//		};
-//		mntmEmpSearch.addMouseListener(myMouseListener);
+
 		
 		mnEmpInfo = new JMenu("사원 정보");
 		mnEmpInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -318,6 +296,7 @@ public class MainFrameHS extends JFrame implements ActionListener {
 		mntmEmpSearch.addActionListener(this);
 		mntmWorkInfo.addActionListener(this);
 		mntmStatistic.addActionListener(this);
+		//사원권한
 		mnEmpAuth.addActionListener(this);
 	}
 	
