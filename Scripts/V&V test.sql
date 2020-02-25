@@ -115,6 +115,7 @@ select * from employee;
 insert into employee values ('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2);
 select empname from employee where empid='111' and emppwd=password('111');
 select * from employee where empAuth = 'CS';
+select * from plan where planCode like 'A%';
 select * from plan where planCode like 'B%';
 select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname = '김가나';
 select customer.custname,bankbook.accountBalance from customer left join bankbook on customer.`custCode` = bankbook.`custCode` where bankbook.`accountPlanCode` in ('A001','A004'); 

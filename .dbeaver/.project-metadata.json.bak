@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170757341d7-5ebae8ef2f063adb","default-catalog":"bank"}}}
-=======
-{"resources":{"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"}}}
->>>>>>> refs/heads/hana_CSteam2
+{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3","default-catalog":"bank"}}}
