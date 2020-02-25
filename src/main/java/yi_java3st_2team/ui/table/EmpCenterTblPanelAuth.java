@@ -50,11 +50,11 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 		model.setValueAt(item.getEmpName(), updateIdx, 1);
 		model.setValueAt(item.getEmpTitle(), updateIdx, 2);
 		model.setValueAt(item.getEmpAuth(), updateIdx, 3);
-		model.setValueAt(item.getEmpSalary(), updateIdx, 4);
-		model.setValueAt(item.getEmpTel(), updateIdx, 5);
-		model.setValueAt(item.getEmpId(), updateIdx, 6);
-		model.setValueAt(item.getEmpPwd(), updateIdx, 7);
-		model.setValueAt(item.getDept().getDeptName(), updateIdx, 8);
+//		model.setValueAt(item.getEmpSalary(), updateIdx, 4);
+//		model.setValueAt(item.getEmpTel(), updateIdx, 5);
+//		model.setValueAt(item.getEmpId(), updateIdx, 6);
+//		model.setValueAt(item.getEmpPwd(), updateIdx, 7);
+//		model.setValueAt(item.getDept().getDeptName(), updateIdx, 8);
 	}
 
 	@Override
@@ -64,15 +64,15 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 		String empName = (String) model.getValueAt(selIdx, 1);
 		String empTitle = (String) model.getValueAt(selIdx, 2);
 		String empAuth = (String) model.getValueAt(selIdx, 3);
-		String sSalary = (String)model.getValueAt(selIdx, 4);
-		int empSalary = Integer.parseInt(sSalary.replace(",",""));
-		String empTel = (String) model.getValueAt(selIdx, 5);
-		String empId = (String) model.getValueAt(selIdx, 6);
-		String empPwd = (String) model.getValueAt(selIdx, 7);
-		String sDept= (String)model.getValueAt(selIdx, 8);
-		int index = sDept.indexOf(")");
-		Department dept = new Department(index-1); //)앞의 숫자를 넣는다.. 
-		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+//		String sSalary = (String)model.getValueAt(selIdx, 4);
+//		int empSalary = Integer.parseInt(sSalary.replace(",",""));
+//		String empTel = (String) model.getValueAt(selIdx, 5);
+//		String empId = (String) model.getValueAt(selIdx, 6);
+//		String empPwd = (String) model.getValueAt(selIdx, 7);
+//		String sDept= (String)model.getValueAt(selIdx, 8);
+//		int index = sDept.indexOf(")");
+//		Department dept = new Department(index-1); //)앞의 숫자를 넣는다.. 
+		Employee emp = new Employee(empCode, empName, empTitle, empAuth);
 		
 		return emp;
 	}

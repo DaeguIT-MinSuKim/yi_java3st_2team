@@ -206,4 +206,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String deptName =rs.getString("deptName");
 		return new Department(deptNo, deptName);
 	}
+
+	@Override
+	public int updateEmployeeAuth(Employee emp) {  //여기서 emp는 네가지 정보만 가지고 있음 
+		String sql="update employee set empName=?,empTitle=?,empAuth=? where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			
+			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(2, emp.getEmpTitle());
+			pstmt.setString(3, emp.getEmpAuth());
+			pstmt.setString(4, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

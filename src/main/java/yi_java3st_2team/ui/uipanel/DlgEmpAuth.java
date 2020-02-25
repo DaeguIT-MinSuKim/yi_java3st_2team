@@ -1,4 +1,4 @@
-package yi_java3st_2team.uiDesign;
+package yi_java3st_2team.ui.uipanel;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -152,6 +153,12 @@ public class DlgEmpAuth extends JDialog {
 			String empName = emp.getEmpName();
 			String empTitle = emp.getEmpTitle();
 			String empAuth = tfEmpAuth.getText().trim();
+			
+//			if(checkAuth(empAuth)==0) {
+//				
+//				return null;
+//			}
+			
 			int empSalary = emp.getEmpSalary();
 			String empTel = emp.getEmpTel();
 			String empId = emp.getEmpId();
@@ -159,6 +166,18 @@ public class DlgEmpAuth extends JDialog {
 			Department dept = emp.getDept();
 			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 		}
+		
+		//권한 확인하기 -아직 수정필요 0225
+		 public int checkAuth(String empAuth) {
+			 String [] strAuth = {"HR","AD","CS"};
+				for(int i =0; i<strAuth.length; i++) {
+					if(strAuth[i].equals(empAuth)) {
+						return 1;
+					}
+					
+				}
+				return 0;
+		 }
 		
 
 		public void clearTf() {

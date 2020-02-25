@@ -14,8 +14,7 @@ import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
 import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
 import yi_java3st_2team.ui.table.EmpCenterTblPanelAuth;
-import yi_java3st_2team.uiDesign.DlgEmp;
-import yi_java3st_2team.uiDesign.DlgEmpAuth;
+
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -58,17 +57,11 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 	private JPopupMenu createPopup() {
 		JPopupMenu popup = new JPopupMenu();
 		
-		JMenuItem addMenu = new JMenuItem("추가");
-		addMenu.addActionListener(myPopListener);
-		popup.add(addMenu);
-		
+
 		JMenuItem editMenu = new JMenuItem("수정");
 		editMenu.addActionListener(myPopListener);
 		popup.add(editMenu);
 		
-		JMenuItem deleteMenu = new JMenuItem("삭제");
-		deleteMenu.addActionListener(myPopListener);
-		popup.add(deleteMenu);
 		return popup;
 	}
 	//팝업메뉴 액션리스너
@@ -76,20 +69,10 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//추가일때
-			if(e.getActionCommand()=="추가") {
-				if(dlgEmpAuth == null) {
-					dlgEmpAuth = new DlgEmpAuth();
-				}
-				//부서 리스트 가져와서 콤보박스에 넣기 
-
-				dlgEmpAuth.setVisible(true);
-				//다이얼로그의 추가 취소 버튼 가져와서 액션리스너 달기
-				dlgEmpAuth.getBtnAdd().addActionListener(myDlgActionListner);
-				dlgEmpAuth.getBtnCancel().addActionListener(myDlgActionListner);
+			
 				
 			//수정일때
-			}if(e.getActionCommand()=="수정") {
+			if(e.getActionCommand()=="수정") {
 				//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 					Employee emp = pEmpTblPanel.getSelectedItem();
 					if(dlgEmpAuth == null) {
@@ -101,52 +84,37 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 					}
 				
 					
-					//다이얼로그 버튼을 수정으로 바꾸고 myDlgActionListner달기
-					dlgEmpAuth.getBtnUpdate().addActionListener(myDlgActionListner);
-					dlgEmpAuth.getBtnCancel().addActionListener(myDlgActionListner);
-			    
-				
-			}if(e.getActionCommand()=="삭제") {
-				//선택한 위치의  employee객체를 구하고 그걸 데이터에서 삭제 
-				Employee emp = pEmpTblPanel.getSelectedItem();
-				
-				service.removeEmp(emp);
-				JOptionPane.showMessageDialog(null, "삭제되었습니다");
-				pEmpTblPanel.loadTableData(service.showEmpList());
+					//다이얼로그 버튼에 myDlgActionListner달기
+					dlgEmpAuth.getBtnOk().addActionListener(myDlgActionListner);
+					dlgEmpAuth.getBtnCancel().addActionListener(myDlgActionListner);			    
 				
 			}
-			
-			
-			
 			
 		}
 	};
 	
 	ActionListener myDlgActionListner = new ActionListener() {
 		
+		private Employee updateEmp;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getActionCommand() == "확인") {
-				//다이어로그에서 추가를 누르면 디비 employee테이블 에 선택한 값들이 들어감 
-				//권한 부분이니 선택한 사원의  emp를 가져올 것 . ----------------------------
-				Employee emp = pEmpTblPanel.getSelectedItem();
-				Employee addEmp = dlgEmpAuth.getItem(emp);  //임플로이 생성자로 생성
-				//서비스로 인서트구문 만들어 넣기
-				service.addEmp(addEmp);
-				//dlgEmp.clearTf();
-				//리스트 다시 불러오기 
-				//pEmpTblPanel.loadTableData(service.showEmpList());
+
 				
 			if(e.getActionCommand()=="수정") {
-				//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
-				Employee emp1 = pEmpTblPanel.getSelectedItem();
-				Employee updateEmp = dlgEmpAuth.getItem(emp1);
-				service.modifyEmp(updateEmp);
-				dlgEmpAuth.clearTf();
+				//다이얼로그에서 수정을 누르면 디비에서 권한부분 수정 됨 
+				Employee emp = pEmpTblPanel.getSelectedItem();
+
+			
+				updateEmp = dlgEmpAuth.getItem(emp);	
+				service.modifyEmpAuth(updateEmp);
+				JOptionPane.showMessageDialog(null, "권한이 수정되었습니다");
+				dlgEmpAuth.setVisible(false);
+
 			}
 				
-			}if(e.getActionCommand()=="취소") {
-				//다이얼로그에서 취소 누르면 다이얼로그 텍스트 값들이 초기화됨 
+			if(e.getActionCommand()=="취소") {
+				//다이얼로그에서 취소 누르면 다이얼로그의 권한 값이 삭제됨
 				dlgEmpAuth.clearTf();
 			}
 			//클리어하기
