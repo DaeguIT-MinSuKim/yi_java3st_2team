@@ -13,21 +13,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
+import com.mysql.jdbc.MysqlDataTruncation;
+
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel;
 import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
-import yi_java3st_2team.uiDesign.DlgEmp;
+
 
 public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	private EmployeeUIService service;
 	private EmpCenterNorthSearchPanel pEmpSerch;
 	private EmpCenterTblPanel pEmpTblPanel;
 	private DlgEmp dlgEmp;
-	
-	
-	
+
+
 	public EmpCenterUIpanel() {
 		service = new EmployeeUIService();
 		initialize();
@@ -154,31 +155,38 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					if(e.getActionCommand().contentEquals("추가")) {
 						System.out.println("추가 눌렀음 ");
 						//다이어로그에서 추가를 누르면 디비 employee테이블 에 선택한 값들이 들어감 
-						Employee addEmp = dlgEmp.getItem();  //임플로이 생성자로 생성
+						
+						try{Employee addEmp = dlgEmp.getItem();  //임플로이 생성자로 생성
 						//서비스로 인서트구문 만들어 넣기
 						service.addEmp(addEmp);
-						//dlgEmp.clearTf();
-						//리스트 다시 불러오기 
-						//pEmpTblPanel.loadTableData(service.showEmpList());
-						
-					if(e.getActionCommand().contentEquals("수정")) {
-						//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
-						System.out.println("수정 눌렀음 ");
-						Employee updateEmp = dlgEmp.getItem();
-						service.modifyEmp(updateEmp);
+			
+						}catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, "입력한 정보를 확인해주세요");
+							return;
+						}
+						//클리어하기
 						dlgEmp.clearTf();
+						//리스트 다시 불러오기 
 						pEmpTblPanel.loadTableData(service.showEmpList());
+						
+					}if(e.getActionCommand().contentEquals("수정")) {
+						//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
+						//System.out.println("수정 눌렀음 ");
+						Employee updateEmp = dlgEmp.getItem();
+	//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
+						//해결해야함 0225 
+					    service.modifyEmp(updateEmp);
+						JOptionPane.showMessageDialog(null, "수정 되었습니다");
+						dlgEmp.setVisible(false);
+				
 					}
 						
-					}if(e.getActionCommand().contentEquals("취소")) {
+					if(e.getActionCommand().contentEquals("취소")) {
 						System.out.println("취소 눌렀음 ");
 						//다이얼로그에서 취소 누르면 다이얼로그 텍스트 값들이 초기화됨 
 						dlgEmp.clearTf();
 					}
-					//클리어하기
-					dlgEmp.clearTf();
-					//리스트 다시 불러오기 
-					pEmpTblPanel.loadTableData(service.showEmpList());
+					
 				}
 			};
 
@@ -215,6 +223,8 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					e1.printStackTrace();
 			    }
 			}
+
 		
+	
 	
 }

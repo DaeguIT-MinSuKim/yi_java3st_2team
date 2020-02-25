@@ -44,6 +44,10 @@ public class EmployeeUIService {
     	empDao.updateEmployee(emp);
     }
     
+    public void modifyEmpAuth(Employee emp) {
+    	empDao.updateEmployeeAuth(emp);
+    }
+    
     
     
 }

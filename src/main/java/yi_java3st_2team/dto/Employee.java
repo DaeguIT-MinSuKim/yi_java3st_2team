@@ -14,6 +14,9 @@ public class Employee {
 	public Employee() {
 		
 	}
+	
+	
+	
 
 	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
 			String empId, String empPwd, Department dept) {
@@ -26,6 +29,15 @@ public class Employee {
 		this.empId = empId;
 		this.empPwd = empPwd;
 		this.dept = dept;
+	}
+
+	//네개만 있는 emp
+	public Employee(String empCode, String empName, String empTitle, String empAuth) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
 	}
 
 	public Employee(String empId, String empPwd) {
