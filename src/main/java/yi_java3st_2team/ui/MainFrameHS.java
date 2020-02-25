@@ -347,11 +347,7 @@ public class MainFrameHS extends JFrame implements ActionListener {
 	public JLabel getLblGreeting() {
 		return lblGreeting;
 	}
-	
-	
-	
-	
-	
+		
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == mnEmpAuth) {

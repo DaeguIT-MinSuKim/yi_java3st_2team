@@ -1,4 +1,4 @@
-package yi_java3st_2team.uiDesign;
+package yi_java3st_2team.ui.uipanel;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -200,6 +200,7 @@ public class DlgEmp extends JDialog {
 	
 	public JButton setActionCommendToUpdate() {
 		btnOk.setText("수정");
+		btnOk.setActionCommand("수정");
 		return btnOk;
 	}
 	
