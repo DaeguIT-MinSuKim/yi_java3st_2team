@@ -79,7 +79,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
 						dlgCard.dispose();
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+						// TODO Auto-generated catch block  
 						e1.printStackTrace();
 					}
 				}
