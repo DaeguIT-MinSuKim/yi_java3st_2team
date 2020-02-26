@@ -22,6 +22,10 @@ public class CustomerService {
 		return dao.selectCustomerByName(custName);
 	}
 	
+	public List<Customer> showCustomersByBalance() throws SQLException{
+		return dao.selectCustomerBalance();
+	}
+	
 	public void AddCustomer(Customer customer) throws SQLException{
 		 dao.insertCustomer(customer);
 	}
