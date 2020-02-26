@@ -32,3 +32,15 @@ select custCode, custName, custRank, custCredit, custAddr, custTel from customer
 select planCode, planDetail, planName, planDesc, planDiv from plan;
 select custRank from customer;
 delete from customer where custCode = "C008";
+
+select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
+
+select * from customer;
+select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalance from BankBook b left join customer c on b.custCode = c.custCode ;
+
+select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
+
+select * from BankBook bb ;
+select * from card;
+select * from loan;
+select * from plan;
