@@ -185,13 +185,7 @@ public class DlgEmp extends JDialog {
 		return btnOk;
 	}	
 	
-	//안먹어서 추가를 기본으로 바꿈 
-//	//추가로 바꾸기
-//	public JButton getBtnAdd() {
-//		btnOk.setText("추가");
-//		return btnOk;
-//	}
-	
+
 	public JButton getBtnUpdate() {
 		btnOk.setActionCommand("수정");
 		btnOk.setText("수정");

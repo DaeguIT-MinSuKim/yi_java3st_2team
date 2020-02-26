@@ -59,37 +59,46 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(e.getActionCommand().contentEquals("추가")) {
-						System.out.println("추가 눌렀음 ");
-						//다이어로그에서 추가를 누르면 디비 employee테이블 에 선택한 값들이 들어감 
+						//System.out.println("추가 눌렀음 ");
+						//다이어로그에서 추가를 누르면 디비 employee테이블 에 선택한 값들이 들어감 	
 						
 						try{Employee addEmp = dlgEmp.getItem();  //임플로이 생성자로 생성
 						//서비스로 인서트구문 만들어 넣기
 						service.addEmp(addEmp);
-			
-						}catch (Exception e2) {
-							JOptionPane.showMessageDialog(null, "입력한 정보를 확인해주세요");
-							return;
-						}
-						//클리어하기
-						dlgEmp.clearTf();
+			            JOptionPane.showMessageDialog(null, "추가되었습니다");
+						//창 닫기
+						dlgEmp.setVisible(false);
 						//리스트 다시 불러오기 
 						pEmpTblPanel.loadTableData(service.showEmpList());
+						}catch (Exception e2) {
+							//e2.printStackTrace();
+							JOptionPane.showMessageDialog(null, "입력한 정보를 다시 확인해주세요");
+							return;
+						}
+						
+						//0226부서번호가 없어도 들어간다 이게 무슨일이야..........ㅜ 
 						
 					}if(e.getActionCommand().contentEquals("수정")) {
 						//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
 						//System.out.println("수정 눌렀음 ");
+						try {
 						Employee updateEmp = dlgEmp.getItem();
-	//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
+	                 //com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
 						//해결해야함 0225 
 					    service.modifyEmp(updateEmp);
 						JOptionPane.showMessageDialog(null, "수정 되었습니다");
 						dlgEmp.setVisible(false);
-				
+						}catch (NullPointerException e2) {
+							
+							JOptionPane.showMessageDialog(null, "부서를 입력해주세요");
+							return;
+						}
 					}
 						
 					if(e.getActionCommand().contentEquals("취소")) {
 						System.out.println("취소 눌렀음 ");
 						//다이얼로그에서 취소 누르면 다이얼로그 텍스트 값들이 초기화됨 
+						
 						dlgEmp.clearTf();
 					}
 					
@@ -153,8 +162,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					}if(e.getActionCommand().contentEquals("수정")) {
 					//	System.out.println("수정수정");
 						//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
-						
-						
+					
 							Employee emp = pEmpTblPanel.getSelectedItem();
 							if(dlgEmp == null) {		
 								dlgEmp = new DlgEmp();
