@@ -86,9 +86,15 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	                 //com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
 						//해결해야함 0225 
 					    service.modifyEmp(updateEmp);
+					    if(updateEmp == null) {
+					    	return;
+					    }
 						JOptionPane.showMessageDialog(null, "수정 되었습니다");
+						pEmpTblPanel.loadTableData(service.showEmpList());
 						dlgEmp.setVisible(false);
-						}catch (NullPointerException e2) {
+						}
+						
+						catch (NullPointerException e2) {
 							
 							JOptionPane.showMessageDialog(null, "부서를 입력해주세요");
 							return;
@@ -100,6 +106,10 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						//다이얼로그에서 취소 누르면 다이얼로그 텍스트 값들이 초기화됨 
 						
 						dlgEmp.clearTf();
+					}
+					
+					if(e.getActionCommand().contentEquals("닫기")) {
+						dlgEmp.setVisible(false);
 					}
 					
 				}
@@ -153,6 +163,8 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						dlgEmp = new DlgEmp();
 						}
 						//부서 리스트 가져와서 콤보박스에 넣기 
+						dlgEmp.removeAll();
+						dlgEmp = new DlgEmp();
 						dlgEmp.setCmbDeptList(service.showDeptList());
 						dlgEmp.setVisible(true);
 						dlgEmp.getBtnOk().addActionListener(myDlgActionListner); //ok가 애초에 추가로 설정 
@@ -167,12 +179,13 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 							if(dlgEmp == null) {		
 								dlgEmp = new DlgEmp();
 							}
-							if(dlgEmp != null){
-								dlgEmp.setVisible(true);
-							}
+								dlgEmp.removeAll();
+								dlgEmp = new DlgEmp();
 							
+							dlgEmp.setActionCommendClose().addActionListener(myDlgActionListner);
 							dlgEmp.setActionCommendToUpdate().addActionListener(myDlgActionListner);
 							dlgEmp.setCmbDeptList(service.showDeptList());
+							dlgEmp.setVisible(true);
 							dlgEmp.setItem(emp);
 				    
 						
