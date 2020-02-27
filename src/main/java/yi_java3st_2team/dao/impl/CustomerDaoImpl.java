@@ -11,6 +11,7 @@ import java.util.List;
 import yi_java3st_2team.dao.CustomerDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -120,6 +121,49 @@ public class CustomerDaoImpl implements CustomerDao {
 			res=pstmt.executeUpdate();
 		}
 		return res;
+	}
+
+	@Override
+	public List<Customer> selectCustomerBalance() throws SQLException {
+		String sql = "select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c "
+				+ "left join bankbook b on c.custcode = b.custcode";
+		List<Customer> list = new ArrayList<>();
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				do {
+					list.add(getCustomerForBalance(rs));
+				}while(rs.next());
+			}
+		}
+		
+		return list;
+	}
+
+	private Customer getCustomerForBalance(ResultSet rs) throws SQLException {
+		String custCode = rs.getString("c.custCode");
+		String custName  = rs.getString("c.custName");
+		String custAccnt = rs.getString("b.accountNum");
+		String custBalance = rs.getString("b.accountBalance");
+		if(custBalance==null) {
+			custBalance="0";
+		}
+		Long balance = Long.parseLong(custBalance);
+		
+		Customer customer = new Customer(custCode, custName);
+		BankBook bankbook = new BankBook(customer);
+		bankbook.setAccountNum(custAccnt);
+		bankbook.setAccountBalance(balance);
+		
+		customer.setBankbook(bankbook);
+		/*
+		 * customer.getBankbook().setCustCode(customer.getCustCode());
+		 * customer.getBankbook().setAccountNum(custAccnt);
+		 * customer.getBankbook().setAccountBalance(balance);
+		 */
+		
+		return customer;
 	}
 
 	

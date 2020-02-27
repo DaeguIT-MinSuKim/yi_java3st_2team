@@ -17,19 +17,24 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4);
-		setColumnWidth(100,100,100,100,100);
+		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5);
+		setColumnWidth(100,100,100,100,100,100);
 	}
 
 	@Override
 	protected String[] getColumns() {
-		return new String[] {"고객명", "입출금 구분", "금액", "잔액", "일시"};
+		return new String[] {"고객명", "계좌번호" ,"입출금 구분", "금액", "잔액", "일시"};
 	}
 
 	@Override
 	protected Object[] toArray(Customer item) {
 		return new Object[] {
-				item.getCustName()
+				item.getCustName(),
+				item.getBankbook().getAccountNum(),
+				null,
+				null,
+				item.getBankbook().getAccountBalance(),
+				null
 				
 		};
 	}

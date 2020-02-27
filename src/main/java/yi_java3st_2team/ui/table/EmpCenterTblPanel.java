@@ -18,7 +18,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 	protected void setTblWidthAlign() {
 		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5,6,7,8 );
 		setColumnAlign(SwingConstants.RIGHT, 4);
-        setColumnWidth(50,50,70,50,80,110,70,100,70);		
+        setColumnWidth(50,70,70,50,80,110,70,100,70);		
 	}
 
 	@Override

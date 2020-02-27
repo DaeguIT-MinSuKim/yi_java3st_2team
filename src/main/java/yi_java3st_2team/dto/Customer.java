@@ -7,10 +7,21 @@ public class Customer {
 	private int custCredit;
 	private String custAddr;
 	private String custTel;
+	private BankBook bankbook;
 	public Customer() {
 		
 	}
 	
+	
+	
+	public Customer(String custCode, String custName) {
+		super();
+		this.custCode = custCode;
+		this.custName = custName;
+	}
+
+
+
 	public Customer(String custCode, String custName, String custRank, int custCredit, String custAddr,
 			String custTel) {
 		this.custCode = custCode;
@@ -60,6 +71,21 @@ public class Customer {
 	public void setCustTel(String custTel) {
 		this.custTel = custTel;
 	}
+	
+	
+
+	public BankBook getBankbook() {
+		return bankbook;
+	}
+	
+	
+
+
+	public void setBankbook(BankBook bankbook) {
+		this.bankbook = bankbook;
+	}
+
+
 
 	@Override
 	public String toString() {

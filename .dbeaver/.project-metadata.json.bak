@@ -1,1 +1,5 @@
-{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3","default-catalog":"bank"}}}
+<<<<<<< HEAD
+{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3","default-catalog":"bank"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3"}}}
+=======
+{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-17068020f09-76d6a3cf1df4f04b"},"Scripts/hsData.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/hsTest.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170686ba88c-6c65351260102da7"}}}
+>>>>>>> refs/heads/hsBranch

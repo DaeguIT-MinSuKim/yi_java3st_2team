@@ -23,7 +23,7 @@ public class CustDWUIPanel extends JPanel {
 		
 		CustDWCenterCenterTblPanel panel_1 = new CustDWCenterCenterTblPanel();
 		try {
-			panel_1.loadTableData(service.showCustomers());
+			panel_1.loadTableData(service.showCustomersByBalance());
 		} catch (SQLException e) {
 			System.out.println("해당 고객이 없습니다.");
 			e.printStackTrace();

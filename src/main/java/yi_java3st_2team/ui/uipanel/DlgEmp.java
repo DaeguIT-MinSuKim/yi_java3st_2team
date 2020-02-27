@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -185,13 +186,7 @@ public class DlgEmp extends JDialog {
 		return btnOk;
 	}	
 	
-	//안먹어서 추가를 기본으로 바꿈 
-//	//추가로 바꾸기
-//	public JButton getBtnAdd() {
-//		btnOk.setText("추가");
-//		return btnOk;
-//	}
-	
+
 	public JButton getBtnUpdate() {
 		btnOk.setActionCommand("수정");
 		btnOk.setText("수정");
@@ -204,10 +199,11 @@ public class DlgEmp extends JDialog {
 		return btnOk;
 	}
 	
-//	//수정으로 바꾸는 함수
-//	public void setBtnName(String str) {
-//		btnOk.setText(str);
-//	}
+    public JButton setActionCommendClose() {
+    	btnCancel.setText("닫기");
+    	btnCancel.setActionCommand("닫기");
+    	return btnCancel;
+    }
 	
 	ActionListener myActionListener = new ActionListener() {
 		
@@ -237,6 +233,11 @@ public class DlgEmp extends JDialog {
 	public Employee getItem() {
 		String empCode = tfEmpCode.getText().trim();
 		String empName = tfEmpName.getText().trim();
+		int nameLength = empName.length();
+		if(nameLength >= 6) {
+			JOptionPane.showMessageDialog(null, "이름은 다섯자 이내입니다");
+			return null;
+		}
 		String empTitle = tfEmpTitle.getText().trim();
 		String empAuth = null;  //null로 넣어도 되는걸까
 		int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
