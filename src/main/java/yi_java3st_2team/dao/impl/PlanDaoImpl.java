@@ -87,7 +87,7 @@ public class PlanDaoImpl implements PlanDao {
 	public List<Plan> selectPlanByLoan() throws SQLException {
 		List<Plan> list = new ArrayList<>();
 		String sql = "select * from plan where planCode like ?";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, "C%");
 			try(ResultSet rs = pstmt.executeQuery()) {

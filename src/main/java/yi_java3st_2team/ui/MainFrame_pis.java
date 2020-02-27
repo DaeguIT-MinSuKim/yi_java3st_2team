@@ -36,6 +36,8 @@ import yi_java3st_2team.ui.panel.BankBookTransHisStatisticPanel;
 import yi_java3st_2team.ui.panel.CardCenterStatisticPanel;
 import yi_java3st_2team.ui.panel.CardCenterTransInfoPanel;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
+import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
+import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
 import yi_java3st_2team.ui.table.CardCenterTblPanel;
 import yi_java3st_2team.uiDesign.CardTransHisStatisticFrame;
@@ -266,10 +268,12 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		mnBankWork.add(mnLoan);
 		
 		mntmLoan = new JMenuItem("대출 관리");
+		mntmLoan.addActionListener(this);
 		mntmLoan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoan);
 		
 		mntmLoanSearch = new JMenuItem("대출 조회");
+		mntmLoanSearch.addActionListener(this);
 		mntmLoanSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoanSearch);
 		
@@ -332,6 +336,12 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		return lblGreeting;
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmLoan) {
+			mntmLoanActionPerformed(e);
+		}
+		if (e.getSource() == mntmLoanSearch) {
+			mntmLoanSearchActionPerformed(e);
+		}
 		if (e.getSource() == mntmBankBookStatistic) {
 			mntmBankBookStatisticActionPerformed(e);
 		}
@@ -389,6 +399,20 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
 		contentPane.remove(pCenter);
 		pCenter = new BankBookInfoStatisticPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new LoanInfoStatisticPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	protected void mntmLoanActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new LoanCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();

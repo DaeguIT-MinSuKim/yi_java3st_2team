@@ -1,0 +1,114 @@
+package yi_java3st_2team.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import yi_java3st_2team.dao.LoanDao;
+import yi_java3st_2team.ds.LocalDataSource;
+import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.dto.Plan;
+
+public class LoanDaoImpl implements LoanDao {
+	private static final LoanDaoImpl instance = new LoanDaoImpl();
+	private LoanDaoImpl() {};
+	
+	public static LoanDaoImpl getInstance() {
+		return instance;
+	}
+
+	@Override
+	public List<Loan> showLoans() throws SQLException {
+		List<Loan> list = new ArrayList<>();
+		String sql = "select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getLoan(rs));
+			}
+		}
+		return list;
+	}
+
+	private Loan getLoan(ResultSet rs) throws SQLException {
+		String loanAccountNum = rs.getString("l.loanaccountnum");
+		Customer custCode = new Customer();
+		custCode.setCustName(rs.getString("c.custname"));
+		Plan planCode = new Plan();
+		planCode.setPlanName(rs.getString("p.planname"));
+		Date loanDate = rs.getTimestamp("l.loanDate");
+		float loanInterest = rs.getFloat("l.loaninterest");
+		Long loanBalance = rs.getLong("l.loanbalance");
+		return new Loan(loanAccountNum, custCode, planCode, loanDate, loanInterest, loanBalance);
+	}
+
+	@Override
+	public List<Loan> showLoanByCustName(Loan loan) throws SQLException {
+		List<Loan> list = new ArrayList<>();
+		String sql = "select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode where c.custname = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+				pstmt.setString(1, loan.getCustCode().getCustName());
+				try(ResultSet rs = pstmt.executeQuery()) {
+					while(rs.next()) {
+						list.add(getLoan(rs));
+					}
+				}	
+		}
+		return list;
+	}
+
+	@Override
+	public int insertLoan(Loan loan) throws SQLException {
+		int res = -1;
+		String sql = "insert into loan values(?,?,?,?,?,?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, loan.getLoanAccountNum());
+			pstmt.setString(2, loan.getCustCode().getCustCode());
+			pstmt.setString(3, loan.getPlanCode().getPlanCode());
+			pstmt.setTimestamp(4, new Timestamp(loan.getLoanDate().getTime()));
+			pstmt.setFloat(5, loan.getLoanInterest());
+			pstmt.setLong(6, loan.getLoanBalance());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public int updateLoan(Loan loan) throws SQLException {
+		int res = -1;
+		String sql = "update loan set loandate = ?,loaninterest=?,loanbalance=? where custcode = (select custcode from customer where custname = ?) and loanaccountnum = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setTimestamp(1, new Timestamp(loan.getLoanDate().getTime()));
+			pstmt.setFloat(2, loan.getLoanInterest());
+			pstmt.setLong(3, loan.getLoanBalance());
+			pstmt.setString(4, loan.getCustCode().getCustName());
+			pstmt.setString(5, loan.getLoanAccountNum());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public int deleteLoan(Loan loan) throws SQLException {
+		int res = -1;
+		String sql = "delete from loan where custcode = (select custcode from customer where custname = ?) and loanaccountnum = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, loan.getCustCode().getCustName());
+			pstmt.setString(2, loan.getLoanAccountNum());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+}
