@@ -77,6 +77,14 @@ public class Customer {
 	public BankBook getBankbook() {
 		return bankbook;
 	}
+	
+	
+
+
+	public void setBankbook(BankBook bankbook) {
+		this.bankbook = bankbook;
+	}
+
 
 
 	@Override
