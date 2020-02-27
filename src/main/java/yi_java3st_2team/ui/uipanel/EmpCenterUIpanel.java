@@ -180,9 +180,15 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	                 //com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
 						//해결해야함 0225 
 					    service.modifyEmp(updateEmp);
+					    if(updateEmp == null) {
+					    	return;
+					    }
 						JOptionPane.showMessageDialog(null, "수정 되었습니다");
+						pEmpTblPanel.loadTableData(service.showEmpList());
 						dlgEmp.setVisible(false);
-						}catch (NullPointerException e2) {
+						}
+						
+						catch (NullPointerException e2) {
 							
 							JOptionPane.showMessageDialog(null, "부서를 입력해주세요");
 							return;
@@ -196,17 +202,63 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						dlgEmp.clearTf();
 					}
 					
+					if(e.getActionCommand().contentEquals("닫기")) {
+						dlgEmp.setVisible(false);
+					}
+					
 				}
 			};
 
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
 
-
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					//추가일때
+					if(e.getActionCommand().contentEquals("추가")) {
+					//	System.out.println("추가추가");
+						if(dlgEmp == null) {
+						dlgEmp = new DlgEmp();
+						}
+						//부서 리스트 가져와서 콤보박스에 넣기 
+						dlgEmp.removeAll();
+						dlgEmp = new DlgEmp();
+						dlgEmp.setCmbDeptList(service.showDeptList());
+						dlgEmp.setVisible(true);
+						dlgEmp.getBtnOk().addActionListener(myDlgActionListner); //ok가 애초에 추가로 설정 
+				        dlgEmp.getBtnCancel().addActionListener(myDlgActionListner);
+						
+					//수정일때
+					}if(e.getActionCommand().contentEquals("수정")) {
+					//	System.out.println("수정수정");
+						//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
+					
+							Employee emp = pEmpTblPanel.getSelectedItem();
+							if(dlgEmp == null) {		
+								dlgEmp = new DlgEmp();
+							}
+								dlgEmp.removeAll();
+								dlgEmp = new DlgEmp();
+							
+							dlgEmp.setActionCommendClose().addActionListener(myDlgActionListner);
+							dlgEmp.setActionCommendToUpdate().addActionListener(myDlgActionListner);
+							dlgEmp.setCmbDeptList(service.showDeptList());
+							dlgEmp.setVisible(true);
+							dlgEmp.setItem(emp);
+				    
+						
+					}if(e.getActionCommand().contentEquals("삭제")) {
+						//선택한 위치의  employee객체를 구하고 그걸 데이터에서 삭제 
+						Employee emp = pEmpTblPanel.getSelectedItem();
+						
+						service.removeEmp(emp);
+						JOptionPane.showMessageDialog(null, "삭제되었습니다");
+						pEmpTblPanel.loadTableData(service.showEmpList());
+						
+					}
+			
+					
+				}
+			};
+			
 		
-	
-}
+
