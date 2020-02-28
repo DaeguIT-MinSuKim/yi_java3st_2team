@@ -41,6 +41,8 @@ select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalan
 select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
 
 select * from BankBook bb ;
+update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
+
 select * from card;
 select * from loan;
 select * from plan;

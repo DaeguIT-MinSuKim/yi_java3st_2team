@@ -3,6 +3,7 @@ package yi_java3st_2team.ui.panel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
 
@@ -46,8 +47,23 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 	}
 
 	@Override
-	protected Customer getSelectedItem() {
-		return null;
+	public Customer getSelectedItem() {
+		int selectedIdx = getSelectedRowIdx();
+		String custName = (String) model.getValueAt(selectedIdx, 0);
+		String accountNum = (String) model.getValueAt(selectedIdx, 1);
+		long custBalance = (long) model.getValueAt(selectedIdx, 4);
+		long balance = custBalance;
+		
+		
+		Customer customer = new Customer();
+		BankBook bankbook = new BankBook();
+		
+		customer.setCustName(custName);
+		bankbook.setAccountNum(accountNum);
+		bankbook.setAccountBalance(balance);
+		
+		customer.setBankbook(bankbook);
+		return customer;
 	}
 
 }
