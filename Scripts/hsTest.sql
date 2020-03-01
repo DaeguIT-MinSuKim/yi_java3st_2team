@@ -7,6 +7,7 @@ select * from performance p;
 desc performance;
 select * from customer c;
 select * from plan p;
+select * from card c;
 
 
 select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptNo

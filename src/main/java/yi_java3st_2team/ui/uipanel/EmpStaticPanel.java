@@ -7,7 +7,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel {
 	
 	
 	public EmpStaticPanel() {
-		setLabelInit(lblStat1,lblStat2,lblStat3,lblStat4,lblStat5,lblStat6);
+		this.setLabelInit(this.lblStat1,this.lblStat2,this.lblStat3,this.lblStat4,this.lblStat5,this.lblStat6);
 	}
 	@Override
 	protected String[] getTexts() {
