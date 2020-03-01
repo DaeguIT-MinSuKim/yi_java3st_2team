@@ -64,6 +64,7 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 		String empName = (String) model.getValueAt(selIdx, 1);
 		String empTitle = (String) model.getValueAt(selIdx, 2);
 		String empAuth = (String) model.getValueAt(selIdx, 3);
+		
 //		String sSalary = (String)model.getValueAt(selIdx, 4);
 //		int empSalary = Integer.parseInt(sSalary.replace(",",""));
 //		String empTel = (String) model.getValueAt(selIdx, 5);

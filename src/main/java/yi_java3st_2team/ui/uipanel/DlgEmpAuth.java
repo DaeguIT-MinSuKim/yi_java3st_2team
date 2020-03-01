@@ -153,18 +153,18 @@ public class DlgEmpAuth extends JDialog {
 			String empName = emp.getEmpName();
 			String empTitle = emp.getEmpTitle();
 			String empAuth = tfEmpAuth.getText().trim();
-			
-//			if(checkAuth(empAuth)==0) {
-//				
-//				return null;
-//			}
-			
+				
 			int empSalary = emp.getEmpSalary();
 			String empTel = emp.getEmpTel();
 			String empId = emp.getEmpId();
 			String empPwd = emp.getEmpPwd();
 			Department dept = emp.getDept();
-			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+			
+            if(empAuth.equals("HR")|| empAuth.equals("CS")||empAuth.contentEquals("AD")) {
+            	return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+				
+			}
+            return null;
 		}
 		
 		//권한 확인하기 -아직 수정필요 0225
