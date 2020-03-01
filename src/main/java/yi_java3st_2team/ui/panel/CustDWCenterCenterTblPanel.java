@@ -18,13 +18,15 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5);
-		setColumnWidth(100,100,100,100,100,100);
+		setColumnAlign(SwingConstants.CENTER, 0,1);
+		setColumnAlign(SwingConstants.RIGHT, 2);
+		setColumnWidth(100,100,100);
 	}
 
 	@Override
 	protected String[] getColumns() {
-		return new String[] {"고객명", "계좌번호" ,"입출금 구분", "금액", "잔액", "일시"};
+		return new String[] {"고객명", "계좌번호" , "잔액"};
+		
 	}
 
 	@Override
@@ -32,10 +34,8 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 		return new Object[] {
 				item.getCustName(),
 				item.getBankbook().getAccountNum(),
-				null,
-				null,
-				item.getBankbook().getAccountBalance(),
-				null
+				//item.getBankbook().getAccountBalance(),
+				String.format("%,d", item.getBankbook().getAccountBalance())
 				
 		};
 	}
@@ -51,8 +51,9 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 		int selectedIdx = getSelectedRowIdx();
 		String custName = (String) model.getValueAt(selectedIdx, 0);
 		String accountNum = (String) model.getValueAt(selectedIdx, 1);
-		long custBalance = (long) model.getValueAt(selectedIdx, 4);
-		long balance = custBalance;
+		String balance = (String) model.getValueAt(selectedIdx, 2);
+		balance = balance.replace(",", "");
+		long custBalance = Long.parseLong(balance);
 		
 		
 		Customer customer = new Customer();
@@ -60,7 +61,7 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 		
 		customer.setCustName(custName);
 		bankbook.setAccountNum(accountNum);
-		bankbook.setAccountBalance(balance);
+		bankbook.setAccountBalance(custBalance);
 		
 		customer.setBankbook(bankbook);
 		return customer;

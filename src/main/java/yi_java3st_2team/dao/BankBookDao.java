@@ -12,5 +12,5 @@ public interface BankBookDao {
 	public abstract int insertBankBook(BankBook bankbook) throws SQLException;
 	public abstract int updateBankBook(BankBook bankbook) throws SQLException;
 	public abstract int deleteBankBook(BankBook bankbook) throws SQLException;
-	public abstract int updateBankBook(Customer customer) throws SQLException;
+	public abstract int updateBankBalance(Customer customer) throws SQLException;
 }

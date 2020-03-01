@@ -46,6 +46,6 @@ public class BankBookService {
 	}
 	
 	public int updateBankBalance(Customer customer) throws SQLException {
-		return bankBookDao.updateBankBook(customer);
+		return bankBookDao.updateBankBalance(customer);
 	}
 }

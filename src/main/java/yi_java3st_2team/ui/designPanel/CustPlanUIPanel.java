@@ -136,17 +136,21 @@ public class CustPlanUIPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
 				dlgcustplan.setActiontoEdit();
-				Plan plan = panel_1.getSelectedItem();
-				dlgcustplan.setVisible(true);
-				dlgcustplan.setItem(plan);
-				
-				
+				try {
+					Plan plan = panel_1.getSelectedItem();
+					dlgcustplan.setVisible(true);
+					dlgcustplan.setItem(plan);
+				}catch (RuntimeException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage());
+				}
+
 				dlgcustplan.getOkButton().addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						Plan plan = dlgcustplan.getItem();
+						
 						try {
+							Plan plan = dlgcustplan.getItem();
 							planService.editPlan(plan);
 							JOptionPane.showMessageDialog(null, "수정 되었습니다.");
 							dlgcustplan.dispose();
