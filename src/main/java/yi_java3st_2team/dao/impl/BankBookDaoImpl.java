@@ -109,4 +109,19 @@ public class BankBookDaoImpl implements BankBookDao {
 		return res;
 	}
 
+	@Override
+	public int updateBankBalance(Customer customer) throws SQLException {
+		String sql = "update BankBook set accountBalance = ? where custCode=(select custCode from customer where custName=?) and accountNum =?";
+		int res = -1;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setLong(1,customer.getBankbook().getAccountBalance());
+			pstmt.setString(2, customer.getCustName());
+			pstmt.setString(3, customer.getBankbook().getAccountNum());
+			
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
 }

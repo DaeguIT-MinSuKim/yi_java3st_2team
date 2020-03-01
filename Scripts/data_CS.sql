@@ -36,11 +36,42 @@ delete from customer where custCode = "C008";
 select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
 
 select * from customer;
+desc customer;
 select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalance from BankBook b left join customer c on b.custCode = c.custCode ;
 
 select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
 
 select * from BankBook bb ;
+desc bankbook;
+update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
+
 select * from card;
 select * from loan;
 select * from plan;
+
+
+select * from cust_DW_audit;
+create table cust_DW_audit(
+	dw varchar(5),
+	custName varchar(5) not null,
+	accountNum char(16) not null,
+	amount int(20) not null,
+	accountBalance bigint(20) not null,
+	accountDate datetime not null,
+	primary key(dw)
+);
+
+delimiter $$
+create trigger tri_after_update_customer
+   before update on customer
+   for each row 
+   begin
+      insert into cust_DW_audit values
+      (null, old.empno, old.empname, now(), 'update');
+   end $$
+delimiter ;
+
+
+
+
+

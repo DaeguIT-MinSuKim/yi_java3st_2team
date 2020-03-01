@@ -180,15 +180,6 @@ public class DlgCustInfo extends JDialog {
 			{
 				okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
-				okButton.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						
-						
-					}
-					
-				});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}

@@ -217,8 +217,7 @@ public class DlgCustPlan extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "신규 고객 추가를 취소합니다.");
-						dispose();
+						tfClear();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
@@ -298,6 +297,19 @@ public class DlgCustPlan extends JDialog {
 	}
 	
 	
+	public void tfClear() {
+		
+		tfCustPlanCode.setText("");
+		tfCustDetail.setText("");
+		tfCustPlanName.setText("");
+		cmbPlanDetail.setSelectedIndex(-1);
+		cmbCustPlanDiv.setSelectedIndex(-1);
+		textAreaPlanDesc.setText("");
+	
+		
+	}
+	
+	
 	
 	public void setActiontoAdd() {
 		okButton.setActionCommand("추가");
@@ -306,5 +318,7 @@ public class DlgCustPlan extends JDialog {
 	public void setActiontoEdit() {
 		okButton.setActionCommand("수정");
 	}
+	
+	
 
 }
