@@ -106,7 +106,11 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 				Employee emp = pEmpTblPanel.getSelectedItem();
 
 			
-				updateEmp = dlgEmpAuth.getItem(emp);	
+				updateEmp = dlgEmpAuth.getItem(emp);
+				if(updateEmp == null) {
+					JOptionPane.showMessageDialog(null, "입력한 값을 확인하세요(대 소문자 구별)");
+					return;
+				}
 				service.modifyEmpAuth(updateEmp);
 				JOptionPane.showMessageDialog(null, "권한이 수정되었습니다");
 				dlgEmpAuth.setVisible(false);

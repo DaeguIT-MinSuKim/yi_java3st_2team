@@ -7,6 +7,7 @@ desc performance;
 ALTER TABLE employee convert to charset utf8;
 
 
+
 select * from department;
 
 insert into department values
@@ -29,7 +30,7 @@ insert into employee values
 ('B006','황태원','대리','CS',3000000,'010-2902-5959','CSid5',password('testforCS5'),2),
 ('B007','나고객','사원','CS',2000000,'010-2212-7766','CSid6',password('testforCS6'),2);
 
-
+insert into employee values ('A004','test','test','AD',6000000,'000','test',password('test'),2);
 insert into performance values ('A001','A003','C001');
 select * from performance;
 
