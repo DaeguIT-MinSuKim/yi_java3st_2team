@@ -80,7 +80,7 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 	}
 	protected void setLblMouseListener(JLabel... menus) {
 		MouseListener myLblListener = new MouseAdapter() {
-			@Override
+			@Override 
 			public void mouseClicked(MouseEvent e) {
 				for(JLabel menu : menus) {
 					menu.setForeground(Color.BLACK);
