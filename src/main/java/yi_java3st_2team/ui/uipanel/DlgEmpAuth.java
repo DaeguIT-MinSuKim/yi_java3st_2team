@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
 public class DlgEmpAuth extends JDialog {
@@ -27,7 +29,6 @@ public class DlgEmpAuth extends JDialog {
 	private JTextField tfEmpCode;
 	private JTextField tfEmpName;
 	private JTextField tfEmpTitle;
-	private JTextField tfEmpAuth;
 
 	
 	
@@ -99,9 +100,9 @@ public class DlgEmpAuth extends JDialog {
 			contentPanel.add(lblEmpAuth);
 		}
 		{
-			tfEmpAuth = new JTextField();
-			tfEmpAuth.setColumns(10);
-			contentPanel.add(tfEmpAuth);
+			cmbAuth = new JComboBox();
+			cmbAuth.setModel(new DefaultComboBoxModel(new String[] {"CS", "AD", "HR"}));
+			contentPanel.add(cmbAuth);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -144,6 +145,7 @@ public class DlgEmpAuth extends JDialog {
 			
 		}
 	};
+	private JComboBox cmbAuth;
 
 
 	
@@ -152,7 +154,7 @@ public class DlgEmpAuth extends JDialog {
 			String empCode = emp.getEmpCode();
 			String empName = emp.getEmpName();
 			String empTitle = emp.getEmpTitle();
-			String empAuth = tfEmpAuth.getText().trim();
+			String empAuth = ((String) cmbAuth.getSelectedItem()).trim();
 				
 			int empSalary = emp.getEmpSalary();
 			String empTel = emp.getEmpTel();
@@ -160,28 +162,19 @@ public class DlgEmpAuth extends JDialog {
 			String empPwd = emp.getEmpPwd();
 			Department dept = emp.getDept();
 			
-            if(empAuth.equals("HR")|| empAuth.equals("CS")||empAuth.contentEquals("AD")) {
-            	return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
-				
-			}
-            return null;
+//            if(empAuth.equals("HR")|| empAuth.equals("CS")||empAuth.contentEquals("AD")) {
+//            	return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+//				
+//			}
+//            return null;
+			
+			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 		}
 		
-		//권한 확인하기 -아직 수정필요 0225
-		 public int checkAuth(String empAuth) {
-			 String [] strAuth = {"HR","AD","CS"};
-				for(int i =0; i<strAuth.length; i++) {
-					if(strAuth[i].equals(empAuth)) {
-						return 1;
-					}
-					
-				}
-				return 0;
-		 }
-		
+
 
 		public void clearTf() {
-			tfEmpAuth.setText("");
+			cmbAuth.setSelectedIndex(-1);
 			//권한 부분만 삭제하면 되기에
 		}
 		
@@ -190,7 +183,7 @@ public class DlgEmpAuth extends JDialog {
 			tfEmpCode.setText(item.getEmpCode());
 			tfEmpName.setText(item.getEmpName());
 			tfEmpTitle.setText(item.getEmpTitle());
-			tfEmpAuth.setText(item.getEmpAuth());
+			cmbAuth.setSelectedItem(item.getEmpAuth());
 	
 		}
 

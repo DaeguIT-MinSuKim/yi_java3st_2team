@@ -1,5 +1,7 @@
 package yi_java3st_2team.ui.uipanel;
 
+import javax.swing.JLabel;
+
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
 
 public class EmpStaticPanel extends AbsCenterStatisticPanel {
@@ -8,6 +10,9 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel {
 	
 	public EmpStaticPanel() {
 		this.setLabelInit(this.lblStat1,this.lblStat2,this.lblStat3,this.lblStat4,this.lblStat5,this.lblStat6);
+		setLblMouseListener(lblStat1,lblStat2,lblStat3,lblStat4,lblStat5,lblStat6);
+		
+		
 	}
 	@Override
 	protected String[] getTexts() {
@@ -21,5 +26,9 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel {
 				"보너스 총액"
 				};
 	}
+	
+
+	
+	
 
 }
