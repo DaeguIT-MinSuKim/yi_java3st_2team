@@ -75,7 +75,7 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 		String[] texts = getTexts();
 		for(int i=0;i<menu.length;i++) {
 			menu[i].setFont(new Font("맑은 고딕",Font.PLAIN,20));
-			menu[i].setText(texts[i]); 
+			menu[i].setText(texts[i]);  
 		}
 	}
 	protected void setLblMouseListener(JLabel... menus) {
