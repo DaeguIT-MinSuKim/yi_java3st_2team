@@ -67,8 +67,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee selectEmpByName(String empName) throws SQLException {
-		Employee emp = null;
+	public List<Employee> selectEmpByNameList(String empName) throws SQLException {
+		//Employee emp = null;
+		List<Employee> list = new ArrayList<Employee>();
 		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   where empName=?";
@@ -79,10 +80,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setString(1, empName);
 			
 			try(ResultSet rs = pstmt.executeQuery();){
-				if(rs.next()) {
-					return getEmployee(rs);
+				while(rs.next()) {
+					list.add(getEmployee(rs));
+					
+					//return getEmployee(rs);
 				}
+				return list;
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -223,5 +228,89 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public List<Employee> selectEmployeeByPerform() {
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			
+			List<Employee> list = new ArrayList<Employee>();
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+				
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Employee getEmpPerform(ResultSet rs) throws SQLException {
+		String empCode = rs.getString("e.empCode");
+		String empName = rs.getString("e.empName");
+		String empTitle = rs.getString("e.empTitle");
+		int perf = rs.getInt("perf");
+		int bonus = rs.getInt("bonus");
+		String vip = rs.getString("vip");
+		return new Employee(empCode, empName, empTitle, perf, bonus, vip);
+	}
+
+	@Override
+	public Employee selectEmpByName(String empName) throws SQLException {
+		       Employee emp = null;
+				String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+						"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+						"   where empName=?";
+				
+				try (Connection con = LocalDataSource.getConnection();
+						PreparedStatement pstmt = con.prepareStatement(sql)){
+					
+					pstmt.setString(1,empName);
+					
+					try(ResultSet rs = pstmt.executeQuery();){
+						if(rs.next()) {
+							//list.add(getEmployee(rs));
+							
+							return getEmployee(rs);
+						}
+						
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null;
+	}
+
+	@Override
+	public Employee selectOneEmployeeByPerform(String empName) throws SQLException {
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"where e.empName=? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, empName);
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			if(rs.next()) {
+				//list.add(getEmpPerform(rs));
+			   return getEmpPerform(rs);
+				
+			  }
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

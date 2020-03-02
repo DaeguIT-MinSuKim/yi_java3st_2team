@@ -36,12 +36,9 @@ public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 				item.getEmpCode(),
 				item.getEmpName(),
 				item.getEmpTitle(), 
-				item.getEmpAuth(), 
-				String.format("%,d", item.getEmpSalary()), 
-				item.getEmpTel(), 
-				item.getEmpId(), 
-				item.getEmpPwd().replace(item.getEmpPwd(), "**********"), 
-				String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())};
+				item.getPerf(),
+				String.format("%,d", item.getBonus()), 
+				item.getVip()};
 	}
 
 	@Override
@@ -52,13 +49,13 @@ public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 		model.setValueAt(item.getEmpAuth(), updateIdx, 3);
 		model.setValueAt(item.getEmpSalary(), updateIdx, 4);
 		model.setValueAt(item.getEmpTel(), updateIdx, 5);
-		model.setValueAt(item.getEmpId(), updateIdx, 6);
-		model.setValueAt(item.getEmpPwd(), updateIdx, 7);
-		model.setValueAt(item.getDept().getDeptName(), updateIdx, 8);
+		
 	}
 
 	@Override
 	public Employee getSelectedItem() {
+		
+		//불필요한 코드 
 		int selIdx = getSelectedRowIdx();
 		String empCode = (String) model.getValueAt(selIdx, 0);
 		String empName = (String) model.getValueAt(selIdx, 1);

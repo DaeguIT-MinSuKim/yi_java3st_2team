@@ -22,6 +22,9 @@ public class EmployeeUIService {
     }
     
     //사원 이름으로 검색
+    public List<Employee> showPickedEmpList(String empName) throws SQLException{
+    	return empDao.selectEmpByNameList(empName);
+    }
     public Employee showPickedEmp(String empName) throws SQLException{
     	return empDao.selectEmpByName(empName);
     }
@@ -48,6 +51,13 @@ public class EmployeeUIService {
     	empDao.updateEmployeeAuth(emp);
     }
     
+    //사원 실적까지 포함
+    public List<Employee> showEmpPerformance(){
+    	return empDao.selectEmployeeByPerform();
+    }
     
+    public Employee showEmpPerformPicked(String empName) throws SQLException {
+    	return empDao.selectOneEmployeeByPerform(empName);
+    }
     
 }

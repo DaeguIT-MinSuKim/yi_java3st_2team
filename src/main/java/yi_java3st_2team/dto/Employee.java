@@ -11,12 +11,65 @@ public class Employee {
 	private String empPwd;
 	private Department dept;
 	
+	private int perf;
+	private int bonus;
+	private String vip;
+	
 	public Employee() {
 		
 	}
 	
 	
 	
+    //실적테이블을 위한 생성자
+	public Employee(String empCode, String empName, String empTitle, int perf, int bonus, String vip) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.perf = perf;
+		this.bonus = bonus;
+		this.vip = vip;
+	}
+
+
+
+
+	public int getPerf() {
+		return perf;
+	}
+
+
+
+	public void setPerf(int perf) {
+		this.perf = perf;
+	}
+
+
+
+	public int getBonus() {
+		return bonus;
+	}
+
+
+
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
+
+
+
+	public String getVip() {
+		return vip;
+	}
+
+
+
+	public void setVip(String vip) {
+		this.vip = vip;
+	}
+
+
 
 	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
 			String empId, String empPwd, Department dept) {

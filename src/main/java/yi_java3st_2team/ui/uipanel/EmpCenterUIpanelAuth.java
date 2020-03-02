@@ -128,6 +128,10 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 		}
 	};
 
+	
+	
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pEmpSerch.getBtnSearch()) {
 			pEmpSerchBtnSearchActionPerformed(e);
@@ -137,27 +141,29 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 		}
 	}
 	protected void pEmpSerchBtnCancelActionPerformed(ActionEvent e) {
+		//취소누르면
 		pEmpSerch.getTfSearch().setText("");
-		//취소 누르면 검색창 초기화 된 후 
-		//테이블이 다시 원래 상태로 돌아간다
 		pEmpTblPanel.loadTableData(service.showEmpList());
 	}
 	protected void pEmpSerchBtnSearchActionPerformed(ActionEvent e) {
-		String eName = pEmpSerch.getTfSearch().getText();
-		List<Employee> list = new ArrayList<Employee>();
-	    try {
-	    	Employee empOne = service.showPickedEmp(eName);
-	    	 if(list.size() == 0) {
-	    		 list.add(empOne);
-	    		// JOptionPane.showMessageDialog(null,list.size()); //1
-	    	 }else { //이까지 안옴 ㅠㅠ 0222
-	    		 JOptionPane.showMessageDialog(null, "이미 사원이 조회되어 있습니다. 취소 후 다시 조회해주세요.");
-					return;
-	    	 }
-	    	pEmpTblPanel.loadTableData(list);
-	    }catch(SQLException e1) {
-			System.out.println("해당 사원이 없습니다.");
+		//조회누르면
+		String empName = pEmpSerch.getTfSearch().getText().trim();
+	
+		if(pEmpSerch.getTfSearch().getText().contentEquals("")) {
+			JOptionPane.showMessageDialog(null, "사원 이름을 입력해주세요");
+			return;
+		}
+		
+		List<Employee> list = new ArrayList<Employee>(); 
+		
+		try {
+			list.add(service.showPickedEmp(empName));
+			pEmpTblPanel.loadTableData(list);
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, "다시 검색해주세요");
 			e1.printStackTrace();
-	    }
+			return;
+		}
+	
 	}
 }

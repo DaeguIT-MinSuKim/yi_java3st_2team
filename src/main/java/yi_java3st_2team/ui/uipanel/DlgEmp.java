@@ -245,6 +245,10 @@ public class DlgEmp extends JDialog {
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
 		Department dept = (Department)cmbDept.getSelectedItem();
+		if(cmbDept.getSelectedIndex()== -1) {
+			JOptionPane.showMessageDialog(null, "부서를 선택하세요");
+			return null;
+		}
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 	}
 	
