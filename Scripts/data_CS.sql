@@ -61,17 +61,41 @@ create table cust_DW_audit(
 	primary key(dw)
 );
 
+select * from information_schema.TRIGGERS where TRIGGER_SCHEMA = "bank";
+
 delimiter $$
-create trigger tri_after_update_customer
-   before update on customer
+drop trigger if exists tri_after_update_BankBook;
+create trigger tri_after_update_BankBook
+   before update on BankBook
    for each row 
    begin
-      insert into cust_DW_audit values
-      (null, old.empno, old.empname, now(), 'update');
+	  if(old.accountBalance < new.accountBalance) then
+     	 insert into cust_DW_audit values
+      		("입금", 
+      		(select custName from customer where custCode = new.custCode), 
+      		new.accountNum,
+      		(new.accountBalance - old.accountBalance),
+      		new.accountBalance,
+      		Now()
+      		);
+      else
+     	 insert into cust_DW_audit values
+      		("출금", 
+      		(select custName from customer where custCode = new.custCode), 
+      		new.accountNum,
+      		(old.accountBalance - new.accountBalance),
+      		new.accountBalance,
+      		Now()
+      		);
+      end if;
    end $$
 delimiter ;
+ 
 
 
-
+select * from cust_DW_audit;
+select c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode ;
+select * from BankBook bb ;
+desc bankbook;
 
 
