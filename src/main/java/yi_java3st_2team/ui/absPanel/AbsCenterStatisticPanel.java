@@ -24,15 +24,16 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 	protected JLabel lblStat6;
 	protected JLabel lblStat7;
 	protected JLabel lblStat8;
+	protected JButton btnSearch;
+	protected JPanel pCenter;
 
 	public AbsCenterStatisticPanel() {
-
 		initialize();
 	}
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel pCenter = new JPanel();
+		pCenter = new JPanel();
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
 		add(pCenter, BorderLayout.CENTER);
 		pCenter.setLayout(new GridLayout(0, 1, 10, 10));
@@ -66,7 +67,7 @@ abstract public class AbsCenterStatisticPanel extends JPanel {
 		add(pSouth, BorderLayout.SOUTH);
 		pSouth.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnSearch = new JButton("조회");
+		btnSearch = new JButton("조회");
 		btnSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pSouth.add(btnSearch, BorderLayout.EAST);
 	}
