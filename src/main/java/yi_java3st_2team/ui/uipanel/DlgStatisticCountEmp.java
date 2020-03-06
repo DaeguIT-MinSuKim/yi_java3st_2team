@@ -25,7 +25,7 @@ import yi_java3st_2team.ui.service.EmployeeUIService;
 @SuppressWarnings("serial")
 public class DlgStatisticCountEmp extends JDialog {
 	private static PieChart pieChart;
-	private EmployeeUIService service;
+	private static EmployeeUIService service;
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -35,6 +35,7 @@ public class DlgStatisticCountEmp extends JDialog {
 	public static void main(String[] args) {
 		
 		try {
+			service = new EmployeeUIService();
 			DlgStatisticCountEmp dialog = new DlgStatisticCountEmp();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -47,7 +48,7 @@ public class DlgStatisticCountEmp extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgStatisticCountEmp() {
-		service = new EmployeeUIService();
+		
 		setBounds(700,50,600,600);
 		
 		final JFXPanel fxPanel = new JFXPanel();
@@ -61,6 +62,8 @@ public class DlgStatisticCountEmp extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		
 		Platform.runLater(() -> initFX(fxPanel));
+		
+		
 		
 		{
 			JPanel buttonPane = new JPanel();
@@ -121,7 +124,13 @@ public class DlgStatisticCountEmp extends JDialog {
 	}
 	
 	private static ObservableList<Data> getChartData() {
+		// 전체사원 수......... 
+				service.countAllEmpNum();
+			//	System.out.println(service.countAllEmpNum());
+		
 		ObservableList<Data> answer = FXCollections.observableArrayList();
+		
+		
 		answer.addAll(new PieChart.Data("인사", 17), new PieChart.Data("고객", 31));
 		return answer;
 	}

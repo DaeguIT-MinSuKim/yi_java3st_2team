@@ -60,4 +60,11 @@ public class EmployeeUIService {
     	return empDao.selectOneEmployeeByPerform(empName);
     }
     
+    
+    //전체 사원 수 구하기
+    public int countAllEmpNum() {
+    	return empDao.selectCountAllEmployee();
+    	
+    }
+    
 }

@@ -313,4 +313,43 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return null;
 	}
+
+	// -----------------------------------------------------------------------
+	//통계 
+	@Override
+	public int selectCountAllEmployee() {
+	   String sql="select count(*) from employee";
+
+	   try(Connection con = LocalDataSource.getConnection();
+		   PreparedStatement pstmt = con.prepareStatement(sql);){
+		  
+		   try(ResultSet rs = pstmt.executeQuery();){
+			   System.out.println(rs + "아니 뭔데 이거 ");  
+			   System.out.println(getInt(rs)+"되나이거");
+			   
+			   if(rs.next()) {
+			   return getInt(rs);
+
+			   }
+			  
+		   }	   	   
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private int getInt(ResultSet rs) throws SQLException {
+		
+		int aa = rs.getInt("count(*)");
+		return aa;
+	}
+
+	
+	
+	
+	
 }

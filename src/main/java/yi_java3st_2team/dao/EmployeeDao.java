@@ -34,4 +34,9 @@ public interface EmployeeDao {
 	
 	int updateEmployeeAuth(Employee emp);
 	
+	
+	//통계 
+	// 전체 직원 수 구하기
+	int selectCountAllEmployee();
+	
 }
