@@ -380,7 +380,7 @@ public class MainFrameHS extends JFrame implements ActionListener {
         revalidate();
 		
 	}
-	//사원 현황 누르면 
+	//사원 현황 누르면  - 통계연결
 	protected void mntmStatisticActionPerformed(ActionEvent e) {
 		pCenter.removeAll();
 		pEmpUIPanel3 = new EmpStaticPanel();
