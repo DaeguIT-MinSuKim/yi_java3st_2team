@@ -39,4 +39,7 @@ public interface EmployeeDao {
 	// 전체 직원 수 구하기
 	int selectCountAllEmployee();
 	
+	int selectCountMemberByDept(int dept);
+	
+	
 }

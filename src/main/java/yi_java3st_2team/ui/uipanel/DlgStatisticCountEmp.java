@@ -25,9 +25,12 @@ import yi_java3st_2team.ui.service.EmployeeUIService;
 @SuppressWarnings("serial")
 public class DlgStatisticCountEmp extends JDialog {
 	private static PieChart pieChart;
-	private static EmployeeUIService service;
+	private static EmployeeUIService service = new EmployeeUIService();
 
 	private final JPanel contentPanel = new JPanel();
+	private static double numOfCS;
+	private static double numOfHR;
+	private static int totalnum;
 
 	/**
 	 * Launch the application.
@@ -35,7 +38,7 @@ public class DlgStatisticCountEmp extends JDialog {
 	public static void main(String[] args) {
 		
 		try {
-			service = new EmployeeUIService();
+		
 			DlgStatisticCountEmp dialog = new DlgStatisticCountEmp();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
@@ -48,6 +51,11 @@ public class DlgStatisticCountEmp extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgStatisticCountEmp() {
+		
+		    totalnum = service.countAllEmpNum();
+		    System.out.println(totalnum);
+			numOfHR = service.countMemberByDepartment(1);			
+			numOfCS = service.countMemberByDepartment(2);
 		
 		setBounds(700,50,600,600);
 		
@@ -124,14 +132,12 @@ public class DlgStatisticCountEmp extends JDialog {
 	}
 	
 	private static ObservableList<Data> getChartData() {
-		// 전체사원 수......... 
-				service.countAllEmpNum();
-			//	System.out.println(service.countAllEmpNum());
+		       
 		
 		ObservableList<Data> answer = FXCollections.observableArrayList();
 		
 		
-		answer.addAll(new PieChart.Data("인사", 17), new PieChart.Data("고객", 31));
+		answer.addAll(new PieChart.Data("인사", (numOfHR/totalnum)*100), new PieChart.Data("고객", (numOfCS/totalnum)*100));
 		return answer;
 	}
 

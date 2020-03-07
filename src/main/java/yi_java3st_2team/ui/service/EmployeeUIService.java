@@ -66,5 +66,11 @@ public class EmployeeUIService {
     	return empDao.selectCountAllEmployee();
     	
     }
+    //부서별 사원 수 구하기
+    // 인사부 - 1번  고객팀 2번
+    public int countMemberByDepartment(int deptNo) {
+    	return empDao.selectCountMemberByDept(deptNo);
+    }
+ 
     
 }

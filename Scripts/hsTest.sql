@@ -95,7 +95,7 @@ select * from deleted_employee ;
 
 -- 통계부분 ----------------------------------------------------------------------------------------------------
 -- 전체 직원 수 구하기
-select count(*) from employee e ;
+select count(empCode) from employee e;
 -- 고객팀 직원 수
 select count(*) from employee e  where `deptNo` =2;
 select count(*) from employee e  where `deptNo` =1;

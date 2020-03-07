@@ -318,17 +318,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	//통계 
 	@Override
 	public int selectCountAllEmployee() {
-	   String sql="select count(*) from employee";
+	   String sql="select count(empCode) from employee";
 
 	   try(Connection con = LocalDataSource.getConnection();
 		   PreparedStatement pstmt = con.prepareStatement(sql);){
 		  
 		   try(ResultSet rs = pstmt.executeQuery();){
-			   System.out.println(rs + "아니 뭔데 이거 ");  
-			   System.out.println(getInt(rs)+"되나이거");
 			   
-			   if(rs.next()) {
-			   return getInt(rs);
+			   while(rs.next()) {
+				   System.out.println(rs.getInt("count(empCode)") +"이거안돼?");
+			      return rs.getInt("count(empCode)");
 
 			   }
 			  
@@ -342,11 +341,29 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return 0;
 	}
 
-	private int getInt(ResultSet rs) throws SQLException {
+	//부서 번호를 매개변수로 넣고 부서별 인원 수 구하기
+	@Override
+	public int selectCountMemberByDept(int dept) {
+		String sql= "select count(*) from employee e  where `deptNo` =?";
 		
-		int aa = rs.getInt("count(*)");
-		return aa;
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setInt(1, dept);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					return rs.getInt("count(*)");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
+	
+
 
 	
 	

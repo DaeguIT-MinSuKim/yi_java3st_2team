@@ -50,7 +50,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 		for(Component chart : pCenter.getComponents()) {
 			
 			JLabel label = (JLabel) chart;
-			if(label.getForeground().equals(new Color(254,208,64))) {
+			if(label.getForeground().equals(new Color(254,208,64)) && label.getText().contentEquals("전체 직원 수/ 부서별 직원 수")) {
 				DlgStatisticCountEmp empPieCount = new DlgStatisticCountEmp();
 				empPieCount.setTitle(label.getText());
 				empPieCount.setModal(true);
