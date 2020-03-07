@@ -1,11 +1,21 @@
 package yi_java3st_2team.ui.panel;
 
-import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CustStatisticPanel extends AbsCenterStatisticPanel {
+import javax.swing.JLabel;
+
+import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
+import yi_java3st_2team.ui.designPanel.JFrameBarChart;
+
+public class CustStatisticPanel extends AbsCenterStatisticPanel implements ActionListener{
 
 	public CustStatisticPanel() {
+		btnSearch.addActionListener(this);
 		this.setLabelInit(this.lblStat1, this.lblStat2, this.lblStat3, this.lblStat4, this.lblStat5, this.lblStat6, this.lblStat7, this.lblStat8);
+		this.setLblMouseListener(this.lblStat1, this.lblStat2, this.lblStat3, this.lblStat4, this.lblStat5, this.lblStat6, this.lblStat7, this.lblStat8);
 	}
 
 	@Override
@@ -22,5 +32,21 @@ public class CustStatisticPanel extends AbsCenterStatisticPanel {
 			};
 		
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSearch) {
+			BtnSearchActionPerformed(e);
+		}
+	}
+	protected void BtnSearchActionPerformed(ActionEvent e) {
+		for(Component c : pCenter.getComponents()) {
+			JLabel label = (JLabel)c;
+			if(label.getForeground().equals(new Color(254,208,64))) {
+				JFrameBarChart barchart = new JFrameBarChart();
+				barchart.initAndShowGUI();
+			}
+		}
+	}
+
 
 }

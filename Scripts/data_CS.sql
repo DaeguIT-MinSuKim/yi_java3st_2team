@@ -34,21 +34,13 @@ select custRank from customer;
 delete from customer where custCode = "C008";
 
 select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
-
-select * from customer;
-desc customer;
 select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalance from BankBook b left join customer c on b.custCode = c.custCode ;
-
 select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
-
-select * from BankBook bb ;
-desc bankbook;
 update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
 
-select * from card;
-select * from loan;
-select * from plan;
 
+
+-- trigger ----------
 
 select * from cust_DW_audit;
 create table cust_DW_audit(
@@ -60,6 +52,7 @@ create table cust_DW_audit(
 	accountDate datetime not null,
 	primary key(dw)
 );
+
 
 select * from information_schema.TRIGGERS where TRIGGER_SCHEMA = "bank";
 
@@ -99,3 +92,11 @@ select * from BankBook bb ;
 desc bankbook;
 
 
+
+-- statistic -----------
+
+select * from BankBook bb ;
+#예금 총 금액 (11)
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "11";
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "12";
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "13";

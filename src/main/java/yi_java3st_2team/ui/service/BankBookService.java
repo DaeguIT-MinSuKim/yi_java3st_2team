@@ -48,4 +48,16 @@ public class BankBookService {
 	public int updateBankBalance(Customer customer) throws SQLException {
 		return bankBookDao.updateBankBalance(customer);
 	}
+	
+	public String showDpBalance () throws SQLException{
+		return bankBookDao.showDPTotalAmount();
+	}
+	
+	public String showSvBalance () throws SQLException{
+		return bankBookDao.showSvTotalAmount();
+	}
+	
+	public String showLoBalance () throws SQLException{
+		return bankBookDao.showLoTotalAmount();
+	}
 }

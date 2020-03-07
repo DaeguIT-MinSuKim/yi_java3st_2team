@@ -124,4 +124,46 @@ public class BankBookDaoImpl implements BankBookDao {
 		return res;
 	}
 
+	@Override
+	public String showDPTotalAmount() throws SQLException {
+			String sql = "select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, \'-\', 2), \'-\', -1) = \'11\'";
+			String sumDpBalance = null;
+			try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					sumDpBalance = rs.getString(1);
+				}
+			}
+		return sumDpBalance;
+	}
+
+	@Override
+	public String showSvTotalAmount() throws SQLException {
+		String sql = "select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, \'-\', 2), \'-\', -1) = \'12\'";
+		String sumDpBalance = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				sumDpBalance = rs.getString(1);
+			}
+		}
+	return sumDpBalance;
+	}
+
+	@Override
+	public String showLoTotalAmount() throws SQLException {
+		String sql = "select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, \'-\', 2), \'-\', -1) = \'13\'";
+		String sumDpBalance = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				sumDpBalance = rs.getString(1);
+			}
+		}
+	return sumDpBalance;
+	}
+
 }
