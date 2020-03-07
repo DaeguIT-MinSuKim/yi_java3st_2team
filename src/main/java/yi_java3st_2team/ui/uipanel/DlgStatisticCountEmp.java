@@ -21,9 +21,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.text.Text;
 import yi_java3st_2team.ui.service.EmployeeUIService;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class DlgStatisticCountEmp extends JDialog {
+public class DlgStatisticCountEmp extends JDialog implements ActionListener {
 	private static PieChart pieChart;
 	private static EmployeeUIService service = new EmployeeUIService();
 
@@ -31,21 +33,26 @@ public class DlgStatisticCountEmp extends JDialog {
 	private static double numOfCS;
 	private static double numOfHR;
 	private static int totalnum;
+	private JButton okButton;
+	private static DlgStatisticCountEmp dialog;
 
+	
+	
+	private EmpStaticPanel empStaticPanel;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		
-		try {
-		
-			DlgStatisticCountEmp dialog = new DlgStatisticCountEmp();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//		try {
+//		
+//			dialog = new DlgStatisticCountEmp();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+     }
 
 	/**
 	 * Create the dialog.
@@ -53,7 +60,6 @@ public class DlgStatisticCountEmp extends JDialog {
 	public DlgStatisticCountEmp() {
 		
 		    totalnum = service.countAllEmpNum();
-		    System.out.println(totalnum);
 			numOfHR = service.countMemberByDepartment(1);			
 			numOfCS = service.countMemberByDepartment(2);
 		
@@ -78,15 +84,16 @@ public class DlgStatisticCountEmp extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
+				okButton.addActionListener(this);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+//				JButton cancelButton = new JButton("Cancel");
+//				cancelButton.setActionCommand("Cancel");
+//				buttonPane.add(cancelButton);
 			}
 		}
 	}
@@ -137,8 +144,21 @@ public class DlgStatisticCountEmp extends JDialog {
 		ObservableList<Data> answer = FXCollections.observableArrayList();
 		
 		
-		answer.addAll(new PieChart.Data("인사", (numOfHR/totalnum)*100), new PieChart.Data("고객", (numOfCS/totalnum)*100));
+		answer.addAll(new PieChart.Data("인사", Math.round((numOfHR/totalnum)*100)), new PieChart.Data("고객", Math.round((numOfCS/totalnum)*100)));
 		return answer;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == okButton) {
+			okButtonActionPerformed(e);
+		}
+	}
+	public void okButtonActionPerformed(ActionEvent e) {
+		System.out.println("dlg이거눌렀음");
+		// empStaticPanel의 다이얼로그를 닫는거 맞지 않나??? 0307
+		//empStaticPanel.closeEmpPieCount();
+		empStaticPanel.getEmpPieCount().setVisible(false);
+		
+	}
+	
 }

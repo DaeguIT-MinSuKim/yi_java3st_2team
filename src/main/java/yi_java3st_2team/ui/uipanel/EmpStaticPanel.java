@@ -13,6 +13,8 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 
 	
 	
+	private DlgStatisticCountEmp empPieCount;
+
 	public EmpStaticPanel() {
 		
 		
@@ -39,11 +41,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 		if (e.getSource() == btnSearch) {
 			thisBtnSearchActionPerformed(e);
 		}
-		if(e.getSource()== btnSearch) {
-			System.out.println("이거누름");
-			thisBtnSearchActionPerformed(e);
-		}
-		
+
 	}
 
 	protected void thisBtnSearchActionPerformed(ActionEvent e) {
@@ -51,7 +49,8 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 			
 			JLabel label = (JLabel) chart;
 			if(label.getForeground().equals(new Color(254,208,64)) && label.getText().contentEquals("전체 직원 수/ 부서별 직원 수")) {
-				DlgStatisticCountEmp empPieCount = new DlgStatisticCountEmp();
+				empPieCount = new DlgStatisticCountEmp();
+			
 				empPieCount.setTitle(label.getText());
 				empPieCount.setModal(true);
 				empPieCount.setVisible(true);
@@ -59,5 +58,15 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 	     	 }
 		  }
 		
+	}
+	
+	
+	
+	public DlgStatisticCountEmp getEmpPieCount() {
+		return empPieCount;
+	}
+	public void closeEmpPieCount() {
+		empPieCount.setVisible(false);
+	
 	}
 }

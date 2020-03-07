@@ -326,7 +326,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		   try(ResultSet rs = pstmt.executeQuery();){
 			   
 			   while(rs.next()) {
-				   System.out.println(rs.getInt("count(empCode)") +"이거안돼?");
 			      return rs.getInt("count(empCode)");
 
 			   }
