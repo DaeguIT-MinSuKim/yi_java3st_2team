@@ -9,6 +9,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,21 +82,21 @@ public class DlgStatisticCountEmp extends JDialog implements ActionListener {
 		
 		
 		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				okButton = new JButton("OK");
-				okButton.addActionListener(this);
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+//			JPanel buttonPane = new JPanel();
+//			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+//			{
+//				okButton = new JButton("OK");
+//				okButton.addActionListener(this);
+//				okButton.setActionCommand("OK");
+//				buttonPane.add(okButton);
+//				getRootPane().setDefaultButton(okButton);
 			}
 			{
 //				JButton cancelButton = new JButton("Cancel");
 //				cancelButton.setActionCommand("Cancel");
 //				buttonPane.add(cancelButton);
-			}
+//			}
 		}
 	}
 	
@@ -125,9 +127,14 @@ public class DlgStatisticCountEmp extends JDialog implements ActionListener {
 			}
 		};
 		
+		
+		String subject = "Employee Pie Chart";
+		String totalEmp = "전체 직원 수 : ";
+		
+		
 		pieChart.setPrefSize(550, 500);
 		pieChart.setData(getChartData());
-		pieChart.setTitle("Employee Pie Chart");
+		pieChart.setTitle(subject+"\n"+totalEmp+totalnum+"명");
 		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		pieChart.setLabelLineLength(30);// 원의 둘레 가장자리와 라벨간의 거리 지정
 		pieChart.setClockwise(true); // 시계방향 배치여부
@@ -144,7 +151,7 @@ public class DlgStatisticCountEmp extends JDialog implements ActionListener {
 		ObservableList<Data> answer = FXCollections.observableArrayList();
 		
 		
-		answer.addAll(new PieChart.Data("인사", Math.round((numOfHR/totalnum)*100)), new PieChart.Data("고객", Math.round((numOfCS/totalnum)*100)));
+		answer.addAll(new PieChart.Data("인사팀", Math.round((numOfHR/totalnum)*100)), new PieChart.Data("고객팀", Math.round((numOfCS/totalnum)*100)));
 		return answer;
 	}
 
@@ -157,7 +164,11 @@ public class DlgStatisticCountEmp extends JDialog implements ActionListener {
 		System.out.println("dlg이거눌렀음");
 		// empStaticPanel의 다이얼로그를 닫는거 맞지 않나??? 0307
 		//empStaticPanel.closeEmpPieCount();
-		empStaticPanel.getEmpPieCount().setVisible(false);
+		
+		JDialog dialog = empStaticPanel.getEmpPieCount();
+		dialog.dispose();
+		//empStaticPanel = EmpStaticPanel.getEmpstaticpanel();
+		//empStaticPanel.closeEmpPieCount();
 		
 	}
 	

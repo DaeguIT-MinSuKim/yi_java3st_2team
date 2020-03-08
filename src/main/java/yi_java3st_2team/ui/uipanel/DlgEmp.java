@@ -274,8 +274,16 @@ public class DlgEmp extends JDialog {
 		tfEmpTel.setText(item.getEmpTel());
 		tfEmpId.setText(item.getEmpId());
 		tfEmpPwd.setText(item.getEmpPwd());
+
+		
+		
+		System.out.println(item.getDept().getDeptNo() +"부서번호");
+		System.out.println(item.getDept() +"a"); //인사(1)a 
+		System.out.println(item.getDept().toString()+"b"); //인사(1)b
+
 		cmbDept.setSelectedItem(item.getDept()); //이거 맞나 
 	}
-	
+
+
 	
 }

@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import yi_java3st_2team.dao.EmployeeDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
@@ -112,7 +116,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			return pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
+
+			if(e.getMessage().contains("PRIMARY")) {
+				JOptionPane.showMessageDialog(null, "사원번호 중복입니다");
+			}
 		}
+		
 		return 0;
 	}
 

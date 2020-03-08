@@ -27,6 +27,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	private EmpCenterNorthSearchPanel pEmpSerch;
 	private EmpCenterTblPanel pEmpTblPanel;
 	private DlgEmp dlgEmp;
+	private DlgEmp dlgEmpForUpdate;
 
 
 	public EmpCenterUIpanel() {
@@ -78,18 +79,18 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				}if(e.getActionCommand()=="수정") {
 					//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 						Employee emp = pEmpTblPanel.getSelectedItem();
-						if(dlgEmp == null) {
-							dlgEmp = new DlgEmp();
+						if(dlgEmpForUpdate == null) {
+							dlgEmpForUpdate = new DlgEmp();
 						}
-						if(dlgEmp != null){
-							dlgEmp.setVisible(true);
-							dlgEmp.setItem(emp);
+						if(dlgEmpForUpdate != null){
+							dlgEmpForUpdate.setVisible(true);
+							dlgEmpForUpdate.setItem(emp);
 						}
-						dlgEmp.setCmbDeptList(service.showDeptList());
+						dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
 						
 						//다이얼로그 버튼을 수정으로 바꾸고 myDlgActionListner달기
-						dlgEmp.getBtnUpdate().addActionListener(myDlgActionListner);
-						dlgEmp.setActionCommendClose().addActionListener(myDlgActionListner);
+						dlgEmpForUpdate.getBtnUpdate().addActionListener(myDlgActionListner);
+						dlgEmpForUpdate.setActionCommendClose().addActionListener(myDlgActionListner);
 				    
 					
 				}if(e.getActionCommand()=="삭제") {
@@ -123,20 +124,39 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	//다이얼로그의 버튼들에 액션리스너 달기
 			ActionListener myDlgActionListner = new ActionListener() {
 				
+				private Employee addEmp;
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(e.getActionCommand().contentEquals("추가")) {
 						//System.out.println("추가 눌렀음 ");
 						//다이어로그에서 추가를 누르면 디비 employee테이블 에 선택한 값들이 들어감 	
-						
-						try{Employee addEmp = dlgEmp.getItem();  //임플로이 생성자로 생성
+	
+					    try{
+					    	addEmp = dlgEmp.getItem();
+					    }catch(Exception e4){
+					    	//System.out.println(e4.getMessage() + "는 이것 "); //For input string: ""는 이것 
+					    	System.out.println(e4.getMessage() + "는 이것 ");
+					    	if(e4.getMessage().contains("")) {
+					    	  JOptionPane.showMessageDialog(null, "정보를 올바르게 입력해주세요");
+					    	  return;
+					    	}
+//					    	if(e4.getMessage().contains("PRIMARY")) {
+//								JOptionPane.showMessageDialog(null, "사원번호 중복입니다");
+//								return;
+//							}
+					    }
 						//서비스로 인서트구문 만들어 넣기
+						try{ 
 						service.addEmp(addEmp);
-			            JOptionPane.showMessageDialog(null, "추가되었습니다");
-						//창 닫기
-						dlgEmp.setVisible(false);
+			           //  JOptionPane.showMessageDialog(null, "추가되었습니다");
+						
 						//리스트 다시 불러오기 
 						pEmpTblPanel.loadTableData(service.showEmpList());
+						//창 닫기
+						dlgEmp.setVisible(false);
+						//JOptionPane.showMessageDialog(null, "추가되었습니다");
+						
 						}catch (Exception e2) {
 							//e2.printStackTrace();
 							JOptionPane.showMessageDialog(null, "입력한 정보를 다시 확인해주세요");
