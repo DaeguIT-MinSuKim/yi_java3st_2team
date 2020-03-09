@@ -166,4 +166,94 @@ public class BankBookDaoImpl implements BankBookDao {
 	return sumDpBalance;
 	}
 
+	@Override
+	public List<String> showOpenDPMonth() throws SQLException {
+		String sql = "select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) =\'11\'";
+		List<String> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<String> showOpenSvMonth() throws SQLException {
+		String sql = "select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) =\'12\'";
+		List<String> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<String> showOpenLoMonth() throws SQLException {
+		String sql = "select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) =\'13\'";
+		List<String> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<String> showDepositMonth() throws SQLException {
+		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw =\'입금\'";
+		List<String> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+	
+	@Override
+	public List<String> showWithDrawalMonth() throws SQLException {
+		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw =\'출금\'";
+		List<String> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
 }

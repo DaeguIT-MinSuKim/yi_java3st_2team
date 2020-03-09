@@ -104,10 +104,10 @@ public class PlanDaoImpl implements PlanDao {
 	@Override
 	public List<Plan> selectPlanByName(String planName) throws SQLException {
 		List<Plan> list = null;
-		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan where planCode =?";
+		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan where planName like ?";
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setString(1, planName);
+			pstmt.setString(1, '%'+planName+'%');
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {

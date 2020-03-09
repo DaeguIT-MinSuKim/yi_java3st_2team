@@ -30,7 +30,7 @@ insert into plan values("A004", "AA002", "일반정기예금", "일반 정기예
 -- test 
 select custCode, custName, custRank, custCredit, custAddr, custTel from customer;
 select planCode, planDetail, planName, planDesc, planDiv from plan;
-select custRank from customer;
+select * from plan;
 delete from customer where custCode = "C008";
 
 select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
@@ -38,26 +38,47 @@ select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalan
 select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
 update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
 
+select planCode, planDetail, planName, planDesc, planDiv from plan where planName like '%예금%';
+select custName, accountNum, accountBalance from customer c left join bankbook b on c.custcode = b.custCode where custName = "김가나";
+
+select (count(*) - (select count(*) from customer where custRank = "D")) from customer;
+select count(*) from customer where custRank = "D"; 
+select * from customer c ;
+#BSGPD
+select count(*) from customer where custRank = "B";
+
+select * from bankbook;
+select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) ="11";
+
+select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw ="입금";
+
+select * from bankbook b ;
+desc bankbook;
+
 
 
 -- trigger ----------
 
+drop table cust_dw_audit;
+
+
 select * from cust_DW_audit;
+
+
 create table cust_DW_audit(
 	dw varchar(5),
 	custName varchar(5) not null,
 	accountNum char(16) not null,
 	amount int(20) not null,
 	accountBalance bigint(20) not null,
-	accountDate datetime not null,
-	primary key(dw)
+	accountDate datetime not null
 );
 
 
 select * from information_schema.TRIGGERS where TRIGGER_SCHEMA = "bank";
 
-delimiter $$
 drop trigger if exists tri_after_update_BankBook;
+delimiter $$
 create trigger tri_after_update_BankBook
    before update on BankBook
    for each row 

@@ -60,4 +60,22 @@ public class BankBookService {
 	public String showLoBalance () throws SQLException{
 		return bankBookDao.showLoTotalAmount();
 	}
+	
+	public List<String> showOpenDPMonth() throws SQLException{
+		return bankBookDao.showOpenDPMonth();
+	}
+	public List<String> showOpenSvMonth() throws SQLException{
+		return bankBookDao.showOpenSvMonth();
+	}
+	public List<String> showOpenLoMonth() throws SQLException{
+		return bankBookDao.showOpenLoMonth();
+	}
+	
+	public List<String> showDepositMonth() throws SQLException{
+		return bankBookDao.showDepositMonth();
+	}
+	
+	public List<String> showWithdrawalMonth() throws SQLException{
+		return bankBookDao.showWithDrawalMonth();
+	}
 }

@@ -50,18 +50,14 @@ public class CustDWUIPanel extends JPanel {
 				String custName = panel.getTfSearch().getText().trim();
 				List<Customer> listForCustName = new ArrayList<>();
 				try {
-					Customer newCust = custService.showCustomerByName(custName);
 					
+					listForCustName = custService.showCustomerBankInfoByName(custName);
 					if(listForCustName.size()==0) {
-						if(newCust==null) {
-							JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
-							return;
-						}
-						listForCustName.add(newCust);
+						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+						return;
 					}
 					panel_1.loadTableData(listForCustName);
 				} catch (SQLException e1) {
-					System.out.println("해당 고객이 없습니다.");
 					e1.printStackTrace();
 				}
 				
