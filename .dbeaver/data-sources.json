@@ -13,8 +13,7 @@
 				"database": "bank",
 				"url": "jdbc:mysql://192.168.10.63:3306/bank",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
-				"type": "dev",
-				"handlers": {}
+				"type": "dev"
 			}
 		}
 	},
