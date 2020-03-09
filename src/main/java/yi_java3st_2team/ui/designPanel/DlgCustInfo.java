@@ -187,7 +187,7 @@ public class DlgCustInfo extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null, "신규 고객 추가를 취소합니다.");
+						JOptionPane.showMessageDialog(null, "취소합니다.");
 						dispose();
 					}
 				});

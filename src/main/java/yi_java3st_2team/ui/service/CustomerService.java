@@ -26,6 +26,33 @@ public class CustomerService {
 		return dao.selectCustomerBalance();
 	}
 	
+	public List<Customer> showCustomerBankInfoByName(String custName) throws SQLException{
+		return dao.selectCustomerBankInfoByName(custName);
+	}
+	
+	public int showNormalCustNum () throws SQLException{
+		return dao.selectNormalCustNum();
+	}
+	
+	public int showVIPCustNum() throws SQLException{
+		return dao.selectVIPCustNum();
+	}
+	
+	public int showBRankCustNum() throws SQLException{
+		return dao.selectBRankCustNum();
+	}
+	
+	public int showSRankCustNum() throws SQLException{
+		return dao.selectSRankCustNum();
+	}
+	
+	public int showGRankCustNum() throws SQLException{
+		return dao.selectGRankCustNum();
+	}
+	public int showPRankCustNum() throws SQLException{
+		return dao.selectPRankCustNum();
+	}
+	
 	public void AddCustomer(Customer customer) throws SQLException{
 		 dao.insertCustomer(customer);
 	}

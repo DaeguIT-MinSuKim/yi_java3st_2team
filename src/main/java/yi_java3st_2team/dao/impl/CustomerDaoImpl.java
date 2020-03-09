@@ -55,7 +55,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	//!!!!!!!!!! 한글 깨짐 문제로 고객명으로 검색이 안돼서 고객 코드 검색으로 임시변경함
 	@Override
 	public Customer selectCustomerByName(String custName) throws SQLException {
-		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custCode = ?";
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = ?";
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -93,7 +93,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int updateCustomer(Customer customer) throws SQLException {
-		String sql = "update customer set custCode = ?, custName =?, custRank=?, custCredit=?, custAddr=?, custTel=? where custCode=? ";
+		String sql = "update customer set custCode = ?, custName =?, custRank=?, custCredit=?, custAddr=?, custTel=? where custName=? ";
 		int res = -1;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -164,6 +164,128 @@ public class CustomerDaoImpl implements CustomerDao {
 		 */
 		
 		return customer;
+	}
+
+	@Override
+	public List<Customer> selectCustomerBankInfoByName(String custName) throws SQLException {
+		String sql = "select custName, accountNum, accountBalance from customer c left join bankbook b on c.custcode = b.custCode where custName =?";
+		List<Customer> list= null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, custName);
+			ResultSet rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					list = new ArrayList<>();
+					System.out.println(list.size());
+					do {
+						Customer customer= new Customer();
+						BankBook bankbook= new BankBook();
+						list.add(getCustBankInfo(customer, bankbook, rs));
+						System.out.println(list.size() + "!");
+					}while(rs.next());
+				}
+				return list;
+		}
+	}
+
+	private Customer getCustBankInfo(Customer customer, BankBook bankbook, ResultSet rs) throws SQLException {
+		customer.setCustName(rs.getString("custName"));
+		bankbook.setAccountNum(rs.getString("accountNum"));
+		bankbook.setAccountBalance(Long.parseLong(rs.getString("accountBalance")));
+		customer.setBankbook(bankbook);
+		
+		return customer;
+	}
+
+	@Override
+	public int selectNormalCustNum() throws SQLException {
+		String sql ="select (count(*) - (select count(*) from customer where custRank = \"D\")) from customer";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int selectVIPCustNum() throws SQLException {
+		String sql ="select count(*) from customer where custRank = \'D\'";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int selectBRankCustNum() throws SQLException {
+		String sql ="select count(*) from customer where custRank = \'B\'";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int selectSRankCustNum() throws SQLException {
+		String sql ="select count(*) from customer where custRank = \'S\'";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int selectGRankCustNum() throws SQLException {
+		String sql ="select count(*) from customer where custRank = \'G\'";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public int selectPRankCustNum() throws SQLException {
+		String sql ="select count(*) from customer where custRank = \'P\'";
+		int result;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+				return result;
+			}
+		}
+		return -1;
 	}
 
 	
