@@ -32,6 +32,20 @@ public class Employee {
 		this.vip = vip;
 	}
 
+    
+
+    // 직급별 테스트용 
+	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
+			String empId) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
+		this.empSalary = empSalary;
+		this.empTel = empTel;
+		this.empId = empId;
+	}
 
 
 

@@ -41,5 +41,7 @@ public interface EmployeeDao {
 	
 	int selectCountMemberByDept(int dept);
 	
+	//타이틀별 직원 수 구하기
+	int selectCountMemberByTitle(String empTitle);
 	
 }

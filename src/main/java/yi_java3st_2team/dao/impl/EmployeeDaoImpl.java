@@ -370,6 +370,27 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return 0;
 	}
+
+	@Override
+	public int selectCountMemberByTitle(String empTitle) {
+		String sql="select  count(empCode) from employee\r\n" + 
+				"where `empTitle` =?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setString(1, empTitle);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					return rs.getInt("count(empCode)");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 
 

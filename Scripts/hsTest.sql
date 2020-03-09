@@ -100,3 +100,16 @@ select count(empCode) from employee e;
 select count(*) from employee e  where `deptNo` =2;
 select count(*) from employee e  where `deptNo` =1;
 
+-- 직급별 직원수
+
+select `empTitle`, count(empCode) from employee e 
+group by `empTitle`
+order by field(`empTitle`,'지점장','부지점장','부장','차장','과장','대리','사원'); 
+
+
+select  count(empCode) from employee
+where `empTitle` ='부지점장' and `deptNo` =2;
+
+
+
+

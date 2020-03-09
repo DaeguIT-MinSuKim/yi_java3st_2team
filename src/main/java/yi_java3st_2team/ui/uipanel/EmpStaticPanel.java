@@ -19,8 +19,15 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 	public static EmpStaticPanel getEmpstaticpanel() {
 		return empStaticPanel;
 	}
-
+	
+	
+	
+   // 전체직원수, 부서별 직원 수 
 	private DlgStatisticCountEmp empPieCount;
+   // 직급별 직원 수 
+
+	private DlgStatisticCountEmpByTitle empBarCount;
+	
 
 	public EmpStaticPanel() {
 
@@ -36,7 +43,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 	@Override
 	protected String[] getTexts() {
 
-		return new String[] { "전체 직원 수/ 부서별 직원 비율", "직급별 직원 수(등급)", "연간 급여 총액 / 월별 급여 총액", "1인 평균 급여액", "보너스 총액" };
+		return new String[] { "전체 직원 수/ 부서별 직원 비율", "직급별 직원 수", "연간 급여 총액 / 월별 급여 총액", "1인 평균 급여액", "보너스 총액" };
 	}
 
 	@Override
@@ -58,6 +65,15 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 				empPieCount.setTitle(label.getText());
 				empPieCount.setModal(true);
 				empPieCount.setVisible(true);
+
+			}
+			if (label.getForeground().equals(new Color(254, 208, 64))
+					&& label.getText().contentEquals("직급별 직원 수")) {
+				empBarCount = new DlgStatisticCountEmpByTitle();
+
+				empBarCount.setTitle(label.getText());
+				empBarCount.setModal(true);
+				empBarCount.setVisible(true);
 
 			}
 			
