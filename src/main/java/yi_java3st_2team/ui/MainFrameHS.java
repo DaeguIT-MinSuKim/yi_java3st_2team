@@ -21,8 +21,11 @@ import javax.swing.border.EmptyBorder;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
-import yi_java3st_2team.ui.table.EmpCenterTblPanel;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
 import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel;
+import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel2Work;
+import yi_java3st_2team.ui.uipanel.EmpCenterUIpanelAuth;
+import yi_java3st_2team.ui.uipanel.EmpStaticPanel;
 
 import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
@@ -83,6 +86,9 @@ public class MainFrameHS extends JFrame implements ActionListener {
 	
 	//
 	private EmpCenterUIpanel pEmpUIPanel;
+	private EmpCenterUIpanel2Work pEmpUIPanel2;
+	private EmpStaticPanel pEmpUIPanel3;
+	private EmpCenterUIpanelAuth pEmpUIPanel4;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -149,43 +155,24 @@ public class MainFrameHS extends JFrame implements ActionListener {
 		
 		mntmEmpSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mntmEmpSearch);
-//		//사원 검색에 마우스 리스너 달기 
-//		
-//		
-//		//마우스 리스너 현서
-//		MouseListener myMouseListener = new MouseAdapter() {
-//
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				//사원검색 클릭하면 
-//				setCenterEmpSearchUIPanel();
-//			}
-//
-//			private void setCenterEmpSearchUIPanel() {
-//				pCenter.removeAll();
-//				pEmpUIPanel = new EmpCenterUIpanel();
-//	            pCenter.add(pEmpUIPanel,BorderLayout.CENTER);
-//	            repaint();
-//	            revalidate();
-//				
-//			}
-//
-//		};
-//		mntmEmpSearch.addMouseListener(myMouseListener);
+
 		
 		mnEmpInfo = new JMenu("사원 정보");
 		mnEmpInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mnEmpInfo);
 		
 		mntmWorkInfo = new JMenuItem("사원 업무 정보 조회");
+		
 		mntmWorkInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmpInfo.add(mntmWorkInfo);
 		
 		mntmStatistic = new JMenuItem("사원 현황 조회");
+		
 		mntmStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmpInfo.add(mntmStatistic);
 		
 		mnEmpAuth = new JMenuItem("사원 권한");
+		
 		mnEmpAuth.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnEmp.add(mnEmpAuth);
 		
@@ -305,8 +292,12 @@ public class MainFrameHS extends JFrame implements ActionListener {
 		pCenter.add(pcCenter,BorderLayout.CENTER);
 		
 		
-		//액션리스너 밑쪽으로 빼기
+		//사원검색 액션리스너 밑쪽으로 빼기
 		mntmEmpSearch.addActionListener(this);
+		mntmWorkInfo.addActionListener(this);
+		mntmStatistic.addActionListener(this);
+		//사원권한
+		mnEmpAuth.addActionListener(this);
 	}
 	
 	private JPanel getMainLogoPanel() {
@@ -356,13 +347,18 @@ public class MainFrameHS extends JFrame implements ActionListener {
 	public JLabel getLblGreeting() {
 		return lblGreeting;
 	}
-	
-	
-	
-	
-	
-	//액션리스너
+		
+	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mnEmpAuth) {
+			mnEmpAuthActionPerformed(e);
+		}
+		if (e.getSource() == mntmStatistic) {
+			mntmStatisticActionPerformed(e);
+		}
+		if (e.getSource() == mntmWorkInfo) {
+			mntmWorkInfoActionPerformed(e);
+		}
 		if (e.getSource() == mntmEmpSearch) {
 			mntmEmpSearchActionPerformed(e); //사원관리 누르면 
 		}
@@ -375,4 +371,31 @@ public class MainFrameHS extends JFrame implements ActionListener {
         repaint();
         revalidate();
 	}
+	//업무정보 조회 키 누르면 
+	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
+		pCenter.removeAll();
+		pEmpUIPanel2 = new EmpCenterUIpanel2Work();
+        pCenter.add(pEmpUIPanel2,BorderLayout.CENTER);
+        repaint();
+        revalidate();
+		
+	}
+	//사원 현황 누르면  - 통계연결
+	protected void mntmStatisticActionPerformed(ActionEvent e) {
+		pCenter.removeAll();
+		pEmpUIPanel3 = new EmpStaticPanel();
+        pCenter.add(pEmpUIPanel3,BorderLayout.CENTER);
+        repaint();
+        revalidate();
+	}
+	
+	//사원권한 누르면
+	protected void mnEmpAuthActionPerformed(ActionEvent e) {
+		pCenter.removeAll();
+		pEmpUIPanel4 = new EmpCenterUIpanelAuth();
+        pCenter.add(pEmpUIPanel4,BorderLayout.CENTER);
+        repaint();
+        revalidate();
+	}
+	
 }

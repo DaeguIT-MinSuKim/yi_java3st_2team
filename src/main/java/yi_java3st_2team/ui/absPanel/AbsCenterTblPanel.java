@@ -81,17 +81,20 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 		}
 	}
 	protected abstract void updateRow(T item, int updateIdx);
-	protected void addItem(T item) {
+	public void addItem(T item) {
 		model.addRow(toArray(item));
+	}
+	public void removeItem(int delIdx) {
+		model.removeRow(delIdx);
 	}
 	
 	protected abstract T getSelectedItem();
 	
 	public int getSelectedRowIdx() {
 		int selectedIdx = table.getSelectedRow();
-		if(selectedIdx==-1) {
-			throw new RuntimeException("선택부터 해주세요");
-		}
+//		if(selectedIdx==-1) {
+//			throw new RuntimeException("선택부터 해주세요");
+//		}
 		return selectedIdx;
 	}
 

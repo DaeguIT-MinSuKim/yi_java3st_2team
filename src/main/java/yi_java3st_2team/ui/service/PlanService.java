@@ -18,4 +18,21 @@ public class PlanService {
 		return dao.selectPlanAll();
 	}
 	
+	public List<Plan> showPlansByName(String planName) throws SQLException{
+		return dao.selectPlanByName(planName);
+	}
+
+	
+	public int addPlan(Plan plan) throws SQLException{
+		return dao.insertPlan(plan);
+	}
+	
+	public int editPlan(Plan plan) throws SQLException{
+		return dao.updatePlan(plan);
+	}
+	
+	public int removePlan(Plan plan) throws SQLException{
+		return dao.deletePlan(plan);
+	}
+	
 }

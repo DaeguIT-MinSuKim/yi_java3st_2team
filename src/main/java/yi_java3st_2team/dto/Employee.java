@@ -11,10 +11,80 @@ public class Employee {
 	private String empPwd;
 	private Department dept;
 	
+	private int perf;
+	private int bonus;
+	private String vip;
+	
 	public Employee() {
 		
 	}
 	
+	
+	
+    //실적테이블을 위한 생성자
+	public Employee(String empCode, String empName, String empTitle, int perf, int bonus, String vip) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.perf = perf;
+		this.bonus = bonus;
+		this.vip = vip;
+	}
+
+    
+
+    // 직급별 테스트용 
+	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
+			String empId) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
+		this.empSalary = empSalary;
+		this.empTel = empTel;
+		this.empId = empId;
+	}
+
+
+
+	public int getPerf() {
+		return perf;
+	}
+
+
+
+	public void setPerf(int perf) {
+		this.perf = perf;
+	}
+
+
+
+	public int getBonus() {
+		return bonus;
+	}
+
+
+
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
+
+
+
+	public String getVip() {
+		return vip;
+	}
+
+
+
+	public void setVip(String vip) {
+		this.vip = vip;
+	}
+
+
+
 	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
 			String empId, String empPwd, Department dept) {
 		this.empCode = empCode;
@@ -26,6 +96,15 @@ public class Employee {
 		this.empId = empId;
 		this.empPwd = empPwd;
 		this.dept = dept;
+	}
+
+	//네개만 있는 emp
+	public Employee(String empCode, String empName, String empTitle, String empAuth) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
 	}
 
 	public Employee(String empId, String empPwd) {

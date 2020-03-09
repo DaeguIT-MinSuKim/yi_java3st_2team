@@ -9,6 +9,7 @@ public class CardCenterStatisticPanel extends AbsCenterStatisticPanel {
 	 */
 	public CardCenterStatisticPanel() {
 		setLabelInit(lblStat1,lblStat2,lblStat3,lblStat4);
+		setLblMouseListener(lblStat1,lblStat2,lblStat3,lblStat4);
 	}
 
 	@Override

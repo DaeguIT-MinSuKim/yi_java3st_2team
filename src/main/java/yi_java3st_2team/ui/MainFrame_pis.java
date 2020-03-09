@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui;
+ package yi_java3st_2team.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,8 +30,17 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.panel.BankBookCenterUIPanel;
+import yi_java3st_2team.ui.panel.BankBookInfoStatisticPanel;
+import yi_java3st_2team.ui.panel.BankBookTransHisStatisticPanel;
+import yi_java3st_2team.ui.panel.CardCenterStatisticPanel;
+import yi_java3st_2team.ui.panel.CardCenterTransInfoPanel;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
+import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
+import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
+import yi_java3st_2team.ui.table.CardCenterTblPanel;
+import yi_java3st_2team.uiDesign.CardTransHisStatisticFrame;
 
 @SuppressWarnings("serial")
 public class MainFrame_pis extends JFrame implements ActionListener {
@@ -213,6 +222,7 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		mnBankWork.add(mnBankBook);
 		
 		mntmBankBook = new JMenuItem("통장 관리");
+		mntmBankBook.addActionListener(this);
 		mntmBankBook.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnBankBook.add(mntmBankBook);
 		
@@ -221,10 +231,12 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		mnBankBook.add(mnBankBookSearch);
 		
 		mntmBankBooTransInfo = new JMenuItem("통장 거래 내역 조회");
+		mntmBankBooTransInfo.addActionListener(this);
 		mntmBankBooTransInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnBankBookSearch.add(mntmBankBooTransInfo);
 		
 		mntmBankBookStatistic = new JMenuItem("통장 정보 조회");
+		mntmBankBookStatistic.addActionListener(this);
 		mntmBankBookStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnBankBookSearch.add(mntmBankBookStatistic);
 		
@@ -242,6 +254,7 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		mnCard.add(muCardSearch);
 		
 		mntmCardTransInfo = new JMenuItem("카드 거래 내역 조회");
+		mntmCardTransInfo.addActionListener(this);
 		mntmCardTransInfo.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		muCardSearch.add(mntmCardTransInfo);
 		
@@ -255,10 +268,12 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		mnBankWork.add(mnLoan);
 		
 		mntmLoan = new JMenuItem("대출 관리");
+		mntmLoan.addActionListener(this);
 		mntmLoan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoan);
 		
 		mntmLoanSearch = new JMenuItem("대출 조회");
+		mntmLoanSearch.addActionListener(this);
 		mntmLoanSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoanSearch);
 		
@@ -314,13 +329,31 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		}
 	}
 	private void setMenuClear() {
-		
+		contentPane.remove(pCenter);
 	}
 
 	public JLabel getLblGreeting() {
 		return lblGreeting;
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmLoan) {
+			mntmLoanActionPerformed(e);
+		}
+		if (e.getSource() == mntmLoanSearch) {
+			mntmLoanSearchActionPerformed(e);
+		}
+		if (e.getSource() == mntmBankBookStatistic) {
+			mntmBankBookStatisticActionPerformed(e);
+		}
+		if (e.getSource() == mntmBankBooTransInfo) {
+			mntmBankBooTransInfoActionPerformed(e);
+		}
+		if (e.getSource() == mntmBankBook) {
+			mntmBankBookActionPerformed(e);
+		}
+		if (e.getSource() == mntmCardTransInfo) {
+			mntmCardTransInfoActionPerformed(e);
+		}
 		if (e.getSource() == mntmCardStatistic) {
 			mntmCardStatisticActionPerformed(e);
 		}
@@ -336,6 +369,52 @@ public class MainFrame_pis extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
-		
+		 contentPane.remove(pCenter);
+		 pCenter = new CardCenterStatisticPanel();
+		 contentPane.add(pCenter,BorderLayout.CENTER);
+		 repaint();
+		 revalidate();
+	}
+	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		 pCenter = new CardCenterTransInfoPanel();
+		 contentPane.add(pCenter,BorderLayout.CENTER);
+		 repaint();
+		 revalidate();
+	}
+	protected void mntmBankBookActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new BankBookCenterUIPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new BankBookTransHisStatisticPanel();
+		contentPane.add(pCenter);
+		repaint();
+		revalidate();
+	}
+	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new BankBookInfoStatisticPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new LoanInfoStatisticPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	protected void mntmLoanActionPerformed(ActionEvent e) {
+		contentPane.remove(pCenter);
+		pCenter = new LoanCenterUIPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
 	}
 }

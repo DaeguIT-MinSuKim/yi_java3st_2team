@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.panel;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import yi_java3st_2team.dto.Customer;
@@ -50,7 +51,7 @@ public class CustInfoCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 	}
 
 	@Override
-	protected Customer getSelectedItem() {
+	public Customer getSelectedItem() {
 		int selectedIdx = getSelectedRowIdx();
 		String custCode = (String) model.getValueAt(selectedIdx, 0);
 		String custName = (String) model.getValueAt(selectedIdx, 1);

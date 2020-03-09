@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -128,16 +129,14 @@ public class DlgCard extends JDialog implements ActionListener {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
-				btnOk = new JButton("확인");
+				btnOk = new JButton();
 				btnOk.addActionListener(this);
-				btnOk.setActionCommand("확인");
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
 				btnCancel = new JButton("취소");
 				btnCancel.addActionListener(this);
-				btnCancel.setActionCommand("취소");
 				buttonPane.add(btnCancel);
 			}
 		}
@@ -236,17 +235,9 @@ public class DlgCard extends JDialog implements ActionListener {
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
 		}
-		if (e.getSource() == btnOk) {
-			btnOkActionPerformed(e);
-		}
-	}
-	protected void btnOkActionPerformed(ActionEvent e) {
-		uiPanel.insertTable(getItem());
-		uiPanel.updateTable();
-		dispose();
 	}
 
-	private Card getItem() {
+	public Card getItem() {
 		String cardNum = tfCardNum.getText();
 		Customer custCode = (Customer)cmbCust.getSelectedItem();
 		Plan planCode = (Plan)cmbPlan.getSelectedItem();
@@ -254,12 +245,21 @@ public class DlgCard extends JDialog implements ActionListener {
 		Date cardIssueDate = tfCardIssueDate.getDate();
 		Card card = new Card(cardNum, custCode, planCode, cardSecuCode, cardIssueDate);
 		if(cardNum.substring(6, 7).equals("1")) {
-			card.setCardBalance(Long.parseLong(tfCardBalance.getText()));
-		}
+			card.setCardBalance(tfCardBalance.getText().equals("")?Long.parseLong("0"):Long.parseLong(tfCardBalance.getText()));
+		} 
 		else {
-			card.setCardLimit(Integer.parseInt(tfCardLimit.getText()));
+			card.setCardLimit(tfCardLimit.getText().equals("")?Integer.parseInt("0"):Integer.parseInt(tfCardLimit.getText()));
 		}
 		return card;
+	}
+	public void setItem(Card card) {
+		tfCardNum.setText(card.getCardNum());
+		cmbCust.setSelectedItem(card.getCustCode());
+		cmbPlan.setSelectedItem(card.getPlanCode());
+		tfCVS.setText(card.getCardSecuCode());
+		tfCardIssueDate.setDate(card.getCardIssueDate());
+		tfCardLimit.setText(card.getCardLimit()+"");
+		tfCardBalance.setText(card.getCardBalance()+"");
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {

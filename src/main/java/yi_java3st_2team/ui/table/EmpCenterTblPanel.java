@@ -8,7 +8,8 @@ import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
 
 public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
-	private Employee employee; 
+	private Employee employee;
+	private Department dept; 
 
 	public EmpCenterTblPanel() {
 		
@@ -18,7 +19,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 	protected void setTblWidthAlign() {
 		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5,6,7,8 );
 		setColumnAlign(SwingConstants.RIGHT, 4);
-        setColumnWidth(50,50,70,50,80,110,70,100,70);		
+        setColumnWidth(50,70,70,50,80,110,70,100,70);		
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 	}
 
 	@Override
-	protected Object[] toArray(Employee item) {
+	public Object[] toArray(Employee item) {
 		employee = item;
 		return new Object[] {
 				item.getEmpCode(),
@@ -43,7 +44,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 	}
 
 	@Override
-	protected void updateRow(Employee item, int updateIdx) {
+	public void updateRow(Employee item, int updateIdx) {
 		model.setValueAt(item.getEmpCode(), updateIdx, 0);
 		model.setValueAt(item.getEmpName(), updateIdx, 1);
 		model.setValueAt(item.getEmpTitle(), updateIdx, 2);
@@ -56,21 +57,32 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 	}
 
 	@Override
-	protected Employee getSelectedItem() {
+	public Employee getSelectedItem() {
 		int selIdx = getSelectedRowIdx();
 		String empCode = (String) model.getValueAt(selIdx, 0);
 		String empName = (String) model.getValueAt(selIdx, 1);
 		String empTitle = (String) model.getValueAt(selIdx, 2);
 		String empAuth = (String) model.getValueAt(selIdx, 3);
-		int empSalary = (int) model.getValueAt(selIdx, 4);
+		String sSalary = (String)model.getValueAt(selIdx, 4);
+		int empSalary = Integer.parseInt(sSalary.replace(",",""));
 		String empTel = (String) model.getValueAt(selIdx, 5);
 		String empId = (String) model.getValueAt(selIdx, 6);
 		String empPwd = (String) model.getValueAt(selIdx, 7);
-		Department dept = new Department((int) model.getValueAt(selIdx, 8));
-	
+		String sDept= (String)model.getValueAt(selIdx, 8);
+		  if(sDept.equals("인사(1)")) {
+			  dept = new Department(1);
+			  dept.setDeptName("인사");
+		  }if(sDept.contentEquals("고객(2)")) {
+			  dept = new Department(2);
+			  dept.setDeptName("고객");
+		  }
+	//	Department dept = new Department(index-2); //)앞의 숫자를 넣는다.. 
+	//	System.out.println(dept);
 		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 		
 		return emp;
 	}
+	
+	
 
 }

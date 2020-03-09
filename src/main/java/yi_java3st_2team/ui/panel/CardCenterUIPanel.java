@@ -22,6 +22,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	private CardCenterTblPanel pCenter;
 	private CardService service;
 	private DlgCard dlgCard;
+	private int selIdx;
 
 	/**
 	 * Create the panel.
@@ -50,21 +51,68 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 	}
+	
 	private JPopupMenu getTblPopMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
+		ActionListener myDlgListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("추가")) {
+					try {
+						Card card = dlgCard.getItem();
+						pCenter.addItem(card);
+						service.insertCard(card);
+						pCenter.loadTableData(service.showCards());
+						JOptionPane.showMessageDialog(null, "추가되었습니다");
+						dlgCard.dispose();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else {
+					try {
+						Card card = dlgCard.getItem();
+						pCenter.updateRow(card, pCenter.getSelectedRowIdx());
+						service.updateCard(card);
+						pCenter.loadTableData(service.showCards());
+						JOptionPane.showMessageDialog(null, "수정되었습니다");
+						dlgCard.dispose();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block  
+						e1.printStackTrace();
+					}
+				}
+			}
+		};
 		ActionListener popMenuListener = new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					dlgCard = new DlgCard();
 					dlgCard.initCmbModel(service);
 					dlgCard.setTitle("카드 " + e.getActionCommand());
+					dlgCard.getBtnOk().setText(e.getActionCommand());
+					dlgCard.getBtnOk().addActionListener(myDlgListener);
 					dlgCard.setModal(true);
 					dlgCard.setVisible(true);	
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					try {
-						int idx = pCenter.getSelectedRowIdx();
+						selIdx = pCenter.getSelectedRowIdx();
+						Card selCard = pCenter.getSelectedItem();
+						dlgCard = new DlgCard();
+						dlgCard.initCmbModel(service);
+						dlgCard.setTitle("카드" + e.getActionCommand());
+						dlgCard.getBtnOk().setText(e.getActionCommand());
+						dlgCard.getBtnOk().addActionListener(myDlgListener);
+						dlgCard.getTfCardNum().setEnabled(false);
+						dlgCard.getCmbCust().setEnabled(false);
+						dlgCard.getCmbPlan().setEnabled(false);
+						dlgCard.setItem(selCard);
+						dlgCard.setModal(true);
+						dlgCard.setVisible(true);
 					}
 					catch(RuntimeException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -72,7 +120,22 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
-						int idx = pCenter.getSelectedRowIdx();
+						Card selCard = pCenter.getSelectedItem();
+						selIdx = pCenter.getSelectedRowIdx();
+						int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
+						if(res==0) {
+							try {
+								pCenter.removeItem(selIdx);
+								service.deleteCard(selCard);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "삭제가 완료되었습니다");
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "삭제가 취소되었습니다");
+						}
 					}
 					catch(RuntimeException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -119,24 +182,13 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
-		pNorth.tfClear();
-	}
-	public void updateTable() {
 		try {
+			pNorth.tfClear();
 			List<Card> list = service.showCards();
 			pCenter.loadTableData(list);
-			pCenter.setPopupMenu(getTblPopMenu());
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void insertTable(Card card) {
-		try {
-			service.insertCard(card);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 	}
 }

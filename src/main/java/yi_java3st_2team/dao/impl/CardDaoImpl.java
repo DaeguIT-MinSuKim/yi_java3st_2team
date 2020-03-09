@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import yi_java3st_2team.dao.CardDao;
-import yi_java3st_2team.ds.MySqlDataSource;
+import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
@@ -26,7 +26,7 @@ public class CardDaoImpl implements CardDao {
 	public List<Card> showCards() throws SQLException {
 		List<Card> list = new ArrayList<>();
 		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()) {
 			while(rs.next()) {
@@ -57,7 +57,7 @@ public class CardDaoImpl implements CardDao {
 	public List<Card> showCardByCustName(Card card) throws SQLException {
 		List<Card> list = new ArrayList<>();
 		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname = ?";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCustCode().getCustName());
 			try(ResultSet rs = pstmt.executeQuery()) {
@@ -72,27 +72,16 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int insertCard(Card card) throws SQLException {
 		int res = -1;
-		StringBuilder createSql= new StringBuilder("insert into card(cardnum,custcode,plancode,cardsecucode,cardissuedate,");
-		if(card.getCardNum().substring(6,7).equals("1")) {
-			createSql.append("cardbalance values(?,?,?,?,?,?,?)");
-		}
-		else {
-			createSql.append("cardlimit values(?,?,?,?,?,?,?)");
-		}
-		String sql = createSql.toString();
-		try(Connection con = MySqlDataSource.getConnection();
+		String sql = "insert into card values(?,?,?,?,?,?,?)";
+		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCardNum());
 			pstmt.setString(2, card.getCustCode().getCustCode());
 			pstmt.setString(3, card.getPlanCode().getPlanCode());
 			pstmt.setString(4, card.getCardSecuCode());
 			pstmt.setTimestamp(5, new Timestamp(card.getCardIssueDate().getTime()));
-			if(card.getCardNum().substring(6,7).equals("1")) {
-				pstmt.setLong(6, card.getCardBalance());
-			}
-			else {
-				pstmt.setInt(6, card.getCardLimit());
-			}
+			pstmt.setInt(6, card.getCardLimit());
+			pstmt.setLong(7, card.getCardBalance());
 			res = pstmt.executeUpdate();
 		}
 		return res;
@@ -101,26 +90,15 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int updateCard(Card card) throws SQLException {
 		int res = -1;
-		StringBuilder updateSql = new StringBuilder("update card set cardnum = ?, cardsecucode = ?, cardissuedate = ?");
-		if(card.getCardNum().substring(6,7).equals("1")) {
-			updateSql.append(",cardbalance = ? where custcode = ?");
-		}
-		else {
-			updateSql.append(",cardlimit = ? where custcode = ?");
-		}
-		String sql = updateSql.toString();
-		try(Connection con = MySqlDataSource.getConnection(); 
+		String sql = "update card set cardsecucode=?,cardissuedate=?,cardlimit=?,cardbalance=? where custcode = (select custcode from customer where custname = ?) and cardnum = ?";
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, card.getCardNum());
-			pstmt.setString(2, card.getCardSecuCode());
-			pstmt.setTimestamp(3, new Timestamp(card.getCardIssueDate().getTime()));
-			if(card.getCardNum().substring(6,7).equals("1")) {
-				pstmt.setLong(4, card.getCardBalance());
-			}
-			else {
-				pstmt.setInt(4, card.getCardLimit());
-			}
-			pstmt.setString(5, card.getCustCode().getCustCode());
+			pstmt.setString(1, card.getCardSecuCode());
+			pstmt.setTimestamp(2, new Timestamp(card.getCardIssueDate().getTime()));
+			pstmt.setLong(3, card.getCardBalance());
+			pstmt.setInt(4, card.getCardLimit());
+			pstmt.setString(5, card.getCustCode().getCustName());
+			pstmt.setString(6, card.getCardNum());
 			res = pstmt.executeUpdate();
 		}
 		return res;
@@ -129,10 +107,11 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int deleteCard(Card card) throws SQLException {
 		int res = 0;
-		String sql = "delete from card where = custcode = ?";
-		try(Connection con = MySqlDataSource.getConnection(); 
+		String sql = "delete from card where custcode = (select custcode from customer where custname = ?) and cardnum = ?";
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, card.getCustCode().getCustCode());
+			pstmt.setString(1, card.getCustCode().getCustName());
+			pstmt.setString(2, card.getCardNum());
 			res = pstmt.executeUpdate();
 		}
 		return res;

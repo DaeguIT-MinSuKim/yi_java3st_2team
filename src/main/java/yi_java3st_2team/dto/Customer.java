@@ -1,5 +1,7 @@
 package yi_java3st_2team.dto;
 
+import java.util.Date;
+
 public class Customer {
 	private String custCode;
 	private String custName;
@@ -7,10 +9,23 @@ public class Customer {
 	private int custCredit;
 	private String custAddr;
 	private String custTel;
+	private Date lastAccountDate;
+	private String lastAccount;
+	private BankBook bankbook;
 	public Customer() {
 		
 	}
 	
+	
+	
+	public Customer(String custCode, String custName) {
+		super();
+		this.custCode = custCode;
+		this.custName = custName;
+	}
+
+
+
 	public Customer(String custCode, String custName, String custRank, int custCredit, String custAddr,
 			String custTel) {
 		this.custCode = custCode;
@@ -60,6 +75,47 @@ public class Customer {
 	public void setCustTel(String custTel) {
 		this.custTel = custTel;
 	}
+	
+	
+
+	public BankBook getBankbook() {
+		return bankbook;
+	}
+	
+	
+
+
+	public void setBankbook(BankBook bankbook) {
+		this.bankbook = bankbook;
+	}
+
+
+	
+	
+
+	public Date getLastAccountDate() {
+		return lastAccountDate;
+	}
+
+
+
+	public void setLastAccountDate(Date lastAccountDate) {
+		this.lastAccountDate = lastAccountDate;
+	}
+
+
+
+	public String getLastAccount() {
+		return lastAccount;
+	}
+
+
+
+	public void setLastAccount(String lastAccount) {
+		this.lastAccount = lastAccount;
+	}
+
+
 
 	@Override
 	public String toString() {

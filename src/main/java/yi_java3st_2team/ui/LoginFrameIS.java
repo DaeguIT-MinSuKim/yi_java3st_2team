@@ -49,6 +49,7 @@ public class LoginFrameIS extends JFrame implements ActionListener {
 	private boolean chkLogin;
 	private MainFrame_pis main;
 	private Employee chkEmp;
+	private static LoginFrameIS loginFrame;
 	/**
 	 * Launch the application.
 	 */
@@ -56,9 +57,11 @@ public class LoginFrameIS extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrameIS frame = new LoginFrameIS();
-					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					frame.setVisible(true);
+					if(loginFrame==null) {
+						loginFrame = new LoginFrameIS();
+						UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
+						loginFrame.setVisible(true);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,7 +96,7 @@ public class LoginFrameIS extends JFrame implements ActionListener {
 		pImg.setLayout(new BorderLayout(0, 0));
 		
 		lblINorthLogo = new JLabel("");
-		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png").getImage().getScaledInstance(200, 70, 1)));
+		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon(System.getProperty("user.dir")+"//images//Logo.png").getImage().getScaledInstance(200, 70, 1)));
 		lblINorthLogo.setBackground(Color.WHITE);
 		pImg.add(lblINorthLogo, BorderLayout.CENTER);
 		

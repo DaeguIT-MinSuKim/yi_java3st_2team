@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.designPanel;
 
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,7 +21,7 @@ import java.awt.event.ActionEvent;
 public class CustInfoUIPanel extends JPanel implements ActionListener {
 	CustomerService custService = new CustomerService();
 	private CustInfoCenterNorthSearchPanel panel;
-	private List<Customer> listForCustName = new ArrayList<>();
+	//private List<Customer> listForCustName = new ArrayList<>();
 	private CustInfoCenterCenterTblPanel panel_1;
 	public CustInfoUIPanel() {
 
@@ -48,12 +49,97 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		JPopupMenu popup = new JPopupMenu();
 		
 		JMenuItem addMenu = new JMenuItem("추가");
+		addMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DlgCustInfo dlgCustInfo = new DlgCustInfo();
+				dlgCustInfo.setActiontoAdd();
+				dlgCustInfo.getOkButton().addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(dlgCustInfo.getTfCustCode()==null || dlgCustInfo.getTfCustName()==null || dlgCustInfo.getCmbCustRank().getSelectedIndex()==-1
+								  || dlgCustInfo.getCmbCustCredit().getSelectedIndex()==-1 || dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
+									JOptionPane.showMessageDialog(null, "빈 칸을 모두 입력해주세요.");
+								}
+						if(e.getActionCommand().equals("추가")) {
+									try {
+										addItemTbl(dlgCustInfo.getItem());
+										JOptionPane.showMessageDialog(null, "신규 고객이 추가되었습니다.");
+										refreshTbl();
+										dlgCustInfo.dispose();
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+						}
+						
+						
+					}
+					
+				});
+				dlgCustInfo.setVisible(true);
+				
+			}
+			
+		});
 		popup.add(addMenu);
 		
 		JMenuItem editMenu = new JMenuItem("수정");
+		editMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DlgCustInfo dlgCustInfo = new DlgCustInfo();
+				Customer customer = panel_1.getSelectedItem();
+				dlgCustInfo.setItem(customer);
+				dlgCustInfo.setActiontoEdit();
+				dlgCustInfo.getOkButton().addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(dlgCustInfo.getTfCustCode()==null || dlgCustInfo.getTfCustName()==null || dlgCustInfo.getCmbCustRank().getSelectedIndex()==-1
+								  || dlgCustInfo.getCmbCustCredit().getSelectedIndex()==-1 || dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
+									JOptionPane.showMessageDialog(null, "빈 칸을 모두 입력해주세요.");
+								}
+						if(e.getActionCommand().equals("수정")) {
+							try {
+								updateTbl(dlgCustInfo.getItem());
+								JOptionPane.showMessageDialog(null, "수정 되었습니다.");
+								refreshTbl();
+								dlgCustInfo.dispose();
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}
+					
+				});
+				dlgCustInfo.setVisible(true);
+				
+				
+			}
+			
+		});
 		popup.add(editMenu);
 		
 		JMenuItem deleteMenu = new JMenuItem("삭제");
+		deleteMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Customer customer = panel_1.getSelectedItem();
+				try {
+					custService.removeCustomer(customer);
+					JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+					refreshTbl();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+			}
+			
+		});
 		popup.add(deleteMenu);
 		return popup;
 	}
@@ -67,15 +153,17 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void panelBtnSearchActionPerformed(ActionEvent e) {
-		String custName = panel.getTfSearch().getText();
+		String custName = panel.getTfSearch().getText().trim();
+		List<Customer> listForCustName = new ArrayList<>();
 		try {
 			Customer newCust = custService.showCustomerByName(custName);
-			//listForCustName.get(0).getName()
+			
 			if(listForCustName.size()==0) {
+				if(newCust==null) {
+					JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+					return;
+				}
 				listForCustName.add(newCust);
-			}else {
-				JOptionPane.showMessageDialog(null, "이미 고객이 조회되어 있습니다. 취소 후 다시 조회해주세요.");
-				return;
 			}
 			panel_1.loadTableData(listForCustName);
 		} catch (SQLException e1) {
@@ -91,4 +179,20 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void addItemTbl(Customer customer) throws SQLException {
+		custService.AddCustomer(customer);
+		
+	}
+
+	
+	public void updateTbl(Customer customer) throws SQLException{
+		custService.editCustomer(customer);
+	}
+	
+	public void refreshTbl() throws SQLException {
+		List<Customer> list = custService.showCustomers();
+		panel_1.loadTableData(list);
+	}
+	
 }

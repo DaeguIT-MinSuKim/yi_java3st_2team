@@ -17,6 +17,15 @@ public class BankBook {
 	}
 	
 	public BankBook(String accountNum, Customer custCode, Plan accountPlanCode, Date accountOpenDate,
+			float accountInterest) {
+		super();
+		this.accountNum = accountNum;
+		this.custCode = custCode;
+		this.accountPlanCode = accountPlanCode;
+		this.accountOpenDate = accountOpenDate;
+		this.accountInterest = accountInterest;
+	}
+	public BankBook(String accountNum, Customer custCode, Plan accountPlanCode, Date accountOpenDate,
 			float accountInterest, long accountBalance) {
 		this.accountNum = accountNum;
 		this.custCode = custCode;

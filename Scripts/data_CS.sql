@@ -1,7 +1,14 @@
+use bank;
 select user(), database ();
 select * from customer c ;
 select * from plan p ;
+select planCode, planDetail, planName, planDesc, planDiv from plan where planName like "%예금";
+select planCode, planDetail, planName, planDesc, planDiv from plan where planCode ="A001";
 
+
+ALTER TABLE plan convert to charset utf8;
+select * From customer where custName = "김가나";
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = "김가나";
 insert into customer values("C001", "김가나", "B", 1, "서울시 강남구", "123-1234-1234");
 insert into customer values("C002", "김다라", "S", 2, "서울시 마포구", "234-4578-5434"),
 						   ("C003", "김마바", "G", 3, "대구시 서구", "456-4567-4578"),
@@ -23,3 +30,94 @@ insert into plan values("A004", "AA002", "일반정기예금", "일반 정기예
 -- test 
 select custCode, custName, custRank, custCredit, custAddr, custTel from customer;
 select planCode, planDetail, planName, planDesc, planDiv from plan;
+select * from plan;
+delete from customer where custCode = "C008";
+
+select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
+select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalance from BankBook b left join customer c on b.custCode = c.custCode ;
+select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
+update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
+
+select planCode, planDetail, planName, planDesc, planDiv from plan where planName like '%예금%';
+select custName, accountNum, accountBalance from customer c left join bankbook b on c.custcode = b.custCode where custName = "김가나";
+
+select (count(*) - (select count(*) from customer where custRank = "D")) from customer;
+select count(*) from customer where custRank = "D"; 
+select * from customer c ;
+#BSGPD
+select count(*) from customer where custRank = "B";
+
+select * from bankbook;
+select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) ="11";
+
+select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw ="입금";
+
+select * from bankbook b ;
+desc bankbook;
+
+
+
+-- trigger ----------
+
+drop table cust_dw_audit;
+
+
+select * from cust_DW_audit;
+
+
+create table cust_DW_audit(
+	dw varchar(5),
+	custName varchar(5) not null,
+	accountNum char(16) not null,
+	amount int(20) not null,
+	accountBalance bigint(20) not null,
+	accountDate datetime not null
+);
+
+
+select * from information_schema.TRIGGERS where TRIGGER_SCHEMA = "bank";
+
+drop trigger if exists tri_after_update_BankBook;
+delimiter $$
+create trigger tri_after_update_BankBook
+   before update on BankBook
+   for each row 
+   begin
+	  if(old.accountBalance < new.accountBalance) then
+     	 insert into cust_DW_audit values
+      		("입금", 
+      		(select custName from customer where custCode = new.custCode), 
+      		new.accountNum,
+      		(new.accountBalance - old.accountBalance),
+      		new.accountBalance,
+      		Now()
+      		);
+      else
+     	 insert into cust_DW_audit values
+      		("출금", 
+      		(select custName from customer where custCode = new.custCode), 
+      		new.accountNum,
+      		(old.accountBalance - new.accountBalance),
+      		new.accountBalance,
+      		Now()
+      		);
+      end if;
+   end $$
+delimiter ;
+ 
+
+
+select * from cust_DW_audit;
+select c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode ;
+select * from BankBook bb ;
+desc bankbook;
+
+
+
+-- statistic -----------
+
+select * from BankBook bb ;
+#예금 총 금액 (11)
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "11";
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "12";
+select sum(accountBalance) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, "-", 2), "-", -1) = "13";

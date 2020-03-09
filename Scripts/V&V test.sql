@@ -1,6 +1,10 @@
+use bank;
+select USER (), DATABASE ();
 select * from employee;
 select * from plan;
 select * from customer;
+
+ALTER TABLE Customer convert to charset utf8;
 
 insert into bankbook values 
 ('293133-11-000001','C001','A001',"2020-02-05 09:00:00",0.10,5000000),
@@ -22,6 +26,7 @@ select * from bankbook;
 
 desc card;
 
+alter table card drop column cardname;
 insert into card values
 ('2931331000000010','C001','B001','111',"2020-02-05 09:00:00",null,null),
 ('2931332000000020','C001','B002','222',"2020-02-05 09:00:00",null,null),
@@ -33,6 +38,7 @@ insert into card values
 ('2931332000000080','C004','B002','888',"2020-02-05 09:00:00",null,null),
 ('2931331000000090','C005','B001','999',"2020-02-05 09:00:00",null,null),
 ('2931332000000100','C005','B002','000',"2020-02-05 09:00:00",null,null);
+
 
 select * from card;
 select * from card where planCode = 'B001';
@@ -81,7 +87,7 @@ insert into loan values
 ('293133-13-000015','C005','C003',"2020-02-05 09:00:00",0.32,100000000);
 #대출 부분은 대출 금액이 0원이 될 때 계좌가 휴면계좌가 되어야 하므로, 삭제 및 휴면계좌가만 보관하는 휴면계좌 뷰테이블에 삽입되는 트리거 필요
 select * from loan;
-
+select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode;
 #performance table은 상품번호,담당사원,담당고객으로 나누어진다
 #상품코드 : A001 사원코드 : B003 고객코드 C001:
 #상품코드 : A002 사원코드 : B004 고객코드 C001,C002,C003,C004,C005;
@@ -109,6 +115,8 @@ select * from employee;
 insert into employee values ('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2);
 select empname from employee where empid='111' and emppwd=password('111');
 select * from employee where empAuth = 'CS';
+select * from plan where planCode like 'A%';
 select * from plan where planCode like 'B%';
+select * from plan where planCode like 'C%';
 select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname = '김가나';
 select customer.custname,bankbook.accountBalance from customer left join bankbook on customer.`custCode` = bankbook.`custCode` where bankbook.`accountPlanCode` in ('A001','A004'); 

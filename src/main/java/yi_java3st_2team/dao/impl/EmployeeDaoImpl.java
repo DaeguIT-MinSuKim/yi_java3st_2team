@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import yi_java3st_2team.dao.EmployeeDao;
+import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
@@ -24,7 +29,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Employee getEmpIdPass(Employee emp) throws SQLException {
 		String sql = "select empname from employee where empid=? and emppwd=password(?)";
 		Employee employee = new Employee();
-		try(Connection con = MySqlDataSource.getConnection();
+		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpId());
 			pstmt.setString(2, emp.getEmpPwd());
@@ -47,7 +52,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	public Employee getEmpAuth(Employee emp) throws SQLException {
 		String sql = "select empauth from employee where empname = ?";
 		Employee employee = new Employee();
-		try(Connection con = MySqlDataSource.getConnection(); 
+		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, emp.getEmpName());
 			try(ResultSet rs = pstmt.executeQuery()) {
@@ -66,23 +71,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee selectEmpByName(Employee emp) {
+	public List<Employee> selectEmpByNameList(String empName) throws SQLException {
+		//Employee emp = null;
+		List<Employee> list = new ArrayList<Employee>();
 		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   where empName=?";
 		
-		try (Connection con = MySqlDataSource.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
+		try (Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(1, empName);
 			
-			try(ResultSet rs = pstmt.executeQuery()){
-				if(rs.next()) {
-					return getEmployee(rs);
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					list.add(getEmployee(rs));
+					
+					//return getEmployee(rs);
 				}
+				return list;
 			}
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -90,19 +100,66 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int insertEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql = "insert into employee values(?,?,?,?,?,?,?,password(?),?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			pstmt.setString(1, emp.getEmpCode());
+			pstmt.setString(2, emp.getEmpName());
+			pstmt.setString(3, emp.getEmpTitle());
+			pstmt.setString(4, emp.getEmpAuth());
+			pstmt.setInt(5, emp.getEmpSalary());
+			pstmt.setString(6, emp.getEmpTel());
+			pstmt.setString(7, emp.getEmpId());
+			pstmt.setString(8, emp.getEmpPwd());
+			pstmt.setInt(9, emp.getDept().getDeptNo());
+			
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+
+			if(e.getMessage().contains("PRIMARY")) {
+				JOptionPane.showMessageDialog(null, "사원번호 중복입니다");
+			}
+		}
+		
 		return 0;
 	}
 
 	@Override
 	public int updateEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql="update employee set empName=?,empTitle=?,empAuth=?,empSalary=?,empTel=?,empId=?,empPwd=password(?),deptNo=? where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			
+			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(2, emp.getEmpTitle());
+			pstmt.setString(3, emp.getEmpAuth());
+			pstmt.setInt(4, emp.getEmpSalary());
+			pstmt.setString(5, emp.getEmpTel());
+			pstmt.setString(6, emp.getEmpId());
+			pstmt.setString(7, emp.getEmpPwd());
+			pstmt.setInt(8, emp.getDept().getDeptNo());
+			pstmt.setString(9, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
+		
 	}
 
 	@Override
 	public int deleteEmployee(Employee emp) {
-		// TODO Auto-generated method stub
+		String sql="delete from employee where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			pstmt.setString(1, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -111,7 +168,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		String sql="select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
 				"   order by empCode";
-		try (Connection con = MySqlDataSource.getConnection();
+		try (Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 						ResultSet rs = pstmt.executeQuery()){
 			List<Employee> list = new ArrayList<Employee>();
@@ -139,4 +196,206 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	    dept.setDeptName(rs.getString("d.deptName"));
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 	}
+
+	@Override
+	public List<Department> selectDeptByAll() {
+		String sql="select deptNo, deptName from department order by deptNo";
+		try (Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+						ResultSet rs = pstmt.executeQuery()){
+			List<Department> list = new ArrayList<Department>();
+			
+			while(rs.next()) {
+				list.add(getDepartment(rs));
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return null;
+	}
+
+	private Department getDepartment(ResultSet rs) throws SQLException {
+		int deptNo = rs.getInt("deptNo");
+		String deptName =rs.getString("deptName");
+		return new Department(deptNo, deptName);
+	}
+
+	@Override
+	public int updateEmployeeAuth(Employee emp) {  //여기서 emp는 네가지 정보만 가지고 있음 
+		String sql="update employee set empName=?,empTitle=?,empAuth=? where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			
+			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(2, emp.getEmpTitle());
+			pstmt.setString(3, emp.getEmpAuth());
+			pstmt.setString(4, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public List<Employee> selectEmployeeByPerform() {
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			
+			List<Employee> list = new ArrayList<Employee>();
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+				
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private Employee getEmpPerform(ResultSet rs) throws SQLException {
+		String empCode = rs.getString("e.empCode");
+		String empName = rs.getString("e.empName");
+		String empTitle = rs.getString("e.empTitle");
+		int perf = rs.getInt("perf");
+		int bonus = rs.getInt("bonus");
+		String vip = rs.getString("vip");
+		return new Employee(empCode, empName, empTitle, perf, bonus, vip);
+	}
+
+	@Override
+	public Employee selectEmpByName(String empName) throws SQLException {
+		       Employee emp = null;
+				String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+						"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+						"   where empName=?";
+				
+				try (Connection con = LocalDataSource.getConnection();
+						PreparedStatement pstmt = con.prepareStatement(sql)){
+					
+					pstmt.setString(1,empName);
+					
+					try(ResultSet rs = pstmt.executeQuery();){
+						if(rs.next()) {
+							//list.add(getEmployee(rs));
+							
+							return getEmployee(rs);
+						}
+						
+					}
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return null;
+	}
+
+	@Override
+	public Employee selectOneEmployeeByPerform(String empName) throws SQLException {
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"where e.empName=? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, empName);
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			if(rs.next()) {
+				//list.add(getEmpPerform(rs));
+			   return getEmpPerform(rs);
+				
+			  }
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	// -----------------------------------------------------------------------
+	//통계 
+	@Override
+	public int selectCountAllEmployee() {
+	   String sql="select count(empCode) from employee";
+
+	   try(Connection con = LocalDataSource.getConnection();
+		   PreparedStatement pstmt = con.prepareStatement(sql);){
+		  
+		   try(ResultSet rs = pstmt.executeQuery();){
+			   
+			   while(rs.next()) {
+			      return rs.getInt("count(empCode)");
+
+			   }
+			  
+		   }	   	   
+	   } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	//부서 번호를 매개변수로 넣고 부서별 인원 수 구하기
+	@Override
+	public int selectCountMemberByDept(int dept) {
+		String sql= "select count(*) from employee e  where `deptNo` =?";
+		
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setInt(1, dept);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					return rs.getInt("count(*)");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int selectCountMemberByTitle(String empTitle) {
+		String sql="select  count(empCode) from employee\r\n" + 
+				"where `empTitle` =?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setString(1, empTitle);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				while(rs.next()) {
+					return rs.getInt("count(empCode)");
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+
+
+	
+	
+	
+	
 }
