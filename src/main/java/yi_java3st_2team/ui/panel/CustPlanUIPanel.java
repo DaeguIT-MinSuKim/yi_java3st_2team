@@ -15,6 +15,7 @@ import java.util.List;
 
 import yi_java3st_2team.ui.dialog.DlgCustPlan;
 import yi_java3st_2team.ui.service.PlanService;
+import yi_java3st_2team.ui.table.CustPlanCenterCenterTblPanel;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -118,8 +119,8 @@ public class CustPlanUIPanel extends JPanel{
 								
 							
 						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
+							JOptionPane.showMessageDialog(null, "이미 존재하는 고객 입니다. 다시 입력하세요.");
+						} 
 						
 					}
 					

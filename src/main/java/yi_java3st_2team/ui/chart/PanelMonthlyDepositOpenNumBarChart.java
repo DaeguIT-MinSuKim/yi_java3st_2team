@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -45,7 +47,6 @@ public class PanelMonthlyDepositOpenNumBarChart extends JFXPanel implements Init
 		
 		barChart.setPrefSize(500, 250);
 		barChart.setData(getChartData());
-		
 		root.getChildren().add(barChart);
 
 		return scene;
@@ -74,6 +75,9 @@ public class PanelMonthlyDepositOpenNumBarChart extends JFXPanel implements Init
 			listZero = new ArrayList<>(listDp.size());
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		catch(NullPointerException e1) {
+			return null;
 		}
 		
 		//bankbook 의 accountOpenDate에서 월을 잘라서 가져온 후 list 로 받음

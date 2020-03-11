@@ -103,7 +103,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			pstmt.setInt(4, customer.getCustCredit());
 			pstmt.setString(5, customer.getCustAddr());
 			pstmt.setString(6, customer.getCustTel());
-			pstmt.setString(7, customer.getCustCode());
+			pstmt.setString(7, customer.getCustName());
 			
 			res = pstmt.executeUpdate();
 		}

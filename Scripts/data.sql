@@ -172,6 +172,7 @@ delimiter $
  end $
 delimiter ;
 
+-- 입금/출금 기능 
 drop trigger if exists tri_after_update_BankBook;
 delimiter $$
 create trigger tri_after_update_BankBook
@@ -197,6 +198,19 @@ create trigger tri_after_update_BankBook
       		Now()
       		);
       end if;
+   end $$
+delimiter ;
+
+-- 입금/출금 시 체크 카드 잔액 동시 변경
+drop trigger if exists tri_after_update_BankBook_card;
+delimiter $$
+create trigger tri_after_update_BankBook_card
+   after update on BankBook
+   for each row 
+   begin
+	  if(old.accountPlanCode="A001" || old.accountPlanCode="A004") then
+      update card set cardBalance = (select new.accountBalance from bankbook where custCode = new.custCode and accountPlanCode = new.accountPlanCode) where custCode = new.custCode and planCode="B001";
+	end if;
    end $$
 delimiter ;
 

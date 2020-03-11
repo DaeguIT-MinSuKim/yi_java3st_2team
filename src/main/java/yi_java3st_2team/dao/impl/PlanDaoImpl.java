@@ -141,16 +141,16 @@ public class PlanDaoImpl implements PlanDao {
 
 	@Override
 	public int updatePlan(Plan plan) throws SQLException {
-		String sql = "update plan set planCode=?, planDetail=?, planName=?, planDesc=?, planDiv=? where planCode=?";
+		String sql = "update plan set planDetail=?, planName=?, planDesc=?, planDiv=? where planCode=?";
 		int res = -1;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
-			pstmt.setString(1, plan.getPlanCode());
-			pstmt.setString(2, plan.getPlanDetail());
-			pstmt.setString(3, plan.getPlanName());
-			pstmt.setString(4, plan.getPlanDesc());
-			pstmt.setString(5, plan.getPlanDiv());
-			pstmt.setString(6, plan.getPlanCode());
+		//	pstmt.setString(1, plan.getPlanCode());
+			pstmt.setString(1, plan.getPlanDetail());
+			pstmt.setString(2, plan.getPlanName());
+			pstmt.setString(3, plan.getPlanDesc());
+			pstmt.setString(4, plan.getPlanDiv());
+			pstmt.setString(5, plan.getPlanCode());
 			
 			res = pstmt.executeUpdate();
 		}
