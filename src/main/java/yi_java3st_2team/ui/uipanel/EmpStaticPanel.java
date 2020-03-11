@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
 
+@SuppressWarnings("serial")
 public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionListener {
 
 	private static final EmpStaticPanel empStaticPanel = new EmpStaticPanel();

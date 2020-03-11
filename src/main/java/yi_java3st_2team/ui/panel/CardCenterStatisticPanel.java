@@ -14,7 +14,7 @@ public class CardCenterStatisticPanel extends AbsCenterStatisticPanel {
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {"카드 이용 건수","TBD","TBD","TBD"};
+		return new String[] {""};
 	}
 
 }

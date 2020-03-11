@@ -15,7 +15,7 @@ public class LoanInfoStatisticPanel extends AbsCenterStatisticPanel {
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {"대출 상환 내역","남은 상환 일자","TBD","TBD"};
+		return new String[] {"대출 상환 내역","남은 상환 일자","대출상품추천"};
 	}
 
 }

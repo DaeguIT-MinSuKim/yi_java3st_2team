@@ -13,6 +13,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
+import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.service.CustomerService;
 
 @SuppressWarnings("serial")

@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui.panel;
+package yi_java3st_2team.ui.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -15,33 +16,35 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
+import yi_java3st_2team.dto.BankBook;
+import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
-import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.Plan;
-import yi_java3st_2team.ui.service.LoanService;
+import yi_java3st_2team.ui.service.BankBookService;
+import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")
-public class DlgLoan extends JDialog implements ActionListener {
+public class DlgBankBook extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfAccountNum;
-	private JDateChooser tfLoanDate;
-	private JTextField tfLoanInterest;
+	private JDateChooser tfAccountOpenDate;
+	private JTextField tfAccountInterest;
 	private JButton btnOk;
 	private JButton btnCancel;
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
-	private JLabel lblLoanBalance;
-	private JTextField tfLoanBalance;
 
-	public DlgLoan() {
+	public DlgBankBook() {
 		initialize();
 	}
 	private void initialize() {
@@ -81,33 +84,23 @@ public class DlgLoan extends JDialog implements ActionListener {
 			contentPanel.add(cmbPlan);
 		}
 		{
-			JLabel lblLoanDate = new JLabel("대출날짜");
-			lblLoanDate.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(lblLoanDate);
+			JLabel lblAccountOpenDate = new JLabel("계좌개설일");
+			lblAccountOpenDate.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblAccountOpenDate);
 		}
 		{
-			tfLoanDate = new JDateChooser(new Date(),"yyyy-MM-dd HH:mm:ss");
-			contentPanel.add(tfLoanDate);
+			tfAccountOpenDate = new JDateChooser(new Date(),"yyyy-MM-dd HH:mm:ss");
+			contentPanel.add(tfAccountOpenDate);
 		}
 		{
-			JLabel lblLoanInterest = new JLabel("이자율");
-			lblLoanInterest.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(lblLoanInterest);
+			JLabel lblAccountInterest = new JLabel("이자율");
+			lblAccountInterest.setHorizontalAlignment(SwingConstants.RIGHT);
+			contentPanel.add(lblAccountInterest);
 		}
 		{
-			tfLoanInterest = new JTextField();
-			tfLoanInterest.setColumns(10);
-			contentPanel.add(tfLoanInterest);
-		}
-		{
-			lblLoanBalance = new JLabel("대출금액");
-			lblLoanBalance.setHorizontalAlignment(SwingConstants.RIGHT);
-			contentPanel.add(lblLoanBalance);
-		}
-		{
-			tfLoanBalance = new JTextField();
-			tfLoanBalance.setColumns(10);
-			contentPanel.add(tfLoanBalance);
+			tfAccountInterest = new JTextField();
+			tfAccountInterest.setColumns(10);
+			contentPanel.add(tfAccountInterest);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -127,67 +120,70 @@ public class DlgLoan extends JDialog implements ActionListener {
 		}
 		
 	}
-	public JTextField getTfAccountNum() {
+
+	public JTextField getTfCardNum() {
 		return tfAccountNum;
 	}
-	public void setTfAccountNum(JTextField tfAccountNum) {
-		this.tfAccountNum = tfAccountNum;
+
+	public void setTfCardNum(JTextField tfCardNum) {
+		this.tfAccountNum = tfCardNum;
 	}
-	public JDateChooser getTfLoanDate() {
-		return tfLoanDate;
+
+	public JDateChooser getTfCardIssueDate() {
+		return tfAccountOpenDate;
 	}
-	public void setTfLoanDate(JDateChooser tfLoanDate) {
-		this.tfLoanDate = tfLoanDate;
+
+	public void setTfCardIssueDate(JDateChooser tfCardIssueDate) {
+		this.tfAccountOpenDate = tfCardIssueDate;
 	}
-	public JTextField getTfLoanInterest() {
-		return tfLoanInterest;
+
+	public JTextField getTfCardLimit() {
+		return tfAccountInterest;
 	}
-	public void setTfLoanInterest(JTextField tfLoanInterest) {
-		this.tfLoanInterest = tfLoanInterest;
+
+	public void setTfCardLimit(JTextField tfCardLimit) {
+		this.tfAccountInterest = tfCardLimit;
 	}
+
 	public JButton getBtnOk() {
 		return btnOk;
 	}
+
 	public void setBtnOk(JButton btnOk) {
 		this.btnOk = btnOk;
 	}
+
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
+
 	public void setBtnCancel(JButton btnCancel) {
 		this.btnCancel = btnCancel;
 	}
+
 	public JComboBox<Customer> getCmbCust() {
 		return cmbCust;
 	}
+
 	public void setCmbCust(JComboBox<Customer> cmbCust) {
 		this.cmbCust = cmbCust;
 	}
+
 	public JComboBox<Plan> getCmbPlan() {
 		return cmbPlan;
 	}
+
 	public void setCmbPlan(JComboBox<Plan> cmbPlan) {
 		this.cmbPlan = cmbPlan;
 	}
-	public JLabel getLblLoanBalance() {
-		return lblLoanBalance;
-	}
-	public void setLblLoanBalance(JLabel lblLoanBalance) {
-		this.lblLoanBalance = lblLoanBalance;
-	}
-	public JTextField getTfLoanBalance() {
-		return tfLoanBalance;
-	}
-	public void setTfLoanBalance(JTextField tfLoanBalance) {
-		this.tfLoanBalance = tfLoanBalance;
-	}
+
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
-	public void initCmbModel(LoanService service) {
+	public void initCmbModel(BankBookService service) {
 		try {
-			List<Customer> custList = service.showCust();
-			List<Plan> planList = service.showPlanByLoan();
+			List<Customer> custList = service.showCustomers();
+			List<Plan> planList = service.showPlanByBankBook();
 			DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
 			DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
 			cmbCust.setModel(cmbCustModel);
@@ -203,30 +199,28 @@ public class DlgLoan extends JDialog implements ActionListener {
 		}
 	}
 
-	public Loan getItem() {
-		String loanAccountNum = tfAccountNum.getText();
+	public BankBook getItem() {
+		String accountNum = tfAccountNum.getText();
 		Customer custCode = (Customer)cmbCust.getSelectedItem();
-		Plan planCode = (Plan)cmbPlan.getSelectedItem();
-		Date loanDate = tfLoanDate.getDate();
-		float loanInterest = Float.parseFloat(tfLoanInterest.getText());
-		long loanBalance = Long.parseLong(tfLoanBalance.getText());
-		return new Loan(loanAccountNum, custCode, planCode, loanDate, loanInterest, loanBalance);
+		Plan accountPlanCode = (Plan)cmbPlan.getSelectedItem();
+		Date accountOpenDate = tfAccountOpenDate.getDate();
+		Float accountInterest = Float.parseFloat(tfAccountInterest.getText());
+		return new BankBook(accountNum, custCode, accountPlanCode, accountOpenDate, accountInterest);
 	}
-	public void setItem(Loan loan) {
-		tfAccountNum.setText(loan.getLoanAccountNum());
-		cmbCust.setSelectedItem(loan.getCustCode());
-		cmbPlan.setSelectedItem(loan.getPlanCode());
-		tfLoanDate.setDate(loan.getLoanDate());
-		tfLoanInterest.setText(loan.getLoanInterest()+"");
-		tfLoanBalance.setText(loan.getLoanBalance()+"");
+	public void setItem(BankBook bankbook) {
+		tfAccountNum.setText(bankbook.getAccountNum());
+		cmbCust.setSelectedItem(bankbook.getCustCode());
+		cmbPlan.setSelectedItem(bankbook.getAccountPlanCode());
+		tfAccountOpenDate.setDate(bankbook.getAccountOpenDate());
+		tfAccountInterest.setText(bankbook.getAccountInterest()+"");
 	}
 
 	protected void btnCancelActionPerformed(ActionEvent e) {
 		cmbCust.setSelectedIndex(-1);
 		tfAccountNum.setText("");
 		cmbPlan.setSelectedIndex(-1);
-		tfLoanDate.setDate(new Date());
-		tfLoanInterest.setText("");
-		tfLoanBalance.setText("");
+		tfAccountOpenDate.setDate(new Date());
+		tfAccountInterest.setText("");
+
 	}
 }

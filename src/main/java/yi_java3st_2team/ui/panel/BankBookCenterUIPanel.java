@@ -12,6 +12,7 @@ import java.util.List;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.ui.dialog.DlgBankBook;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.table.BankBookCenterTblPanel;

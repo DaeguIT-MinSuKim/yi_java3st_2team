@@ -42,7 +42,6 @@ public class MainFrame_hana extends JFrame {
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
 	private EmployeeService empService;
-	private CardService cardService;
 	private Employee empAuth;
 	private JPanel pImg;
 	private JPanel pEmp;
@@ -84,7 +83,6 @@ public class MainFrame_hana extends JFrame {
 	}
 	private void initialize() {
 		empService = new EmployeeService();
-		cardService = new CardService();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 500);

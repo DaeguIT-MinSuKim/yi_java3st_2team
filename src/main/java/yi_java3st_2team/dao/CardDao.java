@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 
 public interface CardDao {
 	public abstract List<Card> showCards() throws SQLException;
@@ -11,4 +12,5 @@ public interface CardDao {
 	public abstract int insertCard(Card card) throws SQLException;
 	public abstract int updateCard(Card card) throws SQLException;
 	public abstract int deleteCard(Card card) throws SQLException;
+	public abstract CardInfo showCardInfo(String custname) throws SQLException;
 }

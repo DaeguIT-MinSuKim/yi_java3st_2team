@@ -10,6 +10,7 @@ import yi_java3st_2team.dao.impl.CardDaoImpl;
 import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -43,6 +44,9 @@ public class CardService {
 	}
 	public List<Plan> showPlansByCard() throws SQLException {
 		return planDao.selectPlanByCard();
+	}
+	public CardInfo cardInfo(String custname) throws SQLException {
+		return cardDao.showCardInfo(custname);
 	}
 }
 

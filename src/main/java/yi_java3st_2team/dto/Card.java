@@ -66,5 +66,10 @@ public class Card {
 	public void setCardBalance(long cardBalance) {
 		this.cardBalance = cardBalance;
 	}
-	
+	@Override
+	public String toString() {
+		return String.format(
+				"Card [cardNum=%s, custCode=%s, planCode=%s, cardSecuCode=%s, cardIssueDate=%s, cardLimit=%s, cardBalance=%s]",
+				cardNum, custCode, planCode, cardSecuCode, cardIssueDate, cardLimit, cardBalance);
+	}
 }

@@ -64,7 +64,6 @@ update card c set c.cardBalance = (select accountbalance from bankbook b where b
 update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C003' and b.accountPlanCode = 'A004') where plancode = 'B001';
 update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C004' and b.accountPlanCode = 'A004') where plancode = 'B001';
 update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C005' and b.accountPlanCode = 'A004') where plancode = 'B001';
-
 #테이블을 위한 카드 SQL
 select c.cardnum,cs.custname,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode;
 #카드 부분은 추후 구현시 카드한도가 신용카드일때만 한도가 정해져야 하고, 카드잔액이 체크카드일시 예금계좌 잔액과 같아야 하므로 트리거가 필요함 - 일단 테이블부터 구현 후 수정 필요
@@ -120,3 +119,93 @@ select * from plan where planCode like 'B%';
 select * from plan where planCode like 'C%';
 select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname = '김가나';
 select customer.custname,bankbook.accountBalance from customer left join bankbook on customer.`custCode` = bankbook.`custCode` where bankbook.`accountPlanCode` in ('A001','A004'); 
+
+#카드 내역 조회를 위한 테이블 생성
+create table cardInfo(
+	custname varchar(5),
+	transDate datetime
+);
+
+insert into cardInfo values 
+('김가나','2020-01-01 09:00:00'),
+('김가나','2020-01-02 09:00:00'),
+('김가나','2020-01-03 09:00:00'),
+('김가나','2020-01-04 09:00:00'),
+('김가나','2020-01-05 09:00:00'),
+('김가나','2020-01-06 09:00:00'),
+('김가나','2020-01-07 09:00:00'),
+('김가나','2020-01-08 09:00:00'),
+('김가나','2020-01-09 09:00:00'),
+('김가나','2020-01-10 09:00:00'),
+('김가나','2020-01-11 09:00:00'),
+('김가나','2020-01-12 09:00:00'),
+('김가나','2020-01-13 09:00:00'),
+('김가나','2020-01-14 09:00:00'),
+('김가나','2020-01-15 09:00:00'),
+('김가나','2020-01-16 09:00:00'),
+('김가나','2020-01-17 09:00:00'),
+('김가나','2020-01-18 09:00:00'),
+('김가나','2020-01-19 09:00:00'),
+('김가나','2020-01-20 09:00:00'),
+('김가나','2020-01-21 09:00:00'),
+('김가나','2020-01-22 09:00:00'),
+('김가나','2020-01-23 09:00:00'),
+('김가나','2020-01-24 09:00:00'),
+('김가나','2020-01-25 09:00:00'),
+('김가나','2020-01-26 09:00:00'),
+('김가나','2020-01-27 09:00:00'),
+('김가나','2020-01-28 09:00:00'),
+('김가나','2020-01-29 09:00:00'),
+('김가나','2020-01-30 09:00:00'),
+('김가나','2020-01-31 09:00:00'),
+('김가나','2020-02-01 09:00:00'),
+('김가나','2020-02-02 09:00:00'),
+('김가나','2020-02-03 09:00:00'),
+('김가나','2020-02-04 09:00:00'),
+('김가나','2020-02-05 09:00:00'),
+('김가나','2020-02-06 09:00:00'),
+('김가나','2020-02-07 09:00:00'),
+('김가나','2020-02-08 09:00:00'),
+('김가나','2020-02-09 09:00:00'),
+('김가나','2020-02-10 09:00:00'),
+('김가나','2020-02-11 09:00:00'),
+('김가나','2020-02-12 09:00:00'),
+('김가나','2020-02-13 09:00:00'),
+('김가나','2020-02-14 09:00:00'),
+('김가나','2020-02-15 09:00:00'),
+('김가나','2020-02-16 09:00:00'),
+('김가나','2020-02-17 09:00:00'),
+('김가나','2020-02-18 09:00:00'),
+('김가나','2020-02-19 09:00:00'),
+('김가나','2020-02-20 09:00:00'),
+('김가나','2020-02-21 09:00:00'),
+('김가나','2020-02-22 09:00:00'),
+('김가나','2020-02-23 09:00:00'),
+('김가나','2020-02-24 09:00:00'),
+('김가나','2020-02-25 09:00:00'),
+('김가나','2020-02-26 09:00:00'),
+('김가나','2020-02-27 09:00:00'),
+('김가나','2020-02-28 09:00:00'),
+('김가나','2020-02-29 09:00:00'),
+('김가나','2020-03-01 09:00:00'),
+('김가나','2020-03-02 09:00:00'),
+('김가나','2020-03-03 09:00:00'),
+('김가나','2020-03-04 09:00:00'),
+('김가나','2020-03-05 09:00:00'),
+('김가나','2020-03-06 09:00:00'),
+('김가나','2020-03-07 09:00:00'),
+('김가나','2020-03-08 09:00:00'),
+('김가나','2020-03-09 09:00:00'),
+('김가나','2020-03-10 09:00:00');
+select * from cardinfo;
+select count(transDate) from cardinfo where custname = '김가나' and date(transdate) = date(now());
+#카드 내역 조회를 위한 트리거 생성
+drop trigger if exists tri_update_card;
+delimiter $
+create trigger tri_update_card
+before update on card
+for each row 
+begin 
+	insert into cardinfo values((select custname from customer where custcode = new.custcode),now());
+end $
+delimiter ;

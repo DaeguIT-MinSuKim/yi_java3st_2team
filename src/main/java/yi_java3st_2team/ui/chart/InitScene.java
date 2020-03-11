@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui.designPanel;
+package yi_java3st_2team.ui.chart;
 
 import javafx.scene.Scene;
 

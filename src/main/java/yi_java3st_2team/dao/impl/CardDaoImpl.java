@@ -12,6 +12,7 @@ import java.util.List;
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -95,8 +96,8 @@ public class CardDaoImpl implements CardDao {
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCardSecuCode());
 			pstmt.setTimestamp(2, new Timestamp(card.getCardIssueDate().getTime()));
-			pstmt.setLong(3, card.getCardBalance());
-			pstmt.setInt(4, card.getCardLimit());
+			pstmt.setInt(3, card.getCardLimit());
+			pstmt.setLong(4, card.getCardBalance());
 			pstmt.setString(5, card.getCustCode().getCustName());
 			pstmt.setString(6, card.getCardNum());
 			res = pstmt.executeUpdate();
@@ -115,6 +116,26 @@ public class CardDaoImpl implements CardDao {
 			res = pstmt.executeUpdate();
 		}
 		return res;
+	}
+	@Override
+	public CardInfo showCardInfo(String custname) throws SQLException {
+		CardInfo cardInfo = new CardInfo();
+		String sql = "select count(transDate) as 'count' from cardinfo where custname = ? and date(transdate) = date(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					cardInfo = getCard(rs);
+				}
+			}
+		}
+		return cardInfo;
+	}
+	private CardInfo getCard(ResultSet rs) throws SQLException {
+		String custname = rs.getString("custname");
+		int transCount = rs.getInt("count");
+		return new CardInfo(custname, transCount);
 	}
 
 }

@@ -23,7 +23,7 @@ public class BankBookInfoStatisticPanel extends AbsCenterStatisticPanel implemen
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {"입출금 건수","TBD","TBD","TBD"};
+		return new String[] {"휴면 계좌 조회","해지 계좌 조회"};
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -35,10 +35,7 @@ public class BankBookInfoStatisticPanel extends AbsCenterStatisticPanel implemen
 		for(Component c : pCenter.getComponents()) {
 			JLabel label = (JLabel)c;
 			if(label.getForeground().equals(new Color(254,208,64))) {
-				DlgStatisticTest dlgStat = new DlgStatisticTest();
-				dlgStat.setTitle(label.getText());
-				dlgStat.setModal(true);
-				dlgStat.setVisible(true);
+				
 			}
 		}
 	}

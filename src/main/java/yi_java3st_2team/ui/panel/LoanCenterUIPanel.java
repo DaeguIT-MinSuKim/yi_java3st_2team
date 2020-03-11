@@ -13,6 +13,7 @@ import javax.swing.JPopupMenu;
 
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.ui.dialog.DlgLoan;
 import yi_java3st_2team.ui.service.LoanService;
 import yi_java3st_2team.ui.table.LoanCenterTblPanel;
 

@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui.panel;
+package yi_java3st_2team.ui.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -28,6 +28,7 @@ import com.toedter.calendar.JDateChooser;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
+import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")

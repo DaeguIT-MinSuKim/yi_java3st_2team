@@ -11,6 +11,7 @@ import java.util.List;
 
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.ui.dialog.DlgCard;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.table.CardCenterTblPanel;
 import java.awt.event.ActionListener;
@@ -73,7 +74,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				else {
 					try {
 						Card card = dlgCard.getItem();
-						pCenter.updateRow(card, pCenter.getSelectedRowIdx());
 						service.updateCard(card);
 						pCenter.loadTableData(service.showCards());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");

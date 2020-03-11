@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import yi_java3st_2team.ui.chart.InitScene;
 
 @SuppressWarnings("serial")
 public class JFrameMonthlyOpenNumBarChart extends JFrame implements ActionListener {

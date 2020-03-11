@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
+import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.service.CustomerService;
 
 @SuppressWarnings("serial")
