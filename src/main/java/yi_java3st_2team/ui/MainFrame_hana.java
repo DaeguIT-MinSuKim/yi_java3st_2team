@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
-import yi_java3st_2team.ui.designPanel.CustDWUIPanel;
-import yi_java3st_2team.ui.designPanel.CustInfoUIPanel;
-import yi_java3st_2team.ui.designPanel.CustPlanUIPanel;
+import yi_java3st_2team.ui.panel.CustDWUIPanel;
+import yi_java3st_2team.ui.panel.CustInfoUIPanel;
 import yi_java3st_2team.ui.panel.CustPlanCenterNorthSearchPanel;
+import yi_java3st_2team.ui.panel.CustPlanUIPanel;
 import yi_java3st_2team.ui.panel.CustStatisticPanel;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;

@@ -9,10 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
-import yi_java3st_2team.ui.designPanel.JFrameBarChart;
-import yi_java3st_2team.ui.designPanel.JFrameCustNumChart;
-import yi_java3st_2team.ui.designPanel.JFrameMonthlyDpWdBarChart;
-import yi_java3st_2team.ui.designPanel.JFrameMonthlyOpenNumBarChart;
+import yi_java3st_2team.ui.chart.JFrameBarChart;
+import yi_java3st_2team.ui.chart.JFrameCustNumChart;
+import yi_java3st_2team.ui.chart.JFrameMonthlyDpWdBarChart;
+import yi_java3st_2team.ui.chart.JFrameMonthlyOpenNumBarChart;
 
 public class CustStatisticPanel extends AbsCenterStatisticPanel implements ActionListener{
 

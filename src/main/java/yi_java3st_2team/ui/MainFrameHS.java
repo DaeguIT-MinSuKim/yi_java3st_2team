@@ -19,13 +19,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
+import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
+import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
+import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.EmployeeService;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel2Work;
-import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel;
-import yi_java3st_2team.ui.uipanel.EmpCenterUIpanel2Work;
-import yi_java3st_2team.ui.uipanel.EmpCenterUIpanelAuth;
-import yi_java3st_2team.ui.uipanel.EmpStaticPanel;
 
 import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
