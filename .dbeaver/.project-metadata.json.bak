@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/hsData.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/hsTest.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"}}}
+=======
+{"resources":{"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170c7743208-3586f2a17e2af722"},"Scripts/data_CS.sql":{"sql-editor-data-source-id":"mysql5-170c7743208-3586f2a17e2af722"},"Scripts/hsData.sql":{"sql-editor-data-source-id":"mysql5-170c7743208-3586f2a17e2af722"},"Scripts/hsTest.sql":{"sql-editor-data-source-id":"mysql5-1707aed5c06-5ef401f970eb11c3"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170c7743208-3586f2a17e2af722"}}}
+>>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git

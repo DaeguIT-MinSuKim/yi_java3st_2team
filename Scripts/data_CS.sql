@@ -9,11 +9,11 @@ select planCode, planDetail, planName, planDesc, planDiv from plan where planCod
 ALTER TABLE plan convert to charset utf8;
 select * From customer where custName = "김가나";
 select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = "김가나";
-insert into customer values("C001", "김가나", "B", 1, "서울시 강남구", "123-1234-1234");
-insert into customer values("C002", "김다라", "S", 2, "서울시 마포구", "234-4578-5434"),
+insert into customer values("C001", "김가나", "D", 1, "서울시 강남구", "123-1234-1234");
+insert into customer values("C002", "김다라", "P", 2, "서울시 마포구", "234-4578-5434"),
 						   ("C003", "김마바", "G", 3, "대구시 서구", "456-4567-4578"),
-						   ("C004", "김사아", "P", 4, "대구시 수성구", "123-4567-7894"),
-						   ("C005", "김자차", "D", 5, "대구시 달서구", "124-6325-5788");
+						   ("C004", "김사아", "S", 4, "대구시 수성구", "123-4567-7894"),
+						   ("C005", "김자차", "B", 5, "대구시 달서구", "124-6325-5788");
 						   
 insert into plan values("A001", "AA001", "슈퍼정기예금", "가입자 맞춤형 다기능 정기예금", "V"),
 					   ("A002", "AB001", "직장인 우대 적금", "직장인의 재테크 적금", "N"),

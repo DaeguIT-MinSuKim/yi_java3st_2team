@@ -43,7 +43,7 @@ select * from performance p;
 
 
 drop view if exists vipTable;  
-create view vipTable as select custCode as vip from customer c where `custRank`="B";
+create view vipTable as select custCode as vip from customer c where `custRank`="D";
 select * from vipTable;
 
 -- vip커스터머가 추가될 때마다 vipTable에 입력되는 트리거 생성 
@@ -62,7 +62,7 @@ delimiter ;
 
 
 insert into customer values("C001", "김가나", "B", 1, "서울시 강남구", "123-1234-1234");
-update customer set `custRank`='A' where `custCode`='C001';
+update customer set `custRank`='D' where `custCode`='C001';
 
 -- 사원업무 조회에서 사용
 select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
@@ -110,6 +110,10 @@ order by field(`empTitle`,'지점장','부지점장','부장','차장','과장',
 select  count(empCode) from employee
 where `empTitle` ='부지점장' and `deptNo` =2;
 
-
+-- 1인 평균 급여액
+select sum(empSalary) 
+   from employee e ;
+select (sum(empSalary))/(count(*))
+   from employee e ;
 
 
