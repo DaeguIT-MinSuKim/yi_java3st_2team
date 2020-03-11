@@ -77,6 +77,11 @@ public class EmployeeUIService {
     	return empDao.selectCountMemberByTitle(empTitle);
     }
     
+    //1인 평균 월급
+    public int avgOfSalary() {
+    	return empDao.selectAvgOfSalary();   	
+    }
+    
  
     
 }

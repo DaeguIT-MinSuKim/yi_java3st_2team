@@ -20,13 +20,14 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 		return empStaticPanel;
 	}
 	
-	
+
 	
    // 전체직원수, 부서별 직원 수 
 	private DlgStatisticCountEmp empPieCount;
    // 직급별 직원 수 
-
 	private DlgStatisticCountEmpBonus empBarCount;
+	//1인 평균 급여액
+	private DlgStatisticEmpSalary empSalary;
 	
 
 	public EmpStaticPanel() {
@@ -76,6 +77,17 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 				empBarCount.setVisible(true);
 
 			}
+			if (label.getForeground().equals(new Color(254, 208, 64))
+					&& label.getText().contentEquals("1인 평균 급여액")) {
+				empSalary = new DlgStatisticEmpSalary();
+
+				empSalary.setTitle(label.getText());
+				empSalary.setModal(true);
+				empSalary.setVisible(true);
+
+			}
+			
+			
 			
 		}
 

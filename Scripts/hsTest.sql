@@ -110,6 +110,10 @@ order by field(`empTitle`,'지점장','부지점장','부장','차장','과장',
 select  count(empCode) from employee
 where `empTitle` ='부지점장' and `deptNo` =2;
 
-
+-- 1인 평균 급여액
+select sum(empSalary) 
+   from employee e ;
+select (sum(empSalary))/(count(*))
+   from employee e ;
 
 
