@@ -72,11 +72,11 @@ public class EmployeeUIService {
     	return empDao.selectCountMemberByDept(deptNo);
     }
     
-    //타이틀마다 사원 수 구하기{
-    
+    //타이틀마다 사원 수 구하기{  
     public int countMemberByTitle(String empTitle) {
     	return empDao.selectCountMemberByTitle(empTitle);
     }
+    
  
     
 }

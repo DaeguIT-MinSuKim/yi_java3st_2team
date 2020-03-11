@@ -26,7 +26,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 	private DlgStatisticCountEmp empPieCount;
    // 직급별 직원 수 
 
-	private DlgStatisticCountEmpByTitle empBarCount;
+	private DlgStatisticCountEmpBonus empBarCount;
 	
 
 	public EmpStaticPanel() {
@@ -36,14 +36,14 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 
 	private void initialize() {
 		btnSearch.addActionListener(this);
-		this.setLabelInit(this.lblStat1, this.lblStat2, this.lblStat3, this.lblStat4, this.lblStat5);
-		setLblMouseListener(lblStat1, lblStat2, lblStat3, lblStat4, lblStat5);
+		this.setLabelInit(this.lblStat1, this.lblStat2, this.lblStat3, this.lblStat4);
+		setLblMouseListener(lblStat1, lblStat2, lblStat3, lblStat4);
 	}
 
 	@Override
 	protected String[] getTexts() {
 
-		return new String[] { "전체 직원 수/ 부서별 직원 비율", "직급별 직원 수", "연간 급여 총액 / 월별 급여 총액", "1인 평균 급여액", "보너스 총액" };
+		return new String[] { "전체 직원 수/ 부서별 직원 비율", "연간 급여 총액 / 월별 급여 총액", "1인 평균 급여액", "보너스 현황" };
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 
 			}
 			if (label.getForeground().equals(new Color(254, 208, 64))
-					&& label.getText().contentEquals("직급별 직원 수")) {
-				empBarCount = new DlgStatisticCountEmpByTitle();
+					&& label.getText().contentEquals("보너스 현황")) {
+				empBarCount = new DlgStatisticCountEmpBonus();
 
 				empBarCount.setTitle(label.getText());
 				empBarCount.setModal(true);
