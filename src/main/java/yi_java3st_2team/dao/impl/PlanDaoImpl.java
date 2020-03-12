@@ -171,4 +171,22 @@ public class PlanDaoImpl implements PlanDao {
 		return res;
 	}
 
+	@Override
+	public List<String> planExistChk() throws SQLException {
+		List<String> list = null;
+		String sql = "select planCode from plan";
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
 }

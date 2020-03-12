@@ -21,6 +21,10 @@ public class PlanService {
 	public List<Plan> showPlansByName(String planName) throws SQLException{
 		return dao.selectPlanByName(planName);
 	}
+	
+	public List<String> planExistChk() throws SQLException{
+		return dao.planExistChk();
+	}
 
 	
 	public int addPlan(Plan plan) throws SQLException{

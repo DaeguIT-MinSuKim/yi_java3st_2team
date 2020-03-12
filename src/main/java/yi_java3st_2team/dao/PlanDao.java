@@ -13,7 +13,7 @@ public interface PlanDao {
 	abstract int insertPlan(Plan plan) throws SQLException;
 	abstract int updatePlan(Plan plan) throws SQLException;
 	abstract int deletePlan(Plan plan) throws SQLException;
-	
+	abstract List<String> planExistChk() throws SQLException;
 	abstract List<Plan> selectPlanByName(String planName) throws SQLException;
 	abstract List<Plan> selectPlanByBankBook() throws SQLException;
 	abstract List<Plan> selectPlanByCard() throws SQLException;
