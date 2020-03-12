@@ -21,7 +21,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.ui.service.BankBookService;
-
+ 
 public class JFrameBarChart {
 
 	private static BarChart<String, Number> barChart;
