@@ -66,10 +66,27 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 								}
 						if(e.getActionCommand().equals("추가")) {
 									try {
-										addItemTbl(dlgCustInfo.getItem());
-										JOptionPane.showMessageDialog(null, "신규 고객이 추가되었습니다.");
-										refreshTbl();
-										dlgCustInfo.dispose();
+										boolean falsechk = false;
+										String custCode = dlgCustInfo.getItem().getCustCode();
+										List<String> list = custService.custExistChk();
+										for(int i=0; i<list.size(); i++) {											
+											if(custCode.equals(list.get(i))) {												
+												falsechk = false;
+												break;
+											}else {											
+												falsechk = true;
+											}
+										}
+										
+										if(falsechk == true) {
+											addItemTbl(dlgCustInfo.getItem());
+											JOptionPane.showMessageDialog(null, "신규 고객이 추가되었습니다.");
+											refreshTbl();
+											dlgCustInfo.dispose();
+										}else {
+											JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
+										}
+										
 									} catch (SQLException e1) {
 										e1.printStackTrace();
 									}

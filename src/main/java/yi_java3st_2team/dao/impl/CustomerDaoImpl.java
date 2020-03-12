@@ -288,6 +288,23 @@ public class CustomerDaoImpl implements CustomerDao {
 		return -1;
 	}
 
+	@Override
+	public List<String> selectCustExistChk() throws SQLException {
+		List<String> list = null;
+		String sql = "select custCode from customer";
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(rs.getString(1));
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
 	
 	
 	

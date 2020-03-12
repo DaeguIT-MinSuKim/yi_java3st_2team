@@ -81,6 +81,10 @@ public class EmployeeUIService {
     public int avgOfSalary() {
     	return empDao.selectAvgOfSalary();   	
     }
+    //전체 월급 액수 
+    public int totalSalary() {
+    	return empDao.selectTotalSalary();
+    }
     
     
  

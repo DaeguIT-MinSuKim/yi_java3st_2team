@@ -53,6 +53,10 @@ public class CustomerService {
 		return dao.selectPRankCustNum();
 	}
 	
+	public List<String> custExistChk() throws SQLException{
+		return dao.selectCustExistChk();
+	}
+	
 	public void AddCustomer(Customer customer) throws SQLException{
 		 dao.insertCustomer(customer);
 	}

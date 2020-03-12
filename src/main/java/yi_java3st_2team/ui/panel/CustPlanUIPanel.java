@@ -111,15 +111,32 @@ public class CustPlanUIPanel extends JPanel{
 								return;
 							}
 							if(e.getActionCommand().equals("추가")) {
-								planService.addPlan(plan);
-								JOptionPane.showMessageDialog(null, "신규 상품이 추가되었습니다.");
-								dlgcustplan.dispose();
-								refreshTbl();
+								String code = plan.getPlanCode();
+								List<String> list = planService.planExistChk();
+								Boolean falsechk = false;
+									for(int i=0; i<list.size(); i++) {											
+										if(code.equals(list.get(i))) {												
+											falsechk = false;
+											break;
+										}else {											
+											falsechk = true;
+										}
+									}
+									
+									if(falsechk == true) {
+										planService.addPlan(plan);
+										JOptionPane.showMessageDialog(null, "신규 상품이 추가되었습니다.");
+										dlgcustplan.dispose();
+										refreshTbl();
+									}else {
+										JOptionPane.showMessageDialog(null, "이미 등록된 상품입니다.");
+									}
+							
 							}
 								
 							
 						} catch (SQLException e1) {
-							JOptionPane.showMessageDialog(null, "이미 존재하는 고객 입니다. 다시 입력하세요.");
+							e1.printStackTrace();
 						} 
 						
 					}

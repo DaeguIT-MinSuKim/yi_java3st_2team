@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
 import yi_java3st_2team.ui.chart.DlgStatisticCountEmp;
@@ -41,14 +42,14 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 
 	private void initialize() {
 		btnSearch.addActionListener(this);
-		this.setLabelInit(this.lblStat1, this.lblStat2, this.lblStat3, this.lblStat4);
-		setLblMouseListener(lblStat1, lblStat2, lblStat3, lblStat4);
+		this.setLabelInit(this.lblStat1, this.lblStat2, this.lblStat3);
+		setLblMouseListener(lblStat1, lblStat2, lblStat3);
 	}
 
 	@Override
 	protected String[] getTexts() {
 
-		return new String[] { "전체 직원 수/ 부서별 직원 비율", "연간 급여 총액 / 월별 급여 총액", "1인 평균 급여액", "보너스 현황" };
+		return new String[] { "전체 직원 수/ 부서별 직원 비율","급여 총액 / 1인 평균 급여액", "보너스 현황" };
 	}
 
 	@Override
@@ -82,7 +83,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 
 			}
 			if (label.getForeground().equals(new Color(254, 208, 64))
-					&& label.getText().contentEquals("1인 평균 급여액")) {
+					&& label.getText().contentEquals("급여 총액 / 1인 평균 급여액")) {
 				empSalary = new DlgStatisticEmpSalary();
 
 				empSalary.setTitle(label.getText());
@@ -90,6 +91,7 @@ public class EmpStaticPanel extends AbsCenterStatisticPanel implements ActionLis
 				empSalary.setVisible(true);
 
 			}
+			
 			
 			
 			
