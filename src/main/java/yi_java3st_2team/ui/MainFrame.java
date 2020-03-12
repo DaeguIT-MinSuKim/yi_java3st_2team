@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -84,7 +87,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmCardStatistic;
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
-
 	private EmpCenterUIpanel pEmpUIPanel;
 	private EmpCenterUIpanel2Work pEmpUIPanel2;
 	private EmpStaticPanel pEmpUIPanel3;
@@ -109,6 +111,20 @@ public class MainFrame extends JFrame implements ActionListener {
 		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		pImg = new JPanel();
+		pImg.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pCenter.remove(pcNorth);
+				pCenter.remove(pcCenter);
+				pcNorth = getLoginPanel();
+				pcCenter = getMainLogoPanel();
+				pCenter.add(pcNorth,BorderLayout.NORTH);
+				pCenter.add(pcCenter,BorderLayout.CENTER);
+				pCenter.repaint();
+				pCenter.revalidate();
+			}
+			
+		});
 		pImg.setBackground(Color.WHITE);
 		pNorth.add(pImg);
 		
@@ -334,7 +350,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);
 	}
-	
+	public Employee getEmpAuth() {
+		return empAuth;
+	}
+	public void setEmpAuth(Employee empAuth) {
+		this.empAuth = empAuth;
+	}
 	private JPanel getMainLogoPanel() {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -349,12 +370,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setBackground(Color.WHITE);
 		lblGreeting = new JLabel();
 		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		lblGreeting.setText(empAuth.getEmpName() + "님 환영합니다 ~");
 		JButton btnLogout = new JButton("로그아웃");
 		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnLogout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setMenuClear();
 				dispose();
 			}
 		});
@@ -375,10 +396,6 @@ public class MainFrame extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	private void setMenuClear() {
-		
-	}
-
 	public JLabel getLblGreeting() {
 		return lblGreeting;
 	}

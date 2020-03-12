@@ -180,11 +180,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 		try {
 			Employee emp = new Employee(tfId.getText().trim(),new String(pfPass.getPassword()).trim());
 			chkEmp = service.GetLoginInfo(emp);
-			if(chkEmp.getEmpName()==null) {
+			if(chkEmp.getEmpName()==null && chkEmp.getEmpPwd()==null) {
 				JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다. 다시 확인해주세요");
 				return;
 			}
 			JOptionPane.showMessageDialog(null, "확인되었습니다. 로그인을 수행해 주세요");
+			tfId.setEditable(false);
+			pfPass.setEditable(false);
 			chkLogin = true;
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -195,7 +197,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 	protected void btnLoginActionPerformed(ActionEvent e) {
 		if(chkLogin) {
 			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
-			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
+			tfId.setEditable(true);
+			pfPass.setEditable(true);
+			main.setEmpAuth(new Employee(chkEmp.getEmpName()));
 			main.setVisible(true);
 		}
 		else {
