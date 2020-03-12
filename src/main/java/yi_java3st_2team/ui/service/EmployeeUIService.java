@@ -82,6 +82,7 @@ public class EmployeeUIService {
     	return empDao.selectAvgOfSalary();   	
     }
     
+    
  
     
 }
