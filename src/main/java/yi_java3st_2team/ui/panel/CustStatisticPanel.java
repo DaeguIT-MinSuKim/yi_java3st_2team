@@ -55,11 +55,9 @@ public class CustStatisticPanel extends AbsCenterStatisticPanel implements Actio
 				else if(label.getText().equals("입/출금 건수(월별/연도별)")) {
 					JFrameMonthlyDpWdBarChart monthlyDpWdChart = new JFrameMonthlyDpWdBarChart();
 					monthlyDpWdChart.setVisible(true);
-				}
-				
 			}
 		}
 	}
 
-
+	}
 }

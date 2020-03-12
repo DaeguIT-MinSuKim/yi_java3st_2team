@@ -1,37 +1,27 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql5-17057e3b79b-62fb4f401d5cfdbd": {
-			"provider": "mysql",
-			"driver": "mysql5",
-			"name": "MySQL - bank",
-			"save-password": true,
-			"read-only": false,
-			"configuration": {
-				"host": "192.168.10.63",
-				"port": "3306",
-				"database": "bank",
-				"url": "jdbc:mysql://192.168.10.63:3306/bank",
-				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
-				"type": "dev"
 <<<<<<< HEAD
-=======
-			}
-		},
-		"mysql5-170bda726de-7c013a13f8b524f0": {
+		"mysql5-170bf13482d-574c2e9ce6c1bd17": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "MySQL - localhost",
+=======
+		"mysql5-170c7743208-3586f2a17e2af722": {
+			"provider": "mysql",
+			"driver": "mysql5",
+			"name": "MySQL - bank",
+>>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
 				"port": "3306",
-				"url": "jdbc:mysql://localhost:3306/",
+				"database": "bank",
+				"url": "jdbc:mysql://localhost:3306/bank",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
 				"type": "dev",
 				"handlers": {}
->>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git
 			}
 		}
 	},

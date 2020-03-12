@@ -13,10 +13,6 @@ select concat(count(*),'명(',`empTitle`,')') as '직급별사원수(직책)' fr
   from performance p
   group by `empCode`;
  
-select  e.empCode, e.empName, e.empTitle, count(p.custCode) as perf, if(c.custRank="D",p.custCode,null) as vip
-from employee e left join performance p on e.`empCode`=p.`empCode` left join customer c on p.`custCode` = c.`custCode`
-group by p.`empCode`;
-
 -- 사원업무 조회에서 사용
 select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
 from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
@@ -37,7 +33,7 @@ delete from customer where custCode = "C008";
 select c.custName, b.accountBalance from customer c left join bankbook b on c.custCode = b.custCode;
 select  c.custCode, c.custName, b.accountNum , b.accountPlanCode, b.accountBalance from BankBook b left join customer c on b.custCode = c.custCode ;
 select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c left join bankbook b on c.custcode = b.custcode;
-update BankBook set accountBalance = 5000300 where custCode=(select custCode from customer where custName="김가나") and accountNum ="293133-11-000001"; 
+update BankBook set accountBalance = 5000300 where accountNum ="293133-11-000007"; 
 
 select planCode, planDetail, planName, planDesc, planDiv from plan where planName like '%예금%';
 select custName, accountNum, accountBalance from customer c left join bankbook b on c.custcode = b.custCode where custName = "김가나";
@@ -45,6 +41,13 @@ select custName, accountNum, accountBalance from customer c left join bankbook b
 select (count(*) - (select count(*) from customer where custRank = "D")) from customer;
 select count(*) from customer where custRank = "D"; 
 select * from customer c ;
+
+select * from card;
+select * from bankbook;
+select * from customer;
+select * from plan;
+
+
 #BSGPD
 select count(*) from customer where custRank = "B";
 
@@ -55,6 +58,12 @@ select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust
 
 select * from bankbook b ;
 desc bankbook;
+select * from cust_dw_audit cda ;
+delete from cust_dw_audit where dw = "출금";
+select * from loan;
+select * from plan;
+
+
 #은행업무 - 박인선
 select * from plan where planCode like 'A%';
 select * from plan where planCode like 'B%';

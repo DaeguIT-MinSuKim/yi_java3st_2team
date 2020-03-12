@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -22,13 +23,12 @@ public class JFrameMonthlyDpWdBarChart extends JFrame implements ActionListener 
 	private JPanel contentPane;
 	private PanelMonthlyDepositOpenNumBarChart pDpBarChart;
 	private PanelMonthlyWithDrawalOpenNumBarChart pWdBarChart;
+	private Scene scene;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrameMonthlyDpWdBarChart frame = new JFrameMonthlyDpWdBarChart();
-					frame.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,9 +50,8 @@ public class JFrameMonthlyDpWdBarChart extends JFrame implements ActionListener 
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
 		pDpBarChart = new PanelMonthlyDepositOpenNumBarChart();
-		contentPane.add(pDpBarChart);
-		
 		pWdBarChart = new PanelMonthlyWithDrawalOpenNumBarChart();
+		contentPane.add(pDpBarChart);
 		contentPane.add(pWdBarChart);
 		
 		Platform.runLater(() -> initFX(pDpBarChart));
@@ -61,7 +60,7 @@ public class JFrameMonthlyDpWdBarChart extends JFrame implements ActionListener 
 	}
 	
 	public void initFX(InitScene fxPanel) {
-		Scene scene = fxPanel.createScene();
+		scene = fxPanel.createScene();
 		JFXPanel panel = (JFXPanel) fxPanel;
 		panel.setScene(scene);
 	}
@@ -71,6 +70,12 @@ public class JFrameMonthlyDpWdBarChart extends JFrame implements ActionListener 
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Scene getScene() {
+		return scene;
+	}
+	
+	
 
 
 

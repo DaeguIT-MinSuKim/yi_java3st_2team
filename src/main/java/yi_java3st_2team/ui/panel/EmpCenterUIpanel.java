@@ -169,24 +169,27 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
 						//System.out.println("수정 눌렀음 ");
 						try {
-						Employee updateEmp = dlgEmp.getItem();
+						Employee updateEmp = dlgEmpForUpdate.getItem();
+						
+						System.out.println(updateEmp);
+						
 						if(updateEmp == null) {
 					    	return;
 					    }
-	                 //com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'empName' at row 1
-						//해결해야함 0225 
+	                 
 					    service.modifyEmp(updateEmp);
 					    
 						pEmpTblPanel.loadTableData(service.showEmpList());
-						dlgEmp.setVisible(false);
+						dlgEmpForUpdate.setVisible(false);
 						
 						
 						}catch (NullPointerException e2) {
 	                     //  JOptionPane.showMessageDialog(null, "부서를 입력해주세요");
+							e2.printStackTrace();
 							return;
 						}
 						JOptionPane.showMessageDialog(null, "수정 되었습니다");
-						//가 세번뜬다 이유가 뭘까 0302
+						
 					}
 						
 					if(e.getActionCommand().contentEquals("취소")) {

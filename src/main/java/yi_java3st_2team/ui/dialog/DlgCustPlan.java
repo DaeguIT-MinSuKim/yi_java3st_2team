@@ -241,7 +241,9 @@ public class DlgCustPlan extends JDialog {
 			String planCode = tfCustPlanCode.getText();
 			
 			String detail_cmb = (String) cmbPlanDetail.getSelectedItem();
-			String detail_cmb_sub = detail_cmb.substring(3,5);
+			int index = detail_cmb.indexOf(")");
+			String detail_cmb_sub = detail_cmb.substring((detail_cmb.indexOf("(")+1),index);
+		
 			String detail_tf = tfCustDetail.getText();
 			
 			String planDetail = detail_cmb_sub.concat(detail_tf);

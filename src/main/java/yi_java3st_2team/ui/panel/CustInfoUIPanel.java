@@ -13,6 +13,7 @@ import java.util.List;
 
 import yi_java3st_2team.ui.dialog.DlgCustInfo;
 import yi_java3st_2team.ui.service.CustomerService;
+import yi_java3st_2team.ui.table.CustInfoCenterCenterTblPanel;
 import yi_java3st_2team.dto.Customer;
 
 import java.awt.event.ActionListener;

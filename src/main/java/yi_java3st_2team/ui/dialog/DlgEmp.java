@@ -218,7 +218,8 @@ public class DlgEmp extends JDialog {
 			}
 			
 		}
-	};
+	};
+	
 	public JTextField getTextField() {
 		return tfEmpCode;
 	}
@@ -244,13 +245,69 @@ public class DlgEmp extends JDialog {
 		String empTel = tfEmpTel.getText().trim();
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
+		
+//		int deptNum = cmbDept.getSelectedIndex();
+//		System.out.println(deptNum +"deptNum");
+//		if(deptNum ==0) {
+//			System.out.println("0번 선택됨");
+//			dept = new Department(1);
+//			dept.setDeptName("인사");
+//			
+//		}if(deptNum ==1) {
+//			dept = new Department(2);
+//		}
+//		
+		
 		Department dept = (Department)cmbDept.getSelectedItem();
+		System.out.println(dept +"GETiTEM에서 DEPT는");
+
 		if(cmbDept.getSelectedIndex()== -1) {
 			JOptionPane.showMessageDialog(null, "부서를 선택하세요");
 			return null;
 		}
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 	}
+	
+	private Department dept;
+	
+	//다이얼로그의 값 update위해 가져오기
+		public Employee getItemForUpdate() {
+			String empCode = tfEmpCode.getText().trim();
+			String empName = tfEmpName.getText().trim();
+			int nameLength = empName.length();
+			if(nameLength >= 6) {
+				JOptionPane.showMessageDialog(null, "이름은 다섯자 이내입니다");
+				return null;
+			}
+			String empTitle = tfEmpTitle.getText().trim();
+			String empAuth = null;  //null로 넣어도 되는걸까
+			int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
+			String empTel = tfEmpTel.getText().trim();
+			String empId = tfEmpId.getText().trim();
+			String empPwd = tfEmpPwd.getText().trim();
+			
+			int deptNum = cmbDept.getSelectedIndex();
+			System.out.println(deptNum +"deptNum");
+			if(deptNum ==0) {
+				System.out.println("0번 선택됨");
+				dept = new Department(1);
+				dept.setDeptName("인사");
+				
+			}if(deptNum ==1) {
+				dept = new Department(2);
+			}
+			
+			
+			Department dept = (Department)cmbDept.getSelectedItem();
+			System.out.println(dept +"GETiTEM에서 DEPT는");
+
+			if(cmbDept.getSelectedIndex()== -1) {
+				JOptionPane.showMessageDialog(null, "부서를 선택하세요");
+				return null;
+			}
+			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+		}
+	
 	
 
 	public void clearTf() {

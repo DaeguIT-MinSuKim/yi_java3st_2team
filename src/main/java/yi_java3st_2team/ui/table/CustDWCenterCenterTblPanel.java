@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui.panel;
+package yi_java3st_2team.ui.table;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;

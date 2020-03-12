@@ -13,6 +13,7 @@ import java.util.List;
 import yi_java3st_2team.ui.dialog.DlgCustDW;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CustomerService;
+import yi_java3st_2team.ui.table.CustDWCenterCenterTblPanel;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 
@@ -168,10 +169,17 @@ public class CustDWUIPanel extends JPanel {
 						customer.getBankbook().setAccountNum(accountNum);
 						
 						try {
-							bankService.updateBankBalance(customer);
-							JOptionPane.showMessageDialog(null, "출금 되었습니다.");
-							panel_1.loadTableData(custService.showCustomersByBalance());
-							dlgcustDW.dispose();
+							if(custBalance > 0) {
+								bankService.updateBankBalance(customer);
+								JOptionPane.showMessageDialog(null, "출금 되었습니다.");
+								panel_1.loadTableData(custService.showCustomersByBalance());
+								dlgcustDW.dispose();
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "잔액이 없어서 출금할 수 없습니다.");
+								panel_1.loadTableData(custService.showCustomersByBalance());
+								dlgcustDW.dispose();
+							}
 						} catch (SQLException e1) {
 							e1.printStackTrace();
 						}
