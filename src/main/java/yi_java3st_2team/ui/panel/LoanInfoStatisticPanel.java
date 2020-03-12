@@ -1,6 +1,8 @@
 package yi_java3st_2team.ui.panel;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
+import yi_java3st_2team.ui.chart.JFrameBarChartByLoanPlan;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
@@ -20,8 +22,8 @@ public class LoanInfoStatisticPanel extends AbsCenterStatisticPanel implements A
 	}
 	private void initialize() {
 		btnSearch.addActionListener(this);
-		setLabelInit(lblStat1,lblStat2);
-		setLblMouseListener(lblStat1,lblStat2);
+		setLabelInit(lblStat1);
+		setLblMouseListener(lblStat1);
 	}
 
 	@Override
@@ -38,7 +40,7 @@ public class LoanInfoStatisticPanel extends AbsCenterStatisticPanel implements A
 		for(Component c : pCenter.getComponents()) {
 			JLabel label = (JLabel)c;
 			if(label.getForeground().equals(new Color(254,208,64))) {
-				
+				JFrameBarChartByLoanPlan.initAndShowGUI();
 			}
 		}
 	}

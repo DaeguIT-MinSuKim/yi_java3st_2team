@@ -1,16 +1,14 @@
 package yi_java3st_2team.ui.panel;
 
-import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
-import yi_java3st_2team.ui.chart.DlgDormant;
-import yi_java3st_2team.ui.chart.DlgTermination;
-
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
+import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
+import yi_java3st_2team.ui.chart.JFrameBarChartByCardPlan;
 
 @SuppressWarnings("serial")
 public class CardCenterStatisticPanel extends AbsCenterStatisticPanel implements ActionListener {
@@ -40,7 +38,7 @@ public class CardCenterStatisticPanel extends AbsCenterStatisticPanel implements
 		for(Component c : pCenter.getComponents()) {
 			JLabel label = (JLabel)c;
 			if(label.getForeground().equals(new Color(254,208,64))) {
-				
+				JFrameBarChartByCardPlan.initAndShowGUI();
 			}
 		}
 	}

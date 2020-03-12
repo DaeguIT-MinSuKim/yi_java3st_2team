@@ -12,6 +12,7 @@ import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.dto.LoanInfo;
 import yi_java3st_2team.dto.Plan;
 
 public class LoanService {
@@ -43,5 +44,8 @@ public class LoanService {
 	}
 	public List<Plan> showPlanByLoan() throws SQLException {
 		return planDao.selectPlanByLoan();
+	}
+	public List<LoanInfo> showLoanInfo() throws SQLException {
+		return loanDao.showLoanInfo();
 	}
 }

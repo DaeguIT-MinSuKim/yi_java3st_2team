@@ -316,10 +316,16 @@ select replace(accountnum,'-1','-2') from bankbook where custcode = (select cust
 call make_dormant('김가나','휴면,해지계좌테스트용');
 call make_termination('김가나','휴면,해지계좌테스트용');
 
-select c.custcode,
+select cs.custname,
 (select count(plancode) from card where plancode = 'B001' and custcode = c.custcode) as 'check',
 (select count(plancode) from card where plancode = 'B002' and custcode = c.custcode) as 'credit' 
-from card c group by custcode;
+from card c join customer cs on c.custcode = cs.custcode group by c.custcode;
+
+select cs.custname,
+(select count(loanplancode) from loan where loanplancode = 'C001' and custcode = l.custcode) as 'normal',
+(select count(loanplancode) from loan where loanplancode = 'C002' and custcode = l.custcode) as 'credit',
+(select count(loanplancode) from loan where loanplancode = 'C003' and custcode = l.custcode) as 'card'
+from loan l join customer cs on l.custCode = cs.custcode group by l.custcode;
 
 select * from changebankbookdormantinfo;
 select * from changebankbookterminationinfo;
