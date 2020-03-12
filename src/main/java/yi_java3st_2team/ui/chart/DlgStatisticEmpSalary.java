@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -37,30 +38,17 @@ public class DlgStatisticEmpSalary extends JDialog {
 	private static double numOfHR;
 	private static int totalnum;
 	private JButton okButton;
-	private static DlgStatisticEmpSalary dialog;
 
 	
 	private BarChart<String, Number> barChart;
-	private EmpStaticPanel empStaticPanel;
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-
-     }
-
-	/**
-	 * Create the dialog.
-	 */
 	public DlgStatisticEmpSalary() {
 		
 		    totalnum = service.countAllEmpNum();
 			numOfHR = service.countMemberByDepartment(1);			
 			numOfCS = service.countMemberByDepartment(2);
 		
-		setBounds(900,50,900,400);
+		setBounds(700,50,600,400);
 		
 		final JFXPanel fxPanel = new JFXPanel();
 		
@@ -90,7 +78,7 @@ public class DlgStatisticEmpSalary extends JDialog {
 		
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
 				CategoryAxis xAxis = new CategoryAxis();
-				xAxis.setLabel("사원");
+				xAxis.setLabel("");
 
 				NumberAxis yAxis = new NumberAxis();
 				yAxis.setLabel("금액");
@@ -101,7 +89,7 @@ public class DlgStatisticEmpSalary extends JDialog {
 				barChart = new BarChart<>(xAxis, yAxis);
 				barChart.setTitle("인당 평균 급여액");
 				
-				barChart.setPrefSize(700, 250);
+				barChart.setPrefSize(500, 250);
 				barChart.setData(getChartData());
 				
 				root.getChildren().add(barChart);
@@ -109,12 +97,10 @@ public class DlgStatisticEmpSalary extends JDialog {
 				return scene;
 	}
 	
-	public XYChart.Series<String, Number> getChartData(Employee emp) {
+	public XYChart.Series<String, Number> getChartData(String salary) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-		
 		dataSeries.setName("1인 평균 급여액");
-
-		dataSeries.getData().add(new XYChart.Data<>("월급",service.avgOfSalary()));
+		dataSeries.getData().add(new XYChart.Data<>(salary,service.avgOfSalary()));
 
 		
 		return dataSeries;
@@ -124,16 +110,8 @@ public class DlgStatisticEmpSalary extends JDialog {
 	
 
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
-		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		
-		List<Employee> empList = service.showEmpList();
-		for(int i=0; i<empList.size(); i++) {
-			Employee emp = empList.get(i);
-			if(emp.getBonus() != 0) {
-			  list.add(getChartData(emp));
-			}
-		}
-
+		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();		  
+		list.add(getChartData("월급"));
 		
 		return list;
 	}

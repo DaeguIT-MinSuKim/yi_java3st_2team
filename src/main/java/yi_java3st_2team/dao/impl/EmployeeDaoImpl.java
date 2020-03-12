@@ -394,13 +394,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int selectAvgOfSalary() {
-		String sql="select (sum(empSalary))/(count(*)) from employee";
+		String sql="select (sum(empSalary))/(count(*)) as 'avgSal' from employee";
 		
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
-						ResultSet rs = pstmt.executeQuery()){
+				ResultSet rs = pstmt.executeQuery();
+				){
 			
-		} catch (SQLException e) {
+			while(rs.next()) {
+				return rs.getInt("avgSal");
+			}
+				
+		     
+			
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
