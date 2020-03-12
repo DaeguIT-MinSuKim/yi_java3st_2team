@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Info;
 
 public interface CardDao {
@@ -16,4 +17,5 @@ public interface CardDao {
 	public abstract Info showCardInfoWeekly(String custname) throws SQLException;
 	public abstract Info showCardInfoMonthly(String custname) throws SQLException;
 	public abstract Info showCardInfoYearly(String custname) throws SQLException;
+	public abstract List<CardInfo> showCardInfo() throws SQLException;
 }

@@ -3,6 +3,7 @@ package yi_java3st_2team.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Info;
@@ -20,11 +21,14 @@ public interface BankBookDao {
 	public abstract List<String> showWithDrawalMonth() throws SQLException; //월별 출금 건수
 	public abstract int insertBankBook(BankBook bankbook) throws SQLException;
 	public abstract int updateBankBook(BankBook bankbook) throws SQLException;
-	public abstract int updateBankBookAccountNum(BankBook bankbook) throws SQLException;
+	public abstract int insertDormantAccountProcedure(BankBook bankbook) throws SQLException;
+	public abstract int insertTerminationAccountProcedure(BankBook bankbook) throws SQLException;
 	public abstract int deleteBankBook(BankBook bankbook) throws SQLException;
 	public abstract int updateBankBalance(Customer customer) throws SQLException;
 	public abstract Info showBankBookInfoDaily(String custname) throws SQLException;
 	public abstract Info showBankBookInfoWeekly(String custname) throws SQLException;
 	public abstract Info showBankBookInfoMonthly(String custname) throws SQLException;
 	public abstract Info showBankBookInfoYearly(String custname) throws SQLException;
+	public abstract List<AccountInfo> showBankBookDormantAccountInfo() throws SQLException;
+	public abstract List<AccountInfo> showBankBookTerminationAccountInfo() throws SQLException;
 }

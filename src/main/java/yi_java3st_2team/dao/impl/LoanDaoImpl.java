@@ -14,6 +14,7 @@ import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.dto.LoanInfo;
 import yi_java3st_2team.dto.Plan;
 
 public class LoanDaoImpl implements LoanDao {
@@ -110,6 +111,32 @@ public class LoanDaoImpl implements LoanDao {
 			res = pstmt.executeUpdate();
 		}
 		return res;
+	}
+
+	@Override
+	public List<LoanInfo> showLoanInfo() throws SQLException {
+		List<LoanInfo> list = new ArrayList<>();
+		String sql = "select cs.custname,\r\n" + 
+				"(select count(loanplancode) from loan where loanplancode = 'C001' and custcode = l.custcode) as 'normal',\r\n" + 
+				"(select count(loanplancode) from loan where loanplancode = 'C002' and custcode = l.custcode) as 'credit',\r\n" + 
+				"(select count(loanplancode) from loan where loanplancode = 'C003' and custcode = l.custcode) as 'card'\r\n" + 
+				"from loan l join customer cs on l.custCode = cs.custcode group by l.custcode";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getLoanInfo(rs));
+			}
+		}
+		return list;
+	}
+
+	private LoanInfo getLoanInfo(ResultSet rs) throws SQLException {
+		String custname = rs.getString("cs.custname");
+		int normal = rs.getInt("normal");
+		int credit = rs.getInt("credit");
+		int card = rs.getInt("card");
+		return new LoanInfo(custname, normal, credit, card);
 	}
 
 }

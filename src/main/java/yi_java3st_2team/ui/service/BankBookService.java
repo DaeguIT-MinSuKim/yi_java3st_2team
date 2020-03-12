@@ -9,6 +9,7 @@ import yi_java3st_2team.dao.PlanDao;
 import yi_java3st_2team.dao.impl.BankBookDaoImpl;
 import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
+import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Info;
@@ -36,8 +37,11 @@ public class BankBookService {
 	public int updateBankBook(BankBook bankbook) throws SQLException {
 		return bankBookDao.updateBankBook(bankbook);
 	}
-	public int updateBankBookAccountNum(BankBook bankbook) throws SQLException {
-		return bankBookDao.updateBankBookAccountNum(bankbook);
+	public int insertDormantAccountProcedure(BankBook bankbook) throws SQLException {
+		return bankBookDao.insertDormantAccountProcedure(bankbook);
+	}
+	public int insertTerminationAccountProcedure(BankBook bankbook) throws SQLException {
+		return bankBookDao.insertTerminationAccountProcedure(bankbook);
 	}
 	public int deleteBankBook(BankBook bankbook) throws SQLException {
 		return bankBookDao.deleteBankBook(bankbook);
@@ -93,5 +97,11 @@ public class BankBookService {
 	}
 	public Info bankBookInfoYearly(String custname) throws SQLException {
 		return bankBookDao.showBankBookInfoYearly(custname);
+	}
+	public List<AccountInfo> showDormantAccountInfo() throws SQLException {
+		return bankBookDao.showBankBookDormantAccountInfo();
+	}
+	public List<AccountInfo> showTerminationAccountInfo() throws SQLException {
+		return bankBookDao.showBankBookTerminationAccountInfo();
 	}
 }

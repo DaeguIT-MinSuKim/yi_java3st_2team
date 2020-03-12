@@ -127,6 +127,7 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						if(res==0) {
 							try {
 								pCenter.removeItem(selIdx);
+								service.insertTerminationAccountProcedure(bankbook);
 								service.deleteBankBook(bankbook);
 								pCenter.loadTableData(service.showBankBooks());
 							} catch (SQLException e1) {
@@ -152,8 +153,10 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 					int res = JOptionPane.showConfirmDialog(null, "정말 전환하시겠습니까?");
 					if(res==0) {
 						try {
-							pCenter.updateRow(bankbook, pCenter.getSelectedRowIdx());
-							service.updateBankBookAccountNum(bankbook);
+							pCenter.removeItem(selIdx);
+							service.insertDormantAccountProcedure(bankbook);
+							service.deleteBankBook(bankbook);
+							pCenter.loadTableData(service.showBankBooks());
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

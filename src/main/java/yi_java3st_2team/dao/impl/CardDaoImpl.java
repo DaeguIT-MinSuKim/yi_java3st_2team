@@ -12,6 +12,7 @@ import java.util.List;
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
@@ -181,6 +182,28 @@ public class CardDaoImpl implements CardDao {
 			}
 		}
 		return cardInfo;
+	}
+	@Override
+	public List<CardInfo> showCardInfo() throws SQLException {
+		List<CardInfo> list = new ArrayList<>();
+		String sql = "select cs.custname,\r\n" + 
+				"(select count(plancode) from card where plancode = 'B001' and custcode = c.custcode) as 'check',\r\n" + 
+				"(select count(plancode) from card where plancode = 'B002' and custcode = c.custcode) as 'credit' \r\n" + 
+				"from card c join customer cs on c.custcode = cs.custcode group by c.custcode";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getCardDivInfo(rs));
+			}
+		}
+		return list;
+	}
+	private CardInfo getCardDivInfo(ResultSet rs) throws SQLException {
+		String custname = rs.getString("cs.custname");
+		int check = rs.getInt("check");
+		int credit = rs.getInt("credit");
+		return new CardInfo(custname, check, credit);
 	}
 
 }

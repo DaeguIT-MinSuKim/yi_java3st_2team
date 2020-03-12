@@ -1,17 +1,10 @@
 {
 	"folders": {},
 	"connections": {
-<<<<<<< HEAD
-		"mysql5-170bf13482d-574c2e9ce6c1bd17": {
-			"provider": "mysql",
-			"driver": "mysql5",
-			"name": "MySQL - localhost",
-=======
-		"mysql5-170c7743208-3586f2a17e2af722": {
+		"mysql5-170cc2048e3-27a7174919d63881": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "MySQL - bank",
->>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git
 			"save-password": true,
 			"read-only": false,
 			"configuration": {

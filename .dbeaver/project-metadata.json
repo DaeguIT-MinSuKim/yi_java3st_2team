@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 {"resources":{"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170c7fe4d61-146a727045953dbb"},"Scripts/test.sql":{"sql-editor-data-source-id":"mysql5-170c7fe4d61-146a727045953dbb"}}}
+=======
+<<<<<<< HEAD
+{"resources":{"Scripts/Script-1.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/V&V test.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/data.sql":{"sql-editor-data-source-id":"mysql5-170cc2048e3-27a7174919d63881"},"Scripts/init.sql":{"sql-editor-data-source-id":"mysql5-170bf13482d-574c2e9ce6c1bd17"},"Scripts/test.sql":{"sql-editor-data-source-id":"mysql5-170cc2048e3-27a7174919d63881"}}}
+=======
+{"resources":{"Scripts/test.sql":{"sql-editor-data-source-id":"mysql5-170c7fe4d61-146a727045953dbb"}}}
+>>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git
+>>>>>>> branch 'master' of https://github.com/DaeguIT-MinSuKim/yi_java3st_2team.git

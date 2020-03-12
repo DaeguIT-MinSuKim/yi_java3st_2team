@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
 import yi_java3st_2team.ui.chart.JFrameBarChart;
@@ -14,6 +13,7 @@ import yi_java3st_2team.ui.chart.JFrameCustNumChart;
 import yi_java3st_2team.ui.chart.JFrameMonthlyDpWdBarChart;
 import yi_java3st_2team.ui.chart.JFrameMonthlyOpenNumBarChart;
 
+@SuppressWarnings("serial")
 public class CustStatisticPanel extends AbsCenterStatisticPanel implements ActionListener{
 
 	public CustStatisticPanel() {

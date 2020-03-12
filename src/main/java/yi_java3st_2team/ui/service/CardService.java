@@ -10,6 +10,7 @@ import yi_java3st_2team.dao.impl.CardDaoImpl;
 import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.Card;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
@@ -56,6 +57,9 @@ public class CardService {
 	}
 	public Info cardInfoYearly(String custname) throws SQLException {
 		return cardDao.showCardInfoYearly(custname);
+	}
+	public List<CardInfo> showCardInfo() throws SQLException {
+		return cardDao.showCardInfo();
 	}
 }
 

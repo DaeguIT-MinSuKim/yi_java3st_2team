@@ -11,6 +11,7 @@ import java.util.List;
 
 import yi_java3st_2team.dao.BankBookDao;
 import yi_java3st_2team.ds.LocalDataSource;
+import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Info;
@@ -328,16 +329,63 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public int updateBankBookAccountNum(BankBook bankbook) throws SQLException {
+	public int insertDormantAccountProcedure(BankBook bankbook) throws SQLException {
 		int res = -1;
-		String sql = "update bankbook set accountnum = replace(accountnum,'-1','-2') where custcode = (select custcode from customer where custname = ?) and accountnum = ?";
+		String sql = "call make_dormant(?,?)";
 		try(Connection con = LocalDataSource.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1,bankbook.getCustCode().getCustName());
-			pstmt.setString(2, bankbook.getAccountNum());
+				PreparedStatement pstmt = con.prepareCall(sql)) {
+			pstmt.setString(1, bankbook.getCustCode().getCustName());
+			pstmt.setString(2, bankbook.getAccountPlanCode().getPlanName());
 			res = pstmt.executeUpdate();
 		}
 		return res;
 	}
 
+	@Override
+	public int insertTerminationAccountProcedure(BankBook bankbook) throws SQLException {
+		int res = -1;
+		String sql = "call make_termination(?,?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareCall(sql)) {
+			pstmt.setString(1, bankbook.getCustCode().getCustName());
+			pstmt.setString(2, bankbook.getAccountPlanCode().getPlanName());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public List<AccountInfo> showBankBookDormantAccountInfo() throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select * from changebankbookdormantinfo";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getAccountInfo(rs));
+			}
+		}
+		return list;
+	}
+
+	private AccountInfo getAccountInfo(ResultSet rs) throws SQLException {
+		String custname = rs.getString("custname");
+		String accountnum = rs.getString("accountnum");
+		Date transDate = rs.getTimestamp("transDate");
+		return new AccountInfo(custname, accountnum, transDate);
+	}
+
+	@Override
+	public List<AccountInfo> showBankBookTerminationAccountInfo() throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select * from changebankbookterminationinfo";
+		try(Connection con = LocalDataSource.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getAccountInfo(rs));
+			}
+		}
+		return list;
+	}
 }
