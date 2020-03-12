@@ -87,7 +87,7 @@ public class DlgStatisticEmpSalary extends JDialog {
 				//yAxis.setTickUnit(1);
 
 				barChart = new BarChart<>(xAxis, yAxis);
-				barChart.setTitle("인당 평균 급여액");
+				barChart.setTitle("전체/인당 평균 급여액");
 				
 				barChart.setPrefSize(500, 250);
 				barChart.setData(getChartData());
@@ -97,12 +97,15 @@ public class DlgStatisticEmpSalary extends JDialog {
 				return scene;
 	}
 	
-	public XYChart.Series<String, Number> getChartData(String salary) {
+	public XYChart.Series<String, Number> getChartData(List list) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
-		dataSeries.setName("1인 평균 급여액");
-		dataSeries.getData().add(new XYChart.Data<>(salary,service.avgOfSalary()));
-
 		
+		dataSeries.setName(list.toString());
+		
+		dataSeries.getData().add(new XYChart.Data<>(list.get(0).toString(),service.totalSalary()));
+		dataSeries.getData().add(new XYChart.Data<>(list.get(1).toString(),service.avgOfSalary()));
+		
+
 		return dataSeries;
 		
 		//emp.getKorScore())
@@ -110,8 +113,13 @@ public class DlgStatisticEmpSalary extends JDialog {
 	
 
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
-		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();		  
-		list.add(getChartData("월급"));
+		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();	
+		List<String> strList = new ArrayList<String>();
+	
+		strList.add("전체 월급");
+		strList.add("1인당 월급");
+		
+		list.add(getChartData(strList));
 		
 		return list;
 	}

@@ -45,4 +45,5 @@ public interface EmployeeDao {
 	int selectCountMemberByTitle(String empTitle);
 	//1인 평균 월급 구하기
 	int selectAvgOfSalary();
+	int selectTotalSalary();
 }
