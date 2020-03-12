@@ -413,6 +413,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return 0;
 	}
+
+	@Override
+	public int selectTotalSalary() {
+		String sql="select sum(empSalary) as 'totalSal' \r\n" + 
+				"   from employee e";
+		
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			
+			while(rs.next()) {
+				return rs.getInt("totalSal");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
 	
 
 
