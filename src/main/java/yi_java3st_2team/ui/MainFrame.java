@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -40,6 +43,7 @@ import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
+import java.awt.event.MouseListener;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -247,6 +251,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnBarBankWork.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnBarBankWork.setBorder(UIManager.getBorder("Button.border"));
 		mnBarBankWork.setBackground(Color.WHITE);
+	
 		pBankWork.add(mnBarBankWork, BorderLayout.CENTER);
 		
 		mnBankWork = new JMenu("은행 업무 관리");

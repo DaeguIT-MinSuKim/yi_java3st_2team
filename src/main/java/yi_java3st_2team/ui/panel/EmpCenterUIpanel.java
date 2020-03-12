@@ -92,11 +92,23 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				    
 					
 				}if(e.getActionCommand()=="삭제") {
+					//경고창 출력
+					
+					
 					//선택한 위치의  employee객체를 구하고 그걸 데이터에서 삭제 
 					Employee emp = pEmpTblPanel.getSelectedItem();
 					
-					service.removeEmp(emp);
-					JOptionPane.showMessageDialog(null, "삭제되었습니다");
+					int res = JOptionPane.showConfirmDialog(null, emp.getEmpName()+"님의 정보를 정말 삭제하시겠습니까?");
+					if(res ==0) {
+						
+						try {
+							service.removeEmp(emp);
+						}catch (Exception e5) {
+							e5.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "삭제되었습니다");
+					}
+
 					pEmpTblPanel.loadTableData(service.showEmpList());
 					
 				}
