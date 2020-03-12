@@ -172,7 +172,6 @@ delimiter $
  create trigger vip_trigger
  after insert on customer
  for each row 
- 
  begin 
 	 insert into viptable values(new.custCode);
  end $
@@ -180,10 +179,9 @@ delimiter ;
 
 drop trigger if exists deleted_emp_trigger;
 delimiter $
- create trigger deleted_employee
+ create trigger deleted_emp_trigger
  before delete on employee
  for each row 
- 
  begin 
 	 insert into deleted_employee values(old.empCode, old.empName, old.empTitle, old.empTel, old.empId, old.deptNo);
  end $
@@ -231,6 +229,19 @@ create trigger tri_after_update_BankBook_card
    end $$
 delimiter ;
 
+#체크카드 잔액이 변경될 시 통장 잔액이 같이 변경 되게하는 트리거
+drop trigger if exists tri_before_update_card_bankbook;
+delimiter $$
+create trigger tri_before_update_card_bankbook
+   after update on card
+   for each row 
+   begin
+	  if(old.plancode = "B001") then
+      	update bankbook set accountBalance = (select new.cardbalance from card where custCode = new.custCode and plancode = new.plancode) where custCode = new.custCode and planCode in ('A001','A004');
+	  end if;
+   end $$
+delimiter ;
+
 drop trigger if exists tri_update_card;
 delimiter $
 create trigger tri_update_card
@@ -251,27 +262,34 @@ begin
 end $
 delimiter ;
 
-#트리거 다시 손보기
-drop trigger if exists tri_update_changeBankBookTerminationInfo;
-delimiter $
-create trigger tri_update_changeBankBookTerminationInfo
-before delete on bankbook
-for each row 
-begin
-	insert into changeBankBookTerminationInfo values((select custname from customer where custcode = old.custcode),old.accountnum,now());
-end $
-delimiter ;
+drop procedure if exists make_dormant;
 
-drop trigger if exists tri_insert_changeBankBookDormantInfo;
-delimiter $
-create trigger tri_insert_changeBankBookDormantInfo
-before update on bankbook
-for each row 
+delimiter !
+create procedure make_dormant(
+	in p_custname char(5),
+	in p_planname char(20)
+)
 begin
 	declare d_accountnum char(16);
-	if(substring(old.accountnum,8,1)='1') then
-		set d_accountnum = replace(old.accountnum,'-1','-2');
-		insert into changeBankBookDormantInfo values((select custname from customer where custcode = old.custcode),d_accountnum,now());
-	end if;
-end $
+	declare d_custname char(5);
+	set d_accountnum = (select replace(accountnum,'-1','-2') from bankbook where custcode = (select custcode from customer where custname = p_custname) and accountPlanCode = (select planCode from plan where planname = p_planname));
+	set d_custname = p_custname;
+	insert into changebankbookdormantinfo values(d_custname,d_accountnum,now());
+end!
+delimiter ;
+
+drop procedure if exists make_termination;
+
+delimiter !
+create procedure make_termination(
+	in p_custname char(5),
+	in p_planname char(20)
+)
+begin
+	declare d_accountnum char(16);
+	declare d_custname char(5);
+	set d_accountnum = (select replace(accountnum,'-1','-3') from bankbook where custcode = (select custcode from customer where custname = p_custname) and accountPlanCode = (select planCode from plan where planname = p_planname));
+	set d_custname = p_custname;
+	insert into changebankbookterminationinfo values(d_custname,d_accountnum,now());
+end!
 delimiter ;

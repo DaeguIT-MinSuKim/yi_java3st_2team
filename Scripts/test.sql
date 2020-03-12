@@ -307,12 +307,23 @@ insert into loanInfo values
 ('김가나','2020-03-09 09:00:00'),
 ('김가나','2020-03-10 09:00:00');
 
+select * from plan;
+
 select count(transDate) from cardinfo where custname = '김가나' and date(transdate) = date(now());
 select custname,count(transDate) from cardinfo where custname = '김가나' and year(transDate) = year(now());
-select replace(accountnum,'-1','-2') from bankbook where custcode = (select custcode from customer where custname = '김가나') and `accountPlanCode` = 'A001';
+select replace(accountnum,'-1','-2') from bankbook where custcode = (select custcode from customer where custname = '김가나') and accountPlanCode = (select planCode from plan where planname = '휴면,해지계좌테스트용');
 
-select substring(accountnum,8,1) from bankbook where custcode = (select custcode from customer where custname = '김가나') and `accountPlanCode` = 'A001';
+call make_dormant('김가나','휴면,해지계좌테스트용');
+call make_termination('김가나','휴면,해지계좌테스트용');
+
+select c.custcode,
+(select count(plancode) from card where plancode = 'B001' and custcode = c.custcode) as 'check',
+(select count(plancode) from card where plancode = 'B002' and custcode = c.custcode) as 'credit' 
+from card c group by custcode;
+
 select * from changebankbookdormantinfo;
 select * from changebankbookterminationinfo;
 drop table changebankbookdormantinfo;
 drop table changebankbookterminationinfo;
+
+select accountnum from bankbook where custcode = (select custcode from customer where custname = '김가나') and `accountPlanCode` = 'A001' and (select substring(accountnum,8,1) from bankbook where custcode = (select custcode from customer where custname = '김가나') and `accountPlanCode` = 'A001') = '2';

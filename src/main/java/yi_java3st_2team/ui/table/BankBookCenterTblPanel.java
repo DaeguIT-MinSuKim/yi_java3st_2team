@@ -37,10 +37,10 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 		custCode.setCustName((String)model.getValueAt(selIdx, 1));
 		Plan accountPlanCode = new Plan();
 		accountPlanCode.setPlanName((String)model.getValueAt(selIdx, 2));
-		String DateArr = (String)model.getValueAt(selIdx, 4);
+		String dateArr = (String)model.getValueAt(selIdx, 4);
 		Date accountOpenDate = null;
 		try {
-			accountOpenDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(DateArr);
+			accountOpenDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateArr);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
