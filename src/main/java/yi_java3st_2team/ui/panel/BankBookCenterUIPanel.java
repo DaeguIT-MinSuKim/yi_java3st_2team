@@ -1,24 +1,21 @@
 package yi_java3st_2team.ui.panel;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import java.awt.BorderLayout;
-import java.sql.SQLException;
-import java.util.List;
-
 import yi_java3st_2team.dto.BankBook;
-import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.ui.dialog.DlgBankBook;
 import yi_java3st_2team.ui.service.BankBookService;
-import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.table.BankBookCenterTblPanel;
-import yi_java3st_2team.ui.table.CardCenterTblPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class BankBookCenterUIPanel extends JPanel implements ActionListener {
@@ -119,10 +116,10 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						dlgBankBook.setVisible(true);
 					}
 					catch(RuntimeException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage());
+						JOptionPane.showMessageDialog(null, "선택부터 해주세요");
 					}
 				}
-				else {
+				else if(e.getActionCommand().equals("삭제")) {
 					try {
 						BankBook bankbook = pCenter.getSelectedItem();
 						selIdx = pCenter.getSelectedRowIdx();
@@ -131,6 +128,7 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 							try {
 								pCenter.removeItem(selIdx);
 								service.deleteBankBook(bankbook);
+								pCenter.loadTableData(service.showBankBooks());
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -142,7 +140,28 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						}
 					}
 					catch(RuntimeException e1) {
-						JOptionPane.showMessageDialog(null, e1.getMessage());
+						JOptionPane.showMessageDialog(null, "선택부터 해주세요");
+					}
+				}
+				else {
+					BankBook bankbook = pCenter.getSelectedItem();
+					if(bankbook.getAccountNum().substring(7, 8).equals("2")) {
+						JOptionPane.showMessageDialog(null, "이미 전환된 계좌입니다");
+						return;
+					}
+					int res = JOptionPane.showConfirmDialog(null, "정말 전환하시겠습니까?");
+					if(res==0) {
+						try {
+							pCenter.updateRow(bankbook, pCenter.getSelectedRowIdx());
+							service.updateBankBookAccountNum(bankbook);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "휴면계좌로 전환되었습니다");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "전환이 취소되었습니다");
 					}
 				}
 				
@@ -151,12 +170,15 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 		JMenuItem insertMenu = new JMenuItem("추가");
 		JMenuItem updateMenu = new JMenuItem("수정");
 		JMenuItem deleteMenu = new JMenuItem("삭제");
+		JMenuItem changeMenu = new JMenuItem("휴면계좌전환");
 		insertMenu.addActionListener(popMenuListener);
 		updateMenu.addActionListener(popMenuListener);
 		deleteMenu.addActionListener(popMenuListener);
+		changeMenu.addActionListener(popMenuListener);
 		popMenu.add(insertMenu);
 		popMenu.add(updateMenu);
 		popMenu.add(deleteMenu);
+		popMenu.add(changeMenu);
 		return popMenu;
 	}
 	public void actionPerformed(ActionEvent e) {

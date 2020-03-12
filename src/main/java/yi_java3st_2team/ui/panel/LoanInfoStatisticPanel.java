@@ -9,13 +9,13 @@ public class LoanInfoStatisticPanel extends AbsCenterStatisticPanel {
 	 * Create the panel.
 	 */
 	public LoanInfoStatisticPanel() {
-		setLabelInit(lblStat1,lblStat2,lblStat3,lblStat4);
-		setLblMouseListener(lblStat1,lblStat2,lblStat3,lblStat4);
+		setLabelInit(lblStat1,lblStat2);
+		setLblMouseListener(lblStat1,lblStat2);
 	}
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {"대출 상환 내역","남은 상환 일자","대출상품추천"};
+		return new String[] {"대출 잔액 조회","고객별 대출 상품 현황"};
 	}
 
 }

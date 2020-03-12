@@ -82,7 +82,7 @@ public class LoanCenterTblPanel extends AbsCenterTblPanel<Loan> {
 		planCode.setPlanName((String)model.getValueAt(idx, 2));
 		Date loanDate = null;
 		try {
-			loanDate = new SimpleDateFormat().parse((String)model.getValueAt(idx, 4));
+			loanDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)model.getValueAt(idx, 4));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

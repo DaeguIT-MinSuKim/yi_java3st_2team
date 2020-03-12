@@ -1,12 +1,12 @@
 package yi_java3st_2team.dto;
 
-public class CardInfo {
+public class Info {
 	private String custname;
 	private int transCount;
-	public CardInfo() {
+	public Info() {
 		
 	}
-	public CardInfo(String custname, int transCount) {
+	public Info(String custname, int transCount) {
 		this.custname = custname;
 		this.transCount = transCount;
 	}

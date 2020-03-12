@@ -8,13 +8,13 @@ public class CardCenterStatisticPanel extends AbsCenterStatisticPanel {
 	 * Create the panel.
 	 */
 	public CardCenterStatisticPanel() {
-		setLabelInit(lblStat1,lblStat2,lblStat3,lblStat4);
-		setLblMouseListener(lblStat1,lblStat2,lblStat3,lblStat4);
+		setLabelInit(lblStat1);
+		setLblMouseListener(lblStat1);
 	}
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {""};
+		return new String[] {"고객별 카드 상품 조회"};
 	}
 
 }

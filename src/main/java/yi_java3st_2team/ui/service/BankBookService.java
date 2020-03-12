@@ -11,6 +11,7 @@ import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Plan;
 
 public class BankBookService {
@@ -34,6 +35,9 @@ public class BankBookService {
 	}
 	public int updateBankBook(BankBook bankbook) throws SQLException {
 		return bankBookDao.updateBankBook(bankbook);
+	}
+	public int updateBankBookAccountNum(BankBook bankbook) throws SQLException {
+		return bankBookDao.updateBankBookAccountNum(bankbook);
 	}
 	public int deleteBankBook(BankBook bankbook) throws SQLException {
 		return bankBookDao.deleteBankBook(bankbook);
@@ -77,5 +81,17 @@ public class BankBookService {
 	
 	public List<String> showWithdrawalMonth() throws SQLException{
 		return bankBookDao.showWithDrawalMonth();
+	}
+	public Info bankBookInfoDaily(String custname) throws SQLException {
+		return bankBookDao.showBankBookInfoDaily(custname);
+	}
+	public Info bankBookInfoWeekly(String custname) throws SQLException {
+		return bankBookDao.showBankBookInfoWeekly(custname);
+	}
+	public Info bankBookInfoMonthly(String custname) throws SQLException {
+		return bankBookDao.showBankBookInfoMonthly(custname);
+	}
+	public Info bankBookInfoYearly(String custname) throws SQLException {
+		return bankBookDao.showBankBookInfoYearly(custname);
 	}
 }

@@ -13,6 +13,7 @@ import yi_java3st_2team.dao.BankBookDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Plan;
 
 public class BankBookDaoImpl implements BankBookDao {
@@ -254,6 +255,89 @@ public class BankBookDaoImpl implements BankBookDao {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public Info showBankBookInfoDaily(String custname) throws SQLException {
+		Info info = new Info();
+		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and date(transdate) = date(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					info = getBankBookInfo(rs);
+				}
+			}
+		}
+		return info;
+	}
+
+	private Info getBankBookInfo(ResultSet rs) throws SQLException {
+		String custname = rs.getString("custname");
+		int transCount = rs.getInt("count");
+		return new Info(custname, transCount);
+	}
+
+	@Override
+	public Info showBankBookInfoWeekly(String custname) throws SQLException {
+		Info info = new Info();
+		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and week(transDate) = week(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					info = getBankBookInfo(rs);
+				}
+			}
+		}
+		return info;
+	}
+
+	@Override
+	public Info showBankBookInfoMonthly(String custname) throws SQLException {
+		Info info = new Info();
+		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and month(transDate) = month(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					info = getBankBookInfo(rs);
+				}
+			}
+		}
+		return info;
+	}
+
+	@Override
+	public Info showBankBookInfoYearly(String custname) throws SQLException {
+		Info info = new Info();
+		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and year(transDate) = year(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					info = getBankBookInfo(rs);
+				}
+			}
+		}
+		return info;
+	}
+
+	@Override
+	public int updateBankBookAccountNum(BankBook bankbook) throws SQLException {
+		int res = -1;
+		String sql = "update bankbook set accountnum = replace(accountnum,'-1','-2') where custcode = (select custcode from customer where custname = ?) and accountnum = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1,bankbook.getCustCode().getCustName());
+			pstmt.setString(2, bankbook.getAccountNum());
+			res = pstmt.executeUpdate();
+		}
+		return res;
 	}
 
 }

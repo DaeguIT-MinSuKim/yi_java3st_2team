@@ -121,6 +121,23 @@ create table cardInfo(
 	transDate datetime
 );
 
+create table bankBookInfo(
+	custname varchar(5),
+	transDate datetime
+);
+
+create table changeBankBookDormantInfo(
+	custname char(5),
+	accountnum varchar(16),
+	transDate datetime
+);
+
+create table changeBankBookTerminationInfo(
+	custname char(5),
+	accountnum varchar(16),
+	transDate datetime
+);
+
 #statistic trigger 및 procedure
 drop procedure if exists proc_total_avg;
 delimiter $
@@ -207,5 +224,40 @@ before update on card
 for each row 
 begin 
 	insert into cardinfo values((select custname from customer where custcode = new.custcode),now());
+end $
+delimiter ;
+
+drop trigger if exists tri_update_bankbook;
+delimiter $
+create trigger tri_update_bankbook
+before update on bankbook
+for each row 
+begin 
+	insert into bankbookInfo values((select custname from customer where custcode = new.custcode),now());
+end $
+delimiter ;
+
+#트리거 다시 손보기
+drop trigger if exists tri_update_changeBankBookTerminationInfo;
+delimiter $
+create trigger tri_update_changeBankBookTerminationInfo
+before delete on bankbook
+for each row 
+begin
+	insert into changeBankBookTerminationInfo values((select custname from customer where custcode = old.custcode),old.accountnum,now());
+end $
+delimiter ;
+
+drop trigger if exists tri_insert_changeBankBookDormantInfo;
+delimiter $
+create trigger tri_insert_changeBankBookDormantInfo
+before update on bankbook
+for each row 
+begin
+	declare d_accountnum char(16);
+	if(substring(old.accountnum,8,1)='1') then
+		set d_accountnum = replace(old.accountnum,'-1','-2');
+		insert into changeBankBookDormantInfo values((select custname from customer where custcode = old.custcode),d_accountnum,now());
+	end if;
 end $
 delimiter ;

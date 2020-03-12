@@ -17,8 +17,8 @@ public class BankBookInfoStatisticPanel extends AbsCenterStatisticPanel implemen
 	 */
 	public BankBookInfoStatisticPanel() {
 		btnSearch.addActionListener(this);
-		setLabelInit(lblStat1,lblStat2,lblStat3,lblStat4);
-		setLblMouseListener(lblStat1,lblStat2,lblStat3,lblStat4);
+		setLabelInit(lblStat1,lblStat2);
+		setLblMouseListener(lblStat1,lblStat2);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package yi_java3st_2team.ui.chart;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -20,15 +21,15 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
-import yi_java3st_2team.dto.CardInfo;
+import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.ui.service.CardService;
 
-public class JFrameBarChartForCard {
+public class JFrameBarChartForCardWeekly {
 	private static CardService service;
 	private static BarChart<String, Number> barChart;
 	public static void initAndShowGUI() {
 		service = new CardService();
-		JFrame frame = new JFrame("Swing and JavaFX");
+		JFrame frame = new JFrame();
 		frame.setBounds(620, 50, 500, 500);
 		
 		final JFXPanel fxPanel = new JFXPanel();
@@ -36,6 +37,7 @@ public class JFrameBarChartForCard {
 		frame.add(fxPanel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
 
 		Platform.runLater(() -> initFX(fxPanel));
 	}
@@ -58,7 +60,8 @@ public class JFrameBarChartForCard {
 		yAxis.setLabel("건수");
 
 		barChart = new BarChart<>(xAxis, yAxis);
-		barChart.setTitle("Bar Chart");
+		barChart.setTitle("주간 거래 내역");
+		barChart.setLegendVisible(false);
 		
 		barChart.setPrefSize(500, 250);
 		try {
@@ -75,11 +78,11 @@ public class JFrameBarChartForCard {
 
 	private static ObservableList<XYChart.Series<String, Number>> getChartData() throws SQLException {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		CardInfo data1 = service.cardInfo("김가나");
-		CardInfo data2 = service.cardInfo("김다라");
-		CardInfo data3 = service.cardInfo("김마바");
-		CardInfo data4 = service.cardInfo("김사아");
-		CardInfo data5 = service.cardInfo("김자차");
+		Info data1 = service.cardInfoWeekly("김가나");
+		Info data2 = service.cardInfoWeekly("김다라");
+		Info data3 = service.cardInfoWeekly("김마바");
+		Info data4 = service.cardInfoWeekly("김사아");
+		Info data5 = service.cardInfoWeekly("김자차");
 		list.add(getChartData(data1));
 		list.add(getChartData(data2));
 		list.add(getChartData(data3));
@@ -87,7 +90,7 @@ public class JFrameBarChartForCard {
 		list.add(getChartData(data5));
 		return list;
 	}
-	public static XYChart.Series<String, Number> getChartData(CardInfo cardInfo) {
+	public static XYChart.Series<String, Number> getChartData(Info cardInfo) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		dataSeries.getData().add(new XYChart.Data<>(cardInfo.getCustname(), cardInfo.getTransCount()));
 		return dataSeries;

@@ -1,7 +1,15 @@
 package yi_java3st_2team.ui.chart;
 
+import java.awt.BorderLayout;
+import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -13,20 +21,33 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
-import yi_java3st_2team.dto.CardInfo;
+import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.ui.service.CardService;
 
-@SuppressWarnings("serial")
-public class PanelBarChartForCard extends JFXPanel implements InitScene{
-	private CardService service;
-	public PanelBarChartForCard() {
+public class JFrameBarChartForCardMonthly {
+	private static CardService service;
+	private static BarChart<String, Number> barChart;
+	public static void initAndShowGUI() {
 		service = new CardService();
+		JFrame frame = new JFrame();
+		frame.setBounds(620, 50, 500, 500);
+		
+		final JFXPanel fxPanel = new JFXPanel();
+
+		frame.add(fxPanel);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
+
+		Platform.runLater(() -> initFX(fxPanel));
+	}
+	
+	private static void initFX(JFXPanel fxPanel) {
+		Scene scene = createScene();
+		fxPanel.setScene(scene);
 	}
 
-	private BarChart<String, Number> barChart;
-	
-	@Override
-	public Scene createScene() {
+	public static Scene createScene() {
 		Group root = new Group();
 		Scene scene = new Scene(root, Color.ALICEBLUE);
 		root.setAutoSizeChildren(true);
@@ -39,7 +60,8 @@ public class PanelBarChartForCard extends JFXPanel implements InitScene{
 		yAxis.setLabel("건수");
 
 		barChart = new BarChart<>(xAxis, yAxis);
-		barChart.setTitle("Bar Chart");
+		barChart.setTitle("월간 거래 내역");
+		barChart.setLegendVisible(false);
 		
 		barChart.setPrefSize(500, 250);
 		try {
@@ -53,14 +75,14 @@ public class PanelBarChartForCard extends JFXPanel implements InitScene{
 
 		return scene;
 	}
-	
-	private ObservableList<XYChart.Series<String, Number>> getChartData() throws SQLException {
+
+	private static ObservableList<XYChart.Series<String, Number>> getChartData() throws SQLException {
 		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
-		CardInfo data1 = service.cardInfo("김가나");
-		CardInfo data2 = service.cardInfo("김다라");
-		CardInfo data3 = service.cardInfo("김마바");
-		CardInfo data4 = service.cardInfo("김사아");
-		CardInfo data5 = service.cardInfo("김자차");
+		Info data1 = service.cardInfoMonthly("김가나");
+		Info data2 = service.cardInfoMonthly("김다라");
+		Info data3 = service.cardInfoMonthly("김마바");
+		Info data4 = service.cardInfoMonthly("김사아");
+		Info data5 = service.cardInfoMonthly("김자차");
 		list.add(getChartData(data1));
 		list.add(getChartData(data2));
 		list.add(getChartData(data3));
@@ -68,10 +90,10 @@ public class PanelBarChartForCard extends JFXPanel implements InitScene{
 		list.add(getChartData(data5));
 		return list;
 	}
-	public XYChart.Series<String, Number> getChartData(CardInfo cardInfo) {
+	public static XYChart.Series<String, Number> getChartData(Info cardInfo) {
 		XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		dataSeries.getData().add(new XYChart.Data<>(cardInfo.getCustname(), cardInfo.getTransCount()));
 		return dataSeries;
 	}
-
+	
 }

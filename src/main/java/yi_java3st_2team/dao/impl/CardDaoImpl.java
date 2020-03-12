@@ -12,7 +12,7 @@ import java.util.List;
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Card;
-import yi_java3st_2team.dto.CardInfo;
+import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -117,10 +117,30 @@ public class CardDaoImpl implements CardDao {
 		}
 		return res;
 	}
+	private Info getCard(ResultSet rs) throws SQLException {
+		String custname = rs.getString("custname");
+		int transCount = rs.getInt("count");
+		return new Info(custname, transCount);
+	}
 	@Override
-	public CardInfo showCardInfo(String custname) throws SQLException {
-		CardInfo cardInfo = new CardInfo();
-		String sql = "select count(transDate) as 'count' from cardinfo where custname = ? and date(transdate) = date(now())";
+	public Info showCardInfoDaily(String custname) throws SQLException {
+		Info info = new Info();
+		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and date(transdate) = date(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					info = getCard(rs);
+				}
+			}
+		}
+		return info;
+	}
+	@Override
+	public Info showCardInfoWeekly(String custname) throws SQLException {
+		Info cardInfo = new Info();
+		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and week(transDate) = week(now())";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
@@ -132,10 +152,35 @@ public class CardDaoImpl implements CardDao {
 		}
 		return cardInfo;
 	}
-	private CardInfo getCard(ResultSet rs) throws SQLException {
-		String custname = rs.getString("custname");
-		int transCount = rs.getInt("count");
-		return new CardInfo(custname, transCount);
+	@Override
+	public Info showCardInfoMonthly(String custname) throws SQLException {
+		Info cardInfo = new Info();
+		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and month(transDate) = month(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					cardInfo = getCard(rs);
+				}
+			}
+		}
+		return cardInfo;
+	}
+	@Override
+	public Info showCardInfoYearly(String custname) throws SQLException {
+		Info cardInfo = new Info();
+		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and year(transDate) = year(now())";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					cardInfo = getCard(rs);
+				}
+			}
+		}
+		return cardInfo;
 	}
 
 }
