@@ -51,8 +51,6 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		pEmpTblPanel.setPopupMenu(createPopup());
 		pEmpSerch.getBtnSearch().addActionListener(this);
 		pEmpSerch.getBtnCancel().addActionListener(this);
-		
-		
 	
 	}
     
