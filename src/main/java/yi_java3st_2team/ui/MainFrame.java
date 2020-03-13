@@ -549,6 +549,11 @@ public class MainFrame extends JFrame implements ActionListener {
 	
 	//사원권한 누르면
 	protected void mnEmpAuthActionPerformed(ActionEvent e) {
+		//hr부서라하더라도 직급이 과장, 대리, 사원이면 권한 수정할 수 없음
+		if(empAuth.getEmpTitle().contentEquals("과장")||empAuth.getEmpTitle().contentEquals("대리")||empAuth.getEmpTitle().equals("사원")) {
+			JOptionPane.showMessageDialog(null, "권한이 없습니다. HR부서 차장급 이상 접속가능");
+			return;
+		}
 		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanelAuth();
