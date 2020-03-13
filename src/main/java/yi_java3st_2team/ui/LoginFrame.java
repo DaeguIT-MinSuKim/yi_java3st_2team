@@ -52,6 +52,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private boolean chkLogin;
 	private MainFrame main;
 	private Employee chkEmp;
+	private JButton btnLogout;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -171,6 +172,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		pcCenter.add(panel);
+		
+		
+	    btnLogout = main.getBtnLogout();
+	    btnLogout.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -180,7 +185,18 @@ public class LoginFrame extends JFrame implements ActionListener {
 		if (e.getSource() == btnCheck) {
 			btnCheckActionPerformed(e);
 		}
+		if (e.getSource() == btnLogout) {
+			btnLogoutActionPerformed(e);
+			JOptionPane.showMessageDialog(null, "이거눌림");
+		}
 	}
+	private void btnLogoutActionPerformed(ActionEvent e) {
+		main.setClear();
+		main.dispose();
+		chkLogin = false;
+		
+	}
+
 	protected void btnCheckActionPerformed(ActionEvent e) {
 		try {
 			Employee emp = new Employee(tfId.getText().trim(),new String(pfPass.getPassword()).trim());
@@ -212,4 +228,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "확인부터 먼저 해주세요");
 		}
 	}
+	
+	
 }

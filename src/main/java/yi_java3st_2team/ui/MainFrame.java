@@ -88,6 +88,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
 	private String greeting;
+	private JButton btnLogout;
 
 	public MainFrame() {
 		initialize();
@@ -425,25 +426,27 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.add(mainLogo);
 		return panel;
 	}
-	private JPanel getLoginPanel() {
+	public JPanel getLoginPanel() {
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setBackground(Color.WHITE);
 		lblGreeting = new JLabel();
 		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		JButton btnLogout = new JButton("로그아웃");
+		btnLogout = new JButton("로그아웃");
 		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		btnLogout.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setClear();
-				dispose();
-			}
-		});
+//		btnLogout.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				setClear();
+//				dispose();
+//			}
+//		});  // 로그인프레임에서 처리하도록 함
 		panel.add(lblGreeting);
 		panel.add(btnLogout);
 		return panel;
 	}
+	
+	
 	public void setClear() {
 		mnEmp.setEnabled(true);
 		mntmEmpSearch.setEnabled(true);
@@ -469,6 +472,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 	}
+	public JButton getBtnLogout() {
+		return btnLogout;
+	}
+
 	public void initEmpAuth(String empName) {
 		try {
 			Employee emp = new Employee();
