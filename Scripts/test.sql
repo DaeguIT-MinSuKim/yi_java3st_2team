@@ -1,5 +1,7 @@
 use bank;
 #사원 - 장현서
+
+select * from employee e2 ;
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력
 -- 부서별 직원수

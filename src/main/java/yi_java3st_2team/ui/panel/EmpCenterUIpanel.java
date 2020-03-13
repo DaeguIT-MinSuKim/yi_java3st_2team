@@ -62,13 +62,17 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//추가일때
+				
 				if(e.getActionCommand()=="추가") {
+				
 					if(dlgEmp == null) {
 					dlgEmp = new DlgEmp();
 					}
+	
 					//부서 리스트 가져와서 콤보박스에 넣기 
 					dlgEmp.setCmbDeptList(service.showDeptList());
 					dlgEmp.setVisible(true);
+					dlgEmp.clearTf();
 					//다이얼로그의 추가 취소 버튼 가져와서 액션리스너 달기
 			        dlgEmp.getBtnOk().addActionListener(myDlgActionListner);
 			        dlgEmp.getBtnCancel().addActionListener(myDlgActionListner);
@@ -134,8 +138,13 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		return popup;
 	}
 
+    
+	public DlgEmp getDlgEmp() {
+		return dlgEmp;
+	}
 
-	//다이얼로그의 버튼들에 액션리스너 달기
+
+			//다이얼로그의 버튼들에 액션리스너 달기
 			ActionListener myDlgActionListner = new ActionListener() {
 				
 				private Employee addEmp;
@@ -148,36 +157,41 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	
 					    try{
 					    	addEmp = dlgEmp.getItem();
+					    	service.addEmp(addEmp);
+					           //  JOptionPane.showMessageDialog(null, "추가되었습니다");
+								
+								//리스트 다시 불러오기 
+								pEmpTblPanel.loadTableData(service.showEmpList());
+								//창 닫기
+								
+								JOptionPane.showMessageDialog(null, "추가되었습니다");
+								dlgEmp.setVisible(false);
+								
 					    }catch(Exception e4){
 					    	//System.out.println(e4.getMessage() + "는 이것 "); //For input string: ""는 이것 
 					    	System.out.println(e4.getMessage() + "는 이것 ");
 					    	if(e4.getMessage().contains("")) {
 					    	  JOptionPane.showMessageDialog(null, "정보를 올바르게 입력해주세요");
+					    	  dlgEmp.setVisible(true);
 					    	  return;
 					    	}
-//					    	if(e4.getMessage().contains("PRIMARY")) {
+//					    	else if(e4.getMessage().contains("PRIMARY")) {
 //								JOptionPane.showMessageDialog(null, "사원번호 중복입니다");
 //								return;
 //							}
 					    }
 						//서비스로 인서트구문 만들어 넣기
-						try{ 
-						service.addEmp(addEmp);
-			           //  JOptionPane.showMessageDialog(null, "추가되었습니다");
+//						try{ 
+//						
+//						
+//						}catch (Exception e2) {
+//							//e2.printStackTrace();
+//							JOptionPane.showMessageDialog(null, "입력한 정보를 다시 확인해주세요");
+//							return;
+//						}
+							
 						
-						//리스트 다시 불러오기 
-						pEmpTblPanel.loadTableData(service.showEmpList());
-						//창 닫기
-						dlgEmp.setVisible(false);
-						//JOptionPane.showMessageDialog(null, "추가되었습니다");
 						
-						}catch (Exception e2) {
-							//e2.printStackTrace();
-							JOptionPane.showMessageDialog(null, "입력한 정보를 다시 확인해주세요");
-							return;
-						}
-						
-						//0226부서번호가 없어도 들어간다 이게 무슨일이야..........ㅜ 
 						
 					}if(e.getActionCommand().contentEquals("수정")) {
 						//다이얼로그에서 수정을 누르면 디비에서 데이터가 수정 됨 
@@ -185,7 +199,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						try {
 						Employee updateEmp = dlgEmpForUpdate.getItem();
 						
-						System.out.println(updateEmp);
+						//System.out.println(updateEmp);
 						
 						if(updateEmp == null) {
 					    	return;
@@ -207,10 +221,14 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					}
 						
 					if(e.getActionCommand().contentEquals("취소")) {
-						System.out.println("취소 눌렀음 ");
+						//System.out.println("취소 눌렀음 ");
 						//다이얼로그에서 취소 누르면 다이얼로그 텍스트 값들이 초기화됨 
 						
-						dlgEmp.clearTf();
+						try{
+							dlgEmp.clearTf();
+						}catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "취소되었습니다");
+						}
 					}
 					
 					if(e.getActionCommand().contentEquals("닫기")) {

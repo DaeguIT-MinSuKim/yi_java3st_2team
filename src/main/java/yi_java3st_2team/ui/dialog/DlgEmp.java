@@ -218,7 +218,7 @@ public class DlgEmp extends JDialog {
 				
 				
 			}if(e.getActionCommand() == "취소") {
-				dialog.setVisible(false); //아예 닫기는건 어떻게 하지?? 0222
+				
 			}
 			
 		}
@@ -250,20 +250,10 @@ public class DlgEmp extends JDialog {
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
 		
-//		int deptNum = cmbDept.getSelectedIndex();
-//		System.out.println(deptNum +"deptNum");
-//		if(deptNum ==0) {
-//			System.out.println("0번 선택됨");
-//			dept = new Department(1);
-//			dept.setDeptName("인사");
-//			
-//		}if(deptNum ==1) {
-//			dept = new Department(2);
-//		}
-//		
+
 		
 		Department dept = (Department)cmbDept.getSelectedItem();
-		System.out.println(dept +"GETiTEM에서 DEPT는");
+
 
 		if(cmbDept.getSelectedIndex()== -1) {
 			JOptionPane.showMessageDialog(null, "부서를 선택하세요");

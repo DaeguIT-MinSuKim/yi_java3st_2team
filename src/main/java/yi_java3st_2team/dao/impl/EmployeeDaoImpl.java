@@ -16,8 +16,11 @@ import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+	
+	private EmpCenterUIpanel empPanel;
 	private static final EmployeeDaoImpl instance = new EmployeeDaoImpl();
 	private EmployeeDaoImpl() {};
 	
@@ -119,7 +122,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e.printStackTrace();
 
 			if(e.getMessage().contains("PRIMARY")) {
-				JOptionPane.showMessageDialog(null, "사원번호 중복입니다");
+				JOptionPane.showMessageDialog(null, emp.getEmpCode()+ "사원번호 중복입니다");
+				empPanel.getDlgEmp().setVisible(true);
+				
+				return 0;
 			}
 		}
 		
