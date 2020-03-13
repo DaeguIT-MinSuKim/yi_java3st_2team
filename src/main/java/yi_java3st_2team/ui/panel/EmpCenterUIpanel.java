@@ -79,13 +79,17 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						Employee emp = pEmpTblPanel.getSelectedItem();
 						if(dlgEmpForUpdate == null) {
 							dlgEmpForUpdate = new DlgEmp();
+							dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
+							dlgEmpForUpdate.setItem(emp);
 						}
 						if(dlgEmpForUpdate != null){
 							dlgEmpForUpdate.setVisible(true);
+							dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
 							dlgEmpForUpdate.setItem(emp);
 						}
-						dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
 						
+						
+		
 						//다이얼로그 버튼을 수정으로 바꾸고 myDlgActionListner달기
 						dlgEmpForUpdate.getBtnUpdate().addActionListener(myDlgActionListner);
 						dlgEmpForUpdate.setActionCommendClose().addActionListener(myDlgActionListner);

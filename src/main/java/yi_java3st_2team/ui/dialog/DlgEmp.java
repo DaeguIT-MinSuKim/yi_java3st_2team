@@ -3,6 +3,7 @@ package yi_java3st_2team.ui.dialog;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,6 +16,8 @@ import yi_java3st_2team.dto.Employee;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import java.util.Vector;
 
@@ -42,6 +45,7 @@ public class DlgEmp extends JDialog {
 	private static DlgEmp dialog;
 	private JButton btnOk;
 	private JButton btnCancel;
+
 
 	/**
 	 * Launch the application.
@@ -324,6 +328,7 @@ public class DlgEmp extends JDialog {
 	
 	public void setItem(Employee item) {
 		tfEmpCode.setText(item.getEmpCode());
+		tfEmpCode.setEditable(false);  //수정버튼을 누르더라도 사원번호는 수정할 수 없도록 함
 		tfEmpName.setText(item.getEmpName());
 		tfEmpTitle.setText(item.getEmpTitle());
 		tfEmpAuth.setText(item.getEmpAuth());
@@ -331,15 +336,11 @@ public class DlgEmp extends JDialog {
 		tfEmpTel.setText(item.getEmpTel());
 		tfEmpId.setText(item.getEmpId());
 		tfEmpPwd.setText(item.getEmpPwd());
-
+		cmbDept.setSelectedIndex(item.getDept().getDeptNo()-1);
 		
-		
-		System.out.println(item.getDept().getDeptNo() +"부서번호");
-		System.out.println(item.getDept() +"a"); //인사(1)a 
-		System.out.println(item.getDept().toString()+"b"); //인사(1)b
-
-		cmbDept.setSelectedItem(item.getDept()); //이거 맞나 
 	}
+
+	
 
 
 	

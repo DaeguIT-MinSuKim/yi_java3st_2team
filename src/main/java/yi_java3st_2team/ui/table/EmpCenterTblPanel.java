@@ -9,7 +9,7 @@ import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
 public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
 	private Employee employee;
-	private Department dept; 
+	//private Department dept; 
 
 	public EmpCenterTblPanel() {
 		
@@ -40,7 +40,9 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 				item.getEmpTel(), 
 				item.getEmpId(), 
 				item.getEmpPwd().replace(item.getEmpPwd(), "**********"), 
-				String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())};
+				//String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())
+		        item.getDept()		
+		};
 	}
 
 	@Override
@@ -68,14 +70,18 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 		String empTel = (String) model.getValueAt(selIdx, 5);
 		String empId = (String) model.getValueAt(selIdx, 6);
 		String empPwd = (String) model.getValueAt(selIdx, 7);
-		String sDept= (String)model.getValueAt(selIdx, 8);
-		  if(sDept.equals("인사(1)")) {
-			  dept = new Department(1);
-			  dept.setDeptName("인사");
-		  }if(sDept.contentEquals("고객(2)")) {
-			  dept = new Department(2);
-			  dept.setDeptName("고객");
-		  }
+	    Department dept	= (Department) model.getValueAt(selIdx, 8);
+		
+//		String sDept= (String)model.getValueAt(selIdx, 8);
+//		
+//		
+//		  if(sDept.equals("인사(1)")) {
+//			  dept = new Department(1);
+//			  dept.setDeptName("인사");
+//		  }if(sDept.contentEquals("고객(2)")) {
+//			  dept = new Department(2);
+//			  dept.setDeptName("고객");
+//		  }
 	//	Department dept = new Department(index-2); //)앞의 숫자를 넣는다.. 
 	//	System.out.println(dept);
 		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
