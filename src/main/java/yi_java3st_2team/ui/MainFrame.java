@@ -43,7 +43,6 @@ import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
-import java.awt.event.MouseListener;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -88,11 +87,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmCardStatistic;
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
-	private EmpCenterUIpanel pEmpUIPanel;
-	private EmpCenterUIpanel2Work pEmpUIPanel2;
-	private EmpStaticPanel pEmpUIPanel3;
-	private EmpCenterUIpanelAuth pEmpUIPanel4;
-	
+	private String greeting;
 
 	public MainFrame() {
 		initialize();
@@ -110,19 +105,24 @@ public class MainFrame extends JFrame implements ActionListener {
 		pNorth.setBackground(Color.WHITE);
 		contentPane.add(pNorth, BorderLayout.NORTH);
 		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
-		
 		pImg = new JPanel();
 		pImg.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				pCenter.remove(pcNorth);
-				pCenter.remove(pcCenter);
+				if(greeting == null) {
+					greeting = lblGreeting.getText();
+				}
+				contentPane.remove(pCenter);
 				pcNorth = getLoginPanel();
+				lblGreeting.setText(greeting);
 				pcCenter = getMainLogoPanel();
+				pCenter = new JPanel();
+				pCenter.setBackground(Color.white);
 				pCenter.add(pcNorth,BorderLayout.NORTH);
 				pCenter.add(pcCenter,BorderLayout.CENTER);
-				pCenter.repaint();
-				pCenter.revalidate();
+				contentPane.add(pCenter,BorderLayout.CENTER);
+				repaint();
+				revalidate();
 			}
 			
 		});
@@ -147,6 +147,17 @@ public class MainFrame extends JFrame implements ActionListener {
 		pEmp.add(mnBarEmp, BorderLayout.CENTER);
 		
 		mnEmp = new JMenu("사원 관리");
+		mnEmp.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(empAuth.getEmpAuth().equals("CS")) {
+					JOptionPane.showMessageDialog(null, "권한이 없습니다");
+					setMenuDisabled(e);
+				}
+			}
+			
+		});
 		mnEmp.setBackground(Color.WHITE);
 		mnEmp.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		mnEmp.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,6 +196,17 @@ public class MainFrame extends JFrame implements ActionListener {
 		pCust.add(mnBarCust, BorderLayout.CENTER);
 		
 		mnCust = new JMenu("고객 정보 관리");
+		mnCust.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(empAuth.getEmpAuth().equals("HR")) {
+					JOptionPane.showMessageDialog(null, "권한이 없습니다");
+					setMenuDisabled(e);
+				}
+			}
+			
+		});
 		mnCust.setBackground(Color.WHITE);
 		mnCust.setHorizontalAlignment(SwingConstants.CENTER);
 		mnCust.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -196,9 +218,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pCenter.removeAll();
-				CustInfoUIPanel custinfoUI = new CustInfoUIPanel();
-				pCenter.add(custinfoUI);
+				greeting = lblGreeting.getText();
+				contentPane.remove(pCenter);
+				pCenter = new CustInfoUIPanel();
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
 				repaint();
 			}
@@ -211,9 +234,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pCenter.removeAll();
-				CustStatisticPanel custStatistic = new CustStatisticPanel();
-				pCenter.add(custStatistic);
+				greeting = lblGreeting.getText();
+				contentPane.remove(pCenter);
+				pCenter = new CustStatisticPanel();
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
 				repaint();
 				
@@ -228,9 +252,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pCenter.removeAll();
-				CustPlanUIPanel custplanUI = new CustPlanUIPanel();
-				pCenter.add(custplanUI);
+				greeting = lblGreeting.getText();
+				contentPane.remove(pCenter);
+				pCenter = new CustPlanUIPanel();
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
 				repaint();
 				
@@ -244,9 +269,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pCenter.removeAll();
-				CustDWUIPanel custdwUI = new CustDWUIPanel();
-				pCenter.add(custdwUI);
+				greeting = lblGreeting.getText();
+				contentPane.remove(pCenter);
+				pCenter = new CustDWUIPanel();
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
 				repaint();
 				
@@ -268,6 +294,17 @@ public class MainFrame extends JFrame implements ActionListener {
 		pBankWork.add(mnBarBankWork, BorderLayout.CENTER);
 		
 		mnBankWork = new JMenu("은행 업무 관리");
+		mnBankWork.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(empAuth.getEmpAuth().equals("HR")) {
+					JOptionPane.showMessageDialog(null, "권한이 없습니다");
+					setMenuDisabled(e);
+				}
+			}
+			
+		});
 		mnBankWork.setBackground(SystemColor.menu);
 		mnBankWork.setHorizontalAlignment(SwingConstants.CENTER);
 		mnBankWork.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -352,11 +389,33 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);
 	}
-	public Employee getEmpAuth() {
-		return empAuth;
+	public JLabel getLblGreeting() {
+		return lblGreeting;
 	}
-	public void setEmpAuth(Employee empAuth) {
-		this.empAuth = empAuth;
+	private void setMenuDisabled(MouseEvent e) {
+		if(empAuth.getEmpAuth().equals("CS")) {
+			mnEmp.setEnabled(false);
+			mntmEmpSearch.setEnabled(false);
+			mnEmpInfo.setEnabled(false);
+			mnEmpAuth.setEnabled(false);
+		}
+		else {
+			JMenu menu = (JMenu)e.getSource();
+			if(mnCust.equals(menu)) {
+				mnCust.setEnabled(false);
+				mntmCustInfo.setEnabled(false);
+				mntmCustPlan.setEnabled(false);
+				mntmCustStatistic.setEnabled(false);
+				mntmDepositWithdraw.setEnabled(false);
+			}
+			else {
+				mnBankWork.setEnabled(false);
+				mnBankBook.setEnabled(false);
+				mnCard.setEnabled(false);
+				mnLoan.setEnabled(false);
+			}
+			
+		}
 	}
 	private JPanel getMainLogoPanel() {
 		JPanel panel = new JPanel();
@@ -372,12 +431,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setBackground(Color.WHITE);
 		lblGreeting = new JLabel();
 		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		lblGreeting.setText(empAuth.getEmpName() + "님 환영합니다 ~");
 		JButton btnLogout = new JButton("로그아웃");
 		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnLogout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				setClear();
 				dispose();
 			}
 		});
@@ -385,21 +444,40 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.add(btnLogout);
 		return panel;
 	}
-	public void initEmpAuth() {
+	public void setClear() {
+		mnEmp.setEnabled(true);
+		mntmEmpSearch.setEnabled(true);
+		mnEmpInfo.setEnabled(true);
+		mnEmpAuth.setEnabled(true);
+		mnCust.setEnabled(true);
+		mntmCustInfo.setEnabled(true);
+		mntmCustPlan.setEnabled(true);
+		mntmCustStatistic.setEnabled(true);
+		mntmDepositWithdraw.setEnabled(true);
+		mnBankWork.setEnabled(true);
+		mnBankBook.setEnabled(true);
+		mnCard.setEnabled(true);
+		mnLoan.setEnabled(true);
+		contentPane.remove(pCenter);
+		pCenter = new JPanel();
+		pCenter.setBackground(Color.white);
+		pcNorth = getLoginPanel();
+		pcCenter = getMainLogoPanel();
+		pCenter.add(pcNorth,BorderLayout.NORTH);
+		pCenter.add(pcCenter,BorderLayout.CENTER);
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
+	}
+	public void initEmpAuth(String empName) {
 		try {
 			Employee emp = new Employee();
-			emp.setEmpName(lblGreeting.getText().substring(0,lblGreeting.getText().indexOf("님")));
-			if(empAuth==null) {
-				empAuth = empService.GetEmpAuth(emp);
-				empAuth.setEmpName(lblGreeting.getText().substring(0,lblGreeting.getText().indexOf("님")));
-			}
+			emp.setEmpName(empName);
+			empAuth = empService.GetEmpAuth(emp);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	public JLabel getLblGreeting() {
-		return lblGreeting;
 	}
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
@@ -441,40 +519,45 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 	}
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
-		pCenter.removeAll();
-		pEmpUIPanel = new EmpCenterUIpanel();
-	       pCenter.add(pEmpUIPanel,BorderLayout.CENTER);
-	       repaint();
-	       revalidate();
+		contentPane.remove(pCenter);
+		pCenter = new EmpCenterUIpanel();
+	    contentPane.add(pCenter,BorderLayout.CENTER);
+	    repaint();
+	    revalidate();
 	}
 	//업무정보 조회 키 누르면 
 	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
-		pCenter.removeAll();
-		pEmpUIPanel2 = new EmpCenterUIpanel2Work();
-	    pCenter.add(pEmpUIPanel2,BorderLayout.CENTER);
+		greeting = lblGreeting.getText();
+		contentPane.remove(pCenter);
+		pCenter = new EmpCenterUIpanel2Work();
+	    contentPane.add(pCenter,BorderLayout.CENTER);
 	    repaint();
 	    revalidate();
 		
 	}
 	//사원 현황 누르면  - 통계연결
 	protected void mntmStatisticActionPerformed(ActionEvent e) {
-		pCenter.removeAll();
-		pEmpUIPanel3 = new EmpStaticPanel();
-	    pCenter.add(pEmpUIPanel3,BorderLayout.CENTER);	
+		greeting = lblGreeting.getText();
+		contentPane.remove(pCenter);
+		pCenter = new EmpStaticPanel();
+	    contentPane.add(pCenter,BorderLayout.CENTER);	
 	    repaint();
         revalidate();
 	}
 	
 	//사원권한 누르면
 	protected void mnEmpAuthActionPerformed(ActionEvent e) {
-		pCenter.removeAll();
-		pEmpUIPanel4 = new EmpCenterUIpanelAuth();
-		pCenter.add(pEmpUIPanel4,BorderLayout.CENTER);
+		greeting = lblGreeting.getText();
+		contentPane.remove(pCenter);
+		pCenter = new EmpCenterUIpanelAuth();
+		contentPane.add(pCenter,BorderLayout.CENTER);
 	    repaint();
 	    revalidate();
 	}
 	protected void mntmCardActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new CardCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -482,20 +565,23 @@ public class MainFrame extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
-		 contentPane.remove(pCenter);
-		 pCenter = new CardCenterStatisticPanel();
-		 contentPane.add(pCenter,BorderLayout.CENTER);
-		 repaint();
-		 revalidate();
+		greeting = lblGreeting.getText();
+		contentPane.remove(pCenter);
+		pCenter = new CardCenterStatisticPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
 	}
 	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
-		 pCenter = new CardCenterTransInfoPanel();
-		 contentPane.add(pCenter,BorderLayout.CENTER);
-		 repaint();
-		 revalidate();
+		pCenter = new CardCenterTransInfoPanel();
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
 	}
 	protected void mntmBankBookActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new BankBookCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -503,6 +589,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new BankBookTransHisStatisticPanel();
 		contentPane.add(pCenter);
@@ -510,6 +597,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new BankBookInfoStatisticPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -517,6 +605,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new LoanInfoStatisticPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -524,6 +613,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		revalidate();
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
+		greeting = lblGreeting.getText();
 		contentPane.remove(pCenter);
 		pCenter = new LoanCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);

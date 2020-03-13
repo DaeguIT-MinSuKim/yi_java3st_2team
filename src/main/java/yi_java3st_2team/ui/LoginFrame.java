@@ -24,6 +24,9 @@ import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.service.LoginService;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -73,6 +76,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
+		main.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				main.setClear();
+			}
+			
+		});
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
@@ -129,11 +139,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.add(lblNId);
 		
 		tfId = new JTextField();
-		//미리 아이디랑 비번 넣어두기
-		tfId.setText("111");
 		tfId.setBackground(SystemColor.menu);
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		tfId.setText("111");
 		pcCenter.add(tfId);
 		tfId.setColumns(10);
 		
@@ -151,9 +158,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		pfPass = new JPasswordField();
 		pfPass.setBackground(SystemColor.menu);
-		pfPass.setText("111");
 		pfPass.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
-		pfPass.setText("111");
 		pcCenter.add(pfPass);
 		
 		btnLogin = new JButton("Login");
@@ -199,7 +204,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
 			tfId.setEditable(true);
 			pfPass.setEditable(true);
-			main.setEmpAuth(new Employee(chkEmp.getEmpName()));
+			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
+			main.initEmpAuth(chkEmp.getEmpName());
 			main.setVisible(true);
 		}
 		else {
