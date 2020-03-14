@@ -187,7 +187,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == btnLogout) {
 			btnLogoutActionPerformed(e);
-			JOptionPane.showMessageDialog(null, "이거눌림");
+	//		JOptionPane.showMessageDialog(null, "이거눌림");
 		}
 	}
 	private void btnLogoutActionPerformed(ActionEvent e) {
