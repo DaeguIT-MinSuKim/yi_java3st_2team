@@ -209,14 +209,14 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					    
 						pEmpTblPanel.loadTableData(service.showEmpList());
 						dlgEmpForUpdate.setVisible(false);
-						
+						JOptionPane.showMessageDialog(null, "수정 되었습니다");
 						
 						}catch (NullPointerException e2) {
 	                     //  JOptionPane.showMessageDialog(null, "부서를 입력해주세요");
 							e2.printStackTrace();
 							return;
 						}
-						JOptionPane.showMessageDialog(null, "수정 되었습니다");
+						
 						
 					}
 						

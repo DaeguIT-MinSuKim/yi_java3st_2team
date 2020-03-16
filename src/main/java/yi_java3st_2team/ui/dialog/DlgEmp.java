@@ -244,7 +244,7 @@ public class DlgEmp extends JDialog {
 			return null;
 		}
 		String empTitle = tfEmpTitle.getText().trim();
-		String empAuth = null;  //null로 넣어도 되는걸까
+		String empAuth = tfEmpAuth.getText().trim();  
 		int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
 		String empTel = tfEmpTel.getText().trim();
 		String empId = tfEmpId.getText().trim();
