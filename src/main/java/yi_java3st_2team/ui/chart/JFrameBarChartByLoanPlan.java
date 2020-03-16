@@ -60,7 +60,7 @@ public class JFrameBarChartByLoanPlan {
 		barChart.setPrefSize(500, 400);
 		try {
 			for(LoanInfo l : service.showLoanInfo()) {
-				JOptionPane.showMessageDialog(null, l);
+				//JOptionPane.showMessageDialog(null, l);
 				barChart.getData().add(getBarChartData(l));
 			}
 		} catch (SQLException e) {

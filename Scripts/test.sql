@@ -1,6 +1,8 @@
 use bank;
 #사원 - 장현서
 
+update employee set emppwd = 111 where `empName` ='test';
+
 select * from employee e2 ;
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력
