@@ -69,10 +69,14 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				
 				if(e.getActionCommand()=="추가") {
 				
-					if(dlgEmp == null) {
-					dlgEmp = new DlgEmp();
+//					if(dlgEmp == null) {
+//					
+//					}
+					if(dlgEmp != null) {
+						dlgEmp.dispose();
 					}
 	
+					dlgEmp = new DlgEmp();
 					//부서 리스트 가져와서 콤보박스에 넣기 
 					dlgEmp.setCmbDeptList(service.showDeptList());
 					dlgEmp.setVisible(true);
@@ -85,17 +89,14 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				}if(e.getActionCommand()=="수정") {
 					//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 						Employee emp = pEmpTblPanel.getSelectedItem();
-						if(dlgEmpForUpdate == null) {
-							dlgEmpForUpdate = new DlgEmp();
-							dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
-							dlgEmpForUpdate.setItem(emp);
-						}
-						if(dlgEmpForUpdate != null){
-							dlgEmpForUpdate.setVisible(true);
-							dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
-							dlgEmpForUpdate.setItem(emp);
-						}
 						
+						if(dlgEmpForUpdate != null){
+							dlgEmpForUpdate.dispose();
+						}
+						dlgEmpForUpdate = new DlgEmp();
+						dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
+						dlgEmpForUpdate.setVisible(true);
+						dlgEmpForUpdate.setItem(emp);
 						
 		
 						//다이얼로그 버튼을 수정으로 바꾸고 myDlgActionListner달기
