@@ -39,6 +39,28 @@ public class EmployeeUIService {
     	return empDao.selectEmpByTitle(empItem);
     }
     
+    
+    //퍼포먼스 테이블 리스트 불러오기
+    
+    public List<Employee> showPickedEmpListForPerform(String empItem) throws SQLException{
+    	return empDao.selectEmpByNameListForPerform(empItem);
+    }
+    public List<Employee> showPickedEmpByDeptForPerform(String empItem) throws SQLException{
+    	return empDao.selectEmpByDeptForPerform(empItem);
+    }
+    public List<Employee> showPickedEmpByEmpNoForPerform(String empItem) throws SQLException{
+    	return empDao.selectEmpByNoForPerform(empItem);
+    }
+    public List<Employee> showPickedEmpByTitleForPerform(String empItem) throws SQLException{
+    	return empDao.selectEmpByTitleForPerform(empItem);
+    }
+    
+    
+    
+    
+    
+    
+    
     public List<Department> showDeptList(){
     	return empDao.selectDeptByAll();
     }

@@ -15,6 +15,7 @@ import javax.swing.JPopupMenu;
 
 import com.mysql.jdbc.MysqlDataTruncation;
 
+import javafx.scene.control.Alert;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.dialog.DlgEmp;
 import yi_java3st_2team.ui.service.EmployeeUIService;
@@ -29,7 +30,9 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	private DlgEmp dlgEmp;
 	private DlgEmp dlgEmpForUpdate;
 
-
+	private Object selectedOne;
+	
+	
 	public EmpCenterUIpanel() {
 		service = new EmployeeUIService();
 		initialize();
@@ -238,7 +241,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					
 				}
 			};
-			private Object selectedOne;
+	
 
 			
 			
@@ -260,19 +263,23 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		
 		//콤보박스의 값 가져오기 
 		selectedOne = pEmpSerch.getCmbSearchList().getSelectedItem();
-		System.out.println(selectedOne); // 부서 사원번호등 목록으로 불러와짐
+		// System.out.println(selectedOne); // 부서 사원번호등 목록으로 불러와짐
 		
 		//서치 패널에 입력하는 값을 가지고 오기
 		String empItem = pEmpSerch.getTfSearch().getText().trim();
 	
 		if(pEmpSerch.getTfSearch().getText().contentEquals("")) {
-			JOptionPane.showMessageDialog(null, "사원 이름을 입력해주세요");
+			JOptionPane.showMessageDialog(null, "검색할 값을 입력해주세요");
 			return;
 		}
 		
 		List<Employee> list = new ArrayList<Employee>(); 
 		
 		try {
+			if(selectedOne.equals("통합검색")) {
+				JOptionPane.showMessageDialog(null, "검색할 조건을 선택해주세요");
+				return;
+			}
 			if(selectedOne.equals("사원이름")) {
 			  //list.add(service.showPickedEmp(empItem));
 			  list = service.showPickedEmpList(empItem);
