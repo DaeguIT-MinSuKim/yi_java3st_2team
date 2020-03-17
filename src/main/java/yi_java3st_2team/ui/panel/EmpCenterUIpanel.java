@@ -42,6 +42,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		add(pEmpSerch);
 		
 		
+		
 		pEmpTblPanel = new EmpCenterTblPanel();
 	    //리스트불러오기
 		pEmpTblPanel.loadTableData(service.showEmpList());
@@ -237,6 +238,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					
 				}
 			};
+			private Object selectedOne;
 
 			
 			
@@ -255,7 +257,13 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	}
 	protected void pEmpSerchBtnSearchActionPerformed(ActionEvent e) {
 		//조회누르면
-		String empName = pEmpSerch.getTfSearch().getText().trim();
+		
+		//콤보박스의 값 가져오기 
+		selectedOne = pEmpSerch.getCmbSearchList().getSelectedItem();
+		System.out.println(selectedOne); // 부서 사원번호등 목록으로 불러와짐
+		
+		//서치 패널에 입력하는 값을 가지고 오기
+		String empItem = pEmpSerch.getTfSearch().getText().trim();
 	
 		if(pEmpSerch.getTfSearch().getText().contentEquals("")) {
 			JOptionPane.showMessageDialog(null, "사원 이름을 입력해주세요");
@@ -265,7 +273,18 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		List<Employee> list = new ArrayList<Employee>(); 
 		
 		try {
-			list.add(service.showPickedEmp(empName));
+			if(selectedOne.equals("사원이름")) {
+			  //list.add(service.showPickedEmp(empItem));
+			  list = service.showPickedEmpList(empItem);
+		    }else if(selectedOne.equals("부서")) {
+		      list = service.showPickedEmpByDept(empItem);
+		    }else if(selectedOne.equals("사원번호")) {
+		      list = service.showPickedEmpByEmpNo(empItem);
+		    }else if(selectedOne.equals("직급")) {
+		      list = service.showPickedEmpByTitle(empItem);
+		    }
+			
+			
 			pEmpTblPanel.loadTableData(list);
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null, "다시 검색해주세요");

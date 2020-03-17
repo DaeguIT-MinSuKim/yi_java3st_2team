@@ -3,6 +3,10 @@ use bank;
 
 update employee set emppwd = 111 where `empName` ='test';
 
+
+select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo  from employee e left join department d on e.deptNo = d.deptNo where d.deptName='인사';
+select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo from employee e left join department d on e.deptNo = d.deptNo  where empName like '%장%';
+
 select * from employee e2 ;
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력

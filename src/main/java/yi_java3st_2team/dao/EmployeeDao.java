@@ -16,6 +16,11 @@ public interface EmployeeDao {
     //이름으로 검색
 	List<Employee> selectEmpByNameList(String empName)throws SQLException;
 	Employee selectEmpByName(String empName)throws SQLException;
+	//부서로 검색
+	List<Employee> selectEmpByDept(String empItem)throws SQLException;
+	List<Employee> selectEmpByNo(String empItem)throws SQLException;
+	List<Employee> selectEmpByTitle(String empItem)throws SQLException;
+	
 	
     //전체 사원 리스트
 	List<Employee> selectEmployeeByAll();

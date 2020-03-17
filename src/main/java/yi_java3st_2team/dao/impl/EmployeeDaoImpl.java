@@ -80,12 +80,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		List<Employee> list = new ArrayList<Employee>();
 		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
-				"   where empName=?";
+				"   where empName like ?";
 		
 		try (Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, empName);
+			pstmt.setString(1, "%"+empName+"%");
 			
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
@@ -441,6 +441,95 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		
 		
 		return 0;
+	}
+
+	
+	// 부서로 검색하기 
+	@Override
+	public List<Employee> selectEmpByDept(String empItem) throws SQLException {
+		 Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where d.deptName=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByNo(String empItem) throws SQLException {
+		Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where empCode=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByTitle(String empItem) throws SQLException {
+		Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where empTitle=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
 	}
 	
 
