@@ -53,12 +53,16 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private MainFrame main;
 	private Employee chkEmp;
 	private JButton btnLogout;
+	private JPanel panel_1;
 	
+	private static LoginFrame frame;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+		
+
 			public void run() {
 				try {
-					LoginFrame frame = new LoginFrame();
+					frame = new LoginFrame();
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -132,7 +136,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.setBackground(Color.WHITE);
 		pcCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
 		pCenter.add(pcCenter, BorderLayout.CENTER);
-		pcCenter.setLayout(new GridLayout(0, 3, 20, 20));
+		pcCenter.setLayout(new GridLayout(0, 2, 20, 20));
 		
 		lblNId = new JLabel("User Id");
 		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -145,12 +149,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.add(tfId);
 		tfId.setColumns(10);
 		
-		btnCheck = new JButton("확인");
-		btnCheck.addActionListener(this);
-		btnCheck.setForeground(Color.BLACK);
-		btnCheck.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		btnCheck.setBackground(SystemColor.menu);
-		pcCenter.add(btnCheck);
 		
 		lblPass = new JLabel("Password");
 		lblPass.setFont(new Font("맑은 고딕", Font.BOLD, 20));
@@ -162,16 +160,21 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pfPass.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(pfPass);
 		
-		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(this);
-		btnLogin.setForeground(Color.BLACK);
-		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		btnLogin.setBackground(SystemColor.menu);
-		pcCenter.add(btnLogin);
+		panel_1 = new JPanel();
+		panel_1.setVisible(false);
+		pcCenter.add(panel_1);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		pcCenter.add(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		btnLogin = new JButton("Login");
+		panel.add(btnLogin);
+		btnLogin.addActionListener(this);
+		btnLogin.setForeground(Color.BLACK);
+		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		btnLogin.setBackground(SystemColor.menu);
 		
 		
 	    btnLogout = main.getBtnLogout();
@@ -182,9 +185,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		if (e.getSource() == btnLogin) {
 			btnLoginActionPerformed(e);
 		}
-		if (e.getSource() == btnCheck) {
-			btnCheckActionPerformed(e);
-		}
+
 		if (e.getSource() == btnLogout) {
 			btnLogoutActionPerformed(e);
 	//		JOptionPane.showMessageDialog(null, "이거눌림");
@@ -193,11 +194,16 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void btnLogoutActionPerformed(ActionEvent e) {
 		main.setClear();
 		main.dispose();
+		frame.setVisible(true);
+		tfId.setText("");
+	    pfPass.setText("");
 		chkLogin = false;
 		
 	}
 
-	protected void btnCheckActionPerformed(ActionEvent e) {
+
+	protected void btnLoginActionPerformed(ActionEvent e) {
+		
 		try {
 			Employee emp = new Employee(tfId.getText().trim(),new String(pfPass.getPassword()).trim());
 			chkEmp = service.GetLoginInfo(emp);
@@ -205,7 +211,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다. 다시 확인해주세요");
 				return;
 			}
-			JOptionPane.showMessageDialog(null, "확인되었습니다. 로그인을 수행해 주세요");
 			tfId.setEditable(false);
 			pfPass.setEditable(false);
 			chkLogin = true;
@@ -214,12 +219,11 @@ public class LoginFrame extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 		
-	}
-	protected void btnLoginActionPerformed(ActionEvent e) {
 		if(chkLogin) {
 			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
 			tfId.setEditable(true);
 			pfPass.setEditable(true);
+			frame.setVisible(false);
 			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
 			main.initEmpAuth(chkEmp.getEmpName());
 			main.setVisible(true);
