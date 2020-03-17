@@ -53,13 +53,17 @@ public class CustInfoCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 	@Override
 	public Customer getSelectedItem() {
 		int selectedIdx = getSelectedRowIdx();
-		String custCode = (String) model.getValueAt(selectedIdx, 0);
-		String custName = (String) model.getValueAt(selectedIdx, 1);
-		String custRank = (String) model.getValueAt(selectedIdx, 2);
-		int custCredit = (int) model.getValueAt(selectedIdx, 3);
-		String custAddr = (String) model.getValueAt(selectedIdx, 4);
-		String custTel = (String) model.getValueAt(selectedIdx, 5);
-		return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
+		if(selectedIdx==-1) {
+			return null;
+		}else {
+			String custCode = (String) model.getValueAt(selectedIdx, 0);
+			String custName = (String) model.getValueAt(selectedIdx, 1);
+			String custRank = (String) model.getValueAt(selectedIdx, 2);
+			int custCredit = (int) model.getValueAt(selectedIdx, 3);
+			String custAddr = (String) model.getValueAt(selectedIdx, 4);
+			String custTel = (String) model.getValueAt(selectedIdx, 5);
+			return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
+		}
 	}
 
 }

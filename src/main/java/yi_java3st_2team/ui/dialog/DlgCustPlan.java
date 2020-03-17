@@ -123,6 +123,7 @@ public class DlgCustPlan extends JDialog {
 			}
 			{
 				tfCustPlanCode = new JTextField();
+				tfCustPlanCode.setEditable(false);
 				upperPanel.add(tfCustPlanCode);
 				tfCustPlanCode.setColumns(10);
 			}
@@ -217,7 +218,8 @@ public class DlgCustPlan extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						tfClear();
+						tfCustPlanName.setText("");
+						textAreaPlanDesc.setText("");
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

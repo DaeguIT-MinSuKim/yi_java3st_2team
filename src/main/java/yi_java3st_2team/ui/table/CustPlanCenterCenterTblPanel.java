@@ -50,12 +50,16 @@ public class CustPlanCenterCenterTblPanel extends AbsCenterTblPanel<Plan> {
 	@Override
 	public Plan getSelectedItem() {
 		int selectedIdx = getSelectedRowIdx();
-		String planCode = (String) model.getValueAt(selectedIdx, 0);
-		String planDetail = (String) model.getValueAt(selectedIdx, 1);
-		String planName = (String) model.getValueAt(selectedIdx, 2);
-		String planDesc = (String) model.getValueAt(selectedIdx, 3);
-		String planDiv = (String) model.getValueAt(selectedIdx, 4);
-		return new Plan(planCode, planDetail, planName, planDesc, planDiv);
+		if(selectedIdx==-1) {
+			return null;
+		}else {
+			String planCode = (String) model.getValueAt(selectedIdx, 0);
+			String planDetail = (String) model.getValueAt(selectedIdx, 1);
+			String planName = (String) model.getValueAt(selectedIdx, 2);
+			String planDesc = (String) model.getValueAt(selectedIdx, 3);
+			String planDiv = (String) model.getValueAt(selectedIdx, 4);
+			return new Plan(planCode, planDetail, planName, planDesc, planDiv);
+		}
 	}
 
 }
