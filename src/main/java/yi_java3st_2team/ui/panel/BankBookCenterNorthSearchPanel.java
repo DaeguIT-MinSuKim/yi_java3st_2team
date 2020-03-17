@@ -9,13 +9,19 @@ public class BankBookCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Ba
 	/**
 	 * Create the panel.
 	 */
-	public BankBookCenterNorthSearchPanel() {
-		setText("고객 이름 검색");
-	}
+//	public BankBookCenterNorthSearchPanel() {
+//		setText("고객 이름 검색");
+//	}
 
 	@Override
 	protected void tfClear() {
 		getTfSearch().setText("");	
+	}
+
+	@Override
+	public String[] setSearchList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

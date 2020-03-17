@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
@@ -20,6 +22,9 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	private JButton btnSearch;
 	private JButton btnCancel;
 	private JPanel pBtn;
+	private JComboBox cmbSearchList;
+	
+	
 	public AbsCenterNorthSearchPanel() {
 		initialize();
 	}
@@ -31,13 +36,16 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		add(pSearch, BorderLayout.CENTER);
 		pSearch.setLayout(new GridLayout(0, 2, 20, 20));
 		
-		lblSearch = new JLabel("");
-		lblSearch.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblSearch.setForeground(Color.BLACK);
-		lblSearch.setBackground(Color.WHITE);
-		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,16));
-		lblSearch.setOpaque(true);
-		pSearch.add(lblSearch);
+		cmbSearchList = new JComboBox(setSearchList());
+		pSearch.add(cmbSearchList);
+		
+//		lblSearch = new JLabel("");
+//		lblSearch.setHorizontalAlignment(SwingConstants.RIGHT);
+//		lblSearch.setForeground(Color.BLACK);
+//		lblSearch.setBackground(Color.WHITE);
+//		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,16));
+//		lblSearch.setOpaque(true);
+//		pSearch.add(lblSearch);
 		
 		tfSearch = new JTextField();
 		pSearch.add(tfSearch);
@@ -58,9 +66,17 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	
 	
 	
-	public JLabel getLblSearch() {
-		return lblSearch;
+	public JComboBox getCmbSearchList() {
+		return cmbSearchList;
 	}
+	public void setCmbSearchList(JComboBox cmbSearchList) {
+		this.cmbSearchList = cmbSearchList;
+	}
+	
+	public abstract String[] setSearchList();
+//	public JLabel getLblSearch() {
+//		return lblSearch;
+//	}
 	public JTextField getTfSearch() {
 		return tfSearch;
 	}
@@ -70,8 +86,8 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
-	protected void setText(String text) {
-		lblSearch.setText(text);
-	}
+//	protected void setText(String text) {
+//		lblSearch.setText(text);
+//	}
 	abstract protected void tfClear();
 }

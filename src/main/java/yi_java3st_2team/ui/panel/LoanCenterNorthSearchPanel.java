@@ -9,13 +9,19 @@ public class LoanCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<BankBo
 	/**
 	 * Create the panel.
 	 */
-	public LoanCenterNorthSearchPanel() {
-		setText("고객 이름 검색");
-	}
+//	public LoanCenterNorthSearchPanel() {
+//		setText("고객 이름 검색");
+//	}
 
 	@Override
 	protected void tfClear() {
 		getTfSearch().setText("");	
+	}
+
+	@Override
+	public String[] setSearchList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

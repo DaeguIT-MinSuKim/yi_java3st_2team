@@ -12,18 +12,24 @@ public class CustInfoCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Cu
 
 	public CustInfoCenterNorthSearchPanel() {
 		
-		initialize();
+	//	initialize();
 	}
-	private void initialize() {
-		getLblSearch().setFont(new Font("맑은 고딕", Font.BOLD, 20));
-		getLblSearch().setHorizontalAlignment(SwingConstants.CENTER);
-		getLblSearch().setText("고객명 입력");
-		getLblSearch().setForeground(Color.BLACK);
-	}
+//	private void initialize() {
+//		getLblSearch().setFont(new Font("맑은 고딕", Font.BOLD, 20));
+//		getLblSearch().setHorizontalAlignment(SwingConstants.CENTER);
+//		getLblSearch().setText("고객명 입력");
+//		getLblSearch().setForeground(Color.BLACK);
+//	}
 
 	@Override
 	public void tfClear() {
 		this.getTfSearch().setText("");
+	}
+
+	@Override
+	public String[] setSearchList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
