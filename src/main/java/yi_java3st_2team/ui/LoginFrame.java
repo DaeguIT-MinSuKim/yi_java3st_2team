@@ -56,6 +56,12 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel panel_1;
 	
 	private static LoginFrame frame;
+	
+	
+	public static LoginFrame getFrame() {
+		return frame;
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 		
@@ -191,7 +197,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	//		JOptionPane.showMessageDialog(null, "이거눌림");
 		}
 	}
-	private void btnLogoutActionPerformed(ActionEvent e) {
+	protected void btnLogoutActionPerformed(ActionEvent e) {
 		main.setClear();
 		main.dispose();
 		frame.setVisible(true);

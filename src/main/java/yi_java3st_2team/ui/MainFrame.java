@@ -89,6 +89,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmLoanSearch;
 	private String greeting;
 	private JButton btnLogout;
+	private static LoginFrame loginFrame;
 
 	public MainFrame() {
 		initialize();
@@ -441,6 +442,8 @@ public class MainFrame extends JFrame implements ActionListener {
 //				dispose();
 //			}
 //		});  // 로그인프레임에서 처리하도록 함
+		//로그아웃 버튼에 액션리스너 달기
+		btnLogout.addActionListener(this);
 		panel.add(lblGreeting);
 		panel.add(btnLogout);
 		return panel;
@@ -524,7 +527,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (e.getSource() == mntmCard) {
 			mntmCardActionPerformed(e);
 		}
+		//로그아웃
+		if (e.getSource() == btnLogout) {
+			loginFrame = loginFrame.getFrame();
+			loginFrame.btnLogoutActionPerformed(e);
+		}
 	}
+	
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
