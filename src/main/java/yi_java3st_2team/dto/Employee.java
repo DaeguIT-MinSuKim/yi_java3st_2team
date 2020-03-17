@@ -106,6 +106,19 @@ public class Employee {
 		this.empTitle = empTitle;
 		this.empAuth = empAuth;
 	}
+	
+	
+
+	public Employee(String empCode, String empName, String empTitle, String empAuth, Department dept) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
+		this.dept = dept;
+	}
+
+
 
 	public Employee(String empId, String empPwd) {
 		this.empId = empId;

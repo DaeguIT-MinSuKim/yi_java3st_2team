@@ -102,7 +102,9 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 				
 			if(e.getActionCommand()=="수정") {
 				//다이얼로그에서 수정을 누르면 디비에서 권한부분 수정 됨 
-				Employee emp = pEmpTblPanel.getSelectedItem();
+				try{
+					Employee emp = pEmpTblPanel.getSelectedItem();
+				
 
 			
 				updateEmp = dlgEmpAuth.getItem(emp);
@@ -113,8 +115,10 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 				service.modifyEmpAuth(updateEmp);
 				JOptionPane.showMessageDialog(null, "권한이 수정되었습니다");
 				dlgEmpAuth.setVisible(false);
-
+			 }catch (Exception e1) {
+				// TODO: handle exception
 			}
+		 }
 				
 			if(e.getActionCommand()=="취소") {
 				//다이얼로그에서 취소 누르면 다이얼로그의 권한 값이 삭제됨
