@@ -142,6 +142,7 @@ public class CustPlanUIPanel extends JPanel{
 					}
 					
 				});
+				dlgcustplan.setLocation(890, 100);
 				dlgcustplan.setVisible(true);
 				
 			}
@@ -153,11 +154,22 @@ public class CustPlanUIPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
+				dlgcustplan.getTfCustPlanCode().setEditable(false);
+				dlgcustplan.getTfCustDetail().setEditable(false);
+				dlgcustplan.getCmbCustPlanDiv().setEnabled(false);
+				dlgcustplan.getCmbCustPlanDiv().setEnabled(false);
+				dlgcustplan.getCmbPlanDetail().setEnabled(false);
 				dlgcustplan.setActiontoEdit();
 				try {
 					Plan plan = panel_1.getSelectedItem();
-					dlgcustplan.setVisible(true);
-					dlgcustplan.setItem(plan);
+					if(plan!=null) {
+						dlgcustplan.setLocation(890, 100);
+						dlgcustplan.setVisible(true);
+						dlgcustplan.setItem(plan);
+					}else {
+						JOptionPane.showMessageDialog(null, "상품을 선택하세요.");
+					}
+					
 				}catch (RuntimeException e2) {
 					JOptionPane.showMessageDialog(null, e2.getMessage());
 				}
@@ -193,10 +205,15 @@ public class CustPlanUIPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Plan plan = panel_1.getSelectedItem();
+				
 				try {
-					planService.removePlan(plan);
-					JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
-					refreshTbl();
+					if(plan!=null) {
+						planService.removePlan(plan);
+						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+						refreshTbl();
+					}else {
+						JOptionPane.showMessageDialog(null, "상품을 선택하세요.");
+					}
 					
 				} catch (SQLException e1) {
 					e1.printStackTrace();

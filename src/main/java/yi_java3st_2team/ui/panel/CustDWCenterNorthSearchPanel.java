@@ -8,9 +8,9 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class CustInfoCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Customer> {
+public class CustDWCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Customer> {
 
-	public CustInfoCenterNorthSearchPanel() {
+	public CustDWCenterNorthSearchPanel() {
 		
 	}
 
@@ -21,7 +21,7 @@ public class CustInfoCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Cu
 
 	@Override
 	public String[] setSearchList() {
-		String[] list = {"통합검색", "고객코드", "고객명","고객등급", "신용등급", "주소", "연락처"}; 
+		String[] list = {"통합검색", "고객명", "계좌번호"}; 
 		return list;
 	}
 

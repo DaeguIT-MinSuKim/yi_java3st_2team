@@ -120,6 +120,7 @@ public class DlgCustInfo extends JDialog {
 		}
 		{
 			tfCustCode = new JTextField();
+			tfCustCode.setEditable(false);
 			contentPanel.add(tfCustCode);
 			tfCustCode.setColumns(10);
 		}

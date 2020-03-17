@@ -24,7 +24,7 @@ public class CustDWUIPanel extends JPanel {
 	CustomerService custService = new CustomerService();
 	BankBookService bankService = new BankBookService();
 	private CustDWCenterCenterTblPanel panel_1;
-	private CustInfoCenterNorthSearchPanel panel;
+	private CustDWCenterNorthSearchPanel panel;
 	
 	public CustDWUIPanel() {
 
@@ -33,7 +33,7 @@ public class CustDWUIPanel extends JPanel {
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
-		panel = new CustInfoCenterNorthSearchPanel();
+		panel = new CustDWCenterNorthSearchPanel();
 		panel.getBtnCancel().addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -53,7 +53,7 @@ public class CustDWUIPanel extends JPanel {
 				try {
 					
 					listForCustName = custService.showCustomerBankInfoByName(custName);
-					if(listForCustName.size()==0) {
+					if(listForCustName==null) {
 						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
 						return;
 					}
@@ -89,10 +89,11 @@ public class CustDWUIPanel extends JPanel {
 				dlgcustDW.getLblAmount().setText("입금 금액");
 				
 				Customer customer = panel_1.getSelectedItem();
+				if(customer != null) {
 				dlgcustDW.getTfCustName().setText(customer.getCustName());
 				Long custBalance = customer.getBankbook().getAccountBalance();
-				String balance = Long.toString(custBalance);
-				dlgcustDW.getTfBalance().setText(balance);
+				
+				dlgcustDW.getTfBalance().setText(String.format("%,d",custBalance));
 				
 				dlgcustDW.getOkButton().addActionListener(new ActionListener() {
 
@@ -104,25 +105,38 @@ public class CustDWUIPanel extends JPanel {
 						}
 						
 						String custAmount = dlgcustDW.getTfCustAmount().getText();
-						int amount = Integer.parseInt(custAmount);
-						String accountNum = customer.getBankbook().getAccountNum();
-						
-						customer.getBankbook().setAccountBalance(custBalance + amount);
-						customer.getBankbook().setAccountNum(accountNum);
-						
-						try {
-							bankService.updateBankBalance(customer);
-							JOptionPane.showMessageDialog(null, "입금 되었습니다.");
-							panel_1.loadTableData(custService.showCustomersByBalance());
-							dlgcustDW.dispose();
-						} catch (SQLException e1) {
-							e1.printStackTrace();
+						//금액(숫자) 외에 문자를 입력했을 경우
+						char tmp;
+						Boolean output = true;
+						for(int i=0; i<custAmount.length(); i++) {
+							tmp = custAmount.charAt(i);
+							if(Character.isDigit(tmp)==false) {
+								output = false;
+							}
 						}
+						if(output==true) {
+								int amount = Integer.parseInt(custAmount);
+								String accountNum = customer.getBankbook().getAccountNum();
+								
+								customer.getBankbook().setAccountBalance(custBalance + amount);
+								customer.getBankbook().setAccountNum(accountNum);
+								
+								try {
+									bankService.updateBankBalance(customer);
+									JOptionPane.showMessageDialog(null, "입금 되었습니다.");
+									panel_1.loadTableData(custService.showCustomersByBalance());
+									dlgcustDW.dispose();
+								} catch (SQLException e1) {
+									e1.printStackTrace();
+								}
 						
-						
+						}else {
+							JOptionPane.showMessageDialog(null, "숫자만 입력하세요.");
+						}
 					}
 					
 				});
+				
 				
 				dlgcustDW.getCancelButton().addActionListener(new ActionListener() {
 
@@ -132,10 +146,13 @@ public class CustDWUIPanel extends JPanel {
 					}
 					
 				});
+				dlgcustDW.setLocation(890, 100);
 				dlgcustDW.setVisible(true);
 				
-				
-			}
+				}else {
+					JOptionPane.showMessageDialog(null, "고객을 선택하세요.");
+				}
+			}//--
 			
 		});
 		JMenuItem withdrawal = new JMenuItem("출금");
@@ -147,51 +164,69 @@ public class CustDWUIPanel extends JPanel {
 				dlgcustDW.getLblAmount().setText("출금 금액");
 				
 				Customer customer = panel_1.getSelectedItem();
-				dlgcustDW.getTfCustName().setText(customer.getCustName());
-				Long custBalance = customer.getBankbook().getAccountBalance();
-				String balance = Long.toString(custBalance);
-				dlgcustDW.getTfBalance().setText(balance);
-				
-				dlgcustDW.getOkButton().addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if(dlgcustDW.getTfCustAmount()==null) {
-							JOptionPane.showMessageDialog(null, "금액을 입력해주세요.");
-							return;
-						}
-						
-						String custAmount = dlgcustDW.getTfCustAmount().getText();
-						int amount = Integer.parseInt(custAmount);
-						String accountNum = customer.getBankbook().getAccountNum();
-						
-						customer.getBankbook().setAccountBalance(custBalance - amount);
-						customer.getBankbook().setAccountNum(accountNum);
-						
-						try {
-							if(custBalance > 0) {
-								bankService.updateBankBalance(customer);
-								JOptionPane.showMessageDialog(null, "출금 되었습니다.");
-								panel_1.loadTableData(custService.showCustomersByBalance());
-								dlgcustDW.dispose();
-							}
-							else {
-								JOptionPane.showMessageDialog(null, "잔액이 없어서 출금할 수 없습니다.");
-								panel_1.loadTableData(custService.showCustomersByBalance());
-								dlgcustDW.dispose();
-							}
-						} catch (SQLException e1) {
-							e1.printStackTrace();
-						}
-						
-						
-					}
+				if(customer != null) {
+					dlgcustDW.getTfCustName().setText(customer.getCustName());
+					Long custBalance = customer.getBankbook().getAccountBalance();
+					dlgcustDW.getTfBalance().setText(String.format("%,d", custBalance));
 					
-				});
-				dlgcustDW.setVisible(true);
+					dlgcustDW.getOkButton().addActionListener(new ActionListener() {
+	
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							if(dlgcustDW.getTfCustAmount()==null) {
+								JOptionPane.showMessageDialog(null, "금액을 입력해주세요.");
+								return;
+							}
+							
+							String custAmount = dlgcustDW.getTfCustAmount().getText();
+							int amount = Integer.parseInt(custAmount);
+							String accountNum = customer.getBankbook().getAccountNum();
+							
+							customer.getBankbook().setAccountBalance(custBalance - amount);
+							customer.getBankbook().setAccountNum(accountNum);
+							
+							try {
+								if(customer.getBankbook().getAccountBalance() >= 0) {
+									bankService.updateBankBalance(customer);
+									JOptionPane.showMessageDialog(null, "출금 되었습니다.");
+									panel_1.loadTableData(custService.showCustomersByBalance());
+									dlgcustDW.dispose();
+								}else {
+									JOptionPane.showMessageDialog(null, "잔액이 부족합니다.");
+									try {
+										panel_1.loadTableData(custService.showCustomersByBalance());
+									} catch (SQLException e1) {
+										e1.printStackTrace();
+									}
+									
+								}
+							
+							} catch (SQLException e1) {
+								e1.printStackTrace();
+							}
+						
+							
+							
+						}
+						
+					});
+					dlgcustDW.getCancelButton().addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							dlgcustDW.getTfCustAmount().setText("");
+							
+						}
+						
+					});
+					dlgcustDW.setLocation(890, 100);
+					dlgcustDW.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "고객을 선택하세요.");
+				}
 			}
-			
 		});
+		
 		popup.add(deposit);
 		popup.add(withdrawal);
 		
