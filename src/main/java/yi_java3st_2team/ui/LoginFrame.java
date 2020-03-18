@@ -235,10 +235,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
 			
 			mainMessage = chkEmp.getEmpName()+"님 환영합니다~";
-			System.out.println(mainMessage);
+		//	System.out.println(mainMessage);
 			main.initEmpAuth(chkEmp.getEmpName());  
 			
-			main.setTitle("YN Bank 직원 프로그램 : "+mainMessage);
+			main.setTitle("YN Bank 직원 프로그램 : "+mainMessage);  //타이틀에 로그인된 회원 정보 표시하기
 			main.setVisible(true);
 		}
 		else {

@@ -43,6 +43,8 @@ import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -90,6 +92,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private String greeting;
 	private JButton btnLogout;
 	private static LoginFrame loginFrame;
+	private JPanel pLogout;
+	private JButton btnMenuLogout;
 
 	public MainFrame() {
 		initialize();
@@ -107,7 +111,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		pNorth = new JPanel();
 		pNorth.setBackground(Color.WHITE);
 		contentPane.add(pNorth, BorderLayout.NORTH);
-		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
+		pNorth.setLayout(new GridLayout(0, 5, 0, 0));
 		pImg = new JPanel();
 		pImg.addMouseListener(new MouseAdapter() {
 			@Override
@@ -370,6 +374,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoanSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoanSearch);
 		
+		pLogout = new JPanel();
+		pLogout.setBackground(Color.WHITE);
+		pLogout.setBorder(new EmptyBorder(8, 60, 8, 60));
+		pNorth.add(pLogout);
+		
+		btnMenuLogout = new JButton("Logout");
+		btnMenuLogout.setBorderPainted(false);
+		btnMenuLogout.setBackground(Color.WHITE);
+		btnMenuLogout.addActionListener(this);
+		pLogout.setLayout(new BorderLayout(0, 0));
+		pLogout.add(btnMenuLogout);
+		
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.WHITE);
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -438,7 +454,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setBackground(Color.WHITE);
 		String imgPath = System.getProperty("user.dir") + "//images//MainLogo.png";
 		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 400, 1)));
-		panel.add(mainLogo);
+		panel.add(mainLogo,BorderLayout.CENTER);
 		return panel;
 	}
 	public JPanel getLoginPanel() {
@@ -505,6 +521,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnMenuLogout) {
+			loginFrame = loginFrame.getFrame();
+			loginFrame.btnLogoutActionPerformed(e);
+		}
 		if (e.getSource() == mnEmpAuth) {
 			mnEmpAuthActionPerformed(e);
 		}
@@ -546,6 +566,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			loginFrame = loginFrame.getFrame();
 			loginFrame.btnLogoutActionPerformed(e);
 		}
+		
 	}
 	
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
@@ -655,4 +676,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 	}
+	
+	
 }
