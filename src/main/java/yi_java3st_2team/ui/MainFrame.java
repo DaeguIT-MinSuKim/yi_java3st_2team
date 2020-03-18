@@ -147,6 +147,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		pImg.add(lblLogo);
 		
 		pEmp = new JPanel();
+		pEmp.setBorder(new EmptyBorder(0, 90, 0, 0));
 		pEmp.setBackground(Color.WHITE);
 		pNorth.add(pEmp);
 		pEmp.setLayout(new BorderLayout(0, 0));
@@ -196,6 +197,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnEmp.add(mnEmpAuth);
 		
 		pCust = new JPanel();
+		pCust.setBorder(new EmptyBorder(0, 70, 0, 0));
 		pCust.setBackground(Color.WHITE);
 		pNorth.add(pCust);
 		pCust.setLayout(new BorderLayout(0, 0));
@@ -293,6 +295,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnCust.add(mntmDepositWithdraw);
 		
 		pBankWork = new JPanel();
+		pBankWork.setBorder(new EmptyBorder(0, 70, 0, 0));
 		pBankWork.setBackground(Color.WHITE);
 		pNorth.add(pBankWork);
 		pBankWork.setLayout(new BorderLayout(0, 0));
