@@ -43,7 +43,6 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 			panel_1.loadTableData(list);
 			panel_1.setPopupMenu(createPopup());
 		} catch (SQLException e) {
-			System.out.println("해당 고객이 없습니다.");
 			e.printStackTrace();
 		}
 		add(panel_1, BorderLayout.CENTER);
@@ -106,7 +105,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 					}
 					
 				});
-				dlgCustInfo.setLocation(890, 100);
+				dlgCustInfo.setLocation(1310, 100);
 				dlgCustInfo.setVisible(true);
 				
 			}
@@ -146,7 +145,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 					
 						
 						});
-					dlgCustInfo.setLocation(890, 100);
+					dlgCustInfo.setLocation(1310, 100);
 					dlgCustInfo.setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "고객을 선택하세요.");
@@ -193,21 +192,44 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void panelBtnSearchActionPerformed(ActionEvent e) {
-		String custName = panel.getTfSearch().getText().trim();
-		List<Customer> listForCustName = new ArrayList<>();
+		//조회 버튼을 눌렀을 때 검색범위 선택 콤보박스의 값에 따라 다른 결과가 테이블에 표시되도록 하는 부분 
+		String custInfo = panel.getTfSearch().getText().trim();
+		List<Customer> list = new ArrayList<>();
 		try {
-			Customer newCust = custService.showCustomerByName(custName);
-			
-			if(listForCustName.size()==0) {
-				if(newCust==null) {
-					JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
-					return;
-				}
-				listForCustName.add(newCust);
+			String search = (String) panel.getCmbSearchList().getSelectedItem();
+			//경고창이 떠야할 때 : DB에서 받아오는 객체가 null 일 때 ,콤보박스에서 선택한 값이 통합검색 일 때
+			if(search.equals("통합검색")) {
+				JOptionPane.showMessageDialog(null, "검색 범위를 선택해주세요.");
+				return;
 			}
-			panel_1.loadTableData(listForCustName);
+			if(list.size()==0) {
+				if(search.equals("고객코드")) {
+					Customer custByCode = custService.showCustomerByCode(custInfo);
+					if(custByCode==null) {
+						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+						return;
+					}
+					list.add(custByCode);
+				}else if(search.equals("고객명")) {
+					Customer custByName = custService.showCustomerByName(custInfo);
+					if(custByName==null) {
+						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+						return;
+					}
+					list.add(custByName);
+				}else if(search.equals("연락처")) {
+					Customer custByTel = custService.showCustomerByTel(custInfo);
+					if(custByTel==null) {
+						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+						return;
+					}
+					list.add(custByTel);
+				}
+				panel_1.loadTableData(list);
+				
+			}
+			
 		} catch (SQLException e1) {
-			System.out.println("해당 고객이 없습니다.");
 			e1.printStackTrace();
 		}
 	}
