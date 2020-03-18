@@ -79,6 +79,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 		main = new MainFrame();
 		main.addWindowListener(new WindowAdapter() {
 			@Override
+			
+			
 			public void windowClosed(WindowEvent e) {
 				main.setClear();
 			}
