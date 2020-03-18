@@ -98,7 +98,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		empService = new EmployeeService();
 		setTitle("YN Bank 직원 프로그램");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 1224, 700);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -114,15 +114,19 @@ public class MainFrame extends JFrame implements ActionListener {
 				if(greeting == null) {
 					greeting = lblGreeting.getText();
 				}
+				
 				contentPane.remove(pCenter);
-				pcNorth = getLoginPanel();
+    			pcNorth = getLoginPanel();
 				lblGreeting.setText(greeting);
 				pcCenter = getMainLogoPanel();
+//				
 				pCenter = new JPanel();
+				pCenter.setLayout(new BorderLayout(0, 0));
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				pCenter.setBackground(Color.white);
 				pCenter.add(pcNorth,BorderLayout.NORTH);
 				pCenter.add(pcCenter,BorderLayout.CENTER);
-				contentPane.add(pCenter,BorderLayout.CENTER);
+     			
 				repaint();
 				revalidate();
 			}
@@ -423,7 +427,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		String imgPath = System.getProperty("user.dir") + "//images//MainLogo.png";
-		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 250, 1)));
+		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 400, 1)));
 		panel.add(mainLogo);
 		return panel;
 	}
