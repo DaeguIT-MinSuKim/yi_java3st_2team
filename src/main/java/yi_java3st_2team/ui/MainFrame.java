@@ -96,7 +96,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	private void initialize() {
 		empService = new EmployeeService();
-		setTitle("YN Bank 직원 프로그램");
+
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1224, 700);
 		contentPane = new JPanel();
@@ -132,6 +133,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			}
 			
 		});
+
 		pImg.setBackground(Color.WHITE);
 		pNorth.add(pImg);
 		
@@ -394,6 +396,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCardStatistic.addActionListener(this);
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);
+		
+
+		
+		
+	}
+	private void setTitle() {
+		// TODO Auto-generated method stub
+		
 	}
 	public JLabel getLblGreeting() {
 		return lblGreeting;

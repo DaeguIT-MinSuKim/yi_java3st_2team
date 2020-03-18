@@ -56,6 +56,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel panel_1;
 	
 	private static LoginFrame frame;
+	private String mainMessage;
 	
 	
 	public static LoginFrame getFrame() {
@@ -87,6 +88,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
+		//main.setTitle(mainMessage);
 		main.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
@@ -231,13 +233,20 @@ public class LoginFrame extends JFrame implements ActionListener {
 			pfPass.setEditable(true);
 			frame.setVisible(false);
 			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
-			main.initEmpAuth(chkEmp.getEmpName());
+			
+			mainMessage = chkEmp.getEmpName()+"님 환영합니다~";
+			System.out.println(mainMessage);
+			main.initEmpAuth(chkEmp.getEmpName());  
+			
+			main.setTitle("YN Bank 직원 프로그램 : "+mainMessage);
 			main.setVisible(true);
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "확인부터 먼저 해주세요");
 		}
 	}
+
+
 	
 	
 }
