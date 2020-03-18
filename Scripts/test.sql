@@ -3,6 +3,17 @@ use bank;
 
 update employee set emppwd = 111 where `empName` ='test';
 
+
+select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo  from employee e left join department d on e.deptNo = d.deptNo where d.deptName='인사';
+select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo from employee e left join department d on e.deptNo = d.deptNo  where empName like '%장%';
+select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip 
+		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
+				where e.empName like '%황%' group by e.`empCode`;
+			
+select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip, d.deptName 
+		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join department d on e.`deptNo` = d.`deptNo` 
+				where d.deptName ='인사' group by e.`empCode`;			
+
 select * from employee e2 ;
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력
@@ -67,6 +78,22 @@ delete from cust_dw_audit where dw = "출금";
 select * from loan;
 select * from plan;
 
+select count(*) from plan where planCode like 'A%';
+select count(*) from plan where planDetail like 'AA%';
+select count(*) from plan where planDetail like 'AB%';
+select count(*) from plan where planDetail like 'AC%';
+select count(*) from plan where planDetail like 'BA%';
+select count(*) from plan where planDetail like 'BB%';
+select count(*) from plan where planDetail like 'CA%';
+select count(*) from plan where planDetail like 'CB%';
+select count(*) from plan where planDetail like 'CC%';
+
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custCode = "C001";
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custTel = "123-1234-1234";
+
+select * from plan;
+select planCode, planDetail, planName, planDesc, planDiv from plan where planCode like "A%";
+select planCode, planDetail, planName, planDesc, planDiv from plan where planDetail like "AB%";
 
 #은행업무 - 박인선
 select * from plan where planCode like 'A%';

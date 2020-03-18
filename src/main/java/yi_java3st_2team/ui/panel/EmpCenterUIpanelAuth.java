@@ -27,7 +27,7 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 	private EmpCenterTblPanelAuth pEmpTblPanel;
 	private DlgEmpAuth dlgEmpAuth;
 	
-	
+	private Object selectedOne;
 	
 	public EmpCenterUIpanelAuth() {
 		service = new EmployeeUIService();
@@ -102,7 +102,9 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 				
 			if(e.getActionCommand()=="수정") {
 				//다이얼로그에서 수정을 누르면 디비에서 권한부분 수정 됨 
-				Employee emp = pEmpTblPanel.getSelectedItem();
+				try{
+					Employee emp = pEmpTblPanel.getSelectedItem();
+				
 
 			
 				updateEmp = dlgEmpAuth.getItem(emp);
@@ -113,8 +115,10 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 				service.modifyEmpAuth(updateEmp);
 				JOptionPane.showMessageDialog(null, "권한이 수정되었습니다");
 				dlgEmpAuth.setVisible(false);
-
+			 }catch (Exception e1) {
+				// TODO: handle exception
 			}
+		 }
 				
 			if(e.getActionCommand()=="취소") {
 				//다이얼로그에서 취소 누르면 다이얼로그의 권한 값이 삭제됨
@@ -146,22 +150,42 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 	}
 	protected void pEmpSerchBtnSearchActionPerformed(ActionEvent e) {
 		//조회누르면
-		String empName = pEmpSerch.getTfSearch().getText().trim();
-	
-		if(pEmpSerch.getTfSearch().getText().contentEquals("")) {
-			JOptionPane.showMessageDialog(null, "사원 이름을 입력해주세요");
-			return;
-		}
-		
-		List<Employee> list = new ArrayList<Employee>(); 
-		
-		try {
-			list.add(service.showPickedEmp(empName));
-			pEmpTblPanel.loadTableData(list);
-		} catch (Exception e1) {
-			JOptionPane.showMessageDialog(null, "다시 검색해주세요");
-			e1.printStackTrace();
-			return;
+		//콤보박스의 값 가져오기 
+				selectedOne = pEmpSerch.getCmbSearchList().getSelectedItem();
+				// System.out.println(selectedOne); // 부서 사원번호등 목록으로 불러와짐
+				
+				//서치 패널에 입력하는 값을 가지고 오기
+				String empItem = pEmpSerch.getTfSearch().getText().trim();
+			
+				if(pEmpSerch.getTfSearch().getText().contentEquals("")) {
+					JOptionPane.showMessageDialog(null, "검색할 값을 입력해주세요");
+					return;
+				}
+				
+				List<Employee> list = new ArrayList<Employee>(); 
+				
+				try {
+					if(selectedOne.equals("통합검색")) {
+						JOptionPane.showMessageDialog(null, "검색할 조건을 선택해주세요");
+						return;
+					}
+					if(selectedOne.equals("사원이름")) {
+					  //list.add(service.showPickedEmp(empItem));
+					  list = service.showPickedEmpList(empItem);
+				    }else if(selectedOne.equals("부서")) {
+				      list = service.showPickedEmpByDept(empItem);
+				    }else if(selectedOne.equals("사원번호")) {
+				      list = service.showPickedEmpByEmpNo(empItem);
+				    }else if(selectedOne.equals("직급")) {
+				      list = service.showPickedEmpByTitle(empItem);
+				    }
+					
+					
+					pEmpTblPanel.loadTableData(list);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "다시 검색해주세요");
+					e1.printStackTrace();
+					return;
 		}
 	
 	}

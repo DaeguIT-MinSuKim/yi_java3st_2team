@@ -80,12 +80,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		List<Employee> list = new ArrayList<Employee>();
 		String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
 				"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
-				"   where empName=?";
+				"   where empName like ?";
 		
 		try (Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, empName);
+			pstmt.setString(1, "%"+empName+"%");
 			
 			try(ResultSet rs = pstmt.executeQuery();){
 				while(rs.next()) {
@@ -441,6 +441,204 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		
 		
 		return 0;
+	}
+
+	
+	// 부서로 검색하기 
+	@Override
+	public List<Employee> selectEmpByDept(String empItem) throws SQLException {
+		 Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where d.deptName=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByNo(String empItem) throws SQLException {
+		Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where empCode=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByTitle(String empItem) throws SQLException {
+		Employee emp = null;
+		 List<Employee> list = new ArrayList<Employee>();
+			String sql = "select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo\r\n" + 
+					"   from employee e left join department d on e.deptNo = d.deptNo \r\n" + 
+					"   where empTitle=?";
+			
+			try (Connection con = LocalDataSource.getConnection();
+					PreparedStatement pstmt = con.prepareStatement(sql)){
+				
+				pstmt.setString(1,empItem);
+				
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()) {
+						list.add(getEmployee(rs));
+						
+						
+						//return getEmployee(rs);
+					}
+					return list;
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	// 실적테이블 검색조건에 따라 구현되는 서비스 
+	@Override
+	public List<Employee> selectEmpByNameListForPerform(String empItem) throws SQLException {
+		List<Employee> list = new ArrayList<Employee>();
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"where e.empName like ? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, "%"+empItem+"%");
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+			   //return getEmpPerform(rs);
+				
+			  }
+			 return list;
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByDeptForPerform(String empItem) throws SQLException {
+		List<Employee> list = new ArrayList<Employee>();
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip, d.deptName \r\n" + 
+				"		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join department d on e.`deptNo` = d.`deptNo` \r\n" + 
+				"				where d.deptName =? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, empItem);
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+			   //return getEmpPerform(rs);
+				
+			  }
+			 return list;
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByNoForPerform(String empItem) throws SQLException {
+		List<Employee> list = new ArrayList<Employee>();
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"where e.empCode = ? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, empItem);
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+			   //return getEmpPerform(rs);
+				
+			  }
+			 return list;
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Employee> selectEmpByTitleForPerform(String empItem) throws SQLException {
+		List<Employee> list = new ArrayList<Employee>();
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip\r\n" + 
+				"where e.empTitle = ? group by e.`empCode`";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				){
+			pstmt.setString(1, empItem);
+			//List<Employee> list = new ArrayList<Employee>();
+			try(ResultSet rs = pstmt.executeQuery();){
+			
+			while(rs.next()) {
+				list.add(getEmpPerform(rs));
+			   //return getEmpPerform(rs);
+				
+			  }
+			 return list;
+			}	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 

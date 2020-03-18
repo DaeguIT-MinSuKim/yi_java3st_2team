@@ -25,8 +25,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
 import java.awt.Dimension;
 import javax.swing.JTextPane;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
-public class DlgCustPlan extends JDialog {
+public class DlgCustPlan extends JDialog  {
 
 	private final JPanel contentPanel = new JPanel();
 	private String[] detailList = {"예금(AA)", "적금(AB)", "마이너스(AC)", "체크카드(BA)", "신용카드(BB)", "일반 대출(CA)", "신용대출(CB)", "카드론(CC)"};
@@ -139,6 +141,7 @@ public class DlgCustPlan extends JDialog {
 				upperDetail.setLayout(new GridLayout(0, 2, 0, 0));
 				{
 					cmbPlanDetail = new JComboBox(detailList);
+					cmbPlanDetail.setEditable(true);
 					cmbPlanDetail.setSelectedIndex(-1);
 					upperDetail.add(cmbPlanDetail);
 				}
@@ -323,6 +326,6 @@ public class DlgCustPlan extends JDialog {
 		okButton.setActionCommand("수정");
 	}
 	
-	
 
+	
 }

@@ -23,6 +23,8 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	private JButton btnCancel;
 	private JPanel pBtn;
 	private JComboBox cmbSearchList;
+	private JPanel panel;
+	private JPanel panel_1;
 	
 	
 	public AbsCenterNorthSearchPanel() {
@@ -50,6 +52,14 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		tfSearch = new JTextField();
 		pSearch.add(tfSearch);
 		tfSearch.setColumns(10);
+		
+		panel = new JPanel();
+		panel.setVisible(false);
+		pSearch.add(panel);
+		
+		panel_1 = new JPanel();
+		panel_1.setVisible(false);
+		pSearch.add(panel_1);
 		
 		pBtn = new JPanel();
 		add(pBtn, BorderLayout.SOUTH);

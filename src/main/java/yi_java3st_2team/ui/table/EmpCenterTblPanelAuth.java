@@ -16,15 +16,15 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER,0,1,2,3 );
+		setColumnAlign(SwingConstants.CENTER,0,1,2,3,4 );
 
-        setColumnWidth(100,100,100,100);		
+        setColumnWidth(100,100,100,100,100);		
 	}
 
 	@Override
 	protected String[] getColumns() {
 		
-		return new String[] {"사원코드","사원이름","직책","권한"} ;
+		return new String[] {"사원코드","사원이름","직책","부서","권한"} ;
 	}
 
 	
@@ -36,6 +36,7 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 				item.getEmpCode(),
 				item.getEmpName(),
 				item.getEmpTitle(), 
+				item.getDept().getDeptName(),
 				item.getEmpAuth()}; 
 //				String.format("%,d", item.getEmpSalary()), 
 //				item.getEmpTel(), 
@@ -49,7 +50,8 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 		model.setValueAt(item.getEmpCode(), updateIdx, 0);
 		model.setValueAt(item.getEmpName(), updateIdx, 1);
 		model.setValueAt(item.getEmpTitle(), updateIdx, 2);
-		model.setValueAt(item.getEmpAuth(), updateIdx, 3);
+		model.setValueAt(item.getDept().getDeptName(), updateIdx,3);
+		model.setValueAt(item.getEmpAuth(), updateIdx, 4);
 //		model.setValueAt(item.getEmpSalary(), updateIdx, 4);
 //		model.setValueAt(item.getEmpTel(), updateIdx, 5);
 //		model.setValueAt(item.getEmpId(), updateIdx, 6);
@@ -63,7 +65,11 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 		String empCode = (String) model.getValueAt(selIdx, 0);
 		String empName = (String) model.getValueAt(selIdx, 1);
 		String empTitle = (String) model.getValueAt(selIdx, 2);
-		String empAuth = (String) model.getValueAt(selIdx, 3);
+		
+		Department dept = new Department();
+		dept.setDeptName((String) model.getValueAt(selIdx, 3));
+	
+		String empAuth = (String) model.getValueAt(selIdx, 4);
 		
 //		String sSalary = (String)model.getValueAt(selIdx, 4);
 //		int empSalary = Integer.parseInt(sSalary.replace(",",""));
@@ -73,7 +79,7 @@ public class EmpCenterTblPanelAuth extends AbsCenterTblPanel<Employee> {
 //		String sDept= (String)model.getValueAt(selIdx, 8);
 //		int index = sDept.indexOf(")");
 //		Department dept = new Department(index-1); //)앞의 숫자를 넣는다.. 
-		Employee emp = new Employee(empCode, empName, empTitle, empAuth);
+		Employee emp = new Employee(empCode, empName, empTitle, empAuth, dept);
 		
 		return emp;
 	}

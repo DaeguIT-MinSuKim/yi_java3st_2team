@@ -36,13 +36,17 @@ import yi_java3st_2team.ui.panel.CustDWUIPanel;
 import yi_java3st_2team.ui.panel.CustInfoUIPanel;
 import yi_java3st_2team.ui.panel.CustPlanUIPanel;
 import yi_java3st_2team.ui.panel.CustStatisticPanel;
+import yi_java3st_2team.ui.panel.CustStatistic_tapPane;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
+import yi_java3st_2team.ui.panel.Statistic_test;
 import yi_java3st_2team.ui.service.EmployeeService;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -89,15 +93,19 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmLoanSearch;
 	private String greeting;
 	private JButton btnLogout;
+	private static LoginFrame loginFrame;
+	private JPanel pLogout;
+	private JButton btnMenuLogout;
 
 	public MainFrame() {
 		initialize();
 	}
 	private void initialize() {
 		empService = new EmployeeService();
-		setTitle("YN Bank 직원 프로그램");
+
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 800, 500);
+		setBounds(100, 100, 1224, 700);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -105,7 +113,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		pNorth = new JPanel();
 		pNorth.setBackground(Color.WHITE);
 		contentPane.add(pNorth, BorderLayout.NORTH);
-		pNorth.setLayout(new GridLayout(0, 4, 0, 0));
+		pNorth.setLayout(new GridLayout(0, 5, 0, 0));
 		pImg = new JPanel();
 		pImg.addMouseListener(new MouseAdapter() {
 			@Override
@@ -113,20 +121,25 @@ public class MainFrame extends JFrame implements ActionListener {
 				if(greeting == null) {
 					greeting = lblGreeting.getText();
 				}
+				
 				contentPane.remove(pCenter);
-				pcNorth = getLoginPanel();
+    			pcNorth = getLoginPanel();
 				lblGreeting.setText(greeting);
 				pcCenter = getMainLogoPanel();
+//				
 				pCenter = new JPanel();
+				pCenter.setLayout(new BorderLayout(0, 0));
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				pCenter.setBackground(Color.white);
 				pCenter.add(pcNorth,BorderLayout.NORTH);
 				pCenter.add(pcCenter,BorderLayout.CENTER);
-				contentPane.add(pCenter,BorderLayout.CENTER);
+     			
 				repaint();
 				revalidate();
 			}
 			
 		});
+
 		pImg.setBackground(Color.WHITE);
 		pNorth.add(pImg);
 		
@@ -136,6 +149,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		pImg.add(lblLogo);
 		
 		pEmp = new JPanel();
+		pEmp.setBorder(new EmptyBorder(0, 90, 0, 0));
 		pEmp.setBackground(Color.WHITE);
 		pNorth.add(pEmp);
 		pEmp.setLayout(new BorderLayout(0, 0));
@@ -185,6 +199,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnEmp.add(mnEmpAuth);
 		
 		pCust = new JPanel();
+		pCust.setBorder(new EmptyBorder(0, 70, 0, 0));
 		pCust.setBackground(Color.WHITE);
 		pNorth.add(pCust);
 		pCust.setLayout(new BorderLayout(0, 0));
@@ -235,9 +250,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				greeting = lblGreeting.getText();
 				contentPane.remove(pCenter);
-				pCenter = new CustStatisticPanel();
+				//pCenter = new CustStatisticPanel();
+				pCenter = new CustStatistic_tapPane();
+				//pCenter = new Statistic_test();
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
 				repaint();
@@ -282,6 +298,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnCust.add(mntmDepositWithdraw);
 		
 		pBankWork = new JPanel();
+		pBankWork.setBorder(new EmptyBorder(0, 70, 0, 0));
 		pBankWork.setBackground(Color.WHITE);
 		pNorth.add(pBankWork);
 		pBankWork.setLayout(new BorderLayout(0, 0));
@@ -363,6 +380,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoanSearch.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		mnLoan.add(mntmLoanSearch);
 		
+		pLogout = new JPanel();
+		pLogout.setBackground(Color.WHITE);
+		pLogout.setBorder(new EmptyBorder(8, 60, 8, 60));
+		pNorth.add(pLogout);
+		
+		btnMenuLogout = new JButton("Logout");
+		btnMenuLogout.setBorderPainted(false);
+		btnMenuLogout.setBackground(Color.WHITE);
+		btnMenuLogout.addActionListener(this);
+		pLogout.setLayout(new BorderLayout(0, 0));
+		pLogout.add(btnMenuLogout);
+		
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.WHITE);
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -389,6 +418,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCardStatistic.addActionListener(this);
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);
+		
+
+		
+		
+	}
+	private void setTitle() {
+		// TODO Auto-generated method stub
+		
 	}
 	public JLabel getLblGreeting() {
 		return lblGreeting;
@@ -422,8 +459,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		String imgPath = System.getProperty("user.dir") + "//images//MainLogo.png";
-		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 250, 1)));
-		panel.add(mainLogo);
+		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 400, 1)));
+		panel.add(mainLogo,BorderLayout.CENTER);
 		return panel;
 	}
 	public JPanel getLoginPanel() {
@@ -441,6 +478,8 @@ public class MainFrame extends JFrame implements ActionListener {
 //				dispose();
 //			}
 //		});  // 로그인프레임에서 처리하도록 함
+		//로그아웃 버튼에 액션리스너 달기
+		btnLogout.addActionListener(this);
 		panel.add(lblGreeting);
 		panel.add(btnLogout);
 		return panel;
@@ -488,6 +527,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnMenuLogout) {
+			loginFrame = loginFrame.getFrame();
+			loginFrame.btnLogoutActionPerformed(e);
+		}
 		if (e.getSource() == mnEmpAuth) {
 			mnEmpAuthActionPerformed(e);
 		}
@@ -524,7 +567,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		if (e.getSource() == mntmCard) {
 			mntmCardActionPerformed(e);
 		}
+		//로그아웃
+		if (e.getSource() == btnLogout) {
+			loginFrame = loginFrame.getFrame();
+			loginFrame.btnLogoutActionPerformed(e);
+		}
+		
 	}
+	
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
@@ -632,4 +682,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 	}
+	
+	
 }

@@ -189,4 +189,200 @@ public class PlanDaoImpl implements PlanDao {
 		return list;
 	}
 
+	@Override
+	public int selectPlanA() throws SQLException {
+		String sql = "select count(*) from plan where planCode like 'A%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanB() throws SQLException {
+		String sql = "select count(*) from plan where planCode like 'B%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanC() throws SQLException {
+		String sql = "select count(*) from plan where planCode like 'C%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanAA() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'AA%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanAB() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'AB%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanAC() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'AC%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanBA() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'BA%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanBB() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'BB%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanCA() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'CA%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanCB() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'CB%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int selectPlanCC() throws SQLException {
+		String sql = "select count(*) from plan where planDetail like 'CC%'";
+		int result = 0;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();){
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<Plan> selectPlanByCode(String planCode) throws SQLException {
+		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan where planCode like ?";
+		List<Plan> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, planCode+'%');
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(getPlan(rs));
+				}while(rs.next());
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Plan> selectPlanByDetail(String planDetail) throws SQLException {
+		String sql = "select planCode, planDetail, planName, planDesc, planDiv from plan where planDetail like ?";
+		List<Plan> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			pstmt.setString(1, planDetail+'%');
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					list.add(getPlan(rs));
+				}while(rs.next());
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }

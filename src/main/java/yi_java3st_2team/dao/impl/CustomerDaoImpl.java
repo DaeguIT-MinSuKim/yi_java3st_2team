@@ -305,6 +305,46 @@ public class CustomerDaoImpl implements CustomerDao {
 		return list;
 	}
 
+	@Override
+	public Customer selectCustomerByCode(String custCode) throws SQLException {
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custCode = ?";
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1, custCode);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					return getCustomer(rs);
+				}
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Customer selectCustomerByTel(String custTel) throws SQLException {
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custTel = ?";
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1, custTel);
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					return getCustomer(rs);
+				}
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 	
 	
 	
