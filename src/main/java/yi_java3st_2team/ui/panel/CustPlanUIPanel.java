@@ -20,6 +20,10 @@ import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 
 public class CustPlanUIPanel extends JPanel{
@@ -39,11 +43,23 @@ public class CustPlanUIPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String planName = panel.getTfSearch().getText().trim();
+				String search = (String) panel.getCmbSearchList().getSelectedItem();
+				if(search.equals("통합검색")) {
+					JOptionPane.showMessageDialog(null, "검색 범위를 선택하세요.");
+					return;
+				}
+				String planInfo = panel.getTfSearch().getText().trim();
 				List<Plan> list = new ArrayList<>();
 				try {
 					if(list.size()==0){
-						list = planService.showPlansByName(planName);
+						if(search.equals("상품 코드(A)")) {
+							
+							list = planService.showPlansByCode(planInfo);
+						}else if(search.equals("상품 이름")) {
+							list = planService.showPlansByName(planInfo);
+						}else if(search.equals("상품 세부코드(AB)")) {
+							list = planService.showPlansByDetail(planInfo);
+						}
 					}
 					if(list==null) {
 						JOptionPane.showMessageDialog(null, "해당 상품이 없습니다.");
@@ -98,6 +114,66 @@ public class CustPlanUIPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
 				dlgcustplan.setActiontoAdd();
+				dlgcustplan.getCmbPlanDetail().addItemListener(new ItemListener() {
+				
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						
+						try {
+							//다이얼로그 상품세부코드 선택 시 상품코드에 자동으로 다음 번호 부여
+							int planA = planService.showPlanA();
+							int planB = planService.showPlanB();
+							int planC = planService.showPlanC();
+							int planAA = planService.showPlanAA();
+							int planAB = planService.showPlanAB();
+							int planAC = planService.showPlanAC();
+							int planBA = planService.showPlanBA();
+							int planBB = planService.showPlanBB();
+							int planCA = planService.showPlanCA();
+							int planCB = planService.showPlanCB();
+							int planCC = planService.showPlanCC();
+							String plan = (String) dlgcustplan.getCmbPlanDetail().getSelectedItem();
+							int index = plan.indexOf(")");
+							String Planchk = plan.substring((plan.indexOf("(")+1),index-1);//상품 세부코드 앞자리 'A'B
+							String newPlan = plan.substring((plan.indexOf("(")+2),index); //상품 세부코드 뒷자리 A'B'
+							
+							if(Planchk.equals("A")) {
+								dlgcustplan.getTfCustPlanCode().setText(Planchk + String.format("%03d", planA+1));
+								if(newPlan.equals("A")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planAA+1));
+								}else if(newPlan.equals("B")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planAB+1));
+								}else if(newPlan.equals("C")){
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planAC+1));
+								}
+								
+							}else if(Planchk.equals("B")) {
+								dlgcustplan.getTfCustPlanCode().setText(Planchk + String.format("%03d", planB+1));
+								if(newPlan.equals("A")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planBA+1));
+								}else if(newPlan.equals("B")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planBB+1));
+								}
+							}else {
+								dlgcustplan.getTfCustPlanCode().setText(Planchk + String.format("%03d", planC+1));
+								if(newPlan.equals("A")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planCA+1));
+								}else if(newPlan.equals("B")) {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planCB+1));
+								}else {
+									dlgcustplan.getTfCustDetail().setText(String.format("%03d", planCC+1));
+								}
+								
+							}
+							
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
+						
+						
+					}
+					
+				});
 				dlgcustplan.getOkButton().addActionListener(new ActionListener() {
 
 					@Override
@@ -142,7 +218,7 @@ public class CustPlanUIPanel extends JPanel{
 					}
 					
 				});
-				dlgcustplan.setLocation(890, 100);
+				dlgcustplan.setLocation(1310, 100);
 				dlgcustplan.setVisible(true);
 				
 			}
@@ -163,7 +239,7 @@ public class CustPlanUIPanel extends JPanel{
 				try {
 					Plan plan = panel_1.getSelectedItem();
 					if(plan!=null) {
-						dlgcustplan.setLocation(890, 100);
+						dlgcustplan.setLocation(1310, 100);
 						dlgcustplan.setVisible(true);
 						dlgcustplan.setItem(plan);
 					}else {

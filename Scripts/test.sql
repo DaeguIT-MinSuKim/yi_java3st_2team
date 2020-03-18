@@ -78,6 +78,22 @@ delete from cust_dw_audit where dw = "출금";
 select * from loan;
 select * from plan;
 
+select count(*) from plan where planCode like 'A%';
+select count(*) from plan where planDetail like 'AA%';
+select count(*) from plan where planDetail like 'AB%';
+select count(*) from plan where planDetail like 'AC%';
+select count(*) from plan where planDetail like 'BA%';
+select count(*) from plan where planDetail like 'BB%';
+select count(*) from plan where planDetail like 'CA%';
+select count(*) from plan where planDetail like 'CB%';
+select count(*) from plan where planDetail like 'CC%';
+
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custCode = "C001";
+select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custTel = "123-1234-1234";
+
+select * from plan;
+select planCode, planDetail, planName, planDesc, planDiv from plan where planCode like "A%";
+select planCode, planDetail, planName, planDesc, planDiv from plan where planDetail like "AB%";
 
 #은행업무 - 박인선
 select * from plan where planCode like 'A%';
