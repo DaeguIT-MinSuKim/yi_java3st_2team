@@ -2,11 +2,18 @@ package yi_java3st_2team.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,13 +29,6 @@ import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.service.LoginService;
-
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.sql.SQLException;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class LoginFrame extends JFrame implements ActionListener {
@@ -57,12 +57,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 	
 	private static LoginFrame frame;
 	private String mainMessage;
+	private JPanel pSouthForLogo;
+	private JLabel lblLoginImg;
 	
-	
-	public static LoginFrame getFrame() {
-		return frame;
-	}
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 		
@@ -144,12 +141,12 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		pcCenter = new JPanel();
 		pcCenter.setBackground(Color.WHITE);
-		pcCenter.setBorder(new EmptyBorder(20, 20, 20, 20));
+		pcCenter.setBorder(new EmptyBorder(20, 0, 20, 20));
 		pCenter.add(pcCenter, BorderLayout.CENTER);
-		pcCenter.setLayout(new GridLayout(0, 2, 20, 20));
+		pcCenter.setLayout(new GridLayout(0, 2, 10, 30));
 		
 		lblNId = new JLabel("User Id");
-		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblNId.setHorizontalAlignment(SwingConstants.RIGHT);
 		pcCenter.add(lblNId);
 		
@@ -161,7 +158,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		
 		lblPass = new JLabel("Password");
-		lblPass.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		lblPass.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lblPass.setHorizontalAlignment(SwingConstants.RIGHT);
 		pcCenter.add(lblPass);
 		
@@ -185,6 +182,22 @@ public class LoginFrame extends JFrame implements ActionListener {
 		btnLogin.setForeground(Color.BLACK);
 		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		btnLogin.setBackground(SystemColor.menu);
+		
+		pSouthForLogo = new JPanel();
+		pCenter.add(pSouthForLogo, BorderLayout.WEST);
+		pSouthForLogo.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		lblLoginImg = new JLabel("");
+		lblLoginImg.setAlignmentY(Component.TOP_ALIGNMENT);
+		lblLoginImg.setForeground(Color.WHITE);
+		lblLoginImg.setOpaque(true);
+		lblLoginImg.setBackground(Color.WHITE);
+		lblLoginImg.setSize(new Dimension(255, 200));
+		lblLoginImg.setPreferredSize(new Dimension(255, 200));
+		lblLoginImg.setBorder(new EmptyBorder(0, 0, 0, 0));
+		
+		lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/loginlogo2.jpg"));
+		pSouthForLogo.add(lblLoginImg);
 		
 		
 	    btnLogout = main.getBtnLogout();
@@ -210,7 +223,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		chkLogin = false;
 		
 	}
-
 	protected void btnLoginActionPerformed(ActionEvent e) {
 		
 		try {
@@ -230,6 +242,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		if(chkLogin) {
 			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
+			main.setLoginFrame(frame);
 			tfId.setEditable(true);
 			pfPass.setEditable(true);
 			frame.setVisible(false);

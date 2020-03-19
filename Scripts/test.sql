@@ -1,6 +1,11 @@
 use bank;
 #사원 - 장현서
 
+
+alter table employee add column pic LONGBLOB;
+select * from employee e ;
+
+
 update employee set emppwd = 111 where `empName` ='test';
 
 

@@ -20,6 +20,7 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	private JButton btnSearch;
 	private JButton btnCancel;
 	private JPanel pBtn;
+	private JTextField tfSearch;
 	private JComboBox cmbSearchList;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -60,8 +61,12 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		pBtn.add(btnCancel);
 	}
 	
-	
-	
+	public JTextField getTfSearch() {
+		return tfSearch;
+	}
+	public void setTfSearch(JTextField tfSearch) {
+		this.tfSearch = tfSearch;
+	}
 	public JComboBox getCmbSearchList() {
 		return cmbSearchList;
 	}

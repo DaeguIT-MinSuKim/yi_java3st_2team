@@ -93,7 +93,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmLoanSearch;
 	private String greeting;
 	private JButton btnLogout;
-	private static LoginFrame loginFrame;
+	private LoginFrame loginFrame;
 	private JPanel pLogout;
 	private JButton btnMenuLogout;
 
@@ -420,8 +420,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoanSearch.addActionListener(this);
 		
 
-		
-		
+			
+	}
+	public LoginFrame getLoginFrame() {
+		return loginFrame;
+	}
+	public void setLoginFrame(LoginFrame loginFrame) {
+		this.loginFrame = loginFrame;
 	}
 	private void setTitle() {
 		// TODO Auto-generated method stub
@@ -502,6 +507,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mnLoan.setEnabled(true);
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
+		pCenter.setLayout(new BorderLayout());
 		pCenter.setBackground(Color.white);
 		pcNorth = getLoginPanel();
 		pcCenter = getMainLogoPanel();
@@ -528,7 +534,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnMenuLogout) {
-			loginFrame = loginFrame.getFrame();
 			loginFrame.btnLogoutActionPerformed(e);
 		}
 		if (e.getSource() == mnEmpAuth) {
@@ -569,7 +574,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		//로그아웃
 		if (e.getSource() == btnLogout) {
-			loginFrame = loginFrame.getFrame();
 			loginFrame.btnLogoutActionPerformed(e);
 		}
 		

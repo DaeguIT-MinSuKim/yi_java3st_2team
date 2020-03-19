@@ -1,17 +1,20 @@
 package yi_java3st_2team.ui.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class DlgEmpAuth extends JDialog {
@@ -36,9 +40,12 @@ public class DlgEmpAuth extends JDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 	private static DlgEmpAuth dialog;
-	/**
-	 * Launch the application.
-	 */
+	
+	
+	private Dimension picDimension=new Dimension(100, 150);
+	private String picPath;
+	
+	
 	public static void main(String[] args) {
 		try {
 			dialog = new DlgEmpAuth();
@@ -56,10 +63,29 @@ public class DlgEmpAuth extends JDialog {
 		initialize();
 	}
 	private void initialize() {
-		setBounds(100, 100, 450, 450);
+		setBounds(100, 100, 450, 237);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			panel = new JPanel();
+			getContentPane().add(panel, BorderLayout.NORTH);
+		}
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		{
+			pForPic = new JPanel();
+			panel.add(pForPic);
+			pForPic.setLayout(new BorderLayout(0, 0));
+			{   //사진부분
+				lblPic = new JLabel("");
+				lblPic.setHorizontalAlignment(SwingConstants.CENTER);
+				pForPic.add(lblPic, BorderLayout.CENTER);
+				lblPic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				lblPic.setPreferredSize(picDimension);
+				lblPic.setSize(picDimension);
+				setPic(getClass().getClassLoader().getResource("suji.jpg").getPath());
+			}
+		}
+		contentPanel.setBorder(new EmptyBorder(20, 0, 20, 20));
+		panel.add(contentPanel);
 		contentPanel.setLayout(new GridLayout(0, 2, 10, 10));
 		{
 			JLabel lblEmpCode = new JLabel("코드");
@@ -146,6 +172,9 @@ public class DlgEmpAuth extends JDialog {
 		}
 	};
 	private JComboBox cmbAuth;
+	private JPanel panel;
+	private JPanel pForPic;
+	private JLabel lblPic;
 
 
 	
@@ -185,6 +214,20 @@ public class DlgEmpAuth extends JDialog {
 			tfEmpTitle.setText(item.getEmpTitle());
 			cmbAuth.setSelectedItem(item.getEmpAuth());
 	
+		}
+		
+		
+		private void setPic(byte[] byteImg) {
+			new ImageIcon(byteImg);
+			lblPic.setIcon(new ImageIcon(new ImageIcon(byteImg).getImage().getScaledInstance((int)picDimension.getWidth(),
+					(int)picDimension.getHeight(), Image.SCALE_DEFAULT)));
+		  	 
+			}
+		
+		private void setPic(String imgPath) {
+			picPath = imgPath; //사진이 없다면 클릭하면 경로가 바뀔것
+			lblPic.setIcon(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance((int)picDimension.getWidth(),
+					(int)picDimension.getHeight(), Image.SCALE_DEFAULT)));
 		}
 
 }
