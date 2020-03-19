@@ -1,5 +1,7 @@
 package yi_java3st_2team.dto;
 
+import java.util.Arrays;
+
 public class Employee {
 	private String empCode;
 	private String empName;
@@ -228,6 +230,16 @@ public class Employee {
 
 	public void setPic(byte[] pic) {
 		this.pic = pic;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Employee [empCode=" + empCode + ", empName=" + empName + ", empTitle=" + empTitle + ", empAuth="
+				+ empAuth + ", empSalary=" + empSalary + ", empTel=" + empTel + ", empId=" + empId + ", empPwd="
+				+ empPwd + ", dept=" + dept + ", pic=" + Arrays.toString(pic) + ", perf=" + perf + ", bonus=" + bonus
+				+ ", vip=" + vip + "]";
 	}
 	
 	

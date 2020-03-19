@@ -137,7 +137,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int updateEmployee(Employee emp) {
-		String sql="update employee set empName=?,empTitle=?,empAuth=?,empSalary=?,empTel=?,empId=?,empPwd=password(?),deptNo=? where empCode=?";
+		String sql="update employee set empName=?,empTitle=?,empAuth=?,empSalary=?,empTel=?,empId=?,empPwd=password(?),deptNo=?,pic=? where empCode=?";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt= con.prepareStatement(sql)){
 			
@@ -149,7 +149,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setString(6, emp.getEmpId());
 			pstmt.setString(7, emp.getEmpPwd());
 			pstmt.setInt(8, emp.getDept().getDeptNo());
-			pstmt.setString(9, emp.getEmpCode());
+			pstmt.setBytes(9, emp.getPic());
+			pstmt.setString(10, emp.getEmpCode());
 
 			return pstmt.executeUpdate();
 		}catch (Exception e) {
@@ -205,6 +206,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Department dept= new Department(rs.getInt("d.deptNo")); //이부분 확인해보기
 	    dept.setDeptName(rs.getString("d.deptName"));
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+
+	}
+	private Employee getEmployeePic(ResultSet rs) throws SQLException {
+		String empCode = rs.getString("empCode");
+		String empName = rs.getString("empName");
+		String empTitle = rs.getString("empTitle");
+		String empAuth = rs.getString("empAuth");
+		int empSalary = rs.getInt("empSalary");
+		String empTel = rs.getString("empTel");
+		String empId = rs.getString("empId");
+		String empPwd =rs.getString("empPwd");
+		Department dept= new Department(rs.getInt("d.deptNo")); //이부분 확인해보기
+	    dept.setDeptName(rs.getString("d.deptName"));
+		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+		byte[] pic = rs.getBytes("pic")==null?null:rs.getBytes("pic");
+		if(pic==null) {
+			return emp;
+		}
+		else {
+			emp.setPic(pic);
+			return emp;
+		}
 	}
 
 	@Override
@@ -642,6 +665,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public Employee selectEmpByCode(String empCode) throws SQLException {
+		Employee emp = null;
+		String sql = "select empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo, pic from employee e left join department d on e.deptNo = d.deptNo where empCode=?";
+		
+		try (Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1,empCode);
+			
+			try(ResultSet rs = pstmt.executeQuery();){
+				if(rs.next()) {
+					//list.add(getEmployee(rs));
+					
+					emp = getEmployeePic(rs);
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 	
 

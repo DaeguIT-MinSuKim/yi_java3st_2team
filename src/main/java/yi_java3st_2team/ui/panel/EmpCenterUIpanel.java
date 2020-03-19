@@ -63,6 +63,8 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		//팝업메뉴 액션리스너
 		ActionListener myPopListener = new ActionListener() {
 			
+			private Employee emp111;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//추가일때
@@ -88,7 +90,18 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				//수정일때
 				}if(e.getActionCommand()=="수정") {
 					//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
-						Employee emp = pEmpTblPanel.getSelectedItem();
+					
+					    
+						Employee empForUpdate = pEmpTblPanel.getSelectedItem();
+						try {
+							emp111 = service.showPikedEmpByCode(empForUpdate.getEmpCode());
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						
+						
 						
 						if(dlgEmpForUpdate != null){
 							dlgEmpForUpdate.dispose();
@@ -96,7 +109,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						dlgEmpForUpdate = new DlgEmp();
 						dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
 						dlgEmpForUpdate.setVisible(true);
-						dlgEmpForUpdate.setItem(emp);
+						dlgEmpForUpdate.setItem(emp111);
 						
 		
 						//다이얼로그 버튼을 수정으로 바꾸고 myDlgActionListner달기
@@ -110,6 +123,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					
 					//선택한 위치의  employee객체를 구하고 그걸 데이터에서 삭제 
 					Employee emp = pEmpTblPanel.getSelectedItem();
+					         
 					
 					int res = JOptionPane.showConfirmDialog(null, emp.getEmpName()+"님의 정보를 정말 삭제하시겠습니까?");
 					if(res ==0) {
@@ -174,7 +188,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 								
 					    }catch(Exception e4){
 					    	//System.out.println(e4.getMessage() + "는 이것 "); //For input string: ""는 이것 
-					    	System.out.println(e4.getMessage() + "는 이것 ");
+					    	//System.out.println(e4.getMessage() + "는 이것 ");
 					    	if(e4.getMessage().contains("")) {
 					    	  JOptionPane.showMessageDialog(null, "정보를 올바르게 입력해주세요");
 					    	  dlgEmp.setVisible(true);
