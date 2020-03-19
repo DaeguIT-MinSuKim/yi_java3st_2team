@@ -104,7 +104,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int insertEmployee(Employee emp) {
-		String sql = "insert into employee values(?,?,?,?,?,?,?,password(?),?)";
+		String sql = "insert into employee values(?,?,?,?,?,?,?,password(?),?,?)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt= con.prepareStatement(sql)){
 			pstmt.setString(1, emp.getEmpCode());
@@ -116,6 +116,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			pstmt.setString(7, emp.getEmpId());
 			pstmt.setString(8, emp.getEmpPwd());
 			pstmt.setInt(9, emp.getDept().getDeptNo());
+			if (emp.getPic()!=null) {
+				pstmt.setBytes(10, emp.getPic());
+			}
 			
 			return pstmt.executeUpdate();
 		}catch (Exception e) {

@@ -217,6 +217,18 @@ public class Employee {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
+
+
+
+	public byte[] getPic() {
+		return pic;
+	}
+
+
+
+	public void setPic(byte[] pic) {
+		this.pic = pic;
+	}
 	
 	
 	
