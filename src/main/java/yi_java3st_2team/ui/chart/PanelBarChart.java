@@ -39,7 +39,7 @@ public class PanelBarChart extends JFXPanel implements InitScene{
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("등급 별 고객 숫자");
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(1000, 250);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

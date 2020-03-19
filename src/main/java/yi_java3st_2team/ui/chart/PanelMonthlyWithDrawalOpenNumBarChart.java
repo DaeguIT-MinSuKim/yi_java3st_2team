@@ -45,7 +45,7 @@ public class PanelMonthlyWithDrawalOpenNumBarChart extends JFXPanel implements I
 		barChart.setTitle("월별 출금 건수");
 		barChart.setLegendVisible(false);
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(1000, 300);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);
