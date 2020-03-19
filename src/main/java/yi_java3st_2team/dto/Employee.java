@@ -10,6 +10,7 @@ public class Employee {
 	private String empId;
 	private String empPwd;
 	private Department dept;
+	private byte[] pic;
 	
 	private int perf;
 	private int bonus;
@@ -21,7 +22,37 @@ public class Employee {
 	
 	
 	
-    //실적테이블을 위한 생성자
+    public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
+			String empId, String empPwd, Department dept, byte[] pic) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.empAuth = empAuth;
+		this.empSalary = empSalary;
+		this.empTel = empTel;
+		this.empId = empId;
+		this.empPwd = empPwd;
+		this.dept = dept;
+		this.pic = pic;
+	}
+
+    
+
+	public Employee(String empCode, String empName, String empTitle, byte[] pic, int perf, int bonus, String vip) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.pic = pic;
+		this.perf = perf;
+		this.bonus = bonus;
+		this.vip = vip;
+	}
+
+
+
+	//실적테이블을 위한 생성자
 	public Employee(String empCode, String empName, String empTitle, int perf, int bonus, String vip) {
 		super();
 		this.empCode = empCode;
@@ -186,5 +217,7 @@ public class Employee {
 	public void setDept(Department dept) {
 		this.dept = dept;
 	}
+	
+	
 	
 }

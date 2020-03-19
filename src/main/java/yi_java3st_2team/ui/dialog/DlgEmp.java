@@ -5,15 +5,20 @@ import java.awt.FlowLayout;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -26,9 +31,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
+import javax.swing.BoxLayout;
+import java.awt.Dimension;
 
 @SuppressWarnings("serial")
-public class DlgEmp extends JDialog {
+public class DlgEmp extends JDialog implements ActionListener{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfEmpCode;
@@ -46,7 +53,8 @@ public class DlgEmp extends JDialog {
 	private JButton btnOk;
 	private JButton btnCancel;
 
-
+	private Dimension picDimension=new Dimension(100, 150);
+	private String picPath;
 	/**
 	 * Launch the application.
 	 */
@@ -67,10 +75,16 @@ public class DlgEmp extends JDialog {
 		initialize();
 	}
 	private void initialize() {
-		setBounds(100, 100, 450, 450);
+		setBounds(100, 100, 450, 383);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			panel = new JPanel();
+			getContentPane().add(panel, BorderLayout.NORTH);
+	
+		}
+		panel.setLayout(new BorderLayout(0, 0));
+		contentPanel.setBorder(new EmptyBorder(20, 0, 20, 50));
+		panel.add(contentPanel);
 		contentPanel.setLayout(new GridLayout(0, 2, 10, 10));
 		{
 			JLabel lblNewLabel = new JLabel("코드");
@@ -163,6 +177,30 @@ public class DlgEmp extends JDialog {
 			contentPanel.add(cmbDept);
 		}
 		{
+			pForPic = new JPanel();
+			pForPic.setBorder(new EmptyBorder(20, 50, 20, 0));
+			panel.add(pForPic, BorderLayout.WEST);
+			pForPic.setLayout(new BoxLayout(pForPic, BoxLayout.Y_AXIS));
+			{
+				//사진부분
+				lblPic = new JLabel();
+				lblPic.setIcon(null);
+				lblPic.setSize(new Dimension(100, 150));
+				lblPic.setPreferredSize(new Dimension(100, 150));
+				lblPic.setHorizontalAlignment(SwingConstants.CENTER);
+				lblPic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				setPic(getClass().getClassLoader().getResource("suji.jpg").getPath());
+				pForPic.add(lblPic);
+			}
+			{
+				btnPic = new JButton("사원사진");
+				btnPic.setMaximumSize(new Dimension(100, 23));
+				btnPic.setPreferredSize(new Dimension(100, 23));
+				pForPic.add(btnPic);
+				
+			}
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
@@ -180,6 +218,7 @@ public class DlgEmp extends JDialog {
 				buttonPane.add(btnCancel);
 			}
 		}
+		btnPic.addActionListener(this);
 	}
 	
 	public JButton getBtnCancel() {
@@ -263,6 +302,10 @@ public class DlgEmp extends JDialog {
 	}
 	
 	private Department dept;
+	private JPanel panel;
+	private JPanel pForPic;
+	private JLabel lblPic;
+	private JButton btnPic;
 	
 	//다이얼로그의 값 update위해 가져오기
 		public Employee getItemForUpdate() {
@@ -330,7 +373,39 @@ public class DlgEmp extends JDialog {
 		
 	}
 
+	private void setPic(byte[] byteImg) {
+		new ImageIcon(byteImg);
+		lblPic.setIcon(new ImageIcon(new ImageIcon(byteImg).getImage().getScaledInstance((int)picDimension.getWidth(),
+				(int)picDimension.getHeight(), Image.SCALE_DEFAULT)));
+	  	 
+		}
 	
+	private void setPic(String imgPath) {
+		picPath = imgPath; //사진이 없다면 클릭하면 경로가 바뀔것
+		lblPic.setIcon(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance((int)picDimension.getWidth(),
+				(int)picDimension.getHeight(), Image.SCALE_DEFAULT)));
+	}
+	
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnPic) {
+			btnPicActionPerformed(e);
+		}
+	}
+	protected void btnPicActionPerformed(ActionEvent e) {
+		JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG or PNG or GIF", "jpg","png","gif");
+		chooser.setFileFilter(filter);
+		
+		int res = chooser.showOpenDialog(null);
+	    if(res != JFileChooser.APPROVE_OPTION) {
+	    	JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다","경고",JOptionPane.WARNING_MESSAGE);
+	    	return;
+	    }
+	    picPath = chooser.getSelectedFile().getPath();
+	    setPic(picPath); //만든메소드
+		
+	}
 
 
 	
