@@ -255,6 +255,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				//pCenter = new CustStatisticPanel();
 				//pCenter = new CustStatistic_tapPane();
 				pCenter = new CustStatistic_panels();
+				((CustStatistic_panels) pCenter).initChart();
 				//pCenter = new Statistic_test();
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();

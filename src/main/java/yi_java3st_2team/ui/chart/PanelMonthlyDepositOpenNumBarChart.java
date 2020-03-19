@@ -45,7 +45,7 @@ public class PanelMonthlyDepositOpenNumBarChart extends JFXPanel implements Init
 		barChart.setTitle("월별 입금 건수");
 		barChart.setLegendVisible(false);
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(1000, 250);
 		barChart.setData(getChartData());
 		root.getChildren().add(barChart);
 

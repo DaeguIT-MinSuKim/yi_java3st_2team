@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticPanel;
-import yi_java3st_2team.ui.chart.JFrameBarChart;
+import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
 import yi_java3st_2team.ui.chart.JFrameCustNumChart;
 import yi_java3st_2team.ui.chart.JFrameMonthlyDpWdBarChart;
 import yi_java3st_2team.ui.chart.JFrameMonthlyOpenNumBarChart;
@@ -43,7 +43,7 @@ public class CustStatisticPanel extends AbsCenterStatisticPanel implements Actio
 			JLabel label = (JLabel)c;
 			if(label.getForeground().equals(new Color(254,208,64))) {
 				if(label.getText().equals("예금/적금/대출 총 금액")) {
-					JFrameBarChart barchart = new JFrameBarChart();
+					PanelDPsLoanAllBarChart barchart = new PanelDPsLoanAllBarChart();
 					barchart.initAndShowGUI();
 				}else if(label.getText().equals("총 고객 숫자/전체 고객 대비 VIP 고객 비율/등급별 고객 숫자")){
 					JFrameCustNumChart custNumChart = new JFrameCustNumChart();
