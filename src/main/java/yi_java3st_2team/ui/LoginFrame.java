@@ -203,13 +203,21 @@ public class LoginFrame extends JFrame implements ActionListener {
 		lblLoginImg.setPreferredSize(new Dimension(255, 200));
 		lblLoginImg.setBorder(new EmptyBorder(0, 0, 0, 0));
 		
-		lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/dfdfdfsadfadsf.png"));
+		//lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/dfdfdfsadfadsf.png"));
 		pSouthForLogo.add(lblLoginImg);
 		
 		pNorthForLogo = new JPanel();
+
 		pCenter.add(pNorthForLogo, BorderLayout.SOUTH);
 		
 		lblLogoImg = new JLabel("");
+		lblLogoImg.setForeground(Color.WHITE);
+		lblLogoImg.setOpaque(true);
+		lblLogoImg.setBackground(Color.WHITE);
+		lblLogoImg.setSize(new Dimension(500, 80));
+		lblLogoImg.setPreferredSize(new Dimension(500, 80));
+		lblLogoImg.setBorder(new EmptyBorder(0, 0, 0, 0));
+		lblLogoImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/banner1.jpg"));
 		pNorthForLogo.add(lblLogoImg);
 		
 		
