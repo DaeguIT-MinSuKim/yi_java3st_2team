@@ -62,6 +62,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private String mainMessage;
 	private JPanel pSouthForLogo;
 	private JLabel lblLoginImg;
+	private JPanel pNorthForLogo;
+	private JLabel lblLogoImg;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -128,11 +130,15 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcNorth = new JPanel();
 		pcNorth.setBackground(Color.WHITE);
 		FlowLayout flowLayout = (FlowLayout) pcNorth.getLayout();
-		flowLayout.setHgap(20);
+		flowLayout.setHgap(0);
 		pCenter.add(pcNorth, BorderLayout.NORTH);
 		
 		lblBankImg = new JLabel("");
-		lblBankImg.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\money.png").getImage().getScaledInstance(65, 65, 1)));
+		lblBankImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/file/images/bank.png"));
+		lblBankImg.setBackground(Color.WHITE);
+		lblBankImg.setSize(new Dimension(100, 50));
+		lblBankImg.setPreferredSize(new Dimension(100, 50));
+		lblBankImg.setBorder(new EmptyBorder(0, 0, 0, 0));
 		pcNorth.add(lblBankImg);
 		
 		lblGreeting = new JLabel("Welcome!!");
@@ -197,8 +203,14 @@ public class LoginFrame extends JFrame implements ActionListener {
 		lblLoginImg.setPreferredSize(new Dimension(255, 200));
 		lblLoginImg.setBorder(new EmptyBorder(0, 0, 0, 0));
 		
-		lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/loginlogo2.jpg"));
+		lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/dfdfdfsadfadsf.png"));
 		pSouthForLogo.add(lblLoginImg);
+		
+		pNorthForLogo = new JPanel();
+		pCenter.add(pNorthForLogo, BorderLayout.SOUTH);
+		
+		lblLogoImg = new JLabel("");
+		pNorthForLogo.add(lblLogoImg);
 		
 		
 	    btnLogout = main.getBtnLogout();
