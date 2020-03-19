@@ -60,10 +60,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 	
 	private static LoginFrame frame;
 	private String mainMessage;
-	private JPanel pSouthForLogo;
-	private JLabel lblLoginImg;
 	private JPanel pNorthForLogo;
 	private JLabel lblLogoImg;
+	private JPanel panel_2;
+	private JPanel panel_3;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -150,7 +150,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.setBackground(Color.WHITE);
 		pcCenter.setBorder(new EmptyBorder(20, 0, 20, 20));
 		pCenter.add(pcCenter, BorderLayout.CENTER);
-		pcCenter.setLayout(new GridLayout(0, 2, 10, 30));
+		pcCenter.setLayout(new GridLayout(0, 3, 10, 10));
 		
 		lblNId = new JLabel("User Id");
 		lblNId.setFont(new Font("맑은 고딕", Font.BOLD, 18));
@@ -162,6 +162,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 		tfId.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		pcCenter.add(tfId);
 		tfId.setColumns(10);
+		
+		panel_2 = new JPanel();
+		panel_2.setBackground(Color.WHITE);
+		pcCenter.add(panel_2);
 		
 		
 		lblPass = new JLabel("Password");
@@ -175,8 +179,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pcCenter.add(pfPass);
 		
 		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
 		panel_1.setVisible(false);
 		pcCenter.add(panel_1);
+		
+		panel_3 = new JPanel();
+		panel_3.setBackground(Color.WHITE);
+		pcCenter.add(panel_3);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -187,26 +196,11 @@ public class LoginFrame extends JFrame implements ActionListener {
 		panel.add(btnLogin);
 		btnLogin.addActionListener(this);
 		btnLogin.setForeground(Color.BLACK);
-		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		btnLogin.setBackground(SystemColor.menu);
 		
-		pSouthForLogo = new JPanel();
-		pCenter.add(pSouthForLogo, BorderLayout.WEST);
-		pSouthForLogo.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		lblLoginImg = new JLabel("");
-		lblLoginImg.setAlignmentY(Component.TOP_ALIGNMENT);
-		lblLoginImg.setForeground(Color.WHITE);
-		lblLoginImg.setOpaque(true);
-		lblLoginImg.setBackground(Color.WHITE);
-		lblLoginImg.setSize(new Dimension(255, 200));
-		lblLoginImg.setPreferredSize(new Dimension(255, 200));
-		lblLoginImg.setBorder(new EmptyBorder(0, 0, 0, 0));
-		
-		//lblLoginImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/dfdfdfsadfadsf.png"));
-		pSouthForLogo.add(lblLoginImg);
-		
 		pNorthForLogo = new JPanel();
+		pNorthForLogo.setBackground(Color.WHITE);
 
 		pCenter.add(pNorthForLogo, BorderLayout.SOUTH);
 		
@@ -214,8 +208,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 		lblLogoImg.setForeground(Color.WHITE);
 		lblLogoImg.setOpaque(true);
 		lblLogoImg.setBackground(Color.WHITE);
-		lblLogoImg.setSize(new Dimension(500, 80));
-		lblLogoImg.setPreferredSize(new Dimension(500, 80));
+		lblLogoImg.setSize(new Dimension(520, 100));
+		lblLogoImg.setPreferredSize(new Dimension(520, 100));
 		lblLogoImg.setBorder(new EmptyBorder(0, 0, 0, 0));
 		lblLogoImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/banner1.jpg"));
 		pNorthForLogo.add(lblLogoImg);
