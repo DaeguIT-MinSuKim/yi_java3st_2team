@@ -90,6 +90,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
+		main.setResizable(false);
 		//main.setTitle(mainMessage);
 		main.addWindowListener(new WindowAdapter() {
 			@Override
