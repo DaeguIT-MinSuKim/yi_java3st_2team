@@ -36,6 +36,7 @@ import yi_java3st_2team.ui.panel.CustDWUIPanel;
 import yi_java3st_2team.ui.panel.CustInfoUIPanel;
 import yi_java3st_2team.ui.panel.CustPlanUIPanel;
 import yi_java3st_2team.ui.panel.CustStatisticPanel;
+import yi_java3st_2team.ui.panel.CustStatistic_panels;
 import yi_java3st_2team.ui.panel.CustStatistic_tapPane;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
@@ -252,7 +253,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				contentPane.remove(pCenter);
 				//pCenter = new CustStatisticPanel();
-				pCenter = new CustStatistic_tapPane();
+				//pCenter = new CustStatistic_tapPane();
+				pCenter = new CustStatistic_panels();
 				//pCenter = new Statistic_test();
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();

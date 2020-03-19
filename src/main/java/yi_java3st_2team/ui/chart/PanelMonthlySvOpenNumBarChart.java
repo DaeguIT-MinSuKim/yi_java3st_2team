@@ -42,7 +42,7 @@ public class PanelMonthlySvOpenNumBarChart extends JFXPanel implements InitScene
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("월별 적금 건수");
 		
-		barChart.setPrefSize(500, 250);
+		barChart.setPrefSize(1000, 500);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

@@ -48,12 +48,15 @@ public class CustStatistic_tapPane extends JPanel {
 	}
 	private JPanel getPanel() {
 		JPanel smPanel = new JPanel();
+		
 		EmptyBorder border = new EmptyBorder(100,300,100,300);
 		Color bg = new Color(255,255,255,255);
 		smPanel.setLayout(new BorderLayout(0,0));
 		smPanel.setBackground(bg);
 		smPanel.setBorder(border);
+		
 		PanelPieChart panel_fx = new PanelPieChart();
+		
 		smPanel.add(panel_fx, BorderLayout.CENTER);
 		Platform.runLater(() -> initFX(panel_fx));
 		return smPanel;
