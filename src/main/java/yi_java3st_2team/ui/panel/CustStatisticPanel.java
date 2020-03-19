@@ -44,7 +44,7 @@ public class CustStatisticPanel extends AbsCenterStatisticPanel implements Actio
 			if(label.getForeground().equals(new Color(254,208,64))) {
 				if(label.getText().equals("예금/적금/대출 총 금액")) {
 					PanelDPsLoanAllBarChart barchart = new PanelDPsLoanAllBarChart();
-					barchart.initAndShowGUI();
+					barchart.setVisible(true);
 				}else if(label.getText().equals("총 고객 숫자/전체 고객 대비 VIP 고객 비율/등급별 고객 숫자")){
 					JFrameCustNumChart custNumChart = new JFrameCustNumChart();
 					custNumChart.setVisible(true);
