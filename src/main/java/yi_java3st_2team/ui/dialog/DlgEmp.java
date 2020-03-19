@@ -23,6 +23,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Vector;
 
@@ -189,7 +194,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 				lblPic.setPreferredSize(new Dimension(100, 150));
 				lblPic.setHorizontalAlignment(SwingConstants.CENTER);
 				lblPic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-				setPic(getClass().getClassLoader().getResource("suji.jpg").getPath());
+				setPic(getClass().getClassLoader().getResource("no-image.png").getPath());
 				pForPic.add(lblPic);
 			}
 			{
@@ -288,9 +293,14 @@ public class DlgEmp extends JDialog implements ActionListener{
 		String empTel = tfEmpTel.getText().trim();
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
-		
-
-		
+		ImageIcon icon = (ImageIcon)lblPic.getIcon();
+		byte[] pic = getImage();
+		//lblPic.setIcon(new ImageIcon(pic));
+        
+		setPic(pic);
+		//System.out.println(pic.hashCode()); //1255441253
+		//System.out.println(pic.toString()); //[B@4ad48365
+		//System.out.println(lblPic.getIcon().toString() +"이건?"); //javax.swing.ImageIcon@74ea2e99이건?
 		Department dept = (Department)cmbDept.getSelectedItem();
 
 
@@ -298,9 +308,24 @@ public class DlgEmp extends JDialog implements ActionListener{
 			JOptionPane.showMessageDialog(null, "부서를 선택하세요");
 			return null;
 		}
-		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept ,pic);
 	}
 	
+	private byte[] getImage() {
+		// 노이미지일때 기본 사진 가져오는것
+	  byte[] pic = null;
+	     File file = new File(picPath);
+	     try(InputStream is = new FileInputStream(file)){
+	    	 pic = new byte[is.available()]; //메모리 부족하면 반복문 돌려야한다 512바이트씩
+	    	 is.read(pic); //읽어서 pic배열에 담아라
+	     } catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	    		
+		return pic;
+	}
 	private Department dept;
 	private JPanel panel;
 	private JPanel pForPic;
@@ -342,6 +367,9 @@ public class DlgEmp extends JDialog implements ActionListener{
 				JOptionPane.showMessageDialog(null, "부서를 선택하세요");
 				return null;
 			}
+			
+			
+			//byte[] pic = lblPic.getIcon().toString()
 			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
 		}
 	
@@ -368,8 +396,15 @@ public class DlgEmp extends JDialog implements ActionListener{
 		tfEmpSalary.setText(item.getEmpSalary()+"");
 		tfEmpTel.setText(item.getEmpTel());
 		tfEmpId.setText(item.getEmpId());
-		tfEmpPwd.setText(item.getEmpPwd());
+		tfEmpPwd.setText("**********");
 		cmbDept.setSelectedIndex(item.getDept().getDeptNo()-1);
+        //JOptionPane.showMessageDialog(null, item.getPic().toString());
+		
+		if(item.getPic() == null) {
+	    	setPic(getClass().getClassLoader().getResource("no-image.png").getPath());
+	    }else {
+	    setPic(item.getPic()); //메소드 오버로딩 필요  //이게 null일 수 있음 
+	    }
 		
 	}
 

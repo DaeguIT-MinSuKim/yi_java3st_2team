@@ -20,6 +20,11 @@ select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode))
 				where d.deptName ='인사' group by e.`empCode`;			
 
 select * from employee e2 ;
+select * from employee where empcode = 'B020';
+select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo, pic 
+from employee e left join department d on e.deptNo = d.deptNo
+where empCode='B020';
+select empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo, pic from employee e left join department d on e.deptNo = d.deptNo where empCode='B020';
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력
 -- 부서별 직원수
