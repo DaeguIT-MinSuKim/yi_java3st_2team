@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import yi_java3st_2team.dto.Card;
@@ -19,13 +20,14 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5,6,7);
+		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5);
+		setColumnAlign(SwingConstants.RIGHT, 6,7);
 		setColumnWidth(200,100,100,100,100,200,100,100);
 	}
 
 	@Override
 	protected Object[] toArray(Card item) {
-		return new Object[] {item.getCardNum(),item.getCustCode().getCustName(),item.getPlanCode().getPlanName(),item.getCardNum().substring(6,7).equals("1")?"체크카드":"신용카드",item.getCardSecuCode(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getCardIssueDate()),item.getCardBalance(),item.getCardLimit()};
+		return new Object[] {item.getCardNum(),item.getCustCode().getCustName(),item.getPlanCode().getPlanName(),item.getCardNum().substring(6,7).equals("1")?"체크카드":"신용카드",item.getCardSecuCode(),new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getCardIssueDate()),String.format("%,d", item.getCardBalance()),String.format("%,d", item.getCardLimit())};
 	}
 
 	@Override
@@ -36,8 +38,8 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 		model.setValueAt(item.getCardNum().substring(6,7).equals("1")?"체크카드":"신용카드", updateIdx, 3);
 		model.setValueAt(item.getCardSecuCode(), updateIdx, 4);
 		model.setValueAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getCardIssueDate()), updateIdx, 5);
-		model.setValueAt(item.getCardBalance(), updateIdx, 6);
-		model.setValueAt(item.getCardLimit(), updateIdx, 7);
+		model.setValueAt(String.format("%,d", item.getCardBalance()), updateIdx, 6);
+		model.setValueAt(String.format("%,d", item.getCardLimit()), updateIdx, 7);
 	}
 
 	@Override
@@ -60,10 +62,14 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 		}
 		Card card = new Card(cardNum, custCode, planCode, cardSecuCode, cardIssueDate);
 		if(cardDiv.equals("체크카드")) {
-			card.setCardBalance((long)model.getValueAt(selIdx, 6));
+			String balanceStr = (String)model.getValueAt(selIdx, 6);
+			long balance = Long.parseLong(balanceStr.replaceAll("[\\,]", ""));
+			card.setCardBalance(balance);
 		}
 		else {
-			card.setCardLimit((int)model.getValueAt(selIdx, 7));
+			String limitStr = (String)model.getValueAt(selIdx, 7);
+			int limit = Integer.parseInt(limitStr.replaceAll("[\\,]", ""));
+			card.setCardLimit(limit);
 		}
 		return card;
 	}

@@ -6,22 +6,14 @@ import yi_java3st_2team.ui.absPanel.AbsCenterNorthSearchPanel;
 @SuppressWarnings("serial")
 public class LoanCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<BankBook> {
 
-	/**
-	 * Create the panel.
-	 */
-//	public LoanCenterNorthSearchPanel() {
-//		setText("고객 이름 검색");
-//	}
-
 	@Override
 	protected void tfClear() {
-		getTfSearch().setText("");	
+		getTfSearch().setText("");
 	}
 
 	@Override
 	public String[] setSearchList() {
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] {"검색구분","계좌번호","고객이름","상품명","대출구분"};
 	}
 
 }

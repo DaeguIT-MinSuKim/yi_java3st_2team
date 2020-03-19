@@ -14,7 +14,6 @@ public class BankBookCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Ba
 	@Override
 	protected void tfClear() {
 		getTfSearch().setText("");
-		getCmbSearchList().setSelectedIndex(0);
 	}
 
 }

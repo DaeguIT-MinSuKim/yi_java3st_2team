@@ -24,7 +24,8 @@ public class LoanCenterTblPanel extends AbsCenterTblPanel<Loan> {
 	@Override
 	protected void setTblWidthAlign() {
 		setColumnWidth(200,100,100,50,150,100,100);
-		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4,5,6);
+		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4);
+		setColumnAlign(SwingConstants.RIGHT, 5,6);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class LoanCenterTblPanel extends AbsCenterTblPanel<Loan> {
 			loanDiv = "카드론";
 			break;
 		}
-		return new Object[] {item.getLoanAccountNum(),item.getCustCode().getCustName(),item.getPlanCode().getPlanName(),loanDiv,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getLoanDate()),item.getLoanInterest(),item.getLoanBalance()};
+		return new Object[] {item.getLoanAccountNum(),item.getCustCode().getCustName(),item.getPlanCode().getPlanName(),loanDiv,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getLoanDate()),String.format("%.1f%%", item.getLoanInterest() * 100),String.format("%,d", item.getLoanBalance())};
 	}
 
 	@Override
@@ -68,8 +69,8 @@ public class LoanCenterTblPanel extends AbsCenterTblPanel<Loan> {
 		model.setValueAt(item.getPlanCode().getPlanName(), updateIdx, 2);
 		model.setValueAt(loanDiv, updateIdx, 3);
 		model.setValueAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getLoanDate()), updateIdx, 4);
-		model.setValueAt(item.getLoanInterest(), updateIdx, 5);
-		model.setValueAt(item.getLoanBalance(), updateIdx, 6);
+		model.setValueAt(String.format("%.1f%%", item.getLoanInterest()), updateIdx, 5);
+		model.setValueAt(String.format("%,d", item.getLoanBalance()), updateIdx, 6);
 	}
 
 	@Override
@@ -87,8 +88,10 @@ public class LoanCenterTblPanel extends AbsCenterTblPanel<Loan> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		float loanInterest = (float)model.getValueAt(idx, 5);
-		long loanBalance = (long)model.getValueAt(idx, 6);
+		String interestStr = (String)model.getValueAt(idx, 5);
+		float loanInterest = Float.parseFloat(interestStr.replaceAll("[\\%]", "")) / 100;
+		String balanceStr = (String)model.getValueAt(idx, 6);
+		long loanBalance = Long.parseLong(balanceStr.replaceAll("[\\,]", ""));
 		return new Loan(loanAccountNum, custCode, planCode, loanDate, loanInterest, loanBalance);
 	}
 

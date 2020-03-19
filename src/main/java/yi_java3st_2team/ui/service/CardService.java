@@ -31,6 +31,15 @@ public class CardService {
 	public List<Card> showCardByCustName(Card card) throws SQLException {
 		return cardDao.showCardByCustName(card);
 	}
+	public List<Card> showCardByPlanName(Card card) throws SQLException {
+		return cardDao.showCardByPlanName(card);
+	}
+	public List<Card> showCardByCheckCard() throws SQLException {
+		return cardDao.showCardByCheckCard();
+	}
+	public List<Card> showCardByCreditCard() throws SQLException {
+		return cardDao.showCardByCreditCard();
+	}
 	public int insertCard(Card card) throws SQLException {
 		return cardDao.insertCard(card);
 	}

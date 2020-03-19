@@ -58,10 +58,10 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public List<Card> showCardByCustName(Card card) throws SQLException {
 		List<Card> list = new ArrayList<>();
-		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname = ?";
+		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where cs.custname like ?";
 		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, card.getCustCode().getCustName());
+			pstmt.setString(1, "%" + card.getCustCode().getCustName() + "%");
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
 					list.add(getCardInfo(rs));
@@ -204,6 +204,47 @@ public class CardDaoImpl implements CardDao {
 		int check = rs.getInt("check");
 		int credit = rs.getInt("credit");
 		return new CardInfo(custname, check, credit);
+	}
+	@Override
+	public List<Card> showCardByPlanName(Card card) throws SQLException {
+		List<Card> list = new ArrayList<>();
+		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where p.planname = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "%" + card.getPlanCode().getPlanName() + "%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getCardInfo(rs));
+				}
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<Card> showCardByCheckCard() throws SQLException {
+		List<Card> list = new ArrayList<>();
+		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where c.cardnum like '%331%'";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getCardInfo(rs));
+			}
+		}
+		return list;
+	}
+	@Override
+	public List<Card> showCardByCreditCard() throws SQLException {
+		List<Card> list = new ArrayList<>();
+		String sql = "select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where c.cardnum like '%332%'";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()) {
+			while(rs.next()) {
+				list.add(getCardInfo(rs));
+			}
+		}
+		return list;
 	}
 
 }

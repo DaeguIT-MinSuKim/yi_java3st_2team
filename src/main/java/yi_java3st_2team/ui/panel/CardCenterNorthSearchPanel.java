@@ -9,13 +9,13 @@ public class CardCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Card> 
 
 	@Override
 	protected void tfClear() {
-		getCmbSearchList().setSelectedIndex(-1);
+		getTfSearch().setText("");
 	}
 
 	@Override
 	public String[] setSearchList() {
 		// TODO Auto-generated method stub
-		return null;
+		return new String[] {"검색구분","고객이름","상품명","카드구분"};
 	}
 
 }

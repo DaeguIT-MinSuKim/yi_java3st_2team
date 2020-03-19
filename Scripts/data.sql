@@ -233,11 +233,11 @@ delimiter ;
 drop trigger if exists tri_before_update_card_bankbook;
 delimiter $$
 create trigger tri_before_update_card_bankbook
-   after update on card
+   before update on card
    for each row 
    begin
 	  if(old.plancode = "B001") then
-      	update bankbook set accountBalance = (select new.cardbalance from card where custCode = new.custCode and plancode = new.plancode) where custCode = new.custCode and planCode in ('A001','A004');
+      	update bankbook set accountBalance = (select new.cardbalance from card where custCode = new.custCode and plancode = new.plancode);
 	  end if;
    end $$
 delimiter ;
