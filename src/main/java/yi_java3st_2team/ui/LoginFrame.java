@@ -58,11 +58,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private static LoginFrame frame;
 	private String mainMessage;
 	
-	
-	public static LoginFrame getFrame() {
-		return frame;
-	}
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 		
@@ -210,6 +205,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	}
 
 
+	@SuppressWarnings("static-access")
 	protected void btnLoginActionPerformed(ActionEvent e) {
 		
 		try {
@@ -229,6 +225,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		if(chkLogin) {
 			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
+			main.setLoginFrame(frame);
 			tfId.setEditable(true);
 			pfPass.setEditable(true);
 			frame.setVisible(false);
