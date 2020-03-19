@@ -1,14 +1,7 @@
 package yi_java3st_2team.ui.chart;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -22,30 +15,18 @@ import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.ui.service.BankBookService;
  
-public class JFrameBarChart {
+public class PanelDPsLoanAllBarChart extends JFXPanel  implements InitScene {
 
 	private static BarChart<String, Number> barChart;
 	private static BankBookService service = new BankBookService();
 
-	public static void initAndShowGUI() {
-		JFrame frame = new JFrame("Swing and JavaFX");
-		frame.setBounds(620, 50, 500, 500);
-		
-		final JFXPanel fxPanel = new JFXPanel();
-
-		frame.add(fxPanel);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		Platform.runLater(() -> initFX(fxPanel));
-	}
 	
-	private static void initFX(JFXPanel fxPanel) {
-		Scene scene = createScene();
-		fxPanel.setScene(scene);
+	
+	public PanelDPsLoanAllBarChart() {
 	}
 
-	private static Scene createScene() {
+
+	public Scene createScene() {
 		Group root = new Group();
 		Scene scene = new Scene(root, Color.ALICEBLUE);
 
@@ -58,7 +39,7 @@ public class JFrameBarChart {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("항목별 총 금액");
 		
-		barChart.setPrefSize(500, 400);
+		barChart.setPrefSize(1000, 400);
 		//barChart.getData().add(getBarChartData());
 		barChart.setData(getChartData());
 		root.getChildren().add(barChart);

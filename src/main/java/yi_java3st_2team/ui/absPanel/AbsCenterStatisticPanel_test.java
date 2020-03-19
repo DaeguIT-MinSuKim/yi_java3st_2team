@@ -139,6 +139,7 @@ abstract public class AbsCenterStatisticPanel_test extends JPanel {
 	//메뉴 패널 세팅 
 	protected void setPanelInit(JPanel ... menu) {
 		for(int i=0;i<menu.length;i++) {
+			menu[0].setBackground(new Color(254,208,64));
 			 menu[i].setBackground(new Color(255,255,255));
 		}
 	}
