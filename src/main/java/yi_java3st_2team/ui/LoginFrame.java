@@ -34,9 +34,6 @@ import yi_java3st_2team.ui.service.LoginService;
 public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pCenter;
-	private JPanel pNorth;
-	private JPanel pImg;
-	private JLabel lblINorthLogo;
 	private JPanel pcNorth;
 	private JLabel lblBankImg;
 	private JLabel lblGreeting;
@@ -105,21 +102,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		pNorth = new JPanel();
-		pNorth.setBackground(Color.WHITE);
-		contentPane.add(pNorth, BorderLayout.NORTH);
-		pNorth.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		pImg = new JPanel();
-		pImg.setBackground(Color.WHITE);
-		pNorth.add(pImg);
-		pImg.setLayout(new BorderLayout(0, 0));
-		
-		lblINorthLogo = new JLabel("");
-		lblINorthLogo.setIcon(new ImageIcon(new ImageIcon("D:\\workspace_gradle\\yi_java3st_2team\\images\\logo.png").getImage().getScaledInstance(200, 70, 1)));
-		lblINorthLogo.setBackground(Color.WHITE);
-		pImg.add(lblINorthLogo, BorderLayout.CENTER);
 		
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.WHITE);

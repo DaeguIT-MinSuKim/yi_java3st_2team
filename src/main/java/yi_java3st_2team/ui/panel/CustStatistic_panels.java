@@ -20,14 +20,19 @@ import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
 public class CustStatistic_panels extends AbsCenterStatisticPanel_test implements ActionListener{
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
-	private PanelMonthlyDpOpenNumBarChart panel_chart;
-
+	private PanelMonthlyDpOpenNumBarChart panel_chart_Deposit;
+	private PanelMonthlySvOpenNumBarChart panel_chart_Saving;
 	/**
 	 * Create the panel.
 	 */
 	public CustStatistic_panels() {
-
 		initialize();
+	}
+	public void initChart() {
+		panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
+		panel_chart_Saving = new PanelMonthlySvOpenNumBarChart();
+		Platform.runLater(() -> initFX(panel_chart_Deposit));
+		Platform.runLater(() -> initFX(panel_chart_Saving));
 	}
 	private void initialize() {
 		this.setPanelInit(this.panel, this.panel_1, this.panel_2, this.panel_3, this.panel_7, this.panel_8, this.panel_9);
@@ -41,9 +46,7 @@ public class CustStatistic_panels extends AbsCenterStatisticPanel_test implement
 		btn_panel.add(btnNewButton_1);
 		
 		this.setBtnInit(btnNewButton,btnNewButton_1);
-		
-		panel_chart = new PanelMonthlyDpOpenNumBarChart();
-		Platform.runLater(() -> initFX(panel_chart));
+		initChart();
 	}
 
 	@Override
@@ -90,19 +93,19 @@ public class CustStatistic_panels extends AbsCenterStatisticPanel_test implement
 	}
 	protected void btnNewButtonActionPerformed(ActionEvent e) {
 		//panel_5.removeAll();
+		initChart();
 		JPanel panel_5 = new JPanel();
 		center_panel.add(panel_5, BorderLayout.CENTER);
-		panel_5.add(panel_chart);
+		panel_5.add(panel_chart_Deposit);
 		panel_5.revalidate();
 		panel_5.repaint();
 	}
 	protected void btnNewButton_1ActionPerformed(ActionEvent e) {
 		//panel_5.removeAll();
+		initChart();
 		JPanel panel_5 = new JPanel();
 		center_panel.add(panel_5, BorderLayout.CENTER);
-		PanelMonthlySvOpenNumBarChart panel = new PanelMonthlySvOpenNumBarChart();
-		panel_5.add(panel);
-		Platform.runLater(() -> initFX(panel));
+		panel_5.add(panel_chart_Saving);
 		center_panel.revalidate();
 		center_panel.repaint();
 		
