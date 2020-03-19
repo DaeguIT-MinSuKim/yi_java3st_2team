@@ -8,12 +8,13 @@ public class BankBookCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Ba
 
 	@Override
 	public String[] setSearchList() {
-		return new String[] {"계좌번호","고객이름","상품명","예금","적금","마이너스"};
+		return new String[] {"검색구분","계좌번호","고객이름","상품명","통장상품"};
 	}
 
 	@Override
 	protected void tfClear() {
-		getCmbSearchList().setSelectedIndex(-1);
+		getTfSearch().setText("");
+		getCmbSearchList().setSelectedIndex(0);
 	}
 
 }

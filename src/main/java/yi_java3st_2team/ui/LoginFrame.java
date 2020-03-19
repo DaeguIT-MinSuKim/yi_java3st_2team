@@ -54,7 +54,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private Employee chkEmp;
 	private JButton btnLogout;
 	private JPanel panel_1;
-	
 	private static LoginFrame frame;
 	private String mainMessage;
 	private JPanel pSouthForLogo;
@@ -85,13 +84,15 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
+		main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		//main.setTitle(mainMessage);
 		main.addWindowListener(new WindowAdapter() {
 			@Override
-			
-			
 			public void windowClosed(WindowEvent e) {
 				main.setClear();
+				main.getLoginFrame().setVisible(true);
+				tfId.setText("");
+				pfPass.setText("");
 			}
 			
 		});

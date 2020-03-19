@@ -40,6 +40,10 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		cmbSearchList = new JComboBox(setSearchList());
 		pSearch.add(cmbSearchList);
 		
+		tfSearch = new JTextField();
+		tfSearch.setColumns(10);
+		pSearch.add(tfSearch);
+		
 		panel = new JPanel();
 		panel.setVisible(false);
 		pSearch.add(panel);

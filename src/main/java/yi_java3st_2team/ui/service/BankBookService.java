@@ -104,4 +104,19 @@ public class BankBookService {
 	public List<AccountInfo> showTerminationAccountInfo() throws SQLException {
 		return bankBookDao.showBankBookTerminationAccountInfo();
 	}
+	public List<BankBook> showBankBookByAccoutNum(BankBook bankbook) throws SQLException {
+		return bankBookDao.showBankBooksByAccountNum(bankbook);
+	}
+	public List<BankBook> showBankBookByPlanName(BankBook bankbook) throws SQLException {
+		return bankBookDao.showBankBooksByPlanName(bankbook);
+	}
+	public List<BankBook> showBankBookByDeposit() throws SQLException {
+		return bankBookDao.showBankBooksByDeposit();
+	}
+	public List<BankBook> showBankBookBySaving() throws SQLException {
+		return bankBookDao.showBankBooksBySaving();
+	}
+	public List<BankBook> showBankBookByMinus() throws SQLException {
+		return bankBookDao.showBankBooksByMinus();
+	}
 }
