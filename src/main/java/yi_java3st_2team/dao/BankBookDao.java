@@ -10,7 +10,12 @@ import yi_java3st_2team.dto.Info;
 
 public interface BankBookDao {
 	public abstract List<BankBook> showBankBooks() throws SQLException;
+	public abstract List<BankBook> showBankBooksByAccountNum(BankBook bankbook) throws SQLException;
 	public abstract List<BankBook> showBankBooksByCustName(BankBook bankbook) throws SQLException;
+	public abstract List<BankBook> showBankBooksByPlanName(BankBook bankbook) throws SQLException;
+	public abstract List<BankBook> showBankBooksByDeposit(BankBook bankbook) throws SQLException;
+	public abstract List<BankBook> showBankBooksBySaving(BankBook bankbook) throws SQLException;
+	public abstract List<BankBook> showBankBooksByMinus(BankBook bankbook) throws SQLException;
 	public abstract String showDPTotalAmount() throws SQLException;//예금 총금액
 	public abstract String showSvTotalAmount() throws SQLException;//적금 총금액
 	public abstract String showLoTotalAmount() throws SQLException;//대출 총금액

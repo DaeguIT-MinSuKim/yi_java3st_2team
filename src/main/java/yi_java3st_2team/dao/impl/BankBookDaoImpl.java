@@ -388,4 +388,54 @@ public class BankBookDaoImpl implements BankBookDao {
 		}
 		return list;
 	}
+
+	@Override
+	public List<BankBook> showBankBooksByAccountNum(BankBook bankbook) throws SQLException {
+		List<BankBook> list = new ArrayList<>();
+		String sql = "select b.accountNum,c.custCode,c.custName,p.planCode,p.planName,b.accountOpenDate,b.accountInterest from bankbook b left join customer c on b.custCode = c.custCode left join plan p on b.accountPlanCode = p.planCode where b.accountnum = ?";
+		try(Connection con = LocalDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, bankbook.getAccountNum());
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getBankBook(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BankBook> showBankBooksByPlanName(BankBook bankbook) throws SQLException {
+		List<BankBook> list = new ArrayList<>();
+		String sql = "select b.accountNum,c.custCode,c.custName,p.planCode,p.planName,b.accountOpenDate,b.accountInterest from bankbook b left join customer c on b.custCode = c.custCode left join plan p on b.accountPlanCode = p.planCode where p.planname = ?";
+		try(Connection con = LocalDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, bankbook.getAccountPlanCode().getPlanName());
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getBankBook(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<BankBook> showBankBooksByDeposit(BankBook bankbook) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BankBook> showBankBooksBySaving(BankBook bankbook) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<BankBook> showBankBooksByMinus(BankBook bankbook) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

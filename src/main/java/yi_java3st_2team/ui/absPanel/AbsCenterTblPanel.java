@@ -92,9 +92,9 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 	
 	public int getSelectedRowIdx() {
 		int selectedIdx = table.getSelectedRow();
-//		if(selectedIdx==-1) {
-//			throw new RuntimeException("선택부터 해주세요");
-//		}
+		if(selectedIdx==-1) {
+			throw new RuntimeException("선택부터 해주세요");
+		}
 		return selectedIdx;
 	}
 

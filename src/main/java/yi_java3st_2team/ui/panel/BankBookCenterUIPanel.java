@@ -101,7 +101,6 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					try {
-						selIdx = pCenter.getSelectedRowIdx();
 						BankBook bankbook = pCenter.getSelectedItem();
 						dlgBankBook = new DlgBankBook();
 						dlgBankBook.initCmbModel(service);
@@ -116,17 +115,18 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						dlgBankBook.setVisible(true);
 					}
 					catch(RuntimeException e1) {
-						JOptionPane.showMessageDialog(null, "선택부터 해주세요");
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
+					
 				}
 				else if(e.getActionCommand().equals("삭제")) {
 					try {
+						int idx = pCenter.getSelectedRowIdx();
 						BankBook bankbook = pCenter.getSelectedItem();
-						selIdx = pCenter.getSelectedRowIdx();
 						int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
 						if(res==0) {
 							try {
-								pCenter.removeItem(selIdx);
+								pCenter.removeItem(idx);
 								service.insertTerminationAccountProcedure(bankbook);
 								service.deleteBankBook(bankbook);
 								pCenter.loadTableData(service.showBankBooks());
@@ -141,8 +141,9 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						}
 					}
 					catch(RuntimeException e1) {
-						JOptionPane.showMessageDialog(null, "선택부터 해주세요");
+						JOptionPane.showMessageDialog(null, e1.getMessage());
 					}
+					
 				}
 				else {
 					BankBook bankbook = pCenter.getSelectedItem();
@@ -194,20 +195,22 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 	}
 	protected void pNorthBtnSearchActionPerformed(ActionEvent e) {
 		Customer cust = new Customer();
-		cust.setCustName(pNorth.getTfSearch().getText());
 		BankBook bankbook = new BankBook();
 		bankbook.setCustCode(cust);
-		try {
-			List<BankBook> list = service.showBankBookByCustName(bankbook);
-			if(list.size()==0) {
-				JOptionPane.showMessageDialog(null, "그런 고객을 찾을 수 없습니다");
-				return;
-			}
-			pCenter.loadTableData(list);
-			JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		String searchMenu = (String)pNorth.getCmbSearchList().getSelectedItem();
+		switch(searchMenu) {
+		case "계좌번호":
+			break;
+		case "고객이름":
+			break;
+		case "상품명":
+			break;
+		case "예금":
+			break;
+		case "적금":
+			break;
+		case "마이너스":
+			break;
 		}
 	}
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {

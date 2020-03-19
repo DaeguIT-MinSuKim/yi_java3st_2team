@@ -6,22 +6,14 @@ import yi_java3st_2team.ui.absPanel.AbsCenterNorthSearchPanel;
 @SuppressWarnings("serial")
 public class BankBookCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<BankBook> {
 
-	/**
-	 * Create the panel.
-	 */
-//	public BankBookCenterNorthSearchPanel() {
-//		setText("고객 이름 검색");
-//	}
-
 	@Override
-	protected void tfClear() {
-		getTfSearch().setText("");	
+	public String[] setSearchList() {
+		return new String[] {"계좌번호","고객이름","상품명","예금","적금","마이너스"};
 	}
 
 	@Override
-	public String[] setSearchList() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void tfClear() {
+		getCmbSearchList().setSelectedIndex(-1);
 	}
 
 }

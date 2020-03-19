@@ -211,7 +211,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 	}
 
-
 	protected void btnLoginActionPerformed(ActionEvent e) {
 		
 		try {

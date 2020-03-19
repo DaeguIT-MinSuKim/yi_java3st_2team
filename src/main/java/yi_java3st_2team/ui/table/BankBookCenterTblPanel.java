@@ -22,6 +22,7 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 	protected void setTblWidthAlign() {
 		setColumnWidth(200,100,100,100,200,100);
 		setColumnAlign(SwingConstants.CENTER, 0,1,2,3,4);
+		setColumnAlign(SwingConstants.RIGHT,5);
 	}
 
 	@Override
@@ -45,7 +46,9 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		float accountInterest = (float)model.getValueAt(selIdx, 5);
+		String interestStr = (String)model.getValueAt(selIdx, 5);
+		interestStr = interestStr.replaceAll("[\\%]", "");
+		float accountInterest = (Float.parseFloat(interestStr) / 100);
 		return new BankBook(accountNum, custCode, accountPlanCode, accountOpenDate, accountInterest);
 	}
 
@@ -61,7 +64,7 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 		else {
 			bankDiv = "마이너스";
 		}
-		return new Object[] {item.getAccountNum(),item.getCustCode().getCustName(),item.getAccountPlanCode().getPlanName(),bankDiv,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getAccountOpenDate()),item.getAccountInterest()};
+		return new Object[] {item.getAccountNum(),item.getCustCode().getCustName(),item.getAccountPlanCode().getPlanName(),bankDiv,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(item.getAccountOpenDate()),String.format("%.2f%%", item.getAccountInterest()*100)};
 	}
 
 	@Override
@@ -81,7 +84,7 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 		}
 		model.setValueAt(bankDiv, updateIdx, 3);
 		model.setValueAt(new SimpleDateFormat().format(item.getAccountOpenDate()), updateIdx, 4);
-		model.setValueAt(item.getAccountInterest(), updateIdx, 5);
+		model.setValueAt(String.format("%.2f%%", item.getAccountBalance() * 100), updateIdx, 5);
 	}
 
 }

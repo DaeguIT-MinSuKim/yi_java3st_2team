@@ -17,8 +17,6 @@ import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
-	private JTextField tfSearch;
-	private JLabel lblSearch;
 	private JButton btnSearch;
 	private JButton btnCancel;
 	private JPanel pBtn;
@@ -40,18 +38,6 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 		
 		cmbSearchList = new JComboBox(setSearchList());
 		pSearch.add(cmbSearchList);
-		
-//		lblSearch = new JLabel("");
-//		lblSearch.setHorizontalAlignment(SwingConstants.RIGHT);
-//		lblSearch.setForeground(Color.BLACK);
-//		lblSearch.setBackground(Color.WHITE);
-//		lblSearch.setFont(new Font("맑은 고딕",Font.BOLD,16));
-//		lblSearch.setOpaque(true);
-//		pSearch.add(lblSearch);
-		
-		tfSearch = new JTextField();
-		pSearch.add(tfSearch);
-		tfSearch.setColumns(10);
 		
 		panel = new JPanel();
 		panel.setVisible(false);
@@ -84,20 +70,12 @@ public abstract class AbsCenterNorthSearchPanel<T> extends JPanel {
 	}
 	
 	public abstract String[] setSearchList();
-//	public JLabel getLblSearch() {
-//		return lblSearch;
-//	}
-	public JTextField getTfSearch() {
-		return tfSearch;
-	}
+
 	public JButton getBtnSearch() {
 		return btnSearch;
 	}
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
-//	protected void setText(String text) {
-//		lblSearch.setText(text);
-//	}
 	abstract protected void tfClear();
 }
