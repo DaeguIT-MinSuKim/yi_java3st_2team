@@ -17,6 +17,7 @@ import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.service.NoticeService;
 import yi_java3st_2team.ui.table.NoticeTblPanel;
 import java.awt.Color;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class NoticeUIPanel extends JPanel implements ActionListener {
@@ -36,6 +37,8 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
+		setBorder(new EmptyBorder(0, 0, 20, 20));
+		setBackground(Color.WHITE);
 		service = new NoticeService();
 		dpUIPanel = this;
 		setLayout(new BorderLayout(0, 0));
@@ -49,6 +52,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		pNorth.add(lblNewLabel);
 		
 		pCenter = new NoticeTblPanel();
+		pCenter.getTable().setBackground(Color.WHITE);
 		pCenter.setBackground(Color.WHITE);
 		try {
 			pCenter.loadTableData(service.showNoticeByAll());

@@ -77,11 +77,12 @@ public class LoginFrame extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public LoginFrame() {
-		initialize();
+		initialize(); 
 	}
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
+		main.getCenterPanel();
 		main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		main.setResizable(false);
 		//main.setTitle(mainMessage);
