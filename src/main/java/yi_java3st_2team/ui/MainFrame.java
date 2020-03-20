@@ -44,8 +44,10 @@ import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
+import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.panel.Statistic_test;
 import yi_java3st_2team.ui.service.EmployeeService;
+
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 
@@ -97,6 +99,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private LoginFrame loginFrame;
 	private JPanel pLogout;
 	private JButton btnMenuLogout;
+	private JPanel left;
+	private JPanel right;
 
 	public MainFrame() {
 		initialize();
@@ -122,19 +126,16 @@ public class MainFrame extends JFrame implements ActionListener {
 				if(greeting == null) {
 					greeting = lblGreeting.getText();
 				}
-				
 				contentPane.remove(pCenter);
     			pcNorth = getLoginPanel();
 				lblGreeting.setText(greeting);
-				pcCenter = getMainLogoPanel();
-//				
+				pcCenter = getMainLogoPanel();		
 				pCenter = new JPanel();
 				pCenter.setLayout(new BorderLayout(0, 0));
-				contentPane.add(pCenter,BorderLayout.CENTER);
 				pCenter.setBackground(Color.white);
 				pCenter.add(pcNorth,BorderLayout.NORTH);
 				pCenter.add(pcCenter,BorderLayout.CENTER);
-     			
+				contentPane.add(pCenter,BorderLayout.CENTER);
 				repaint();
 				revalidate();
 			}
@@ -463,12 +464,17 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 		}
 	}
-	private JPanel getMainLogoPanel() {
+	public JPanel getMainLogoPanel() {
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		String imgPath = System.getProperty("user.dir") + "//images//MainLogo.png";
-		JLabel mainLogo = new JLabel(new ImageIcon(new ImageIcon(imgPath).getImage().getScaledInstance(700, 400, 1)));
-		panel.add(mainLogo,BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(0,2,20,20));
+		left = new JPanel();
+		panel.add(left);
+		right = new JPanel();
+		right.setLayout(new BorderLayout());
+		NoticeUIPanel noUIPanel = new NoticeUIPanel();
+		noUIPanel.setMain(this);
+		right.add(noUIPanel,BorderLayout.CENTER);
+		panel.add(right);
 		return panel;
 	}
 	public JPanel getLoginPanel() {
@@ -492,7 +498,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.add(btnLogout);
 		return panel;
 	}
-	
 	
 	public void setClear() {
 		mnEmp.setEnabled(true);
@@ -520,10 +525,27 @@ public class MainFrame extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 	}
+	public JPanel getPcCenter() {
+		return pcCenter;
+	}
+	public void setPcCenter(JPanel pcCenter) {
+		this.pcCenter = pcCenter;
+	}
+	public JPanel getLeft() {
+		return left;
+	}
+	public void setLeft(JPanel left) {
+		this.left = left;
+	}
+	public JPanel getRight() {
+		return right;
+	}
+	public void setRight(JPanel right) {
+		this.right = right;
+	}
 	public JButton getBtnLogout() {
 		return btnLogout;
 	}
-
 	public void initEmpAuth(String empName) {
 		try {
 			Employee emp = new Employee();

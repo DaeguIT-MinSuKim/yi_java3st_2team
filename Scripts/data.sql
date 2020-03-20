@@ -138,6 +138,18 @@ create table changeBankBookTerminationInfo(
 	transDate datetime
 );
 
+#공지사항 테이블 생성
+create table notice(
+	no int auto_increment not null primary key,
+	subject varchar(30) not null, 
+	writer varchar(3) not null,
+	write_date datetime not null,
+	content text not null
+);
+
+insert into notice(subject,writer,write_date,content) values("코로나19 다 함께 이겨냅시다!","작성자",now(),"YN BANK 직원 어려분 코로나 19 때문에 은행이 부도 위기에 처했지만, 여러분의 노고만이 회사를 살리는 유일한 길입니다. 저희 은행은 절대 직원 여러분을 버리지 않습니다. 다들 심기일전하여 코로나 19를 극복하고, YN BANK를 전세계 1위 은행으로 발돋움하게 노력합시다");
+update notice set writer = '관리자' where writer = '작성자';
+select * from notice;
 #statistic trigger 및 procedure
 drop procedure if exists proc_total_avg;
 delimiter $
