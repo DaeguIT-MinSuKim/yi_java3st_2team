@@ -175,11 +175,13 @@ public class LoginFrame extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		btnLogin = new JButton("Login");
-		panel.add(btnLogin);
+		btnLogin.setBorder(null);
+		
 		btnLogin.addActionListener(this);
 		btnLogin.setForeground(Color.BLACK);
 		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		btnLogin.setBackground(SystemColor.menu);
+		btnLogin.setBackground(SystemColor.activeCaption);
+		panel.add(btnLogin);
 		
 		pNorthForLogo = new JPanel();
 		pNorthForLogo.setBackground(Color.WHITE);

@@ -22,6 +22,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
 
 
 
@@ -51,6 +52,7 @@ public class EmpBest extends JPanel {
 		initialize();
 	}
 	private void initialize() {
+		setBorder(new EmptyBorder(10, 20, 20, 20));
 		setBackground(Color.WHITE);
 		List<Employee> list = new ArrayList<>();
 		list = service.showRank();
