@@ -62,7 +62,7 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public int insertNotice(Notice notice) throws SQLException {
 		int res = -1;
-		String sql = "insert into notice(title,writer,write_date,content) values(?,?,?,?)";
+		String sql = "insert into notice(subject,writer,write_date,content) values(?,?,?,?)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, notice.getSubject());
@@ -77,11 +77,12 @@ public class NoticeDaoImpl implements NoticeDao {
 	@Override
 	public int updateNotice(Notice notice) throws SQLException {
 		int res = -1;
-		String sql = "update notice set content = ? where no = ?";
+		String sql = "update notice set content = ? where no= ? and writer = ?";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, notice.getContent());
 			pstmt.setInt(2, notice.getNo());
+			pstmt.setString(3, notice.getWriter());
 			res = pstmt.executeUpdate();
 		}
 		return res;
@@ -97,6 +98,16 @@ public class NoticeDaoImpl implements NoticeDao {
 			res = pstmt.executeUpdate();
 		}
 		return res;
+	}
+
+	@Override
+	public int resetAutoIncrement() throws SQLException {
+		String sql = "call reset_autoincrement_notice()";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareCall(sql)) {
+			return pstmt.executeUpdate();
+		}
+		
 	}
 
 }

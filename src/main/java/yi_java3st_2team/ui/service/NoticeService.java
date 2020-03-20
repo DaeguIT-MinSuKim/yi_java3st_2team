@@ -28,5 +28,7 @@ public class NoticeService {
 	public int removeNotice(Notice notice) throws SQLException {
 		return dao.deleteNotice(notice);
 	}
-	
+	public int resetAutoIncrement() throws SQLException {
+		return dao.resetAutoIncrement();
+	}
 }

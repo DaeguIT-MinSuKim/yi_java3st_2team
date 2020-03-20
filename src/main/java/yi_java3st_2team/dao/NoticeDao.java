@@ -11,4 +11,5 @@ public interface NoticeDao {
 	public int insertNotice(Notice notice) throws SQLException;
 	public int updateNotice(Notice notice) throws SQLException;
 	public int deleteNotice(Notice notice) throws SQLException;
+	public int resetAutoIncrement() throws SQLException;
 }

@@ -29,7 +29,6 @@ public class NoticeDetailPanel extends JPanel {
 	private JButton btnCancel;
 	private NoticeUIPanel noticePanel;
 	private JButton btnReturn;
-
 	/**
 	 * Create the panel.
 	 */
@@ -161,7 +160,7 @@ public class NoticeDetailPanel extends JPanel {
 	public void setItem(Notice notice) {
 		tfSubject.setText(notice.getSubject());
 		tfWriter.setText(notice.getWriter());
-		taContent.setText(notice.getContent());
+		taContent.append(notice.getContent());
 	}
 	public void chkVaildate() {
 		if(tfSubject.getText().length()==0 || tfWriter.getText().length()==0 || taContent.getText().length()==0) {

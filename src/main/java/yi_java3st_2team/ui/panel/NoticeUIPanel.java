@@ -16,6 +16,7 @@ import yi_java3st_2team.dto.Notice;
 import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.service.NoticeService;
 import yi_java3st_2team.ui.table.NoticeTblPanel;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class NoticeUIPanel extends JPanel implements ActionListener {
@@ -27,6 +28,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 	private JButton btnMod;
 	private NoticeDetailPanel dpPanel;
 	private NoticeUIPanel dpUIPanel;
+	private int selIdx;
 	/**
 	 * Create the panel.
 	 */
@@ -39,6 +41,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel pNorth = new JPanel();
+		pNorth.setBackground(Color.WHITE);
 		add(pNorth, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel = new JLabel("공지사항");
@@ -46,6 +49,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		pNorth.add(lblNewLabel);
 		
 		pCenter = new NoticeTblPanel();
+		pCenter.setBackground(Color.WHITE);
 		try {
 			pCenter.loadTableData(service.showNoticeByAll());
 		} catch (SQLException e) {
@@ -55,6 +59,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		add(pCenter, BorderLayout.CENTER);
 		
 		JPanel pSouth = new JPanel();
+		pSouth.setBackground(Color.WHITE);
 		FlowLayout flowLayout = (FlowLayout) pSouth.getLayout();
 		flowLayout.setHgap(20);
 		add(pSouth, BorderLayout.SOUTH);
@@ -86,6 +91,12 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	public NoticeTblPanel getpCenter() {
+		return pCenter;
+	}
+	public void setpCenter(NoticeTblPanel pCenter) {
+		this.pCenter = pCenter;
+	}
 	public NoticeUIPanel getDpUIPanel() {
 		return dpUIPanel;
 	}
@@ -115,9 +126,10 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("등록")) {
 					try {
+						dpPanel.chkVaildate();
 						Notice notice = dpPanel.getItem();
-						pCenter.loadTableData(service.showNoticeByAll());
 						service.addNotice(notice);
+						pCenter.loadTableData(service.showNoticeByAll());
 						JOptionPane.showMessageDialog(null, "등록이 완료되었습니다");
 						main.getRight().removeAll();
 						main.getRight().add(dpUIPanel);
@@ -130,16 +142,22 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 				}
 				else if(e.getActionCommand().contentEquals("수정")) {
 					try {	
+						dpPanel.chkVaildate();
 						Notice notice = dpPanel.getItem();
-						pCenter.loadTableData(service.showNoticeByAll());
-						service.modifyNotice(notice);
-						JOptionPane.showMessageDialog(null, "수정이 완료되었습니다");
-						main.getRight().removeAll();
-						main.getRight().add(dpUIPanel);
-						main.getRight().repaint();
-						main.getRight().revalidate();
+						pCenter.updateRow(notice, selIdx);
+						notice.setNo(selIdx+1);
+						int res = service.modifyNotice(notice);
+						if(res==1) {
+							JOptionPane.showMessageDialog(null, "수정이 완료되었습니다");
+							main.getRight().removeAll();
+							main.getRight().add(dpUIPanel);
+							main.getRight().repaint();
+							main.getRight().revalidate();
+						}
 					} catch(SQLException e1) {
 						e1.printStackTrace();
+					} catch(RuntimeException e2) {
+						JOptionPane.showMessageDialog(null, e2.getMessage());
 					}
 				}
 				else if(e.getActionCommand().equals("취소")) {
@@ -161,11 +179,16 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 			try {
 				Notice notice = pCenter.getSelectedItem();
 				service.removeNotice(notice);
-				JOptionPane.showMessageDialog(null, "삭제되었습니다");
-				pCenter.loadTableData(service.showNoticeByAll());
+				res = service.resetAutoIncrement();
+				if(res==1) {
+					JOptionPane.showMessageDialog(null, "삭제되었습니다");
+					pCenter.loadTableData(service.showNoticeByAll());
+				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+			} catch(RuntimeException e2) {
+				JOptionPane.showMessageDialog(null, e2.getMessage());
 			}
 		}
 		else {
@@ -176,6 +199,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 	protected void btnModActionPerformed(ActionEvent e) {
 		dpPanel = new NoticeDetailPanel();
 		dpPanel.setItem(pCenter.getSelectedItem());
+		selIdx = pCenter.getSelectedRowIdx();
 		ActionListener dpAddListner = setDpListner();
 		dpPanel.getBtnAdd().setText("수정");
 		dpPanel.getBtnAdd().addActionListener(dpAddListner);
