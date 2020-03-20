@@ -40,6 +40,9 @@ public class EmpBest extends JPanel {
 	private JLabel lblRank3Title;
 	
 	private EmployeeUIService service;
+	private JLabel lblPicEmp1;
+	private JLabel lblPicEmp2;
+	private JLabel lblPicEmp3;
 	/**
 	 * Create the panel.
 	 */
@@ -60,11 +63,15 @@ public class EmpBest extends JPanel {
 		add(pSubject);
 		pSubject.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lblNewLabel = new JLabel("");
-		pSubject.add(lblNewLabel);
+		JLabel lblBestLogo = new JLabel("");
+		lblBestLogo.setBorder(null);
+		lblBestLogo.setBackground(Color.WHITE);
+		lblBestLogo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBestLogo.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/thebest.png"));
+		pSubject.add(lblBestLogo);
 		
-		JLabel lblTitle = new JLabel("우수사원");
-		lblTitle.setFont(new Font("새굴림", Font.BOLD, 26));
+		JLabel lblTitle = new JLabel("우 수 사 원");
+		lblTitle.setFont(new Font("새굴림", Font.BOLD, 28));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		pSubject.add(lblTitle);
 		
@@ -82,14 +89,20 @@ public class EmpBest extends JPanel {
 		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD, 15));
 		pEmpRank.add(lblNewLabel_1);
 		
-		JLabel lblPicEmp1 = new JLabel("");
+		lblPicEmp1 = new JLabel("");
 		lblPicEmp1.setBackground(Color.WHITE);
 		lblPicEmp1.setIcon(null);
 		lblPicEmp1.setSize(new Dimension(100, 150));
 		lblPicEmp1.setPreferredSize(new Dimension(100, 150));
 		lblPicEmp1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPicEmp1.setBorder(null);
-		setPic(lblPicEmp1,getClass().getClassLoader().getResource("no-img.png").getPath());
+		//setPic(lblPicEmp1,getClass().getClassLoader().getResource("no-img.png").getPath());
+		if(list.get(0).getPic() ==null){
+			setPic(lblPicEmp1,getClass().getClassLoader().getResource("no-img.png").getPath());
+		}else {
+			setPic(lblPicEmp1,list.get(0).getPic());
+		}
+		
 		pEmpRank.add(lblPicEmp1);
 		
 		JPanel pRank1 = new JPanel();
@@ -99,7 +112,7 @@ public class EmpBest extends JPanel {
 		
 		lblRank1Name = new JLabel(list.get(0).getEmpName());
 		lblRank1Name.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		lblRank1Name.setFont(new Font("굴림", Font.BOLD, 15));
+		lblRank1Name.setFont(new Font("굴림", Font.BOLD, 18));
 		lblRank1Name.setHorizontalAlignment(SwingConstants.CENTER);
 		pRank1.add(lblRank1Name);
 		
@@ -119,14 +132,19 @@ public class EmpBest extends JPanel {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		pEmpRank.add(lblNewLabel_3);
 		
-		JLabel lblPicEmp2 = new JLabel("");
+		lblPicEmp2 = new JLabel("");
 		lblPicEmp2.setBackground(Color.WHITE);
 		lblPicEmp2.setIcon(null);
 		lblPicEmp2.setSize(new Dimension(100, 150));
 		lblPicEmp2.setPreferredSize(new Dimension(100, 150));
 		lblPicEmp2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPicEmp2.setBorder(null);
-		setPic(lblPicEmp2,getClass().getClassLoader().getResource("no-image.png").getPath());
+		if(list.get(1).getPic() ==null){
+			setPic(lblPicEmp2,getClass().getClassLoader().getResource("no-img.png").getPath());
+		}else {
+			setPic(lblPicEmp2,list.get(1).getPic());
+		}
+		
 		pEmpRank.add(lblPicEmp2);
 		
 		JPanel pRank2 = new JPanel();
@@ -154,14 +172,18 @@ public class EmpBest extends JPanel {
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		pEmpRank.add(lblNewLabel_4);
 		
-		JLabel lblPicEmp3 = new JLabel("");
+		lblPicEmp3 = new JLabel("");
 		lblPicEmp3.setBackground(Color.WHITE);
 		lblPicEmp3.setIcon(null);
 		lblPicEmp3.setSize(new Dimension(100, 150));
 		lblPicEmp3.setPreferredSize(new Dimension(100, 150));
 		lblPicEmp3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPicEmp3.setBorder(null);
-		setPic(lblPicEmp3,getClass().getClassLoader().getResource("no-img.png").getPath());
+		if(list.get(2).getPic() ==null){
+			setPic(lblPicEmp3,getClass().getClassLoader().getResource("no-img.png").getPath());
+		}else {
+			setPic(lblPicEmp3,list.get(2).getPic());
+		}
 		pEmpRank.add(lblPicEmp3);
 		
 		JPanel pRank3 = new JPanel();
@@ -200,7 +222,7 @@ public class EmpBest extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(400, 600);;
+		frame.setSize(600, 600);;
 		EmpBest empBest = new EmpBest();
 		frame.getContentPane().add(empBest);
 		frame.setVisible(true);
