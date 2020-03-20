@@ -3,6 +3,7 @@ package yi_java3st_2team.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
@@ -25,7 +26,18 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.chart.InitScene;
+import yi_java3st_2team.ui.chart.PanelBarChart;
+import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
+import yi_java3st_2team.ui.chart.PanelMonthlyDepositOpenNumBarChart;
+import yi_java3st_2team.ui.chart.PanelMonthlyDpOpenNumBarChart;
+import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
+import yi_java3st_2team.ui.chart.PanelMonthlyWithDrawalOpenNumBarChart;
+import yi_java3st_2team.ui.chart.PanelPieChart;
 import yi_java3st_2team.ui.panel.BankBookCenterUIPanel;
 import yi_java3st_2team.ui.panel.BankBookInfoStatisticPanel;
 import yi_java3st_2team.ui.panel.BankBookTransHisStatisticPanel;
@@ -35,9 +47,9 @@ import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.panel.CustDWUIPanel;
 import yi_java3st_2team.ui.panel.CustInfoUIPanel;
 import yi_java3st_2team.ui.panel.CustPlanUIPanel;
-import yi_java3st_2team.ui.panel.CustStatisticPanel;
-import yi_java3st_2team.ui.panel.CustStatistic_panels;
-import yi_java3st_2team.ui.panel.CustStatistic_tapPane;
+import yi_java3st_2team.ui.panel.CustStatistic_CenterPanel;
+import yi_java3st_2team.ui.panel.CustStatistic_NorthPanel;
+import yi_java3st_2team.ui.panel.CustStatistic_WestPanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
@@ -48,8 +60,6 @@ import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.panel.Statistic_test;
 import yi_java3st_2team.ui.service.EmployeeService;
 
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
@@ -101,13 +111,27 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JButton btnMenuLogout;
 	private JPanel left;
 	private JPanel right;
-
+	private Thread chartThread;
+	private Thread panelThread;	
+	private PanelMonthlyDpOpenNumBarChart panel_chart_Deposit;
+	private PanelMonthlySvOpenNumBarChart panel_chart_Saving;
+	private PanelMonthlyDepositOpenNumBarChart penal_chart_DPnum;
+	private PanelMonthlyWithDrawalOpenNumBarChart panel_chartWDnum;
+	private PanelDPsLoanAllBarChart panel_chart_DPsLoan;
+	private PanelBarChart panel_chart_custRankNum;
+	private PanelPieChart panel_chart_custVIP;
+	private CustStatistic_WestPanel statistic_west;
+	private CustStatistic_CenterPanel statistic_center;
+	private CustStatistic_NorthPanel statistic_north;
+	private JPanel pCenterCenter;
+	
 	public MainFrame() {
 		initialize();
 	}
 	private void initialize() {
 		empService = new EmployeeService();
-
+		MouseAdapter menuAdapter = getMouseAdapter();
+		setThread();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1224, 700);
@@ -248,24 +272,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		mntmCustStatistic = new JMenuItem("고객 통계 정보");
 		mntmCustStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mntmCustStatistic.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				contentPane.remove(pCenter);
-				//pCenter = new CustStatisticPanel();
-				//pCenter = new CustStatistic_tapPane();
-				pCenter = new CustStatistic_panels();
-				((CustStatistic_panels) pCenter).initChart();
-				//pCenter = new Statistic_test();
-				contentPane.add(pCenter,BorderLayout.CENTER);
-				revalidate();
-				repaint();
-				
-			}
-		});
-		mnCust.add(mntmCustStatistic);
 		
+		//----------------여기에 
+		
+		mnCust.add(mntmCustStatistic);
 		
 		mntmCustPlan = new JMenuItem("고객 상품관리");
 		mntmCustPlan.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -406,7 +416,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		pcCenter = getMainLogoPanel();
 		pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
-		
 		//사원검색 액션리스너 밑쪽으로 빼기
 		mntmEmpSearch.addActionListener(this);
 		mntmWorkInfo.addActionListener(this);
@@ -423,9 +432,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);
 		
-
-			
+		mntmCustStatistic.addMouseListener(menuAdapter);
+		
 	}
+
 	public LoginFrame getLoginFrame() {
 		return loginFrame;
 	}
@@ -710,6 +720,225 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
+	}
+	
+	private synchronized MouseAdapter getMouseAdapter() {
+		MouseAdapter menuAdapter = new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//패널이 들어갈 페이지 삭제
+				contentPane.remove(pCenter);
+				//메인 패널 재 생성, 세팅
+				panelThread.run();
+				//메뉴 패널 마우스 리스너
+				JPanel[] panels = statistic_west.getPanels();
+				for(JPanel panel : panels) {
+					panel.addMouseListener(new MouseAdapter() {
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							
+							//모든 패널 흰색으로 먼저 변경
+							for(JPanel panel : panels) {
+								panel.setBackground(new Color(255,255,255));
+							}
+							//선택된 패널 노란색으로 변경
+							JPanel selPanel = (JPanel) e.getSource();
+							selPanel.setBackground(new Color(254,208,64));
+							//선택된 패널의 하위에 있는 라벨
+							JLabel selLabel = (JLabel) selPanel.getComponent(0);
+							switch(selLabel.getText()) {
+							case "예/적금건수(월별)":
+								statistic_north.removeAll();
+								statistic_center.removeAll();
+								//버튼 패널
+								statistic_north = new CustStatistic_NorthPanel();
+								statistic_north.setLayout(new FlowLayout());
+								JButton button_1 = new JButton("예금");
+								JButton button_2 = new JButton("적금");
+								//statistic_north.setBtns(button_1, button_2);
+								statistic_north.add(button_1);
+								statistic_north.add(button_2);
+								button_1.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(panel_chart_Deposit, BorderLayout.CENTER);
+										pCenterCenter.add(statistic_center,BorderLayout.CENTER);
+									}
+									
+								});
+								button_2.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(panel_chart_Saving, BorderLayout.CENTER);
+										pCenterCenter.add(statistic_center,BorderLayout.CENTER);
+									}
+									
+								});
+							
+								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
+								repaint();
+								revalidate();
+								break;
+							case "입/출금 건수(월별)":
+								pCenterCenter.removeAll();
+								//버튼 패널
+								statistic_north = new CustStatistic_NorthPanel();
+								statistic_north.setLayout(new FlowLayout());
+								JButton button_3 = new JButton("입금");
+								JButton button_4 = new JButton("출금");
+								//statistic_north.setBtns(button_1, button_2);
+								statistic_north.add(button_3);
+								statistic_north.add(button_4);
+								button_3.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(penal_chart_DPnum, BorderLayout.CENTER);
+									}
+									
+								});
+								button_4.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(panel_chartWDnum, BorderLayout.CENTER);
+									}
+									
+								});
+								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
+								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
+								repaint();
+								revalidate();
+								break;	
+							case "예금/적금/대출 총 금액":
+								pCenterCenter.removeAll();
+								//버튼 패널
+								statistic_north = new CustStatistic_NorthPanel();
+								statistic_north.setLayout(new FlowLayout());
+								//statistic_north.setBtns(button_1, button_2);
+								statistic_center.add(panel_chart_DPsLoan, BorderLayout.CENTER);
+								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
+								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
+								repaint();
+								revalidate();
+								break;
+							case "일반고객/VIP고객":
+								pCenterCenter.removeAll();
+								//버튼 패널
+								statistic_north = new CustStatistic_NorthPanel();
+								statistic_north.setLayout(new FlowLayout());
+								JButton button_5 = new JButton("총 고객 숫자");
+								JButton button_6 = new JButton("VIP고객 비율");
+								//statistic_north.setBtns(button_1, button_2);
+								statistic_north.add(button_5);
+								statistic_north.add(button_6);
+								button_5.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(panel_chart_custRankNum, BorderLayout.CENTER);
+										
+									}
+									
+								});
+								button_6.addMouseListener(new MouseAdapter() {
+
+									@Override
+									public void mouseClicked(MouseEvent e) {
+										statistic_center.add(panel_chart_custVIP, BorderLayout.CENTER);
+									}
+									
+								});
+								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
+								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
+								repaint();
+								revalidate();
+								break;
+						
+							}
+							
+						}
+						
+					});
+					chartThread.interrupt();
+					chartThread.run();
+				}
+				contentPane.add(pCenter,BorderLayout.CENTER);
+				revalidate();
+				repaint();
+			}
+				
+			
+		};
+		return menuAdapter;
+	}
+	
+	
+	public void setThread() {
+		chartThread = initChartThread();
+		chartThread.run();
+		panelThread = initPanelThread();
+		panelThread.run();
+	}
+	
+	private Thread initChartThread() {
+		Thread thread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
+				panel_chart_Saving = new PanelMonthlySvOpenNumBarChart();
+				penal_chart_DPnum = new PanelMonthlyDepositOpenNumBarChart();
+				panel_chartWDnum = new PanelMonthlyWithDrawalOpenNumBarChart();
+				panel_chart_DPsLoan = new PanelDPsLoanAllBarChart();
+				panel_chart_custRankNum = new PanelBarChart();
+				panel_chart_custVIP = new PanelPieChart();
+				
+				Platform.runLater(() -> initFX((InitScene) panel_chart_Deposit));
+				Platform.runLater(() -> initFX((InitScene) panel_chart_Saving));
+				Platform.runLater(() -> initFX((InitScene) penal_chart_DPnum));
+				Platform.runLater(() -> initFX((InitScene) panel_chartWDnum));
+				Platform.runLater(() -> initFX((InitScene) panel_chart_DPsLoan));
+				Platform.runLater(() -> initFX((InitScene) panel_chart_custRankNum));
+				Platform.runLater(() -> initFX((InitScene) panel_chart_custVIP));
+			}
+		});
+		return thread;
+	}
+	
+	private Thread initPanelThread() {
+		Thread thread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				pCenter = new JPanel();
+				pCenter.setLayout(new BorderLayout(0,0));
+				pCenterCenter = new JPanel();
+				pCenterCenter.setLayout(new BorderLayout());
+				
+				statistic_west = new CustStatistic_WestPanel();
+				statistic_center = new CustStatistic_CenterPanel();
+				statistic_north = new CustStatistic_NorthPanel();
+				pCenter.add(statistic_west, BorderLayout.WEST);
+				pCenter.add(pCenterCenter, BorderLayout.CENTER);
+				pCenterCenter.add(statistic_center, BorderLayout.CENTER);
+				pCenterCenter.add(statistic_north, BorderLayout.NORTH);
+				
+				
+			
+			}
+		});
+		return thread;
+	}
+	
+	public void initFX(InitScene fxPanel) {
+		Scene scene = fxPanel.createScene();
+		JFXPanel panel = (JFXPanel) fxPanel;
+		panel.setScene(scene);
 	}
 	
 	

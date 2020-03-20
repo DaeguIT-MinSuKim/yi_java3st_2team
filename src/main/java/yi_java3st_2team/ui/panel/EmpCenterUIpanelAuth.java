@@ -29,6 +29,8 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 	
 	private Object selectedOne;
 	
+	private Employee emp111;
+	
 	public EmpCenterUIpanelAuth() {
 		service = new EmployeeUIService();
 		initialize();
@@ -74,12 +76,18 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 			if(e.getActionCommand()=="수정") {
 				//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 					Employee emp = pEmpTblPanel.getSelectedItem();
+					
+					try {
+						emp111 = service.showPikedEmpByCode(emp.getEmpCode());
+					}catch (Exception e1) {
+						e1.printStackTrace();
+					}
 					if(dlgEmpAuth == null) {
 						dlgEmpAuth = new DlgEmpAuth();
 					}
 					if(dlgEmpAuth != null){
 						dlgEmpAuth.setVisible(true);
-						dlgEmpAuth.setItem(emp);
+						dlgEmpAuth.setItem(emp111);
 					}
 				
 					

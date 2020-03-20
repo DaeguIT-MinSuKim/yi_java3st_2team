@@ -691,8 +691,40 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return emp;
 	}
-	
 
+	// 실적 랭킹
+	
+	
+	@Override
+	public List<Employee> selectRank() {
+		String sql="select e.empCode, e.empName, e.empTitle, e.pic, r.perf, r.bonus  from employee e left join ranking r on e.`empCode` =r.empCode order by bonus desc";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			
+			List<Employee> list = new ArrayList<Employee>();
+			while(rs.next()) {
+				list.add(getEmpRanking(rs));
+				
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private Employee getEmpRanking(ResultSet rs) throws SQLException {
+		String empCode = rs.getString("e.empCode");
+		String empName = rs.getString("e.empName");
+		String empTitle = rs.getString("e.empTitle");
+		byte[] pic = rs.getBytes("e.pic");
+		int perf = rs.getInt("r.perf");
+		int bonus = rs.getInt("r.bonus");
+
+		return new Employee(empCode, empName, empTitle, pic, perf, bonus);
+	}
 
 	
 	

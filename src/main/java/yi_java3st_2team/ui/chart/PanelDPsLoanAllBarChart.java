@@ -78,5 +78,11 @@ public class PanelDPsLoanAllBarChart extends JFXPanel  implements InitScene {
 		
 		return list;
 	}
+
+
+	public void initAndShowGUI() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

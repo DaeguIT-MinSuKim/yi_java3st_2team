@@ -38,13 +38,25 @@ public class CustStatistic_panels extends AbsCenterStatisticPanel_test implement
 	private PanelMonthlyWithDrawalOpenNumBarChart panel_chartWDnum;//출금
 	private PanelDPsLoanAllBarChart panel_chart_DPsLoan; //예금 총금액
 	private PanelBarChart panel_chart_custRankNum;//등급별 고객 숫자
-	private PanelPieChart panel_chart_custVIP;//vip 고객 비율 
+	private PanelPieChart panel_chart_custVIP;//vip 고객 비율
+	private Thread initPanelThread;
 	/**
 	 * Create the panel.
 	 */
 	public CustStatistic_panels() {
+		
+	}
+	
+	
+	
+	public CustStatistic_panels(Thread initPanelThread) {
+		this.initPanelThread = initPanelThread;
+		initPanelThread.start();
 		initialize();
 	}
+
+
+
 	public void initChartDPSV() {
 		panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
 		panel_chart_Saving = new PanelMonthlySvOpenNumBarChart();
@@ -100,7 +112,7 @@ public class CustStatistic_panels extends AbsCenterStatisticPanel_test implement
 		this.setLblMouseListener(this.panel, this.panel_1, this.panel_2, this.panel_3, this.panel_7, this.panel_8, this.panel_9);
 		this.setLabelInit(this.menu1, this.menu2, this.menu3, this.menu4,this.menu5,this.menu6, this.menu7);
 		makingBtnsDPSV(this.btn_panel);
-		initChartDPSV();
+		//initChartDPSV();
 	}
 	private void makingBtnsDPSV(JPanel btn_panel) {
 		btnNewButton = new JButton("예금");
