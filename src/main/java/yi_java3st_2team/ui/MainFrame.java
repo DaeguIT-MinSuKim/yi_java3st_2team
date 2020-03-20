@@ -149,21 +149,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		pImg.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(greeting == null) {
-					greeting = lblGreeting.getText();
-				}
-				contentPane.remove(pCenter);
-    			pcNorth = getLoginPanel();
-				lblGreeting.setText(greeting);
-				pcCenter = getMainLogoPanel();		
-				pCenter = new JPanel();
-				pCenter.setLayout(new BorderLayout(0, 0));
-				pCenter.setBackground(Color.white);
-				pCenter.add(pcNorth,BorderLayout.NORTH);
-				pCenter.add(pcCenter,BorderLayout.CENTER);
-				contentPane.add(pCenter,BorderLayout.CENTER);
-				repaint();
-				revalidate();
+				getCenterPanel();
 			}
 			
 		});
@@ -479,6 +465,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	public JPanel getMainLogoPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(0,2,20,20));
+		panel.setBackground(Color.white);
 		left = new JPanel();
 		panel.add(left);
 		left.setLayout(new BorderLayout(0, 0));
@@ -945,6 +932,23 @@ public class MainFrame extends JFrame implements ActionListener {
 		Scene scene = fxPanel.createScene();
 		JFXPanel panel = (JFXPanel) fxPanel;
 		panel.setScene(scene);
+	}
+	public void getCenterPanel() {
+		if(greeting == null) {
+			greeting = lblGreeting.getText();
+		}
+		contentPane.remove(pCenter);
+		pcNorth = getLoginPanel();
+		lblGreeting.setText(greeting);
+		pcCenter = getMainLogoPanel();		
+		pCenter = new JPanel();
+		pCenter.setLayout(new BorderLayout(0, 0));
+		pCenter.setBackground(Color.white);
+		pCenter.add(pcNorth,BorderLayout.NORTH);
+		pCenter.add(pcCenter,BorderLayout.CENTER);
+		contentPane.add(pCenter,BorderLayout.CENTER);
+		repaint();
+		revalidate();
 	}
 	
 	
