@@ -59,6 +59,7 @@ import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.panel.Statistic_test;
 import yi_java3st_2team.ui.service.EmployeeService;
+import yi_java3st_2team.ui.panel.EmpBest;
 
 
 @SuppressWarnings("serial")
@@ -124,6 +125,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private CustStatistic_CenterPanel statistic_center;
 	private CustStatistic_NorthPanel statistic_north;
 	private JPanel pCenterCenter;
+	private EmpBest pBestEmp;
 	
 	public MainFrame() {
 		initialize();
@@ -479,6 +481,10 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0,2,20,20));
 		left = new JPanel();
 		panel.add(left);
+		left.setLayout(new BorderLayout(0, 0));
+		
+		pBestEmp = new EmpBest();
+		left.add(pBestEmp);
 		right = new JPanel();
 		right.setLayout(new BorderLayout());
 		NoticeUIPanel noUIPanel = new NoticeUIPanel();
