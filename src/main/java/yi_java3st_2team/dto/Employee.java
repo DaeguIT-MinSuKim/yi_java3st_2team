@@ -67,7 +67,19 @@ public class Employee {
 
     
 
-    // 직급별 테스트용 
+    public Employee(String empCode, String empName, String empTitle, byte[] pic, int perf, int bonus) {
+		super();
+		this.empCode = empCode;
+		this.empName = empName;
+		this.empTitle = empTitle;
+		this.pic = pic;
+		this.perf = perf;
+		this.bonus = bonus;
+	}
+
+
+
+	// 직급별 테스트용 
 	public Employee(String empCode, String empName, String empTitle, String empAuth, int empSalary, String empTel,
 			String empId) {
 		super();

@@ -37,6 +37,9 @@ public interface EmployeeDao {
 	//그중 한명의 실적만
 	Employee selectOneEmployeeByPerform(String empName) throws SQLException; 
 	
+	//실적 랭킹
+	List<Employee> selectRank();
+	
 	//다이얼로그에 달 부서 리스트
     List<Department> selectDeptByAll();
     

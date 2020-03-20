@@ -194,7 +194,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 				lblPic.setPreferredSize(new Dimension(100, 150));
 				lblPic.setHorizontalAlignment(SwingConstants.CENTER);
 				lblPic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-				setPic(getClass().getClassLoader().getResource("no-image.png").getPath());
+				setPic(getClass().getClassLoader().getResource("no-img.png").getPath());
 				pForPic.add(lblPic);
 			}
 			{
@@ -401,7 +401,7 @@ public class DlgEmp extends JDialog implements ActionListener{
         //JOptionPane.showMessageDialog(null, item.getPic().toString());
 		
 		if(item.getPic() == null) {
-	    	setPic(getClass().getClassLoader().getResource("no-image.png").getPath());
+	    	setPic(getClass().getClassLoader().getResource("no-img.png").getPath());
 	    }else {
 	    setPic(item.getPic()); //메소드 오버로딩 필요  //이게 null일 수 있음 
 	    }

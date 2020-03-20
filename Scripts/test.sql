@@ -4,7 +4,7 @@ use bank;
 
 alter table employee add column pic LONGBLOB;
 select * from employee e ;
-
+select  * from performance p ;
 
 update employee set emppwd = 111 where `empName` ='test';
 
@@ -38,7 +38,7 @@ select concat(count(*),'명(',`empTitle`,')') as '직급별사원수(직책)' fr
   from performance p
   group by `empCode`;
  
--- 사원업무 조회에서 사용
+-- 사원업무 조회에서 사용 //건수는 10건 이상 되어야 보너스 발생 
 select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
 from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
 group by e.`empCode`;
@@ -48,6 +48,17 @@ select sum(empSalary)
    from employee e ;
 select (sum(empSalary))/(count(*))
    from employee e ;
+  
+-- 우수사원
+create view ranking as select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
+from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
+group by e.`empCode`;
+
+
+select * from ranking ;
+select e.empCode, e.empName, e.empTitle, e.pic, r.perf, r.bonus  from employee e left join ranking r on e.`empCode` =r.empCode order by bonus desc;
+
+  
 #고객 - 황하나
 -- test 
 select custCode, custName, custRank, custCredit, custAddr, custTel from customer;

@@ -63,8 +63,11 @@ public class DlgEmpAuth extends JDialog {
 		initialize();
 	}
 	private void initialize() {
-		setBounds(100, 100, 450, 237);
-		getContentPane().setLayout(new BorderLayout());
+		setBounds(100, 100, 393, 236);
+		BorderLayout borderLayout = new BorderLayout();
+		borderLayout.setVgap(20);
+		borderLayout.setHgap(20);
+		getContentPane().setLayout(borderLayout);
 		{
 			panel = new JPanel();
 			getContentPane().add(panel, BorderLayout.NORTH);
@@ -78,15 +81,15 @@ public class DlgEmpAuth extends JDialog {
 				lblPic = new JLabel("");
 				lblPic.setHorizontalAlignment(SwingConstants.CENTER);
 				pForPic.add(lblPic, BorderLayout.CENTER);
-				lblPic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				lblPic.setBorder(null);
 				lblPic.setPreferredSize(picDimension);
 				lblPic.setSize(picDimension);
-				setPic(getClass().getClassLoader().getResource("suji.jpg").getPath());
+				setPic(getClass().getClassLoader().getResource("no-img.png").getPath());
 			}
 		}
 		contentPanel.setBorder(new EmptyBorder(20, 0, 20, 20));
 		panel.add(contentPanel);
-		contentPanel.setLayout(new GridLayout(0, 2, 10, 10));
+		contentPanel.setLayout(new GridLayout(0, 2, 20, 10));
 		{
 			JLabel lblEmpCode = new JLabel("코드");
 			lblEmpCode.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -213,7 +216,11 @@ public class DlgEmpAuth extends JDialog {
 			tfEmpName.setText(item.getEmpName());
 			tfEmpTitle.setText(item.getEmpTitle());
 			cmbAuth.setSelectedItem(item.getEmpAuth());
-	
+			if(item.getPic() == null) {
+		    	setPic(getClass().getClassLoader().getResource("no-img.png").getPath());
+		    }else {
+		    setPic(item.getPic()); //메소드 오버로딩 필요  //이게 null일 수 있음 
+		    }
 		}
 		
 		

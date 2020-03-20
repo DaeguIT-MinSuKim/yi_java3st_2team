@@ -57,7 +57,10 @@ public class EmployeeUIService {
     	return empDao.selectEmpByTitleForPerform(empItem);
     }
     
-    
+    //사원 랭킹 리스트 부르기
+    public List<Employee> showRank(){
+    	return empDao.selectRank();
+    }
     
     
     
