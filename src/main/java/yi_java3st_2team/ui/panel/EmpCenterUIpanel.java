@@ -92,12 +92,17 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 					
 					    
-						Employee empForUpdate = pEmpTblPanel.getSelectedItem();
+						
+					
 						try {
+							Employee empForUpdate = pEmpTblPanel.getSelectedItem();
 							emp111 = service.showPikedEmpByCode(empForUpdate.getEmpCode());
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							
+						}catch (RuntimeException e2) {
+							JOptionPane.showMessageDialog(null, "선택해주세요");
+							return;
 						}
 						
 						
