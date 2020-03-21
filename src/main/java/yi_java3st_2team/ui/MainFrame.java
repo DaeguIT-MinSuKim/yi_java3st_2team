@@ -888,6 +888,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		if(cust_statistic_west!=null) {
 			contentPane.remove(cust_statistic_west);
 		}
+		if(emp_statistic_west!=null) {
+			contentPane.remove(emp_statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.white);
