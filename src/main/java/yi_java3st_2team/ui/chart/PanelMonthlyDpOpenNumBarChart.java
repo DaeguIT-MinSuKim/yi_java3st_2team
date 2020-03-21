@@ -41,6 +41,7 @@ public class PanelMonthlyDpOpenNumBarChart extends JFXPanel implements InitScene
 
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("월별 예금 건수");
+		barChart.setLegendVisible(false);
 		
 		barChart.setPrefSize(1000,500);
 		barChart.setData(getChartData());
