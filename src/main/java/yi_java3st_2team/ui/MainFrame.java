@@ -36,6 +36,7 @@ import yi_java3st_2team.ui.chart.PanelBarChart;
 import yi_java3st_2team.ui.chart.PanelBarChartBankBookDeposit;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
+import yi_java3st_2team.ui.chart.PanelEmpBarChartBonus;
 import yi_java3st_2team.ui.chart.PanelEmpPieChartForCountEmp;
 import yi_java3st_2team.ui.chart.PanelMonthlyDepositOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyDpOpenNumBarChart;
@@ -139,6 +140,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private EmpBest pBestEmp;
 	private EmpStatistic_CenterPanel emp_statistic_center;
 	private PanelEmpPieChartForCountEmp panelEmpPieChartForCountEmp;
+	private PanelEmpBarChartBonus panelEmpBarChartBonus;
 	
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
@@ -851,7 +853,15 @@ public class MainFrame extends JFrame implements ActionListener {
 					pCenter.revalidate();
 					 break;
 				
-				
+				case "보너스 현황":
+					pCenter.removeAll();
+					emp_statistic_center = new EmpStatistic_CenterPanel();
+					emp_statistic_center.setBackground(Color.white);
+					emp_statistic_center.add(panelEmpBarChartBonus);
+					pCenter.add(emp_statistic_center,BorderLayout.CENTER);
+					pCenter.repaint();
+					pCenter.revalidate();
+					break;
 				//고객
 				case "예/적금건수(월별)":
 					pCenter.removeAll();
@@ -995,6 +1005,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				//사원
 				panelEmpPieChartForCountEmp = new PanelEmpPieChartForCountEmp();
 				Platform.runLater(() -> initFX((InitScene) panelEmpPieChartForCountEmp));
+				panelEmpBarChartBonus = new PanelEmpBarChartBonus();
+				Platform.runLater(() -> initFX((InitScene) panelEmpBarChartBonus));
 				
 				
 				panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
