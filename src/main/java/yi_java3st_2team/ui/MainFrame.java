@@ -516,7 +516,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setBackground(Color.WHITE);
 		lblGreeting = new JLabel();
 		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		btnLogout = new JButton("로그아웃");
+		btnLogout = new JButton("로그아웃"); 
 		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnLogout.addActionListener(this);
 		panel.add(lblGreeting);
