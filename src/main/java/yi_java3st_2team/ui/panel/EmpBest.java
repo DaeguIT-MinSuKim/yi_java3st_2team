@@ -224,7 +224,7 @@ public class EmpBest extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(600, 600);;
+		frame.setSize(600, 600);
 		EmpBest empBest = new EmpBest();
 		frame.getContentPane().add(empBest);
 		frame.setVisible(true);
