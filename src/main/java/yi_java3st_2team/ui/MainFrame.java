@@ -425,10 +425,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		pCenter.setForeground(new Color(255, 255, 255));
 		contentPane.add(pCenter, BorderLayout.CENTER);
 		pCenter.setLayout(new BorderLayout(0, 0));
-		pcNorth = getLoginPanel();
-		pcCenter = getMainLogoPanel();
-		pCenter.add(pcNorth,BorderLayout.NORTH);
-		pCenter.add(pcCenter,BorderLayout.CENTER);
 		//사원검색 액션리스너 밑쪽으로 빼기
 		mntmEmpSearch.addActionListener(this);
 		mntmWorkInfo.addActionListener(this);
@@ -445,7 +441,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmLoan.addActionListener(this);
 		mntmLoanSearch.addActionListener(this);	
 	}
-
+	public JButton getBtnMenuLogout() {
+		return btnMenuLogout;
+	}
+	public void setBtnMenuLogout(JButton btnMenuLogout) {
+		this.btnMenuLogout = btnMenuLogout;
+	}
 	public LoginFrame getLoginFrame() {
 		return loginFrame;
 	}
@@ -497,6 +498,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		right = new JPanel();
 		right.setLayout(new BorderLayout());
 		NoticeUIPanel noUIPanel = new NoticeUIPanel();
+		if(!empAuth.getEmpAuth().equals("AD")) {
+			noUIPanel.getBtnMod().setVisible(false);
+			noUIPanel.getBtnDel().setVisible(false);
+			noUIPanel.getBtnAdd().setText("보기");
+		}
 		noUIPanel.setMain(this);
 		right.add(noUIPanel,BorderLayout.CENTER);
 		panel.add(right);
@@ -575,7 +581,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	//사원 액션리스너
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnMenuLogout) {
+		if (e.getSource() == btnMenuLogout || e.getSource() == btnLogout) {
 			loginFrame.btnLogoutActionPerformed(e);
 		}
 		if (e.getSource() == mnEmpAuth) {
@@ -613,10 +619,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == mntmCard) {
 			mntmCardActionPerformed(e);
-		}
-		//로그아웃
-		if (e.getSource() == btnLogout) {
-			loginFrame.btnLogoutActionPerformed(e);
 		}
 		
 	}
@@ -846,19 +848,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setScene(scene);
 	}
 	public void getCenterPanel() {
-		if(greeting == null) {
-			greeting = lblGreeting.getText();
-		}
 		if(statistic_west!=null) {
 			contentPane.remove(statistic_west);
 		}
-		contentPane.remove(pCenter);
+		pCenter.removeAll();
 		pcNorth = getLoginPanel();
+		greeting = empAuth.getEmpName() + "님 환영합니다~";
 		lblGreeting.setText(greeting);
 		pcCenter = getMainLogoPanel();		
-		pCenter = new JPanel();
-		pCenter.setLayout(new BorderLayout(0, 0));
-		pCenter.setBackground(Color.white);
 		pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);

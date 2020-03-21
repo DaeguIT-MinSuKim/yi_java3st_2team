@@ -113,16 +113,59 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 	public void setMain(MainFrame main) {
 		this.main = main;
 	}
+	
+	public JButton getBtnAdd() {
+		return btnAdd;
+	}
+	public void setBtnAdd(JButton btnAdd) {
+		this.btnAdd = btnAdd;
+	}
+	public JButton getBtnDel() {
+		return btnDel;
+	}
+	public void setBtnDel(JButton btnDel) {
+		this.btnDel = btnDel;
+	}
+	public JButton getBtnMod() {
+		return btnMod;
+	}
+	public void setBtnMod(JButton btnMod) {
+		this.btnMod = btnMod;
+	}
 	protected void btnAddActionPerformed(ActionEvent e) {
-		dpPanel = new NoticeDetailPanel();
-		ActionListener dpAddListner = setDpListner();
-		dpPanel.getBtnAdd().addActionListener(dpAddListner);
-		dpPanel.getBtnCancel().addActionListener(dpAddListner);
-		dpPanel.getBtnReturn().addActionListener(dpAddListner);
-		main.getRight().removeAll();
-		main.getRight().add(dpPanel);
-		main.getRight().repaint();
-		main.getRight().revalidate();
+		if(e.getActionCommand().equals("추가")) {
+			dpPanel = new NoticeDetailPanel();
+			ActionListener dpAddListner = setDpListner();
+			dpPanel.getBtnAdd().addActionListener(dpAddListner);
+			dpPanel.getBtnCancel().addActionListener(dpAddListner);
+			dpPanel.getBtnReturn().addActionListener(dpAddListner);
+			main.getRight().removeAll();
+			main.getRight().add(dpPanel);
+			main.getRight().repaint();
+			main.getRight().revalidate();
+		}
+		else {
+			try {
+				Notice notice = pCenter.getSelectedItem();
+				dpPanel = new NoticeDetailPanel();
+				dpPanel.setItem(notice);
+				ActionListener dpAddListner = setDpListner();
+				dpPanel.getTfWriter().setEditable(false);
+				dpPanel.getTfSubject().setEditable(false);
+				dpPanel.getTaContent().setEditable(false);
+				dpPanel.getBtnAdd().setVisible(false);
+				dpPanel.getBtnCancel().setVisible(false);
+				dpPanel.getBtnReturn().addActionListener(dpAddListner);
+				main.getRight().removeAll();
+				main.getRight().add(dpPanel);
+				main.getRight().repaint();
+				main.getRight().revalidate();
+			}
+			catch(RuntimeException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage());
+			}
+		}
+		
 	}
 	public ActionListener setDpListner() {
 		return new ActionListener() {

@@ -81,10 +81,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		service = new LoginService();
 		main = new MainFrame();
-		main.getCenterPanel();
-		main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		main.setResizable(false);
-		//main.setTitle(mainMessage);
+		main.setTitle(mainMessage);
 		main.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
@@ -176,8 +174,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 		btnLogin = new JButton("Login");
 		btnLogin.setBorder(null);
-		
-		btnLogin.addActionListener(this);
 		btnLogin.setForeground(Color.BLACK);
 		btnLogin.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		btnLogin.setBackground(SystemColor.activeCaption);
@@ -199,8 +195,9 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pNorthForLogo.add(lblLogoImg);
 		
 		
-	    btnLogout = main.getBtnLogout();
+	    btnLogout = main.getBtnMenuLogout();
 	    btnLogout.addActionListener(this);
+		btnLogin.addActionListener(this);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -223,7 +220,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 	}
 	protected void btnLoginActionPerformed(ActionEvent e) {
-		
 		try {
 			Employee emp = new Employee(tfId.getText().trim(),new String(pfPass.getPassword()).trim());
 			chkEmp = service.GetLoginInfo(emp);
@@ -231,35 +227,20 @@ public class LoginFrame extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "아이디나 비밀번호가 틀렸습니다. 다시 확인해주세요");
 				return;
 			}
-			tfId.setEditable(false);
-			pfPass.setEditable(false);
 			chkLogin = true;
+			if(chkLogin) {
+				JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
+				main.setLoginFrame(frame);
+				frame.setVisible(false);
+				mainMessage = chkEmp.getEmpName() + "님 환영합니다~";
+				main.setTitle("YN Bank 직원 프로그램 : "+mainMessage);  //타이틀에 로그인된 회원 정보 표시하기
+				main.initEmpAuth(chkEmp.getEmpName());
+				main.getCenterPanel();
+				main.setVisible(true);
+			}
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		if(chkLogin) {
-			JOptionPane.showMessageDialog(null, "로그인이 성공하였습니다.");
-			main.setLoginFrame(frame);
-			tfId.setEditable(true);
-			pfPass.setEditable(true);
-			frame.setVisible(false);
-			main.getLblGreeting().setText(chkEmp.getEmpName() + "님 환영합니다~");
-			
-			mainMessage = chkEmp.getEmpName()+"님 환영합니다~";
-		//	System.out.println(mainMessage);
-			main.initEmpAuth(chkEmp.getEmpName());  
-			
-			main.setTitle("YN Bank 직원 프로그램 : "+mainMessage);  //타이틀에 로그인된 회원 정보 표시하기
-			main.setVisible(true);
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "확인부터 먼저 해주세요");
-		}
-	}
-
-
-	
-	
+	}	
 }

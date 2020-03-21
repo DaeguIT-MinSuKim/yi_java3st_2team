@@ -53,7 +53,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee getEmpAuth(Employee emp) throws SQLException {
-		String sql = "select empauth, empTitle from employee where empname = ?";
+		String sql = "select empname, empauth, empTitle from employee where empname = ?";
 		Employee employee = new Employee();
 		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -69,6 +69,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	private Employee getEmployeeAuth(ResultSet rs) throws SQLException {
 		Employee emp = new Employee();
+		emp.setEmpName(rs.getString("empname"));
 		emp.setEmpAuth(rs.getString("empauth"));
 		emp.setEmpTitle(rs.getString("empTitle"));
 		return emp;
