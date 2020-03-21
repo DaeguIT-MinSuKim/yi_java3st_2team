@@ -219,9 +219,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(pWest!=null) {
-					contentPane.remove(emp_statistic_west);
+					contentPane.remove(pWest);
 				}
-				contentPane.remove(pWest);
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				emp_statistic_west = new EmpStatistic_WestPanel();
@@ -230,8 +229,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
-				contentPane.add(emp_statistic_west,BorderLayout.WEST);
-				pWest.add(cust_statistic_west,BorderLayout.WEST);
+				pWest.add(emp_statistic_west,BorderLayout.WEST);
 				contentPane.add(pWest,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
