@@ -853,7 +853,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		if(statistic_west!=null) {
 			contentPane.remove(statistic_west);
 		}
-		pCenter.removeAll();
+		contentPane.remove(pCenter);
+		pCenter = new JPanel();
+		pCenter.setBackground(Color.white);
 		pcNorth = getLoginPanel();
 		greeting = empAuth.getEmpName() + "님 환영합니다~";
 		lblGreeting.setText(greeting);
