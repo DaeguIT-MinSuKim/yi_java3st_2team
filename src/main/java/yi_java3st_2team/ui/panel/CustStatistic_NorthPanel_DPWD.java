@@ -2,10 +2,10 @@ package yi_java3st_2team.ui.panel;
 
 import javax.swing.JButton;
 
-import yi_java3st_2team.ui.absPanel.AbsCenterStatisticNortPanel_test;
+import yi_java3st_2team.ui.absPanel.AbsCenterStatisticNorthPanel_test;
 
 @SuppressWarnings("serial")
-public class CustStatistic_NorthPanel_DPWD extends AbsCenterStatisticNortPanel_test {
+public class CustStatistic_NorthPanel_DPWD extends AbsCenterStatisticNorthPanel_test {
 	public CustStatistic_NorthPanel_DPWD() {
 		initialize();
 	}

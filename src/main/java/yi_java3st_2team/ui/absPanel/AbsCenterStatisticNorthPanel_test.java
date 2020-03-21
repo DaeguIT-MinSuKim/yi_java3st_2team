@@ -23,10 +23,10 @@ import java.awt.FlowLayout;
 import javax.swing.border.MatteBorder;
 
 @SuppressWarnings("serial")
-abstract public class AbsCenterStatisticNortPanel_test extends JPanel {
+abstract public class AbsCenterStatisticNorthPanel_test extends JPanel {
 	protected JPanel panel;
 	protected JButton[] buttons;
-	public AbsCenterStatisticNortPanel_test() {
+	public AbsCenterStatisticNorthPanel_test() {
 		initialize();
 	}
 	private void initialize() {
@@ -35,7 +35,7 @@ abstract public class AbsCenterStatisticNortPanel_test extends JPanel {
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		add(panel);
-		panel.setLayout(new GridLayout(0, 2, 20, 20));
+		panel.setLayout(new GridLayout(0, 4, 20, 20));
 }
 
 	public void setBtns() {
