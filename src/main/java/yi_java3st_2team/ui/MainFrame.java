@@ -207,18 +207,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCustStatistic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(statistic_west!=null) {
-					contentPane.remove(statistic_west);
+				if(cust_statistic_west!=null) {
+					contentPane.remove(cust_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
-				statistic_west = new CustStatistic_WestPanel();
+				cust_statistic_west = new CustStatistic_WestPanel();
 				MouseAdapter menuAdapter = getMouseAdapter();
-				JPanel[] menuPanels = statistic_west.getPanels();
+				JPanel[] menuPanels = cust_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
-				contentPane.add(statistic_west,BorderLayout.WEST);
+				contentPane.add(cust_statistic_west,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
 				contentPane.revalidate();
