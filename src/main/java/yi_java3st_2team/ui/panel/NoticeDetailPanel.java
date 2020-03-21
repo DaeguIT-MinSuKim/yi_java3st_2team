@@ -16,6 +16,7 @@ import yi_java3st_2team.dto.Notice;
 
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class NoticeDetailPanel extends JPanel {
@@ -23,12 +24,13 @@ public class NoticeDetailPanel extends JPanel {
 	private JPanel pNorth;
 	private JTextField tfSubject;
 	private JTextField tfWriter;
-	private JTextArea taContent;
 	private JPanel pBtns;
 	private JButton btnAdd;
 	private JButton btnCancel;
 	private NoticeUIPanel noticePanel;
 	private JButton btnReturn;
+	private JScrollPane scrollPane;
+	private JTextArea taContent;
 	/**
 	 * Create the panel.
 	 */
@@ -69,8 +71,11 @@ public class NoticeDetailPanel extends JPanel {
 		lblContent.setHorizontalAlignment(SwingConstants.LEFT);
 		pCenter.add(lblContent, BorderLayout.NORTH);
 		
+		scrollPane = new JScrollPane();
+		pCenter.add(scrollPane, BorderLayout.CENTER);
+		
 		taContent = new JTextArea();
-		pCenter.add(taContent, BorderLayout.CENTER);
+		scrollPane.setViewportView(taContent);
 		
 		pBtns = new JPanel();
 		pCenter.add(pBtns, BorderLayout.SOUTH);

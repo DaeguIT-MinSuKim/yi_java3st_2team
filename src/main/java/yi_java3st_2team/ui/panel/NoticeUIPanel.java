@@ -200,7 +200,6 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 							JOptionPane.showMessageDialog(null, "수정이 완료되었습니다");
 							main.getRight().removeAll();
 							main.getRight().add(dpUIPanel);
-							main.setResizable(false);
 							main.getRight().repaint();
 							main.getRight().revalidate();
 						}
@@ -217,7 +216,6 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 				else {
 					main.getRight().removeAll();
 					main.getRight().add(dpUIPanel);
-					main.setResizable(false);
 					main.getRight().repaint();
 					main.getRight().revalidate();
 				}
@@ -265,7 +263,6 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 			dpPanel.getTfWriter().setEditable(false);
 			main.getRight().removeAll();
 			main.getRight().add(dpPanel);
-			main.setResizable(false);
 			main.getRight().repaint();
 			main.getRight().revalidate();
 		}
