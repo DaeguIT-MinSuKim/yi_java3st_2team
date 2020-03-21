@@ -86,6 +86,15 @@ select * from loan;
 select * from Performance p ;
 select * from Employee e ;
 
+-- mysql 5.7 이상에서 group by 에러 처리
+
+show variables like 'sql_mode';
+set global sql_mode='STRICT_TRANS_TABLES';
+
+-- 
+select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) ='11';
+
+
 #BSGPD
 select count(*) from customer where custRank = "B";
 
