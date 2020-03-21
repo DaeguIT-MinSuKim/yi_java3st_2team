@@ -204,6 +204,26 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		mntmStatistic = new JMenuItem("사원 현황 조회");
 		mntmStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		mntmCustStatistic.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(statistic_west!=null) {
+					contentPane.remove(statistic_west);
+				}
+				contentPane.remove(pCenter);
+				pCenter = new JPanel(new BorderLayout());
+				statistic_west = new CustStatistic_WestPanel();
+				MouseAdapter menuAdapter = getMouseAdapter();
+				JPanel[] menuPanels = statistic_west.getPanels();
+				for(JPanel pMenu : menuPanels) {
+					pMenu.addMouseListener(menuAdapter);
+				}
+				contentPane.add(statistic_west,BorderLayout.WEST);
+				contentPane.add(pCenter,BorderLayout.CENTER);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		mnEmpInfo.add(mntmStatistic);
 		
 		mnEmpAuth = new JMenuItem("사원 권한");
