@@ -37,6 +37,7 @@ import yi_java3st_2team.ui.chart.PanelBarChartBankBookDeposit;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
 import yi_java3st_2team.ui.chart.PanelEmpBarChartBonus;
+import yi_java3st_2team.ui.chart.PanelEmpBarChartSalary;
 import yi_java3st_2team.ui.chart.PanelEmpPieChartForCountEmp;
 import yi_java3st_2team.ui.chart.PanelMonthlyDepositOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyDpOpenNumBarChart;
@@ -141,6 +142,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private EmpStatistic_CenterPanel emp_statistic_center;
 	private PanelEmpPieChartForCountEmp panelEmpPieChartForCountEmp;
 	private PanelEmpBarChartBonus panelEmpBarChartBonus;
+	private PanelEmpBarChartSalary panelEmpBarChartSalary;
 	
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
@@ -234,6 +236,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				pCenter.setBackground(Color.white);
 				emp_statistic_west = new EmpStatistic_WestPanel();
 				pWest = new JPanel(new BorderLayout());
 				JPanel[] menuPanels = emp_statistic_west.getPanels();
@@ -852,6 +855,17 @@ public class MainFrame extends JFrame implements ActionListener {
 					pCenter.repaint();
 					pCenter.revalidate();
 					 break;
+					 
+				case "급여 총액/ 1인 평균 급여액":
+					emp_statistic_center = new EmpStatistic_CenterPanel();
+					emp_statistic_center.setBackground(Color.white);
+					emp_statistic_center.add(panelEmpBarChartSalary);
+						
+					pCenter.add(emp_statistic_center,BorderLayout.CENTER);
+					pCenter.repaint();
+					pCenter.revalidate();
+					 break;
+					 
 				
 				case "보너스 현황":
 					pCenter.removeAll();
@@ -1007,6 +1021,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				Platform.runLater(() -> initFX((InitScene) panelEmpPieChartForCountEmp));
 				panelEmpBarChartBonus = new PanelEmpBarChartBonus();
 				Platform.runLater(() -> initFX((InitScene) panelEmpBarChartBonus));
+				panelEmpBarChartSalary = new PanelEmpBarChartSalary();
+				Platform.runLater(() -> initFX((InitScene) panelEmpBarChartSalary));
 				
 				
 				panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
