@@ -6,6 +6,7 @@ import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,10 +74,14 @@ public class PanelEmpPieChartForCountEmp extends JFXPanel implements InitScene{
 	  JFrame frame = new JFrame();
 	  frame.setSize(600,600);
 	  PanelEmpPieChartForCountEmp panel = new PanelEmpPieChartForCountEmp();
-
 	  frame.getContentPane().add(panel);
-	  
+	  Platform.runLater(() -> initFX(panel));
 	  frame.setVisible(true);
 	  
-	}	
+	}
+	public static void initFX(InitScene fxPanel) {
+		Scene scene = fxPanel.createScene();
+		JFXPanel panel = (JFXPanel) fxPanel;
+		panel.setScene(scene);
+	}
 }
