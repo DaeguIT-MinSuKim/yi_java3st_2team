@@ -32,7 +32,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 
 	private Object selectedOne;
 	
-	
+	private Employee emp111;
 	public EmpCenterUIpanel() {
 		service = new EmployeeUIService();
 		initialize();
@@ -63,7 +63,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		//팝업메뉴 액션리스너
 		ActionListener myPopListener = new ActionListener() {
 			
-			private Employee emp111;
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -222,6 +222,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						//System.out.println("수정 눌렀음 ");
 						try {
 						Employee updateEmp = dlgEmpForUpdate.getItem();
+						
 						
 						//System.out.println(updateEmp);
 						

@@ -296,6 +296,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		ImageIcon icon = (ImageIcon)lblPic.getIcon();
 		byte[] pic = getImage();
 		//lblPic.setIcon(new ImageIcon(pic));
+		
         
 		setPic(pic);
 		//System.out.println(pic.hashCode()); //1255441253

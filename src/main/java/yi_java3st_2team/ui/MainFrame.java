@@ -384,12 +384,14 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		pLogout = new JPanel();
 		pLogout.setBackground(Color.WHITE);
-		pLogout.setBorder(new EmptyBorder(8, 60, 8, 60));
+		pLogout.setBorder(new EmptyBorder(20, 80, 20, 80));
 		pNorth.add(pLogout);
 		
 		btnMenuLogout = new JButton("Logout");
-		btnMenuLogout.setBorderPainted(false);
-		btnMenuLogout.setBackground(Color.WHITE);
+		btnMenuLogout.setFocusPainted(false);
+		btnMenuLogout.setBorder(null);
+		//btnMenuLogout.setBorderPainted(false);
+		btnMenuLogout.setBackground(SystemColor.activeCaption);
 		btnMenuLogout.addActionListener(this);
 		pLogout.setLayout(new BorderLayout(0, 0));
 		pLogout.add(btnMenuLogout);
