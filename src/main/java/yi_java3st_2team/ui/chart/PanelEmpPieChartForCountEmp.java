@@ -42,7 +42,7 @@ public class PanelEmpPieChartForCountEmp extends JFXPanel implements InitScene{
 		
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(1000, 350);
+		pieChart.setPrefSize(1000, 600);
 		pieChart.setData(getChartData());
 		pieChart.setTitle(subject+"\n"+totalEmp+totalnum+"명");
 		pieChart.setLegendVisible(false);	// 범례 표시 유무
@@ -70,18 +70,18 @@ public class PanelEmpPieChartForCountEmp extends JFXPanel implements InitScene{
 		return answer;
 	}
 
-	public static void main(String[] args) {
-	  JFrame frame = new JFrame();
-	  frame.setSize(600,600);
-	  PanelEmpPieChartForCountEmp panel = new PanelEmpPieChartForCountEmp();
-	  frame.getContentPane().add(panel);
-	  Platform.runLater(() -> initFX(panel));
-	  frame.setVisible(true);
-	  
-	}
-	public static void initFX(InitScene fxPanel) {
-		Scene scene = fxPanel.createScene();
-		JFXPanel panel = (JFXPanel) fxPanel;
-		panel.setScene(scene);
-	}
+//	public static void main(String[] args) {
+//	  JFrame frame = new JFrame();
+//	  frame.setSize(600,600);
+//	  PanelEmpPieChartForCountEmp panel = new PanelEmpPieChartForCountEmp();
+//	  frame.getContentPane().add(panel);
+//	  Platform.runLater(() -> initFX(panel));
+//	  frame.setVisible(true);
+//	  
+//	}
+//	public static void initFX(InitScene fxPanel) {
+//		Scene scene = fxPanel.createScene();
+//		JFXPanel panel = (JFXPanel) fxPanel;
+//		panel.setScene(scene);
+//	}
 }
