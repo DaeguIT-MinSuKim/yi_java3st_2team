@@ -35,6 +35,7 @@ import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.chart.PanelBarChart;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
+import yi_java3st_2team.ui.chart.PanelEmpPieChartForCountEmp;
 import yi_java3st_2team.ui.chart.PanelMonthlyDepositOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyDpOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
@@ -57,6 +58,7 @@ import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStaticPanel;
+import yi_java3st_2team.ui.panel.EmpStatistic_CenterPanel;
 import yi_java3st_2team.ui.panel.EmpStatistic_WestPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
@@ -133,6 +135,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private PanelCustNumAll statistic_CustNumAll;
 	private EmpBest pBestEmp;
+	private EmpStatistic_CenterPanel emp_statistic_center;
+	private PanelEmpPieChartForCountEmp panelEmpPieChartForCountEmp;
 	
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
 	
@@ -799,6 +803,19 @@ public class MainFrame extends JFrame implements ActionListener {
 				ActionListener northBankBookBtnListener = BankWorkInfoButtonsActionListener(chkLabel.getText());
 				switch(chkLabel.getText()) {
 				//사원
+				case "전체 직원 수/ 부서별 직원 비율":
+					pCenter.removeAll();
+					
+					//센터패널
+					emp_statistic_center = new EmpStatistic_CenterPanel();
+					emp_statistic_center.setBackground(Color.white);
+					emp_statistic_center.add(panelEmpPieChartForCountEmp);
+						
+					pCenter.add(emp_statistic_center,BorderLayout.CENTER);
+					pCenter.repaint();
+					pCenter.revalidate();
+					 break;
+				
 				
 				//고객
 				case "예/적금건수(월별)":
@@ -912,6 +929,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
 			@Override
 			public void run() {
+				
+				
+				//사원
+				panelEmpPieChartForCountEmp = new PanelEmpPieChartForCountEmp();
+				Platform.runLater(() -> initFX((InitScene) panelEmpPieChartForCountEmp));
+				
+				
 				panel_chart_Deposit = new PanelMonthlyDpOpenNumBarChart();
 				panel_chart_Saving = new PanelMonthlySvOpenNumBarChart();
 				penal_chart_DPnum = new PanelMonthlyDepositOpenNumBarChart();
