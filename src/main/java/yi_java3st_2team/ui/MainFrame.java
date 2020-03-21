@@ -54,6 +54,7 @@ import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStaticPanel;
+import yi_java3st_2team.ui.panel.EmpStatistic_WestPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
@@ -122,6 +123,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private CustStatistic_NorthPanel_DepositSaving statistic_north_DepositSaving;
 	private CustStatistic_NorthPanel_DPWD statistic_north_DPWD;
 	private CustStatistic_NorthPanel_CustNum statistic_north_CustNum;
+	
+	private EmpStatistic_WestPanel emp_statistic_west;
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private PanelCustNumAll statistic_CustNumAll;
 	private EmpBest pBestEmp;
@@ -204,21 +207,21 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		mntmStatistic = new JMenuItem("사원 현황 조회");
 		mntmStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		mntmCustStatistic.addActionListener(new ActionListener() {
+		mntmStatistic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(cust_statistic_west!=null) {
-					contentPane.remove(cust_statistic_west);
+				if(emp_statistic_west!=null) {
+					contentPane.remove(emp_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
-				cust_statistic_west = new CustStatistic_WestPanel();
+				emp_statistic_west = new EmpStatistic_WestPanel();
 				MouseAdapter menuAdapter = getMouseAdapter();
-				JPanel[] menuPanels = cust_statistic_west.getPanels();
+				JPanel[] menuPanels = emp_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
-				contentPane.add(cust_statistic_west,BorderLayout.WEST);
+				contentPane.add(emp_statistic_west,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
 				contentPane.revalidate();
