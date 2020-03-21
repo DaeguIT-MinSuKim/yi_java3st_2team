@@ -3,7 +3,7 @@ package yi_java3st_2team.ui.panel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import yi_java3st_2team.ui.absPanel.AbsCenterStatisticNortPanel_test;
+import yi_java3st_2team.ui.absPanel.AbsCenterStatisticNorthPanel_test;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 

@@ -2,6 +2,7 @@ package yi_java3st_2team.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -39,6 +41,7 @@ import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyWithDrawalOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelPieChart;
 import yi_java3st_2team.ui.panel.BankBookCenterUIPanel;
+import yi_java3st_2team.ui.panel.BankBookTransInfoNorthPanel;
 import yi_java3st_2team.ui.panel.BankBookTransInfoWestMenuPanel;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.panel.CustDWUIPanel;
@@ -64,6 +67,7 @@ import yi_java3st_2team.ui.service.EmployeeService;
 public class MainFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JPanel pCenter;
+	private JPanel pWest;
 	private JPanel pNorth;
 	private JPanel pcNorth;
 	private JPanel pcCenter;
@@ -123,11 +127,14 @@ public class MainFrame extends JFrame implements ActionListener {
 	private CustStatistic_NorthPanel_DepositSaving statistic_north_DepositSaving;
 	private CustStatistic_NorthPanel_DPWD statistic_north_DPWD;
 	private CustStatistic_NorthPanel_CustNum statistic_north_CustNum;
-	
+	private MouseAdapter menuAdapter;
+
 	private EmpStatistic_WestPanel emp_statistic_west;
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private PanelCustNumAll statistic_CustNumAll;
 	private EmpBest pBestEmp;
+	
+	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
 	
 	public MainFrame() {
 		initialize();
@@ -135,6 +142,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private void initialize() {
 		empService = new EmployeeService();
 		setThread();
+		menuAdapter = getMouseAdapter();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1224, 700);
@@ -210,18 +218,21 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmStatistic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(emp_statistic_west!=null) {
+				if(pWest!=null) {
 					contentPane.remove(emp_statistic_west);
 				}
+				contentPane.remove(pWest);
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				emp_statistic_west = new EmpStatistic_WestPanel();
-				MouseAdapter menuAdapter = getMouseAdapter();
+				pWest = new JPanel(new BorderLayout());
 				JPanel[] menuPanels = emp_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
 				contentPane.add(emp_statistic_west,BorderLayout.WEST);
+				pWest.add(cust_statistic_west,BorderLayout.WEST);
+				contentPane.add(pWest,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
 				contentPane.revalidate();
@@ -293,7 +304,6 @@ public class MainFrame extends JFrame implements ActionListener {
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				cust_statistic_west = new CustStatistic_WestPanel();
-				MouseAdapter menuAdapter = getMouseAdapter();
 				JPanel[] menuPanels = cust_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
@@ -735,13 +745,20 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
+		pCenter = new JPanel(new BorderLayout());
+		pWest = new JPanel(new BorderLayout());
+		pWest.setBackground(new Color(255,255,255));
 		bankbook_statistic_west = new BankBookTransInfoWestMenuPanel();
 		JPanel[] panels = bankbook_statistic_west.getPanels();
 		for(JPanel panel : panels) {
 			panel.addMouseListener(getMouseAdapter());
 		}
-		contentPane.add(bankbook_statistic_west,BorderLayout.WEST);
+		pWest.add(bankbook_statistic_west,BorderLayout.CENTER);
+		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
@@ -773,15 +790,19 @@ public class MainFrame extends JFrame implements ActionListener {
 		MouseAdapter menuAdapter = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel[] menus = cust_statistic_west.getPanels();
-				for(JPanel menu : menus) {
-					menu.setBackground(new Color(255,255,255));
-				}
 				JPanel chkPanel = (JPanel)e.getSource();
+				for(Component c : chkPanel.getParent().getComponents()) {
+					JPanel panel = (JPanel)c;
+					panel.setBackground(Color.white);
+				}
 				chkPanel.setBackground(new Color(254,208,64));
 				JLabel chkLabel = (JLabel)chkPanel.getComponent(0);
-				ActionListener northBtnListener = buttonActionListener();
+				ActionListener northCustBtnListener = CustbuttonActionListener();
+				ActionListener northBankBookBtnListener = BankWorkInfoButtonsActionListener(chkLabel.getText());
 				switch(chkLabel.getText()) {
+				//사원
+				
+				//고객
 				case "예/적금건수(월별)":
 					pCenter.removeAll();
 					statistic_north_DepositSaving = new CustStatistic_NorthPanel_DepositSaving();
@@ -789,7 +810,7 @@ public class MainFrame extends JFrame implements ActionListener {
 					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_DepositSaving = statistic_north_DepositSaving.getBtns();
 					for(JButton btn : buttons_DepositSaving) {
-						btn.addActionListener(northBtnListener);
+						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_DepositSaving,BorderLayout.NORTH);
 					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
@@ -803,7 +824,7 @@ public class MainFrame extends JFrame implements ActionListener {
 					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_DPWD = statistic_north_DPWD.getBtns();
 					for(JButton btn : buttons_DPWD) {
-						btn.addActionListener(northBtnListener);
+						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_DPWD,BorderLayout.NORTH);
 					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
@@ -829,7 +850,7 @@ public class MainFrame extends JFrame implements ActionListener {
 					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_CustNum = statistic_north_CustNum.getBtns();
 					for(JButton btn : buttons_CustNum) {
-						btn.addActionListener(northBtnListener);
+						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_CustNum,BorderLayout.NORTH);
 					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
@@ -837,10 +858,44 @@ public class MainFrame extends JFrame implements ActionListener {
 					pCenter.repaint();
 					pCenter.revalidate();
 					break;
+				//은행업무
+				case "예금":
+					pCenter.removeAll();
+					transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
+					transInfo_north_bankbook.setBackground(new Color(255,255,255));
+					JButton[] buttons_bankbook_transInfo = transInfo_north_bankbook.getBtns();
+					for(JButton btn : buttons_bankbook_transInfo) {
+						btn.addActionListener(northBankBookBtnListener);
+					}
+					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
+					pCenter.repaint();
+					pCenter.revalidate();
+					break;
+				case "적금":
+					pCenter.removeAll();
+					transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
+					transInfo_north_bankbook.setBackground(new Color(255,255,255));
+					buttons_bankbook_transInfo = transInfo_north_bankbook.getBtns();
+					for(JButton btn : buttons_bankbook_transInfo) {
+						btn.addActionListener(northBankBookBtnListener);
+					}
+					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
+					pCenter.repaint();
+					pCenter.revalidate();
+					break;
+				case "마이너스":
+					pCenter.removeAll();
+					transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
+					transInfo_north_bankbook.setBackground(new Color(255,255,255));
+					buttons_bankbook_transInfo = transInfo_north_bankbook.getBtns();
+					for(JButton btn : buttons_bankbook_transInfo) {
+						btn.addActionListener(northBankBookBtnListener);
+					}
+					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
+					pCenter.repaint();
+					pCenter.revalidate();
+					break;
 				}
-				
-				
-				
 				chartThread.interrupt();
 				chartThread.run();
 			}
@@ -885,8 +940,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setScene(scene);
 	}
 	public void getCenterPanel() {
-		if(cust_statistic_west!=null) {
-			contentPane.remove(cust_statistic_west);
+		if(pWest!=null) {
+			contentPane.remove(pWest);
 		}
 		if(emp_statistic_west!=null) {
 			contentPane.remove(emp_statistic_west);
@@ -904,7 +959,127 @@ public class MainFrame extends JFrame implements ActionListener {
 		repaint();
 		revalidate();
 	}
-	private ActionListener buttonActionListener() {
+	private ActionListener BankWorkInfoButtonsActionListener(String command) {
+		ActionListener butonBankBookActionListner = new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switch(e.getActionCommand()) {
+				case "일간 거래 내역":
+					divBankWorkDaily(command);
+					break;
+				case "주간 거래 내역":
+					divBankWorkWeekly(command);
+					break;
+				case "월간 거래 내역":
+					divBankWorkMonthly(command);
+					break;
+				case "연간 거래 내역":
+					divBankWorkYearly(command);
+					break;
+				}
+			}
+
+			private void divBankWorkYearly(String command) {
+				switch(command) {
+				case "예금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "적금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "마이너스":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "체크카드":
+					break;
+				case "신용카드":
+					break;
+				case "일반대출":
+					break;
+				case "신용대출":
+					break;
+				case "카드론":
+					break;
+				}
+			}
+
+			private void divBankWorkMonthly(String command) {
+				switch(command) {
+				case "예금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "적금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "마이너스":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "체크카드":
+					break;
+				case "신용카드":
+					break;
+				case "일반대출":
+					break;
+				case "신용대출":
+					break;
+				case "카드론":
+					break;
+				}
+			}
+
+			private void divBankWorkWeekly(String command) {
+				switch(command) {
+				case "예금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "적금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "마이너스":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "체크카드":
+					break;
+				case "신용카드":
+					break;
+				case "일반대출":
+					break;
+				case "신용대출":
+					break;
+				case "카드론":
+					break;
+				}
+			}
+
+			private void divBankWorkDaily(String command) {
+				switch(command) {
+				case "예금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "적금":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "마이너스":
+					JOptionPane.showMessageDialog(null, command);
+					break;
+				case "체크카드":
+					break;
+				case "신용카드":
+					break;
+				case "일반대출":
+					break;
+				case "신용대출":
+					break;
+				case "카드론":
+					break;
+				}
+			}
+		};
+		return butonBankBookActionListner;
+	}
+	
+	
+	private ActionListener CustbuttonActionListener() {
 		ActionListener northBtnListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -944,6 +1119,5 @@ public class MainFrame extends JFrame implements ActionListener {
 		};
 		return northBtnListener;
 	}
-	
 	
 }

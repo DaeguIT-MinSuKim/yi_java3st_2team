@@ -1,8 +1,11 @@
 package yi_java3st_2team.ui.panel;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import yi_java3st_2team.ui.absPanel.AbsCenterStatisticWestPanel_test;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class BankBookTransInfoWestMenuPanel extends AbsCenterStatisticWestPanel_test {
@@ -11,12 +14,16 @@ public class BankBookTransInfoWestMenuPanel extends AbsCenterStatisticWestPanel_
 	 * Create the panel.
 	 */
 	public BankBookTransInfoWestMenuPanel() {
-
+		initialize();
+	}
+	private void initialize() {
+		setPanelInit(this.panel1, this.panel2, this.panel3, this.panel4, this.panel5, this.panel6, this.panel7);
+		setLabelInit(this.menu1, this.menu2, this.menu3, this.menu4, this.menu5, this.menu6, this.menu7);
 	}
 
 	@Override
 	protected String[] getTexts() {
-		return new String[] {"예금","적금","마이너스"};
+		return new String[] {"예금","적금","마이너스","","","",""};
 	}
 
 	@Override
