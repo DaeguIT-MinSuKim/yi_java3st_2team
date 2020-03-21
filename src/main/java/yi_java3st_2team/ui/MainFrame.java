@@ -113,7 +113,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel left;
 	private JPanel right;
 	private Thread chartThread;
-	private Thread panelThread;	
 	private PanelMonthlyDpOpenNumBarChart panel_chart_Deposit;
 	private PanelMonthlySvOpenNumBarChart panel_chart_Saving;
 	private PanelMonthlyDepositOpenNumBarChart penal_chart_DPnum;
@@ -124,7 +123,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private CustStatistic_WestPanel statistic_west;
 	private CustStatistic_CenterPanel statistic_center;
 	private CustStatistic_NorthPanel statistic_north;
-	private JPanel pCenterCenter;
 	private EmpBest pBestEmp;
 	
 	public MainFrame() {
@@ -132,7 +130,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	private void initialize() {
 		empService = new EmployeeService();
-		MouseAdapter menuAdapter = getMouseAdapter();
 		setThread();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -249,6 +246,9 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
+				if(statistic_west!=null) {
+					contentPane.remove(statistic_west);
+				}
 				contentPane.remove(pCenter);
 				pCenter = new CustInfoUIPanel();
 				contentPane.add(pCenter,BorderLayout.CENTER);
@@ -260,7 +260,26 @@ public class MainFrame extends JFrame implements ActionListener {
 		
 		mntmCustStatistic = new JMenuItem("고객 통계 정보");
 		mntmCustStatistic.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		
+		mntmCustStatistic.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(statistic_west!=null) {
+					contentPane.remove(statistic_west);
+				}
+				contentPane.remove(pCenter);
+				pCenter = new JPanel(new BorderLayout());
+				statistic_west = new CustStatistic_WestPanel();
+				MouseAdapter menuAdapter = getMouseAdapter();
+				JPanel[] menuPanels = statistic_west.getPanels();
+				for(JPanel pMenu : menuPanels) {
+					pMenu.addMouseListener(menuAdapter);
+				}
+				contentPane.add(statistic_west,BorderLayout.WEST);
+				contentPane.add(pCenter,BorderLayout.CENTER);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		//----------------여기에 
 		
 		mnCust.add(mntmCustStatistic);
@@ -272,6 +291,9 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
+				if(statistic_west!=null) {
+					contentPane.remove(statistic_west);
+				}
 				contentPane.remove(pCenter);
 				pCenter = new CustPlanUIPanel();
 				contentPane.add(pCenter,BorderLayout.CENTER);
@@ -289,6 +311,9 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
+				if(statistic_west!=null) {
+					contentPane.remove(statistic_west);
+				}
 				contentPane.remove(pCenter);
 				pCenter = new CustDWUIPanel();
 				contentPane.add(pCenter,BorderLayout.CENTER);
@@ -418,10 +443,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCardTransInfo.addActionListener(this);
 		mntmCardStatistic.addActionListener(this);
 		mntmLoan.addActionListener(this);
-		mntmLoanSearch.addActionListener(this);
-		
-		mntmCustStatistic.addMouseListener(menuAdapter);
-		
+		mntmLoanSearch.addActionListener(this);	
 	}
 
 	public LoginFrame getLoginFrame() {
@@ -488,14 +510,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		lblGreeting.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		btnLogout = new JButton("로그아웃");
 		btnLogout.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-//		btnLogout.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				setClear();
-//				dispose();
-//			}
-//		});  // 로그인프레임에서 처리하도록 함
-		//로그아웃 버튼에 액션리스너 달기
 		btnLogout.addActionListener(this);
 		panel.add(lblGreeting);
 		panel.add(btnLogout);
@@ -610,6 +624,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel();
 	    contentPane.add(pCenter,BorderLayout.CENTER);
@@ -619,6 +636,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	//업무정보 조회 키 누르면 
 	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel2Work();
 	    contentPane.add(pCenter,BorderLayout.CENTER);
@@ -629,6 +649,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	//사원 현황 누르면  - 통계연결
 	protected void mntmStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpStaticPanel();
 	    contentPane.add(pCenter,BorderLayout.CENTER);	
@@ -644,6 +667,9 @@ public class MainFrame extends JFrame implements ActionListener {
 			return;
 		}
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanelAuth();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -652,6 +678,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new CardCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -660,6 +689,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new CardCenterStatisticPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -668,6 +700,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new CardCenterTransInfoPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -676,6 +711,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBookActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new BankBookCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -684,6 +722,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new BankBookTransHisStatisticPanel();
 		contentPane.add(pCenter);
@@ -692,6 +733,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new BankBookInfoStatisticPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -700,6 +744,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new LoanInfoStatisticPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -708,6 +755,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
+		}
 		contentPane.remove(pCenter);
 		pCenter = new LoanCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -717,155 +767,44 @@ public class MainFrame extends JFrame implements ActionListener {
 	
 	private synchronized MouseAdapter getMouseAdapter() {
 		MouseAdapter menuAdapter = new MouseAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//패널이 들어갈 페이지 삭제
-				contentPane.remove(pCenter);
-				//메인 패널 재 생성, 세팅
-				panelThread.run();
-				//메뉴 패널 마우스 리스너
-				JPanel[] panels = statistic_west.getPanels();
-				for(JPanel panel : panels) {
-					panel.addMouseListener(new MouseAdapter() {
-						
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							
-							//모든 패널 흰색으로 먼저 변경
-							for(JPanel panel : panels) {
-								panel.setBackground(new Color(255,255,255));
-							}
-							//선택된 패널 노란색으로 변경
-							JPanel selPanel = (JPanel) e.getSource();
-							selPanel.setBackground(new Color(254,208,64));
-							//선택된 패널의 하위에 있는 라벨
-							JLabel selLabel = (JLabel) selPanel.getComponent(0);
-							switch(selLabel.getText()) {
-							case "예/적금건수(월별)":
-								statistic_north.removeAll();
-								statistic_center.removeAll();
-								//버튼 패널
-								statistic_north = new CustStatistic_NorthPanel();
-								statistic_north.setLayout(new FlowLayout());
-								JButton button_1 = new JButton("예금");
-								JButton button_2 = new JButton("적금");
-								//statistic_north.setBtns(button_1, button_2);
-								statistic_north.add(button_1);
-								statistic_north.add(button_2);
-								button_1.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(panel_chart_Deposit, BorderLayout.CENTER);
-										pCenterCenter.add(statistic_center,BorderLayout.CENTER);
-									}
-									
-								});
-								button_2.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(panel_chart_Saving, BorderLayout.CENTER);
-										pCenterCenter.add(statistic_center,BorderLayout.CENTER);
-									}
-									
-								});
-							
-								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
-								repaint();
-								revalidate();
-								break;
-							case "입/출금 건수(월별)":
-								pCenterCenter.removeAll();
-								//버튼 패널
-								statistic_north = new CustStatistic_NorthPanel();
-								statistic_north.setLayout(new FlowLayout());
-								JButton button_3 = new JButton("입금");
-								JButton button_4 = new JButton("출금");
-								//statistic_north.setBtns(button_1, button_2);
-								statistic_north.add(button_3);
-								statistic_north.add(button_4);
-								button_3.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(penal_chart_DPnum, BorderLayout.CENTER);
-									}
-									
-								});
-								button_4.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(panel_chartWDnum, BorderLayout.CENTER);
-									}
-									
-								});
-								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
-								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
-								repaint();
-								revalidate();
-								break;	
-							case "예금/적금/대출 총 금액":
-								pCenterCenter.removeAll();
-								//버튼 패널
-								statistic_north = new CustStatistic_NorthPanel();
-								statistic_north.setLayout(new FlowLayout());
-								//statistic_north.setBtns(button_1, button_2);
-								statistic_center.add(panel_chart_DPsLoan, BorderLayout.CENTER);
-								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
-								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
-								repaint();
-								revalidate();
-								break;
-							case "일반고객/VIP고객":
-								pCenterCenter.removeAll();
-								//버튼 패널
-								statistic_north = new CustStatistic_NorthPanel();
-								statistic_north.setLayout(new FlowLayout());
-								JButton button_5 = new JButton("총 고객 숫자");
-								JButton button_6 = new JButton("VIP고객 비율");
-								//statistic_north.setBtns(button_1, button_2);
-								statistic_north.add(button_5);
-								statistic_north.add(button_6);
-								button_5.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(panel_chart_custRankNum, BorderLayout.CENTER);
-										
-									}
-									
-								});
-								button_6.addMouseListener(new MouseAdapter() {
-
-									@Override
-									public void mouseClicked(MouseEvent e) {
-										statistic_center.add(panel_chart_custVIP, BorderLayout.CENTER);
-									}
-									
-								});
-								pCenterCenter.add(statistic_north, BorderLayout.NORTH);
-								pCenterCenter.add(statistic_center,BorderLayout.CENTER);
-								repaint();
-								revalidate();
-								break;
-						
-							}
-							
-						}
-						
-					});
-					chartThread.interrupt();
-					chartThread.run();
+				JPanel[] menus = statistic_west.getPanels();
+				for(JPanel menu : menus) {
+					menu.setBackground(new Color(255,255,255));
 				}
-				contentPane.add(pCenter,BorderLayout.CENTER);
-				revalidate();
-				repaint();
+				JPanel chkPanel = (JPanel)e.getSource();
+				chkPanel.setBackground(new Color(254,208,64));
+				JLabel chkLabel = (JLabel)chkPanel.getComponent(0);
+				switch(chkLabel.getText()) {
+				case "예/적금건수(월별)":
+					pCenter.removeAll();
+					statistic_north = new CustStatistic_NorthPanel();
+					statistic_center = new CustStatistic_CenterPanel();
+					ActionListener northBtnListener = buttonActionListener();
+					JButton[] buttons = statistic_north.getBtns();
+					for(JButton btn : buttons) {
+						btn.addActionListener(northBtnListener);
+					}
+					statistic_center.setBackground(Color.white);
+					pCenter.add(statistic_north,BorderLayout.NORTH);
+					pCenter.add(statistic_center,BorderLayout.CENTER);
+					pCenter.repaint();
+					pCenter.revalidate();
+					 break;
+				case "입/출금 건수(월별)":
+					pCenter.removeAll();
+					break;
+				case "예금/적금/대출 총 금액":
+					pCenter.removeAll();
+					break;
+				case "일반고객/VIP고객":
+					pCenter.removeAll();
+					break;
+				}
+				chartThread.interrupt();
+				chartThread.run();
 			}
-				
-			
 		};
 		return menuAdapter;
 	}
@@ -874,8 +813,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void setThread() {
 		chartThread = initChartThread();
 		chartThread.run();
-		panelThread = initPanelThread();
-		panelThread.run();
 	}
 	
 	private Thread initChartThread() {
@@ -903,31 +840,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		return thread;
 	}
 	
-	private Thread initPanelThread() {
-		Thread thread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				pCenter = new JPanel();
-				pCenter.setLayout(new BorderLayout(0,0));
-				pCenterCenter = new JPanel();
-				pCenterCenter.setLayout(new BorderLayout());
-				
-				statistic_west = new CustStatistic_WestPanel();
-				statistic_center = new CustStatistic_CenterPanel();
-				statistic_north = new CustStatistic_NorthPanel();
-				pCenter.add(statistic_west, BorderLayout.WEST);
-				pCenter.add(pCenterCenter, BorderLayout.CENTER);
-				pCenterCenter.add(statistic_center, BorderLayout.CENTER);
-				pCenterCenter.add(statistic_north, BorderLayout.NORTH);
-				
-				
-			
-			}
-		});
-		return thread;
-	}
-	
 	public void initFX(InitScene fxPanel) {
 		Scene scene = fxPanel.createScene();
 		JFXPanel panel = (JFXPanel) fxPanel;
@@ -936,6 +848,9 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void getCenterPanel() {
 		if(greeting == null) {
 			greeting = lblGreeting.getText();
+		}
+		if(statistic_west!=null) {
+			contentPane.remove(statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pcNorth = getLoginPanel();
@@ -949,6 +864,26 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
+	}
+	private ActionListener buttonActionListener() {
+		ActionListener northBtnListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("예금")) {
+					statistic_center.removeAll();
+					statistic_center.add(panel_chart_Deposit,BorderLayout.CENTER);
+					statistic_center.repaint();
+					statistic_center.revalidate();
+				}
+				else if(e.getActionCommand().equals("적금")) {
+					statistic_center.removeAll();
+					statistic_center.add(panel_chart_Saving,BorderLayout.CENTER);
+					statistic_center.repaint();
+					statistic_center.revalidate();
+				}
+			}
+		};
+		return northBtnListener;
 	}
 	
 	

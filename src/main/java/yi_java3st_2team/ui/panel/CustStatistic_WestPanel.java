@@ -21,9 +21,7 @@ public class CustStatistic_WestPanel extends AbsCenterStatisticWestPanel_test im
 	private void initialize() {
 
 		setLabelInit(this.menu1, this.menu2, this.menu3, this.menu4, this.menu5, this.menu6, this.menu7);
-		setPanelInit(this.panel_1, this.panel_2, this.panel_3, this.panel_4, this.panel_5, this.panel_6, this.panel);
-		setLblMouseListener(this.panel_1, this.panel_2, this.panel_3, this.panel_4, this.panel_5, this.panel_6, this.panel);
-		getPanels(this.panel_1, this.panel_2, this.panel_3, this.panel_4, this.panel_5, this.panel_6, this.panel);
+		setPanelInit(this.panel1, this.panel2, this.panel3, this.panel4, this.panel5, this.panel6, this.panel7);
 	}
 
 	@Override
@@ -46,6 +44,10 @@ public class CustStatistic_WestPanel extends AbsCenterStatisticWestPanel_test im
 	public void actionPerformed(ActionEvent e) {
 		
 		
+	}
+	@Override
+	public JPanel[] getPanels() {
+		return new JPanel[] {this.panel1,this.panel2,this.panel3,this.panel4};
 	}
 
 

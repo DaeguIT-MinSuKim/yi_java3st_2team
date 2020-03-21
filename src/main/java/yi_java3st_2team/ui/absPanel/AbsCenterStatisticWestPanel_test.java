@@ -23,19 +23,19 @@ import java.awt.Dimension;
 @SuppressWarnings("serial")
 abstract public class AbsCenterStatisticWestPanel_test extends JPanel {
 	protected JPanel west_panel;
-	protected JPanel panel;
-	protected JPanel panel_1;
-	protected JPanel panel_2;
-	protected JPanel panel_3;
+	protected JPanel panel1;
+	protected JPanel panel2;
+	protected JPanel panel3;
+	protected JPanel panel4;
 	protected JLabel menu1;
 	protected JLabel menu2;
 	protected JLabel menu3;
 	protected JLabel menu4;
-	protected JPanel panel_4;
+	protected JPanel panel5;
 	protected JLabel menu5;
-	protected JPanel panel_5;
+	protected JPanel panel6;
 	protected JLabel menu6;
-	protected JPanel panel_6;
+	protected JPanel panel7;
 	protected JLabel menu7;
 
 	public AbsCenterStatisticWestPanel_test() {
@@ -50,54 +50,54 @@ abstract public class AbsCenterStatisticWestPanel_test extends JPanel {
 		add(west_panel, BorderLayout.CENTER);
 		west_panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		panel = new JPanel();
-		west_panel.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel1 = new JPanel();
+		west_panel.add(panel1);
+		panel1.setLayout(new BorderLayout(0, 0));
 		
 		menu1 = new JLabel("");
-		panel.add(menu1);
+		panel1.add(menu1);
 		
-		panel_1 = new JPanel();
-		west_panel.add(panel_1);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		panel2 = new JPanel();
+		west_panel.add(panel2);
+		panel2.setLayout(new BorderLayout(0, 0));
 		
 		menu2 = new JLabel("");
-		panel_1.add(menu2);
+		panel2.add(menu2);
 		
-		panel_2 = new JPanel();
-		west_panel.add(panel_2);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel3 = new JPanel();
+		west_panel.add(panel3);
+		panel3.setLayout(new BorderLayout(0, 0));
 		
 		menu3 = new JLabel("");
-		panel_2.add(menu3);
+		panel3.add(menu3);
 		
-		panel_3 = new JPanel();
-		west_panel.add(panel_3);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		panel4 = new JPanel();
+		west_panel.add(panel4);
+		panel4.setLayout(new BorderLayout(0, 0));
 		
 		menu4 = new JLabel("");
-		panel_3.add(menu4);
+		panel4.add(menu4);
 		
-		panel_4 = new JPanel();
-		west_panel.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		panel5 = new JPanel();
+		west_panel.add(panel5);
+		panel5.setLayout(new BorderLayout(0, 0));
 		
 		menu5 = new JLabel("");
-		panel_4.add(menu5);
+		panel5.add(menu5);
 		
-		panel_5 = new JPanel();
-		west_panel.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		panel6 = new JPanel();
+		west_panel.add(panel6);
+		panel6.setLayout(new BorderLayout(0, 0));
 		
 		menu6 = new JLabel("");
-		panel_5.add(menu6);
+		panel6.add(menu6);
 		
-		panel_6 = new JPanel();
-		west_panel.add(panel_6);
-		panel_6.setLayout(new BorderLayout(0, 0));
+		panel7 = new JPanel();
+		west_panel.add(panel7);
+		panel7.setLayout(new BorderLayout(0, 0));
 		
 		menu7 = new JLabel("");
-		panel_6.add(menu7);
+		panel7.add(menu7);
 			}
 	
 	//메뉴 텍스트 세팅
@@ -115,7 +115,6 @@ abstract public class AbsCenterStatisticWestPanel_test extends JPanel {
 	//메뉴 패널 세팅 
 	protected void setPanelInit(JPanel ... menu) {
 		for(int i=0;i<menu.length;i++) {
-			menu[0].setBackground(new Color(254,208,64));
 			 menu[i].setBackground(new Color(255,255,255));
 		}
 	}
@@ -143,12 +142,7 @@ abstract public class AbsCenterStatisticWestPanel_test extends JPanel {
 		}
 	}
 	
-	
-	public JPanel[] getPanels(JPanel...panel) {
-		JPanel[] panels = {this.panel, this.panel_1, this.panel_2, this.panel_3, this.panel_4, this.panel_5, this.panel_6};
-		return panels;
-	}
-	
-	
 	abstract protected String[] getTexts();
+	
+	abstract public JPanel[] getPanels();
 }
