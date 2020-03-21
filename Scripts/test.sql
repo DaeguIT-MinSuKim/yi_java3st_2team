@@ -82,7 +82,9 @@ select * from card;
 select * from bankbook;
 select * from customer;
 select * from plan;
-
+select * from loan;
+select * from Performance p ;
+select * from Employee e ;
 
 #BSGPD
 select count(*) from customer where custRank = "B";
