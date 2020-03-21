@@ -94,6 +94,8 @@ set global sql_mode='STRICT_TRANS_TABLES';
 -- 
 select SUBSTRING_INDEX(SUBSTRING_INDEX(accountOpenDate, '-', 2), '-', -1) from bankbook where SUBSTRING_INDEX(SUBSTRING_INDEX(accountNum, '-', 2), '-', -1) ='11';
 
+select * from cust_DW_audit cda ;
+desc cust_DW_audit ;
 
 #BSGPD
 select count(*) from customer where custRank = "B";
@@ -126,6 +128,7 @@ select custCode, custName, custRank, custCredit, custAddr, custTel from customer
 select * from plan;
 select planCode, planDetail, planName, planDesc, planDiv from plan where planCode like "A%";
 select planCode, planDetail, planName, planDesc, planDiv from plan where planDetail like "AB%";
+select * from cust_DW_audit cda ;
 
 #은행업무 - 박인선
 select * from plan where planCode like 'A%';
