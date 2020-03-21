@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.chart.PanelBarChart;
+import yi_java3st_2team.ui.chart.PanelBarChartBankBookDeposit;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
 import yi_java3st_2team.ui.chart.PanelEmpPieChartForCountEmp;
@@ -143,6 +144,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
 	private CardTransInfoWestMenuPanel transInfo_west_card;
 	private CardTransInfoNorthPanel transInfo_north_card;
+	private PanelBarChartBankBookDeposit bankBook_barChard_Deposit;
 	public MainFrame() {
 		initialize();
 	}
@@ -666,8 +668,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
-		if(cust_statistic_west!=null) {
-			contentPane.remove(cust_statistic_west);
+		if(pWest!=null) {
+			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel();
@@ -678,8 +680,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	//업무정보 조회 키 누르면 
 	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(cust_statistic_west!=null) {
-			contentPane.remove(cust_statistic_west);
+		if(pWest!=null) {
+			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel2Work();
@@ -691,8 +693,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	//사원 현황 누르면  - 통계연결
 	protected void mntmStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(cust_statistic_west!=null) {
-			contentPane.remove(cust_statistic_west);
+		if(pWest!=null) {
+			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpStaticPanel();
@@ -703,14 +705,14 @@ public class MainFrame extends JFrame implements ActionListener {
 	
 	//사원권한 누르면
 	protected void mnEmpAuthActionPerformed(ActionEvent e) {
-		//hr부서라하더라도 직급이 과장, 대리, 사원이면 권한 수정할 수 없음
+		//부서라하더라도 직급이 과장, 대리, 사원이면 권한 수정할 수 없음
 		if(empAuth.getEmpTitle().contentEquals("과장")||empAuth.getEmpTitle().contentEquals("대리")||empAuth.getEmpTitle().equals("사원")) {
 			JOptionPane.showMessageDialog(null, "권한이 없습니다. HR부서 차장급 이상 접속가능");
 			return;
 		}
 		greeting = lblGreeting.getText();
-		if(cust_statistic_west!=null) {
-			contentPane.remove(cust_statistic_west);
+		if(pWest!=null) {
+			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanelAuth();
@@ -720,7 +722,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
+		pCenter = new JPanel(new BorderLayout());
+		pWest = new JPanel(new BorderLayout());
 		pCenter = new CardCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -738,7 +745,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
-		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
@@ -755,7 +761,10 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBookActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
 		pCenter = new BankBookCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -783,21 +792,31 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		greeting = lblGreeting.getText();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
 		pCenter = new LoanCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -985,6 +1004,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				panel_chart_DPsLoan = new PanelDPsLoanAllBarChart();
 				panel_chart_custRankNum = new PanelBarChart();
 				panel_chart_custVIP = new PanelPieChart();
+				bankBook_barChard_Deposit = new PanelBarChartBankBookDeposit();
 				
 				Platform.runLater(() -> initFX((InitScene) panel_chart_Deposit));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_Saving));
@@ -993,6 +1013,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				Platform.runLater(() -> initFX((InitScene) panel_chart_DPsLoan));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_custRankNum));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_custVIP));
+				Platform.runLater(() -> initFX((InitScene) bankBook_barChard_Deposit));
 			}
 		});
 		return thread;
@@ -1006,9 +1027,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	public void getCenterPanel() {
 		if(pWest!=null) {
 			contentPane.remove(pWest);
-		}
-		if(emp_statistic_west!=null) {
-			contentPane.remove(emp_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
@@ -1046,19 +1064,14 @@ public class MainFrame extends JFrame implements ActionListener {
 			private void divBankWorkYearly(String command) {
 				switch(command) {
 				case "예금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "적금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
-				case "마이너스":
-					JOptionPane.showMessageDialog(null, command);
+				case "마이너스":	
 					break;
 				case "체크카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "신용카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				}
 			}
@@ -1066,19 +1079,14 @@ public class MainFrame extends JFrame implements ActionListener {
 			private void divBankWorkMonthly(String command) {
 				switch(command) {
 				case "예금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "적금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "마이너스":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "체크카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "신용카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				}
 			}
@@ -1086,19 +1094,14 @@ public class MainFrame extends JFrame implements ActionListener {
 			private void divBankWorkWeekly(String command) {
 				switch(command) {
 				case "예금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "적금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "마이너스":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "체크카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "신용카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				}
 			}
@@ -1106,19 +1109,14 @@ public class MainFrame extends JFrame implements ActionListener {
 			private void divBankWorkDaily(String command) {
 				switch(command) {
 				case "예금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "적금":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "마이너스":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "체크카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				case "신용카드":
-					JOptionPane.showMessageDialog(null, command);
 					break;
 				}
 			}

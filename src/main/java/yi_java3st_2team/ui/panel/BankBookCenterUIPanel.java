@@ -108,9 +108,9 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						dlgBankBook.setTitle("통장" + e.getActionCommand());
 						dlgBankBook.getBtnOk().setText(e.getActionCommand());
 						dlgBankBook.getBtnOk().addActionListener(myDlgListener);
-						dlgBankBook.getTfCardNum().setEnabled(false);
+						dlgBankBook.getTfCardNum().setEditable(false);
 						dlgBankBook.getCmbCust().setEnabled(false);
-						dlgBankBook.getCmbPlan().setEditable(false);
+						dlgBankBook.getCmbPlan().setEnabled(false);
 						dlgBankBook.setItem(bankbook);
 						dlgBankBook.setModal(true);
 						dlgBankBook.setVisible(true);

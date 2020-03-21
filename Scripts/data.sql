@@ -122,11 +122,13 @@ create table cust_DW_audit(
 
 create table cardInfo(
 	custname varchar(5),
+	cardnum varchar(16),
 	transDate datetime
 );
 
 create table bankBookInfo(
 	custname varchar(5),
+	accountnum varchar(16),
 	transDate datetime
 );
 
@@ -249,7 +251,7 @@ create trigger tri_after_update_BankBook_card
    end $$
 delimiter ;
 
-#체크카드 잔액이 변경될 시 통장 잔액이 같이 변경 되게하는 트리거
+#체크카드 잔액이 변경될 시 통장 잔액이 같이 변경 되게하는 트리거 - 버그 있어 수정 필요
 drop trigger if exists tri_before_update_card_bankbook;
 delimiter $$
 create trigger tri_before_update_card_bankbook
@@ -265,23 +267,23 @@ delimiter ;
 drop trigger if exists tri_update_card;
 delimiter $
 create trigger tri_update_card
-before update on card
+after update on card
 for each row 
 begin 
-	insert into cardinfo values((select custname from customer where custcode = new.custcode),now());
+	insert into cardinfo values((select custname from customer where custcode = new.custcode),new.cardnum,now());
 end $
 delimiter ;
 
 drop trigger if exists tri_update_bankbook;
 delimiter $
 create trigger tri_update_bankbook
-before update on bankbook
+after update on bankbook
 for each row 
 begin 
-	insert into bankbookInfo values((select custname from customer where custcode = new.custcode),now());
+	insert into bankbookInfo values((select custname from customer where custcode = new.custcode),new.accountnum,now());
 end $
 delimiter ;
-
+#테스트 해서 수정 필요
 drop procedure if exists make_dormant;
 
 delimiter !
@@ -297,7 +299,7 @@ begin
 	insert into changebankbookdormantinfo values(d_custname,d_accountnum,now());
 end!
 delimiter ;
-
+#테스트 해서 수정 필요
 drop procedure if exists make_termination;
 
 delimiter !

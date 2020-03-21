@@ -83,8 +83,8 @@ public class BankBookCenterTblPanel extends AbsCenterTblPanel<BankBook> {
 			bankDiv = "마이너스";
 		}
 		model.setValueAt(bankDiv, updateIdx, 3);
-		model.setValueAt(new SimpleDateFormat().format(item.getAccountOpenDate()), updateIdx, 4);
-		model.setValueAt(String.format("%.2f%%", item.getAccountBalance() * 100), updateIdx, 5);
+		model.setValueAt(new SimpleDateFormat("yyyy-mm-dd HH:mm:ss").format(item.getAccountOpenDate()), updateIdx, 4);
+		model.setValueAt(String.format("%.2f%%", item.getAccountInterest() * 100), updateIdx, 5);
 	}
 
 }
