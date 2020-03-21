@@ -3,7 +3,6 @@ package yi_java3st_2team.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.SystemColor;
@@ -40,10 +39,7 @@ import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyWithDrawalOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelPieChart;
 import yi_java3st_2team.ui.panel.BankBookCenterUIPanel;
-import yi_java3st_2team.ui.panel.BankBookInfoStatisticPanel;
-import yi_java3st_2team.ui.panel.BankBookTransHisStatisticPanel;
-import yi_java3st_2team.ui.panel.CardCenterStatisticPanel;
-import yi_java3st_2team.ui.panel.CardCenterTransInfoPanel;
+import yi_java3st_2team.ui.panel.BankBookTransInfoWestMenuPanel;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.panel.CustDWUIPanel;
 import yi_java3st_2team.ui.panel.CustInfoUIPanel;
@@ -53,16 +49,14 @@ import yi_java3st_2team.ui.panel.CustStatistic_NorthPanel_CustNum;
 import yi_java3st_2team.ui.panel.CustStatistic_NorthPanel_DPWD;
 import yi_java3st_2team.ui.panel.CustStatistic_NorthPanel_DepositSaving;
 import yi_java3st_2team.ui.panel.CustStatistic_WestPanel;
+import yi_java3st_2team.ui.panel.EmpBest;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
-import yi_java3st_2team.ui.panel.LoanInfoStatisticPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
-import yi_java3st_2team.ui.panel.Statistic_test;
 import yi_java3st_2team.ui.service.EmployeeService;
-import yi_java3st_2team.ui.panel.EmpBest;
 
 
 @SuppressWarnings("serial")
@@ -123,11 +117,12 @@ public class MainFrame extends JFrame implements ActionListener {
 	private PanelDPsLoanAllBarChart panel_chart_DPsLoan;
 	private PanelBarChart panel_chart_custRankNum;
 	private PanelPieChart panel_chart_custVIP;
-	private CustStatistic_WestPanel statistic_west;
-	private CustStatistic_CenterPanel statistic_center;
+	private CustStatistic_WestPanel cust_statistic_west;
+	private CustStatistic_CenterPanel cust_statistic_center;
 	private CustStatistic_NorthPanel_DepositSaving statistic_north_DepositSaving;
 	private CustStatistic_NorthPanel_DPWD statistic_north_DPWD;
 	private CustStatistic_NorthPanel_CustNum statistic_north_CustNum;
+	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private PanelCustNumAll statistic_CustNumAll;
 	private EmpBest pBestEmp;
 	
@@ -252,8 +247,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(statistic_west!=null) {
-					contentPane.remove(statistic_west);
+				if(cust_statistic_west!=null) {
+					contentPane.remove(cust_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustInfoUIPanel();
@@ -269,18 +264,18 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCustStatistic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(statistic_west!=null) {
-					contentPane.remove(statistic_west);
+				if(cust_statistic_west!=null) {
+					contentPane.remove(cust_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
-				statistic_west = new CustStatistic_WestPanel();
+				cust_statistic_west = new CustStatistic_WestPanel();
 				MouseAdapter menuAdapter = getMouseAdapter();
-				JPanel[] menuPanels = statistic_west.getPanels();
+				JPanel[] menuPanels = cust_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
-				contentPane.add(statistic_west,BorderLayout.WEST);
+				contentPane.add(cust_statistic_west,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
 				contentPane.revalidate();
@@ -296,8 +291,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(statistic_west!=null) {
-					contentPane.remove(statistic_west);
+				if(cust_statistic_west!=null) {
+					contentPane.remove(cust_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustPlanUIPanel();
@@ -316,8 +311,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(statistic_west!=null) {
-					contentPane.remove(statistic_west);
+				if(cust_statistic_west!=null) {
+					contentPane.remove(cust_statistic_west);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustDWUIPanel();
@@ -633,8 +628,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		if(cust_statistic_west!=null) {
+			contentPane.remove(cust_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel();
@@ -645,8 +640,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	//업무정보 조회 키 누르면 
 	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		if(cust_statistic_west!=null) {
+			contentPane.remove(cust_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanel2Work();
@@ -658,8 +653,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	//사원 현황 누르면  - 통계연결
 	protected void mntmStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		if(cust_statistic_west!=null) {
+			contentPane.remove(cust_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpStaticPanel();
@@ -676,8 +671,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			return;
 		}
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		if(cust_statistic_west!=null) {
+			contentPane.remove(cust_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new EmpCenterUIpanelAuth();
@@ -687,10 +682,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
+		contentPane.removeAll();
 		pCenter = new CardCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -698,32 +690,21 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
-		pCenter = new CardCenterStatisticPanel();
+		contentPane.removeAll();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
-		pCenter = new CardCenterTransInfoPanel();
+		contentPane.removeAll();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmBankBookActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
+		contentPane.removeAll();
 		pCenter = new BankBookCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -731,43 +712,34 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		contentPane.removeAll();
+		bankbook_statistic_west = new BankBookTransInfoWestMenuPanel();
+		JPanel[] panels = bankbook_statistic_west.getPanels();
+		for(JPanel panel : panels) {
+			panel.addMouseListener(getMouseAdapter());
 		}
-		contentPane.remove(pCenter);
-		pCenter = new BankBookTransHisStatisticPanel();
-		contentPane.add(pCenter);
+		contentPane.add(bankbook_statistic_west,BorderLayout.WEST);
+		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
-		pCenter = new BankBookInfoStatisticPanel();
+		contentPane.removeAll();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
-		pCenter = new LoanInfoStatisticPanel();
+		contentPane.removeAll();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
 		revalidate();
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
-		}
-		contentPane.remove(pCenter);
+		contentPane.removeAll();
 		pCenter = new LoanCenterUIPanel();
 		contentPane.add(pCenter,BorderLayout.CENTER);
 		repaint();
@@ -778,7 +750,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		MouseAdapter menuAdapter = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel[] menus = statistic_west.getPanels();
+				JPanel[] menus = cust_statistic_west.getPanels();
 				for(JPanel menu : menus) {
 					menu.setBackground(new Color(255,255,255));
 				}
@@ -790,36 +762,36 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "예/적금건수(월별)":
 					pCenter.removeAll();
 					statistic_north_DepositSaving = new CustStatistic_NorthPanel_DepositSaving();
-					statistic_center = new CustStatistic_CenterPanel();
-					statistic_center.setBackground(Color.white);
+					cust_statistic_center = new CustStatistic_CenterPanel();
+					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_DepositSaving = statistic_north_DepositSaving.getBtns();
 					for(JButton btn : buttons_DepositSaving) {
 						btn.addActionListener(northBtnListener);
 					}
 					pCenter.add(statistic_north_DepositSaving,BorderLayout.NORTH);
-					pCenter.add(statistic_center,BorderLayout.CENTER);
+					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
 					pCenter.repaint();
 					pCenter.revalidate();
 					 break;
 				case "입/출금 건수(월별)":
 					pCenter.removeAll();
 					statistic_north_DPWD = new CustStatistic_NorthPanel_DPWD();
-					statistic_center = new CustStatistic_CenterPanel();
-					statistic_center.setBackground(Color.white);
+					cust_statistic_center = new CustStatistic_CenterPanel();
+					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_DPWD = statistic_north_DPWD.getBtns();
 					for(JButton btn : buttons_DPWD) {
 						btn.addActionListener(northBtnListener);
 					}
 					pCenter.add(statistic_north_DPWD,BorderLayout.NORTH);
-					pCenter.add(statistic_center,BorderLayout.CENTER);
+					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
 					pCenter.repaint();
 					pCenter.revalidate();
 					break;
 				case "예금/적금/대출 총 금액":
 					pCenter.removeAll();
 					//statistic_north_DepositSaving = new CustStatistic_NorthPanel_DepositSaving();
-					statistic_center = new CustStatistic_CenterPanel();
-					statistic_center.setBackground(Color.white);
+					cust_statistic_center = new CustStatistic_CenterPanel();
+					cust_statistic_center.setBackground(Color.white);
 					//pCenter.add(statistic_north_DepositSaving,BorderLayout.NORTH);
 					pCenter.add(panel_chart_DPsLoan,BorderLayout.CENTER);
 					pCenter.repaint();
@@ -828,16 +800,16 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "일반고객/VIP고객":
 					pCenter.removeAll();
 					statistic_north_CustNum = new CustStatistic_NorthPanel_CustNum();
-					statistic_center = new CustStatistic_CenterPanel();
+					cust_statistic_center = new CustStatistic_CenterPanel();
 					statistic_CustNumAll = new PanelCustNumAll();
 					statistic_CustNumAll.setBackground(new Color(255,255,255));
-					statistic_center.setBackground(Color.white);
+					cust_statistic_center.setBackground(Color.white);
 					JButton[] buttons_CustNum = statistic_north_CustNum.getBtns();
 					for(JButton btn : buttons_CustNum) {
 						btn.addActionListener(northBtnListener);
 					}
 					pCenter.add(statistic_north_CustNum,BorderLayout.NORTH);
-					pCenter.add(statistic_center,BorderLayout.CENTER);
+					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
 					pCenter.add(statistic_CustNumAll, BorderLayout.SOUTH);
 					pCenter.repaint();
 					pCenter.revalidate();
@@ -890,8 +862,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		panel.setScene(scene);
 	}
 	public void getCenterPanel() {
-		if(statistic_west!=null) {
-			contentPane.remove(statistic_west);
+		if(cust_statistic_west!=null) {
+			contentPane.remove(cust_statistic_west);
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
@@ -911,36 +883,36 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("예금")) {
-					statistic_center.removeAll();
-					statistic_center.add(panel_chart_Deposit,BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(panel_chart_Deposit,BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}
 				else if(e.getActionCommand().equals("적금")) {
-					statistic_center.removeAll();
-					statistic_center.add(panel_chart_Saving,BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(panel_chart_Saving,BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}else if(e.getActionCommand().equals("입금")) {
-					statistic_center.removeAll();
-					statistic_center.add(penal_chart_DPnum, BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(penal_chart_DPnum, BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}else if(e.getActionCommand().equals("출금")) {
-					statistic_center.removeAll();
-					statistic_center.add(panel_chartWDnum, BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(panel_chartWDnum, BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}else if(e.getActionCommand().equals("등급별 고객수")) {
-					statistic_center.removeAll();
-					statistic_center.add(panel_chart_custRankNum, BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(panel_chart_custRankNum, BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}else if(e.getActionCommand().equals("VIP 고객 비율")) {
-					statistic_center.removeAll();
-					statistic_center.add(panel_chart_custVIP, BorderLayout.CENTER);
-					statistic_center.repaint();
-					statistic_center.revalidate();
+					cust_statistic_center.removeAll();
+					cust_statistic_center.add(panel_chart_custVIP, BorderLayout.CENTER);
+					cust_statistic_center.repaint();
+					cust_statistic_center.revalidate();
 				}
 			}
 		};
