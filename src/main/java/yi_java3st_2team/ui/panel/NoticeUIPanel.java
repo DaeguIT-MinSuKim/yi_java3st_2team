@@ -133,7 +133,7 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		this.btnMod = btnMod;
 	}
 	protected void btnAddActionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("추가")) {
+		if(e.getActionCommand().equals("등록")) {
 			dpPanel = new NoticeDetailPanel();
 			ActionListener dpAddListner = setDpListner();
 			dpPanel.getBtnAdd().addActionListener(dpAddListner);
@@ -221,42 +221,51 @@ public class NoticeUIPanel extends JPanel implements ActionListener {
 		};
 	}	
 	protected void btnDelActionPerformed(ActionEvent e) {
-		int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
-		if(res==0) {
-			try {
-				Notice notice = pCenter.getSelectedItem();
-				service.removeNotice(notice);
-				res = service.resetAutoIncrement();
-				if(res==1) {
-					JOptionPane.showMessageDialog(null, "삭제되었습니다");
-					pCenter.loadTableData(service.showNoticeByAll());
+		try {
+			Notice notice = pCenter.getSelectedItem();
+			int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
+			if(res==0) {
+				try {
+					service.removeNotice(notice);
+					res = service.resetAutoIncrement();
+					if(res==1) {
+						JOptionPane.showMessageDialog(null, "삭제되었습니다");
+						pCenter.loadTableData(service.showNoticeByAll());
+					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch(RuntimeException e2) {
-				JOptionPane.showMessageDialog(null, e2.getMessage());
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "삭제가 취소되었습니다");
 			}
 		}
-		else {
-			JOptionPane.showMessageDialog(null, "삭제가 취소되었습니다");
+		catch(RuntimeException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
+		
 		
 	}
 	protected void btnModActionPerformed(ActionEvent e) {
-		dpPanel = new NoticeDetailPanel();
-		dpPanel.setItem(pCenter.getSelectedItem());
-		selIdx = pCenter.getSelectedRowIdx();
-		ActionListener dpAddListner = setDpListner();
-		dpPanel.getBtnAdd().setText("수정");
-		dpPanel.getBtnAdd().addActionListener(dpAddListner);
-		dpPanel.getBtnCancel().addActionListener(dpAddListner);
-		dpPanel.getBtnReturn().addActionListener(dpAddListner);
-		dpPanel.getTfSubject().setEditable(false);
-		dpPanel.getTfWriter().setEditable(false);
-		main.getRight().removeAll();
-		main.getRight().add(dpPanel);
-		main.getRight().repaint();
-		main.getRight().revalidate();
+		try {
+			dpPanel = new NoticeDetailPanel();
+			dpPanel.setItem(pCenter.getSelectedItem());
+			dpPanel.getBtnCancel().setVisible(false);
+			selIdx = pCenter.getSelectedRowIdx();
+			ActionListener dpAddListner = setDpListner();
+			dpPanel.getBtnAdd().setText("수정");
+			dpPanel.getBtnAdd().addActionListener(dpAddListner);
+			dpPanel.getBtnReturn().addActionListener(dpAddListner);
+			dpPanel.getTfSubject().setEditable(false);
+			dpPanel.getTfWriter().setEditable(false);
+			main.getRight().removeAll();
+			main.getRight().add(dpPanel);
+			main.getRight().repaint();
+			main.getRight().revalidate();
+		}
+		catch(RuntimeException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
 	}
 }
