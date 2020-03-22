@@ -6,6 +6,36 @@ insert into department values
 (2,'고객');
 
 insert into employee values
+('A001','나인사','부장','HR',6000000,'010-1233-1111','HRid1',password('testforHR1'),1,null),
+('A002','정아름','차장','HR',5000000,'010-5840-1111','HRid2',password('testforHR2'),1,null),
+('A003','이상원','과장','HR',4000000,'010-1549-1111','HRid3',password('testforHR3'),1,null),
+('A004','서지수','대리','HR',3000000,'010-3296-1111','HRid4',password('testforHR4'),1,null),
+('A005','박민호','사원','HR',2000000,'010-1597-1111','HRid5',password('testforHR5'),1,null),
+('A006','고희연','사원','HR',2000000,'010-6444-1111','HRid5',password('testforHR5'),1,null),
+('A007','정윤호','사원','HR',2000000,'010-7423-1111','HRid5',password('testforHR5'),1,null),
+-- 고객팀
+('B001','나지점','지점장','AD',10000000,'010-1234-1234','ADid',password('testforAD'),2,null),
+('B002','장현서','부지점장','CS',8000000,'010-4444-7767','CSid1',password('testforCS'),2,null),
+('B003','박인선','부장','CS',6000000,'010-2992-2222','CSid2',password('testforCS'),2,null),
+('B004','황하나','차장','CS',5000000,'010-2222-1111','CSid3',password('testforCS'),2,null),
+('B005','현재승','과장','CS',4000000,'010-2282-4848','CSid4',password('testforCS'),2,null),
+('B006','황태원','대리','CS',3000000,'010-2902-5959','CSid5',password('testforCS'),2,null),
+('B007','나고객','사원','CS',2000000,'010-5489-7346','CSid8',password('testforCS'),2,null),
+('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2,null),
+('B009','아몬드','대리','CS',2000000,'010-1578-5436','CSid9',password('testforCS'),2,null),
+('B010','장우주','사원','CS',2000000,'010-1258-8563','CSid10',password('testforCS'),2,null),
+('B011','방송국','사원','CS',2000000,'010-6982-5312','CSid11',password('testforCS'),2,null),
+('B012','서민지','사원','CS',2000000,'010-5734-1543','CSid12',password('testforCS'),2,null),
+('B013','성시현','사원','CS',2000000,'010-9644-4321','CSid13',password('testforCS'),2,null),
+('B014','민희영','사원','CS',2000000,'010-4231-3443','CSid14',password('testforCS'),2,null),
+('B015','김다린','사원','CS',2000000,'010-3290-6431','CSid15',password('testforCS'),2,null),
+('B016','최지원','사원','CS',2000000,'010-7323-4543','CSid16',password('testforCS'),2,null),
+('B017','연소희','사원','CS',2000000,'010-4443-7345','CSid17',password('testforCS'),2,null),
+('B018','주경미','사원','CS',2000000,'010-6424-3424','CSid18',password('testforCS'),2,null),
+('B019','서연정','사원','CS',2000000,'010-3290-7134','CSid19',password('testforCS'),2,null),
+('B020','차은우','사원','CS',2000000,'010-5834-8555','CSid20',password('testforCS'),2,null),
+('B021','배소경','사원','CS',2000000,'010-3290-3343','CSid21',password('testforCS'),2,null),
+('B022','김천경','사원','CS',2000000,'010-1385-4577','CSid22',password('testforCS'),2,null);
 
 
 insert into customer values("C001", "김가나", "D", 1, "서울시 강남구", "123-1234-1234");
