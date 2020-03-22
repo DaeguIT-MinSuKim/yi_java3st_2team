@@ -1,13 +1,30 @@
 package yi_java3st_2team.ui.chart;
 
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
+import javax.swing.JOptionPane;
+
+import com.sun.javafx.charts.Legend;
+import com.sun.javafx.charts.Legend.LegendItem;
+import com.sun.javafx.geom.BaseBounds;
+import com.sun.javafx.geom.transform.BaseTransform;
+import com.sun.javafx.jmx.MXNodeAlgorithm;
+import com.sun.javafx.jmx.MXNodeAlgorithmContext;
+import com.sun.javafx.sg.prism.NGNode;
+
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
+import javafx.geometry.Side;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -22,10 +39,10 @@ import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.ui.service.BankBookService;
 
 @SuppressWarnings("serial")
-public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitScene{
+public class PanelBarChartBankBookDepositWeekly extends JFXPanel implements InitScene{
 	private BarChart<String, Number> barChart;
 	private BankBookService service;
-	public PanelBarChartBankBookDepositDaily() {
+	public PanelBarChartBankBookDepositWeekly() {
 		
 	}
 	
@@ -47,16 +64,16 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		yAxis.setTickLabelFont(new javafx.scene.text.Font(15));
 
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
-		barChart.setTitle("고객별 예금 일간 거래 내역 조회");
+		barChart.setTitle("고객별 예금 주간 거래 내역 조회");
 		barChart.setPrefSize(1100, 500);
 		barChart.setStyle("-fx-font-size: " + 20 + "px;");
-		barChart.setData(getChartData());
 		barChart.setLegendVisible(false);
+		barChart.setData(getChartData());
 		root.getChildren().add(barChart);
 		return scene;
 	}
 	
-	private ObservableList<XYChart.Series<String, Number>> getChartData() {
+	private ObservableList<Series<String, Number>> getChartData() {
 		ObservableList<Series<String, Number>> list = FXCollections.observableArrayList();
 		service = new BankBookService();
 		List<AccountInfo> list1 = null;

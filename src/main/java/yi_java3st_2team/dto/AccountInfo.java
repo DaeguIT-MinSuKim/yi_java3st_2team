@@ -8,6 +8,8 @@ public class AccountInfo {
 	private int count;
 	private String accountNum;
 	private Date transDate;
+	
+	
 	public AccountInfo() {
 		
 	}
@@ -57,12 +59,6 @@ public class AccountInfo {
 	}
 	public void setTransDate(Date transDate) {
 		this.transDate = transDate;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("AccountInfo [custName=%s, div=%s, count=%s, accountNum=%s, transDate=%s]", custName, div,
-				count, accountNum, transDate);
 	}
 	
 }

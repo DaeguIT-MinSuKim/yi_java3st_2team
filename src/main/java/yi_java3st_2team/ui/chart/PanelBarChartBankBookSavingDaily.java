@@ -3,6 +3,8 @@ package yi_java3st_2team.ui.chart;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,10 +24,10 @@ import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.ui.service.BankBookService;
 
 @SuppressWarnings("serial")
-public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitScene{
+public class PanelBarChartBankBookSavingDaily extends JFXPanel implements InitScene{
 	private BarChart<String, Number> barChart;
 	private BankBookService service;
-	public PanelBarChartBankBookDepositDaily() {
+	public PanelBarChartBankBookSavingDaily() {
 		
 	}
 	
@@ -47,7 +49,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		yAxis.setTickLabelFont(new javafx.scene.text.Font(15));
 
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
-		barChart.setTitle("고객별 예금 일간 거래 내역 조회");
+		barChart.setTitle("고객별 적금 일간 거래 내역 조회");
 		barChart.setPrefSize(1100, 500);
 		barChart.setStyle("-fx-font-size: " + 20 + "px;");
 		barChart.setData(getChartData());
@@ -70,17 +72,17 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		AccountInfo accountInfo4 = null;
 		AccountInfo accountInfo5 = null;
 		try {
-			list1 = service.bankBookInfoWeekly("김가나");
-			list2 = service.bankBookInfoWeekly("김다라");
-			list3 = service.bankBookInfoWeekly("김마바");
-			list4 = service.bankBookInfoWeekly("김사아");
-			list5 = service.bankBookInfoWeekly("김자차");
+			list1 = service.bankBookInfoDaily("김가나");
+			list2 = service.bankBookInfoDaily("김다라");
+			list3 = service.bankBookInfoDaily("김마바");
+			list4 = service.bankBookInfoDaily("김사아");
+			list5 = service.bankBookInfoDaily("김자차");
 			if(list1.size()==0) {
 				accountInfo1 = new AccountInfo("김가나", 0);
 			}
 			else {
 				for(AccountInfo info : list1) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("적금")) {
 						accountInfo1 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -94,7 +96,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list2) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("적금")) {
 						accountInfo2 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -108,7 +110,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list3) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("적금")) {
 						accountInfo3 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -122,7 +124,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list4) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("적금")) {
 						accountInfo4 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -136,7 +138,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list5) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("적금")) {
 						accountInfo5 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}

@@ -22,10 +22,10 @@ import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.ui.service.BankBookService;
 
 @SuppressWarnings("serial")
-public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitScene{
+public class PanelBarChartBankBookMinusDaily extends JFXPanel implements InitScene{
 	private BarChart<String, Number> barChart;
 	private BankBookService service;
-	public PanelBarChartBankBookDepositDaily() {
+	public PanelBarChartBankBookMinusDaily() {
 		
 	}
 	
@@ -47,7 +47,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		yAxis.setTickLabelFont(new javafx.scene.text.Font(15));
 
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
-		barChart.setTitle("고객별 예금 일간 거래 내역 조회");
+		barChart.setTitle("고객별 마이너스통장 일간 거래 내역 조회");
 		barChart.setPrefSize(1100, 500);
 		barChart.setStyle("-fx-font-size: " + 20 + "px;");
 		barChart.setData(getChartData());
@@ -80,12 +80,13 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list1) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("마이너스")) {
 						accountInfo1 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
 					else {
 						accountInfo1 = new AccountInfo("김가나", 0);
+						
 					}
 				}
 			}
@@ -94,17 +95,18 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list2) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("마이너스")) {
 						accountInfo2 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
 					else {
 						accountInfo2 = new AccountInfo("김다라", 0);
+						
 					}
 				}
 			}
 			if(list3.size()==0) {
-				accountInfo3 = new AccountInfo("김마바", 0);
+				accountInfo3 = new AccountInfo("마이너스", 0);
 			}
 			else {
 				for(AccountInfo info : list3) {
@@ -122,7 +124,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list4) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("마이너스")) {
 						accountInfo4 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -136,7 +138,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			}
 			else {
 				for(AccountInfo info : list5) {
-					if(info.getDiv().equals("예금")) {
+					if(info.getDiv().equals("마이너스")) {
 						accountInfo5 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}

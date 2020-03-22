@@ -19,13 +19,15 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.dto.AccountInfo;
+import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.ui.service.BankBookService;
+import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")
-public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitScene{
+public class PanelBarChartCardCreditDaily extends JFXPanel implements InitScene{
 	private BarChart<String, Number> barChart;
-	private BankBookService service;
-	public PanelBarChartBankBookDepositDaily() {
+	private CardService service;
+	public PanelBarChartCardCreditDaily() {
 		
 	}
 	
@@ -47,7 +49,7 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		yAxis.setTickLabelFont(new javafx.scene.text.Font(15));
 
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
-		barChart.setTitle("고객별 예금 일간 거래 내역 조회");
+		barChart.setTitle("고객별 신용카드 일간 거래 내역 조회");
 		barChart.setPrefSize(1100, 500);
 		barChart.setStyle("-fx-font-size: " + 20 + "px;");
 		barChart.setData(getChartData());
@@ -58,29 +60,29 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 	
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
 		ObservableList<Series<String, Number>> list = FXCollections.observableArrayList();
-		service = new BankBookService();
-		List<AccountInfo> list1 = null;
-		List<AccountInfo> list2 = null;
-		List<AccountInfo> list3 = null;
-		List<AccountInfo> list4 = null;
-		List<AccountInfo> list5 = null;
+		service = new CardService();
+		List<CardInfo> list1 = null;
+		List<CardInfo> list2 = null;
+		List<CardInfo> list3 = null;
+		List<CardInfo> list4 = null;
+		List<CardInfo> list5 = null;
 		AccountInfo accountInfo1 = null;
 		AccountInfo accountInfo2 = null;
 		AccountInfo accountInfo3 = null;
 		AccountInfo accountInfo4 = null;
 		AccountInfo accountInfo5 = null;
 		try {
-			list1 = service.bankBookInfoWeekly("김가나");
-			list2 = service.bankBookInfoWeekly("김다라");
-			list3 = service.bankBookInfoWeekly("김마바");
-			list4 = service.bankBookInfoWeekly("김사아");
-			list5 = service.bankBookInfoWeekly("김자차");
+			list1 = service.cardInfoDaily("김가나");
+			list2 = service.cardInfoDaily("김다라");
+			list3 = service.cardInfoDaily("김마바");
+			list4 = service.cardInfoDaily("김사아");
+			list5 = service.cardInfoDaily("김자차");
 			if(list1.size()==0) {
 				accountInfo1 = new AccountInfo("김가나", 0);
 			}
 			else {
-				for(AccountInfo info : list1) {
-					if(info.getDiv().equals("예금")) {
+				for(CardInfo info : list1) {
+					if(info.getDiv().equals("신용카드")) {
 						accountInfo1 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -93,8 +95,8 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 				accountInfo2 = new AccountInfo("김다라", 0);
 			}
 			else {
-				for(AccountInfo info : list2) {
-					if(info.getDiv().equals("예금")) {
+				for(CardInfo info : list2) {
+					if(info.getDiv().equals("신용카드")) {
 						accountInfo2 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -107,8 +109,8 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 				accountInfo3 = new AccountInfo("김마바", 0);
 			}
 			else {
-				for(AccountInfo info : list3) {
-					if(info.getDiv().equals("예금")) {
+				for(CardInfo info : list3) {
+					if(info.getDiv().equals("신용카드")) {
 						accountInfo3 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -121,8 +123,8 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 				accountInfo4 = new AccountInfo("김사아", 0);
 			}
 			else {
-				for(AccountInfo info : list4) {
-					if(info.getDiv().equals("예금")) {
+				for(CardInfo info : list4) {
+					if(info.getDiv().equals("신용카드")) {
 						accountInfo4 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}
@@ -135,8 +137,8 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 				accountInfo5 = new AccountInfo("김자차", 0);
 			}
 			else {
-				for(AccountInfo info : list5) {
-					if(info.getDiv().equals("예금")) {
+				for(CardInfo info : list5) {
+					if(info.getDiv().equals("신용카드")) {
 						accountInfo5 = new AccountInfo(info.getCustName(), info.getCount());
 						break;
 					}

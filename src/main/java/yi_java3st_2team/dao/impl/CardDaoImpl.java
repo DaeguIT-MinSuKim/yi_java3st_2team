@@ -156,7 +156,7 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public List<CardInfo> showCardInfoMonthly(String custname) throws SQLException {
 		List<CardInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and ,month(transdate) = month(now()) group by cardnum";
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and month(transdate) = month(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
@@ -171,7 +171,7 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public List<CardInfo> showCardInfoYearly(String custname) throws SQLException {
 		List<CardInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and ,year(transdate) = year(now()) group by cardnum";
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and year(transdate) = year(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
