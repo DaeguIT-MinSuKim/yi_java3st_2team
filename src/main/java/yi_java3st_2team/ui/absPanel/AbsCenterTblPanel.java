@@ -114,4 +114,9 @@ abstract public class AbsCenterTblPanel<T> extends JPanel {
 			return false;
 		}	
 	}
+	
+	public int getLastRowIndex() {
+		int lastIdx = table.getRowCount();
+		return lastIdx;
+	}
 }

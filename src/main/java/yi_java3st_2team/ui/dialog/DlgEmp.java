@@ -1,28 +1,12 @@
 package yi_java3st_2team.ui.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import yi_java3st_2team.dto.Department;
-import yi_java3st_2team.dto.Employee;
-
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,13 +15,25 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.BoxLayout;
-import java.awt.Dimension;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import yi_java3st_2team.dto.Department;
+import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 
 @SuppressWarnings("serial")
 public class DlgEmp extends JDialog implements ActionListener{
@@ -443,6 +439,23 @@ public class DlgEmp extends JDialog implements ActionListener{
 		
 	}
 
+	public JTextField getTfEmpCode() {
+		return tfEmpCode;
+	}
 
+	public void setTfEmpCode(JTextField tfEmpCode) {
+		this.tfEmpCode = tfEmpCode;
+	}
+
+	public void setEmpCode(String v, EmpCenterTblPanel empTblPanel) {
+		//마지막 숫자 
+		int lastIndex = empTblPanel.getLastIndex(); 
+		tfEmpCode.setText(v+ String.format("%03d", lastIndex));
+	}
+	
+	public void setComboDept(int deptno) {
+		this.cmbDept.setSelectedIndex(deptno);
+		
+	}
 	
 }

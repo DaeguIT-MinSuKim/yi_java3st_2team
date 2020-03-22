@@ -65,24 +65,67 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 			
 			
 
+			private String sDeptName;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//추가일때
+				selectedOne = pEmpSerch.getCmbSearchList().getSelectedItem();
+				sDeptName = pEmpSerch.getTfSearch().getText();
+				
 				
 				if(e.getActionCommand()=="추가") {
-				
-//					if(dlgEmp == null) {
-//					
-//					}
-					if(dlgEmp != null) {
-						dlgEmp.dispose();
+					
+					if(selectedOne.equals("부서") == false 
+							|| (selectedOne.equals("부서")&& sDeptName.equals("")) 
+//							|| (selectedOne.equals("부서")&& (sDeptName.equals("인사")==false))
+//							|| (selectedOne.equals("부서")&& (sDeptName.equals("고객")==false))
+							) {
+						if(dlgEmp != null) {
+							dlgEmp.dispose();
+						}
+
+						dlgEmp = new DlgEmp();
+						//부서 리스트 가져와서 콤보박스에 넣기 
+						dlgEmp.setCmbDeptList(service.showDeptList());
+						dlgEmp.setVisible(true);
+						dlgEmp.clearTf();
 					}
+					
+					  // 인사로 검색했을 경우
+					else if(selectedOne.equals("부서")) {
+						  if(sDeptName.equals("인사")) {
+							 // System.out.println("인사에서 검색했음 ");
+							  if(dlgEmp != null) {
+									dlgEmp.dispose();
+								}
+			        
+							dlgEmp = new DlgEmp();
+							
+							dlgEmp.setEmpCode("A",pEmpTblPanel);
+							//부서 리스트 가져와서 콤보박스에 넣기 
+							dlgEmp.setCmbDeptList(service.showDeptList());
+							//부서 인사로 선택하도록 하기
+							dlgEmp.setComboDept(0);
+							dlgEmp.setVisible(true);
 	
-					dlgEmp = new DlgEmp();
-					//부서 리스트 가져와서 콤보박스에 넣기 
-					dlgEmp.setCmbDeptList(service.showDeptList());
-					dlgEmp.setVisible(true);
-					dlgEmp.clearTf();
+					 
+					   }else if(sDeptName.equals("고객")) {
+						   if(dlgEmp != null) {
+								dlgEmp.dispose();
+							}
+			
+							dlgEmp = new DlgEmp();
+							dlgEmp.setEmpCode("B",pEmpTblPanel);
+							//부서 리스트 가져와서 콤보박스에 넣기 
+							dlgEmp.setCmbDeptList(service.showDeptList()); 
+							dlgEmp.setComboDept(1);
+							dlgEmp.setVisible(true);
+
+
+					   }
+					
+					}
 					//다이얼로그의 추가 취소 버튼 가져와서 액션리스너 달기
 			        dlgEmp.getBtnOk().addActionListener(myDlgActionListner);
 			        dlgEmp.getBtnCancel().addActionListener(myDlgActionListner);
