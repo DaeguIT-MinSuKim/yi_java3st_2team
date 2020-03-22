@@ -15,7 +15,6 @@ import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -62,7 +61,6 @@ import yi_java3st_2team.ui.panel.EmpBest;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
-import yi_java3st_2team.ui.panel.EmpStaticPanel;
 import yi_java3st_2team.ui.panel.EmpStatistic_CenterPanel;
 import yi_java3st_2team.ui.panel.EmpStatistic_WestPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
@@ -702,7 +700,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
-		pCenter = new EmpStaticPanel();
+		pCenter = new JPanel();
 	    contentPane.add(pCenter,BorderLayout.CENTER);	
 	    repaint();
         revalidate();
