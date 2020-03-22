@@ -26,7 +26,7 @@ public class PanelPieChart extends JFXPanel implements InitScene{
 		root.setAutoSizeChildren(true);
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(1000, 350);
+		pieChart.setPrefSize(800, 500);
 		pieChart.setData(getChartData());
 		pieChart.setTitle("일반 고객 대비 VIP 고객(%)");
 		pieChart.setLegendVisible(false);	// 범례 표시 유무

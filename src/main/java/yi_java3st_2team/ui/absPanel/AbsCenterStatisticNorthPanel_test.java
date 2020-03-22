@@ -33,7 +33,7 @@ abstract public class AbsCenterStatisticNorthPanel_test extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		panel.setBorder(new EmptyBorder(20, 50, 20, 120));
 		add(panel);
 		panel.setLayout(new GridLayout(0, 4, 20, 20));
 }
@@ -43,7 +43,9 @@ abstract public class AbsCenterStatisticNorthPanel_test extends JPanel {
 		buttons = new JButton[buttonNames.length];
 		for(int i=0; i<buttonNames.length; i++) {
 			buttons[i] = new JButton(buttonNames[i]);
-			buttons[i].setFont(new Font("굴림", Font.BOLD, 15));
+			buttons[i].setBackground(Color.GRAY);
+			buttons[i].setForeground(Color.WHITE);
+			buttons[i].setFont(new Font("돋움", Font.BOLD, 15));
 			panel.add(buttons[i]);
 		}
 	}

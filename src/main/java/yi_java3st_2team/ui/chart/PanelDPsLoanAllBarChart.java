@@ -12,6 +12,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.ui.service.BankBookService;
  
@@ -28,7 +29,7 @@ public class PanelDPsLoanAllBarChart extends JFXPanel  implements InitScene {
 
 	public Scene createScene() {
 		Group root = new Group();
-		Scene scene = new Scene(root, Color.ALICEBLUE);
+		Scene scene = new Scene(root, Color.WHITE);
 
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
 		CategoryAxis xAxis = new CategoryAxis();
@@ -39,7 +40,9 @@ public class PanelDPsLoanAllBarChart extends JFXPanel  implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("항목별 총 금액");
 		
-		barChart.setPrefSize(1000, 400);
+		barChart.setPrefSize(1000, 500);
+		System.out.println(barChart.getOpaqueInsets());
+		
 		//barChart.getData().add(getBarChartData());
 		barChart.setData(getChartData());
 		root.getChildren().add(barChart);

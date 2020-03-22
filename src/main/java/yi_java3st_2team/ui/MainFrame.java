@@ -148,6 +148,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private CardTransInfoWestMenuPanel transInfo_west_card;
 	private CardTransInfoNorthPanel transInfo_north_card;
 	private PanelBarChartBankBookDeposit bankBook_barChard_Deposit;
+	private JPanel pcSouth;
+	
 	public MainFrame() {
 		initialize();
 	}
@@ -702,6 +704,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
+
+	
 	    contentPane.add(pCenter,BorderLayout.CENTER);	
 	    repaint();
         revalidate();
@@ -879,38 +883,39 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "예/적금건수(월별)":
 					pCenter.removeAll();
 					statistic_north_DepositSaving = new CustStatistic_NorthPanel_DepositSaving();
-					cust_statistic_center = new CustStatistic_CenterPanel();
-					
-					
-					cust_statistic_center.setBackground(Color.white);
+					//cust_statistic_center = new CustStatistic_CenterPanel();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					JButton[] buttons_DepositSaving = statistic_north_DepositSaving.getBtns();
 					for(JButton btn : buttons_DepositSaving) {
 						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_DepositSaving,BorderLayout.NORTH);
-					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.repaint();
 					pCenter.revalidate();
 					 break;
 				case "입/출금 건수(월별)":
 					pCenter.removeAll();
 					statistic_north_DPWD = new CustStatistic_NorthPanel_DPWD();
-					cust_statistic_center = new CustStatistic_CenterPanel();
-					cust_statistic_center.setBackground(Color.white);
+					//cust_statistic_center = new CustStatistic_CenterPanel();
+					//cust_statistic_center.setBackground(Color.white);
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					JButton[] buttons_DPWD = statistic_north_DPWD.getBtns();
 					for(JButton btn : buttons_DPWD) {
 						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_DPWD,BorderLayout.NORTH);
-					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.repaint();
 					pCenter.revalidate();
 					break;
 				case "예금/적금/대출 총 금액":
 					pCenter.removeAll();
 					//statistic_north_DepositSaving = new CustStatistic_NorthPanel_DepositSaving();
-					cust_statistic_center = new CustStatistic_CenterPanel();
-					cust_statistic_center.setBackground(Color.white);
+					//cust_statistic_center = new CustStatistic_CenterPanel();
+					//cust_statistic_center.setBackground(Color.white);
 					//pCenter.add(statistic_north_DepositSaving,BorderLayout.NORTH);
 					pCenter.add(panel_chart_DPsLoan,BorderLayout.CENTER);
 					pCenter.repaint();
@@ -919,17 +924,26 @@ public class MainFrame extends JFrame implements ActionListener {
 				case "일반고객/VIP고객":
 					pCenter.removeAll();
 					statistic_north_CustNum = new CustStatistic_NorthPanel_CustNum();
-					cust_statistic_center = new CustStatistic_CenterPanel();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
+					pcSouth = new JPanel();
+					pcSouth.setBackground(Color.white);
+					pcSouth.setLayout(new BorderLayout());
+					//총 고객숫자 아래에 여백을 위한 패널
+					JPanel pcNull = new JPanel();
+					pcNull.setBackground(Color.white);
 					statistic_CustNumAll = new PanelCustNumAll();
 					statistic_CustNumAll.setBackground(new Color(255,255,255));
-					cust_statistic_center.setBackground(Color.white);
+					pcCenter.setBackground(Color.white);
+					pcSouth.add(statistic_CustNumAll, BorderLayout.CENTER);
+					pcSouth.add(pcNull, BorderLayout.SOUTH);
 					JButton[] buttons_CustNum = statistic_north_CustNum.getBtns();
 					for(JButton btn : buttons_CustNum) {
 						btn.addActionListener(northCustBtnListener);
 					}
 					pCenter.add(statistic_north_CustNum,BorderLayout.NORTH);
-					pCenter.add(cust_statistic_center,BorderLayout.CENTER);
-					pCenter.add(statistic_CustNumAll, BorderLayout.SOUTH);
+					pCenter.add(pcCenter,BorderLayout.CENTER);
+					pCenter.add(pcSouth, BorderLayout.SOUTH);
 					pCenter.repaint();
 					pCenter.revalidate();
 					break;
@@ -1157,36 +1171,36 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("예금")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(panel_chart_Deposit,BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(panel_chart_Deposit,BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}
 				else if(e.getActionCommand().equals("적금")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(panel_chart_Saving,BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(panel_chart_Saving,BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}else if(e.getActionCommand().equals("입금")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(penal_chart_DPnum, BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(penal_chart_DPnum, BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}else if(e.getActionCommand().equals("출금")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(panel_chartWDnum, BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(panel_chartWDnum, BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}else if(e.getActionCommand().equals("등급별 고객수")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(panel_chart_custRankNum, BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(panel_chart_custRankNum, BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}else if(e.getActionCommand().equals("VIP 고객 비율")) {
-					cust_statistic_center.removeAll();
-					cust_statistic_center.add(panel_chart_custVIP, BorderLayout.CENTER);
-					cust_statistic_center.repaint();
-					cust_statistic_center.revalidate();
+					pcCenter.removeAll();
+					pcCenter.add(panel_chart_custVIP, BorderLayout.CENTER);
+					pcCenter.repaint();
+					pcCenter.revalidate();
 				}
 			}
 		};
