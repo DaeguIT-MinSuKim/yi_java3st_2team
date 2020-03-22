@@ -27,7 +27,7 @@ public class TerminationInfoTblPanel extends AbsCenterTblPanel<AccountInfo> {
 	}
 	@Override
 	protected Object[] toArray(AccountInfo item) {
-		return new Object[] {item.getCustname(),item.getAccountnum(),item.getTransDate()};
+		return new Object[] {item.getCustname(),item.getWorkNum(),item.getTransDate()};
 	}
 	@Override
 	protected void updateRow(AccountInfo item, int updateIdx) {

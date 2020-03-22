@@ -118,15 +118,15 @@ public class CardDaoImpl implements CardDao {
 		}
 		return res;
 	}
-	private Info getCard(ResultSet rs) throws SQLException {
+	private CardInfo getCard(ResultSet rs) throws SQLException {
 		String custname = rs.getString("custname");
 		int transCount = rs.getInt("count");
-		return new Info(custname, transCount);
+		return new CardInfo(custname, transCount);
 	}
 	@Override
 	public Info showCardInfoDaily(String custname) throws SQLException {
-		Info info = new Info();
-		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and date(transdate) = date(now())";
+		CardInfo info = new CardInfo();
+		String sql = "sselect custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and date(transdate) = date(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);

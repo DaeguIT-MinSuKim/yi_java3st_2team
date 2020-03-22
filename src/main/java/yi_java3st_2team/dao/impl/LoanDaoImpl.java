@@ -12,7 +12,6 @@ import java.util.List;
 import yi_java3st_2team.dao.LoanDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Customer;
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.LoanInfo;
 import yi_java3st_2team.dto.Plan;

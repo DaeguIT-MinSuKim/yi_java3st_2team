@@ -14,7 +14,6 @@ import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Plan;
 
 public class BankBookDaoImpl implements BankBookDao {
@@ -260,73 +259,74 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public Info showBankBookInfoDaily(String custname) throws SQLException {
-		Info info = new Info();
-		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and date(transdate) = date(now())";
+	public List<AccountInfo> showBankBookInfoDaily(String custname) throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and date(transdate) = date(now()) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					info = getBankBookInfo(rs);
+					list.add(getBankBookInfo(rs));
 				}
 			}
 		}
-		return info;
+		return list;
 	}
 
-	private Info getBankBookInfo(ResultSet rs) throws SQLException {
-		String custname = rs.getString("custname");
-		int transCount = rs.getInt("count");
-		return new Info(custname, transCount);
-	}
-
-	@Override
-	public Info showBankBookInfoWeekly(String custname) throws SQLException {
-		Info info = new Info();
-		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and week(transDate) = week(now())";
-		try(Connection con = LocalDataSource.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, custname);
-			try(ResultSet rs = pstmt.executeQuery()) {
-				while(rs.next()) {
-					info = getBankBookInfo(rs);
-				}
-			}
-		}
-		return info;
+	private AccountInfo getBankBookInfo(ResultSet rs) throws SQLException {
+		String custName = rs.getString("custname");
+		String div = rs.getString("div");
+		int count = rs.getInt("count");
+		return new AccountInfo(custName, div, count);
 	}
 
 	@Override
-	public Info showBankBookInfoMonthly(String custname) throws SQLException {
-		Info info = new Info();
-		String sql = "select custname,count(transDate) as 'count' from bankbookinfo where custname = ? and month(transDate) = month(now())";
+	public List<AccountInfo> showBankBookInfoWeekly(String custname) throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname= ? and week(transdate,1) = week(now(),1) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					info = getBankBookInfo(rs);
+					list.add(getBankBookInfo(rs));
 				}
 			}
 		}
-		return info;
+		return list;
 	}
 
 	@Override
-	public Info showBankBookInfoYearly(String custname) throws SQLException {
-		Info info = new Info();
-		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and year(transDate) = year(now())";
+	public List<AccountInfo> showBankBookInfoMonthly(String custname) throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and month(transdate) = month(now()) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					info = getBankBookInfo(rs);
+					list.add(getBankBookInfo(rs));
 				}
 			}
 		}
-		return info;
+		return list;
+	}
+
+	@Override
+	public List<AccountInfo> showBankBookInfoYearly(String custname) throws SQLException {
+		List<AccountInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and year(transdate) = year(now()) group by accountnum";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, custname);
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getBankBookInfo(rs));
+				}
+			}
+		}
+		return list;
 	}
 
 	@Override

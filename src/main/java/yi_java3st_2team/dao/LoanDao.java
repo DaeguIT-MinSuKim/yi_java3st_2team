@@ -3,7 +3,6 @@ package yi_java3st_2team.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.LoanInfo;
 
