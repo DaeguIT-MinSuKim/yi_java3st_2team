@@ -1,5 +1,5 @@
 use bank;
-
+-- pic추가할것
 #insert문
 insert into department values
 (1,'인사'),
