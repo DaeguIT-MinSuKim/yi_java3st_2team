@@ -180,7 +180,7 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 					if(selectedOne.equals("사원이름")) {
 					  //list.add(service.showPickedEmp(empItem));
 					  list = service.showPickedEmpList(empItem);
-				    }else if(selectedOne.equals("부서")) {
+				    }else if(selectedOne.equals("부서 (인사  or 고객)")) {
 				      list = service.showPickedEmpByDept(empItem);
 				    }else if(selectedOne.equals("사원번호")) {
 				      list = service.showPickedEmpByEmpNo(empItem);

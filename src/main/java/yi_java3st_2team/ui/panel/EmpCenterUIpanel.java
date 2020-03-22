@@ -71,13 +71,13 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				//추가일때
 				selectedOne = pEmpSerch.getCmbSearchList().getSelectedItem();
-				sDeptName = pEmpSerch.getTfSearch().getText();
+				sDeptName = pEmpSerch.getTfSearch().getText().trim();
 				
 				
 				if(e.getActionCommand()=="추가") {
 					
-					if(selectedOne.equals("부서") == false 
-							|| (selectedOne.equals("부서")&& sDeptName.equals("")) 
+					if(selectedOne.equals("부서 (인사  or 고객)") == false 
+							|| (selectedOne.equals("부서 (인사  or 고객)")&& sDeptName.equals("")) 
 //							|| (selectedOne.equals("부서")&& (sDeptName.equals("인사")==false))
 //							|| (selectedOne.equals("부서")&& (sDeptName.equals("고객")==false))
 							) {
@@ -93,7 +93,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					}
 					
 					  // 인사로 검색했을 경우
-					else if(selectedOne.equals("부서")) {
+					else if(selectedOne.equals("부서 (인사  or 고객)")) {
 						  if(sDeptName.equals("인사")) {
 							 // System.out.println("인사에서 검색했음 ");
 							  if(dlgEmp != null) {
@@ -227,12 +227,16 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					    	service.addEmp(addEmp);
 					           //  JOptionPane.showMessageDialog(null, "추가되었습니다");
 								
+					    	   pEmpSerch.getCmbSearchList().setSelectedIndex(0);
+							   pEmpSerch.getTfSearch().setText("");
 								//리스트 다시 불러오기 
 								pEmpTblPanel.loadTableData(service.showEmpList());
 								//창 닫기
 								
-								JOptionPane.showMessageDialog(null, "추가되었습니다");
+								JOptionPane.showMessageDialog(null,addEmp.getEmpName()+"님이 사원리스트에 추가되었습니다");
 								dlgEmp.setVisible(false);
+								
+								
 								
 					    }catch(Exception e4){
 					    	//System.out.println(e4.getMessage() + "는 이것 "); //For input string: ""는 이것 
@@ -347,7 +351,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 			if(selectedOne.equals("사원이름")) {
 			  //list.add(service.showPickedEmp(empItem));
 			  list = service.showPickedEmpList(empItem);
-		    }else if(selectedOne.equals("부서")) {
+		    }else if(selectedOne.equals("부서 (인사  or 고객)")) {
 		      list = service.showPickedEmpByDept(empItem);
 		    }else if(selectedOne.equals("사원번호")) {
 		      list = service.showPickedEmpByEmpNo(empItem);
