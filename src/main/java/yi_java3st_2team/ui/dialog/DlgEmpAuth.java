@@ -63,14 +63,14 @@ public class DlgEmpAuth extends JDialog {
 		initialize();
 	}
 	private void initialize() {
-		setBounds(100, 100, 393, 236);
+		setBounds(100, 100, 366, 265);
 		BorderLayout borderLayout = new BorderLayout();
 		borderLayout.setVgap(20);
 		borderLayout.setHgap(20);
 		getContentPane().setLayout(borderLayout);
 		{
 			panel = new JPanel();
-			getContentPane().add(panel, BorderLayout.NORTH);
+			getContentPane().add(panel, BorderLayout.CENTER);
 		}
 		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		{
