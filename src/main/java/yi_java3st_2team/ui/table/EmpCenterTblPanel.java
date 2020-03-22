@@ -98,6 +98,12 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 		return emp;
 	}
 	
+	public int getLastIndex() {
+		int lastIdx = getLastRowIndex();
+		return lastIdx+1;
+//		int num =(int) model.getValueAt(lastIdx-1, 0) ;  //테이블 인덱스가 0 부터 시작해서 
+//		return num+1;
+	}
 	
 
 }
