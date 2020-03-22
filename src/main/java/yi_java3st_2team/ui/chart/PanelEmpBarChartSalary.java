@@ -34,7 +34,7 @@ public class PanelEmpBarChartSalary extends JFXPanel  implements InitScene {
 
 	public Scene createScene() {
 		Group root = new Group();
-		Scene scene = new Scene(root, Color.ALICEBLUE);
+		Scene scene = new Scene(root, Color.WHITE);
 		totalnum = service.countAllEmpNum();
 		numOfHR = service.countMemberByDepartment(1);			
 		numOfCS = service.countMemberByDepartment(2);
