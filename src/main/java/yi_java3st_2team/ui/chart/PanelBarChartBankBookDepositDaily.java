@@ -78,31 +78,6 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for(AccountInfo info : list1) {
-			if(info.getDiv().equals("예금")) {
-				
-			}
-		}
-		for(AccountInfo info : list2) {
-			if(info.getDiv().equals("예금")) {
-				
-			}
-		}
-		for(AccountInfo info : list3) {
-			if(info.getDiv().equals("예금")) {
-				
-			}
-		}
-		for(AccountInfo info : list4) {
-			if(info.getDiv().equals("예금")) {
-				
-			}
-		}
-		for(AccountInfo info : list5) {
-			if(info.getDiv().equals("예금")) {
-				
-			}
-		}
 		list.add(getChartData(accountInfo1));
 		list.add(getChartData(accountInfo2));
 		list.add(getChartData(accountInfo3));
