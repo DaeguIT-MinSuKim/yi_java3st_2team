@@ -16,9 +16,9 @@ public interface CardDao {
 	public abstract int insertCard(Card card) throws SQLException;
 	public abstract int updateCard(Card card) throws SQLException;
 	public abstract int deleteCard(Card card) throws SQLException;
-	public abstract AccountInfo showCardInfoDaily(String custname) throws SQLException;
-	public abstract AccountInfo showCardInfoWeekly(String custname) throws SQLException;
-	public abstract AccountInfo showCardInfoMonthly(String custname) throws SQLException;
-	public abstract AccountInfo showCardInfoYearly(String custname) throws SQLException;
+	public abstract List<CardInfo> showCardInfoDaily(String custname) throws SQLException;
+	public abstract List<CardInfo> showCardInfoWeekly(String custname) throws SQLException;
+	public abstract List<CardInfo> showCardInfoMonthly(String custname) throws SQLException;
+	public abstract List<CardInfo> showCardInfoYearly(String custname) throws SQLException;
 	public abstract List<CardInfo> showCardInfo() throws SQLException;
 }

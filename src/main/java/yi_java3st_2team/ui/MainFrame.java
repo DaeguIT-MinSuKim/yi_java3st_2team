@@ -140,9 +140,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private PanelCustNumAll statistic_CustNumAll;
 	private EmpBest pBestEmp;
 	private EmpStatistic_CenterPanel emp_statistic_center;
-	private PanelEmpPieChartForCountEmp panelEmpPieChartForCountEmp;
-	private PanelEmpBarChartBonus panelEmpBarChartBonus;
-	private PanelEmpBarChartSalary panelEmpBarChartSalary;
 	
 	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;

@@ -13,7 +13,6 @@ import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.CardInfo;
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -120,68 +119,69 @@ public class CardDaoImpl implements CardDao {
 	}
 	private CardInfo getCard(ResultSet rs) throws SQLException {
 		String custname = rs.getString("custname");
-		int transCount = rs.getInt("count");
-		return new CardInfo(custname, transCount);
+		String div = rs.getString("div");
+		int count = rs.getInt("count");
+		return new CardInfo(custname, div, count);
 	}
 	@Override
-	public Info showCardInfoDaily(String custname) throws SQLException {
-		CardInfo info = new CardInfo();
-		String sql = "sselect custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and date(transdate) = date(now()) group by cardnum";
+	public List<CardInfo> showCardInfoDaily(String custname) throws SQLException {
+		List<CardInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and date(transdate) = date(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					info = getCard(rs);
+					list.add(getCard(rs));
 				}
 			}
 		}
-		return info;
+		return list;
 	}
 	@Override
-	public Info showCardInfoWeekly(String custname) throws SQLException {
-		Info cardInfo = new Info();
-		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and week(transDate) = week(now())";
+	public List<CardInfo> showCardInfoWeekly(String custname) throws SQLException {
+		List<CardInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and week(transdate,1) = week(now(),1) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					cardInfo = getCard(rs);
+					list.add(getCard(rs));
 				}
 			}
 		}
-		return cardInfo;
+		return list;
 	}
 	@Override
-	public Info showCardInfoMonthly(String custname) throws SQLException {
-		Info cardInfo = new Info();
-		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and month(transDate) = month(now())";
+	public List<CardInfo> showCardInfoMonthly(String custname) throws SQLException {
+		List<CardInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and ,month(transdate) = month(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					cardInfo = getCard(rs);
+					list.add(getCard(rs));
 				}
 			}
 		}
-		return cardInfo;
+		return list;
 	}
 	@Override
-	public Info showCardInfoYearly(String custname) throws SQLException {
-		Info cardInfo = new Info();
-		String sql = "select custname,count(transDate) as 'count' from cardinfo where custname = ? and year(transDate) = year(now())";
+	public List<CardInfo> showCardInfoYearly(String custname) throws SQLException {
+		List<CardInfo> list = new ArrayList<>();
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = ? and ,year(transdate) = year(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
-					cardInfo = getCard(rs);
+					list.add(getCard(rs));
 				}
 			}
 		}
-		return cardInfo;
+		return list;
 	}
 	@Override
 	public List<CardInfo> showCardInfo() throws SQLException {
