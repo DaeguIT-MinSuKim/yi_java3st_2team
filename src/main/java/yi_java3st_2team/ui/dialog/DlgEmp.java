@@ -80,7 +80,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		getContentPane().setLayout(new BorderLayout());
 		{
 			panel = new JPanel();
-			getContentPane().add(panel, BorderLayout.NORTH);
+			getContentPane().add(panel, BorderLayout.CENTER);
 	
 		}
 		panel.setLayout(new BorderLayout(0, 0));
