@@ -293,8 +293,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(cust_statistic_west!=null) {
-					contentPane.remove(cust_statistic_west);
+				if(pWest!=null) {
+					contentPane.remove(pWest);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustInfoUIPanel();
@@ -310,17 +310,20 @@ public class MainFrame extends JFrame implements ActionListener {
 		mntmCustStatistic.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(cust_statistic_west!=null) {
-					contentPane.remove(cust_statistic_west);
+				if(pWest!=null) {
+					contentPane.remove(pWest);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				pCenter.setBackground(Color.WHITE);
 				cust_statistic_west = new CustStatistic_WestPanel();
+				pWest = new JPanel(new BorderLayout());
 				JPanel[] menuPanels = cust_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
 				}
-				contentPane.add(cust_statistic_west,BorderLayout.WEST);
+				pWest.add(cust_statistic_west, BorderLayout.WEST);
+				contentPane.add(pWest,BorderLayout.WEST);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				contentPane.repaint();
 				contentPane.revalidate();
@@ -336,8 +339,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(cust_statistic_west!=null) {
-					contentPane.remove(cust_statistic_west);
+				if(pWest!=null) {
+					contentPane.remove(pWest);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustPlanUIPanel();
@@ -356,8 +359,8 @@ public class MainFrame extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				greeting = lblGreeting.getText();
-				if(cust_statistic_west!=null) {
-					contentPane.remove(cust_statistic_west);
+				if(pWest!=null) {
+					contentPane.remove(pWest);
 				}
 				contentPane.remove(pCenter);
 				pCenter = new CustDWUIPanel();
