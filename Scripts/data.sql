@@ -213,7 +213,7 @@ delimiter ;
 drop trigger if exists tri_after_update_BankBook;
 delimiter $$
 create trigger tri_after_update_BankBook
-  	before update on BankBook
+  	after update on BankBook
    for each row 
    begin
 	  if(old.accountBalance < new.accountBalance) then

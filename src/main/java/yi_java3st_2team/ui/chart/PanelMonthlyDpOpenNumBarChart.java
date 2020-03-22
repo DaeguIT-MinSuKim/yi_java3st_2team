@@ -29,7 +29,7 @@ public class PanelMonthlyDpOpenNumBarChart extends JFXPanel implements InitScene
 	@Override
 	public Scene createScene() {
 		Group root = new Group();
-		Scene scene = new Scene(root, Color.ALICEBLUE);
+		Scene scene = new Scene(root, Color.WHITE);
 		root.setAutoSizeChildren(true);
 		
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
@@ -43,7 +43,7 @@ public class PanelMonthlyDpOpenNumBarChart extends JFXPanel implements InitScene
 		barChart.setTitle("월별 예금 건수");
 		barChart.setLegendVisible(false);
 		
-		barChart.setPrefSize(1000,500);
+		barChart.setPrefSize(800,500);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);
