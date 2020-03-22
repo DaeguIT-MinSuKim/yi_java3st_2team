@@ -5,6 +5,7 @@ import javax.swing.SwingConstants;
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
+import javax.swing.border.EmptyBorder;
 
 public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
@@ -13,6 +14,11 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
 	public EmpCenterTblPanel() {
 		
+		initialize();
+	}
+	private void initialize() {
+		getTable().setBorder(null);
+		setBorder(new EmptyBorder(10, 50, 10, 50));
 	}
 
 	@Override
