@@ -6,18 +6,7 @@ insert into department values
 (2,'고객');
 
 insert into employee values
-('A001','나인사','부장','HR',6000000,'010-2222-2222','HRid1',password('testforHD1'),1),
-('A002','정아름','차장','HR',5000000,'010-2222-2222','HRid2',password('testforHD1'),1),
-('A003','이상원','과장','HR',4000000,'010-2222-2222','HRid3',password('testforHD1'),1),
--- 고객팀
-('B001','나지점','지점장','AD',10000000,'010-1234-1234','ADid',password('testforAD'),2),
-('B002','장현서','부지점장','CS',8000000,'010-4444-7767','CSid1',password('testforCS1'),2),
-('B003','박인선','부장','CS',6000000,'010-2992-2222','CSid2',password('testforCS2'),2),
-('B004','황하나','차장','CS',5000000,'010-2222-1111','CSid3',password('testforCS3'),2),
-('B005','현재승','과장','CS',4000000,'010-2282-4848','CSid4',password('testforCS4'),2),
-('B006','황태원','대리','CS',3000000,'010-2902-5959','CSid5',password('testforCS5'),2),
-('B007','나고객','사원','CS',2000000,'010-2212-7766','CSid6',password('testforCS6'),2);
-insert into employee values ('B008','테스트','지점장','AD',10000000,'010-1234-1234','111',password('111'),2);
+
 
 insert into customer values("C001", "김가나", "D", 1, "서울시 강남구", "123-1234-1234");
 insert into customer values("C002", "김다라", "P", 2, "서울시 마포구", "234-4578-5434"),
