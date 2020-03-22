@@ -17,7 +17,7 @@ public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 	}
 	private void initialize() {
 		getTable().setBorder(null);
-		setBorder(new EmptyBorder(10, 50, 10, 50));
+		setBorder(new EmptyBorder(10, 50, 30, 50));
 	}
 
 	@Override
