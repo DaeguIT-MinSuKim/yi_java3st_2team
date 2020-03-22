@@ -11,6 +11,12 @@ public class AccountInfo {
 	public AccountInfo() {
 		
 	}
+	
+	public AccountInfo(String custName, int count) {
+		this.custName = custName;
+		this.count = count;
+	}
+
 	public AccountInfo(String custName, String div, int count) {
 		this.custName = custName;
 		this.div = div;
@@ -51,6 +57,12 @@ public class AccountInfo {
 	}
 	public void setTransDate(Date transDate) {
 		this.transDate = transDate;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("AccountInfo [custName=%s, div=%s, count=%s, accountNum=%s, transDate=%s]", custName, div,
+				count, accountNum, transDate);
 	}
 	
 }

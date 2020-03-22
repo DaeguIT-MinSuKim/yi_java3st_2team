@@ -1,6 +1,5 @@
 package yi_java3st_2team.ui.table;
 
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import yi_java3st_2team.dto.AccountInfo;
@@ -27,7 +26,7 @@ public class TerminationInfoTblPanel extends AbsCenterTblPanel<AccountInfo> {
 	}
 	@Override
 	protected Object[] toArray(AccountInfo item) {
-		return new Object[] {item.getCustname(),item.getWorkNum(),item.getTransDate()};
+		return new Object[] {item.getCustName(),item.getAccountNum(),item.getTransDate()};
 	}
 	@Override
 	protected void updateRow(AccountInfo item, int updateIdx) {

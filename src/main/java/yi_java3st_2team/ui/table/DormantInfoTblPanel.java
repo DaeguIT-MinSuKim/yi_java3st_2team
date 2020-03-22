@@ -27,7 +27,7 @@ public class DormantInfoTblPanel extends AbsCenterTblPanel<AccountInfo> {
 	}
 	@Override
 	protected Object[] toArray(AccountInfo item) {
-		return new Object[] {item.getCustname(),item.getWorkNum(),item.getTransDate()};
+		return new Object[] {item.getCustName(),item.getAccountNum(),item.getTransDate()};
 	}
 	@Override
 	protected void updateRow(AccountInfo item, int updateIdx) {

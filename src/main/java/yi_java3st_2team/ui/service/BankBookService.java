@@ -12,7 +12,6 @@ import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Plan;
 
 public class BankBookService {
@@ -86,16 +85,16 @@ public class BankBookService {
 	public List<String> showWithdrawalMonth() throws SQLException{
 		return bankBookDao.showWithDrawalMonth();
 	}
-	public Info bankBookInfoDaily(String custname) throws SQLException {
+	public List<AccountInfo> bankBookInfoDaily(String custname) throws SQLException {
 		return bankBookDao.showBankBookInfoDaily(custname);
 	}
-	public Info bankBookInfoWeekly(String custname) throws SQLException {
+	public List<AccountInfo> bankBookInfoWeekly(String custname) throws SQLException {
 		return bankBookDao.showBankBookInfoWeekly(custname);
 	}
-	public Info bankBookInfoMonthly(String custname) throws SQLException {
+	public List<AccountInfo> bankBookInfoMonthly(String custname) throws SQLException {
 		return bankBookDao.showBankBookInfoMonthly(custname);
 	}
-	public Info bankBookInfoYearly(String custname) throws SQLException {
+	public List<AccountInfo> bankBookInfoYearly(String custname) throws SQLException {
 		return bankBookDao.showBankBookInfoYearly(custname);
 	}
 	public List<AccountInfo> showDormantAccountInfo() throws SQLException {

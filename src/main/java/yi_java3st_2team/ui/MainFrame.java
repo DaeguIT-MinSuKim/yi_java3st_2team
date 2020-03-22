@@ -32,7 +32,7 @@ import javafx.scene.Scene;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.chart.PanelBarChart;
-import yi_java3st_2team.ui.chart.PanelBarChartBankBookDeposit;
+import yi_java3st_2team.ui.chart.PanelBarChartBankBookDepositDaily;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
 import yi_java3st_2team.ui.chart.PanelEmpBarChartBonus;
@@ -147,7 +147,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
 	private CardTransInfoWestMenuPanel transInfo_west_card;
 	private CardTransInfoNorthPanel transInfo_north_card;
-	private PanelBarChartBankBookDeposit bankBook_barChard_Deposit;
+	private PanelBarChartBankBookDepositDaily bankBook_barChard_Deposit_Daily;
 	public MainFrame() {
 		initialize();
 	}
@@ -1031,7 +1031,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				panel_chart_DPsLoan = new PanelDPsLoanAllBarChart();
 				panel_chart_custRankNum = new PanelBarChart();
 				panel_chart_custVIP = new PanelPieChart();
-				bankBook_barChard_Deposit = new PanelBarChartBankBookDeposit();
+				bankBook_barChard_Deposit_Daily = new PanelBarChartBankBookDepositDaily();
 				
 				Platform.runLater(() -> initFX((InitScene) panel_chart_Deposit));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_Saving));
@@ -1040,7 +1040,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				Platform.runLater(() -> initFX((InitScene) panel_chart_DPsLoan));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_custRankNum));
 				Platform.runLater(() -> initFX((InitScene) panel_chart_custVIP));
-				Platform.runLater(() -> initFX((InitScene) bankBook_barChard_Deposit));
+				Platform.runLater(() -> initFX((InitScene) bankBook_barChard_Deposit_Daily));
 			}
 		});
 		return thread;
@@ -1136,6 +1136,12 @@ public class MainFrame extends JFrame implements ActionListener {
 			private void divBankWorkDaily(String command) {
 				switch(command) {
 				case "예금":
+					pCenter.remove(pcCenter);
+					pcCenter = new JPanel(new BorderLayout());
+					pcCenter.add(bankBook_barChard_Deposit_Daily,BorderLayout.CENTER);
+					pCenter.add(pcCenter);
+					pCenter.repaint();
+					pCenter.revalidate();
 					break;
 				case "적금":
 					break;

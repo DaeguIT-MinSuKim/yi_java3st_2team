@@ -11,7 +11,6 @@ import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.CardInfo;
-import yi_java3st_2team.dto.Info;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -55,16 +54,16 @@ public class CardService {
 	public List<Plan> showPlansByCard() throws SQLException {
 		return planDao.selectPlanByCard();
 	}
-	public Info cardInfoDaily(String custname) throws SQLException {
+	public List<CardInfo> cardInfoDaily(String custname) throws SQLException {
 		return cardDao.showCardInfoDaily(custname);
 	}
-	public Info cardInfoWeekly(String custname) throws SQLException {
+	public List<CardInfo> cardInfoWeekly(String custname) throws SQLException {
 		return cardDao.showCardInfoWeekly(custname);
 	}
-	public Info cardInfoMonthly(String custname) throws SQLException {
+	public List<CardInfo> cardInfoMonthly(String custname) throws SQLException {
 		return cardDao.showCardInfoMonthly(custname);
 	}
-	public Info cardInfoYearly(String custname) throws SQLException {
+	public List<CardInfo> cardInfoYearly(String custname) throws SQLException {
 		return cardDao.showCardInfoYearly(custname);
 	}
 	public List<CardInfo> showCardInfo() throws SQLException {
