@@ -160,7 +160,7 @@ public class EmpBest extends JPanel {
 		lblRank2Title.setHorizontalAlignment(SwingConstants.CENTER);
 		pRank2.add(lblRank2Title);
 		
-		JLabel lblRank2Perf = new JLabel(list.get(0).getPerf()+"건");
+		JLabel lblRank2Perf = new JLabel(list.get(1).getPerf()+"건");
 		lblRank2Perf.setHorizontalAlignment(SwingConstants.CENTER);
 		pRank2.add(lblRank2Perf);
 		
