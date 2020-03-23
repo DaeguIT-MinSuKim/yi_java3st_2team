@@ -69,7 +69,8 @@ public class CustDWUIPanel extends JPanel {
 		
 		panel_1 = new CustDWCenterCenterTblPanel();
 		try {
-			panel_1.loadTableData(custService.showCustomersByBalance());
+			List<Customer> list = custService.showCustomersByBalance();
+			panel_1.loadTableData(list);
 			panel_1.setPopupMenu(createPopup());
 		} catch (SQLException e) {
 			System.out.println("해당 고객이 없습니다.");

@@ -224,7 +224,7 @@ public class BankBookDaoImpl implements BankBookDao {
 
 	@Override
 	public List<String> showDepositMonth() throws SQLException {
-		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw =?";
+		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountTransDate, '-', 2), '-', -1) from cust_dw_audit where dw =?";
 		List<String> list = null;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -243,7 +243,7 @@ public class BankBookDaoImpl implements BankBookDao {
 	
 	@Override
 	public List<String> showWithDrawalMonth() throws SQLException {
-		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountDate, '-', 2), '-', -1) from cust_dw_audit where dw =?";
+		String sql = "select  SUBSTRING_INDEX(SUBSTRING_INDEX(accountTransDate, '-', 2), '-', -1) from cust_dw_audit where dw =?";
 		List<String> list = null;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
