@@ -1,7 +1,9 @@
 package yi_java3st_2team.ui.table;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
@@ -13,7 +15,7 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 	 * Create the panel.
 	 */
 	public CustDWCenterCenterTblPanel() {
-
+		setBorder(new EmptyBorder(10, 50, 30, 50));
 	}
 
 	@Override
@@ -57,7 +59,14 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	public Customer getSelectedItem() {
-		int selectedIdx = getSelectedRowIdx();
+		int selectedIdx=-1;
+		//AbsCenterTblPanel 추상 패널에서 테이블에 선택된 index가 없을 경우 던지게 되는 RuntimeException을 받아서 에러 처리
+		//null을 리턴하면 DWUI패널에서 받아서 선택된 고객이 없다고 알려줌 
+		try {
+			selectedIdx = getSelectedRowIdx();
+		}catch(RuntimeException e) {
+			return null;
+		}
 		if(selectedIdx==-1) {
 			return null;
 		}else {
