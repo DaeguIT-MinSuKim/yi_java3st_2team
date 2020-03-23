@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.Provider.Service;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -52,6 +53,8 @@ import yi_java3st_2team.ui.chart.PanelBarChartCardCreditDaily;
 import yi_java3st_2team.ui.chart.PanelBarChartCardCreditMonthly;
 import yi_java3st_2team.ui.chart.PanelBarChartCardCreditWeekly;
 import yi_java3st_2team.ui.chart.PanelBarChartCardCreditYearly;
+import yi_java3st_2team.ui.chart.PanelBarChartCardStatisticInfo;
+import yi_java3st_2team.ui.chart.PanelBarChartLoanStatisticInfo;
 import yi_java3st_2team.ui.chart.PanelCustNumAll;
 import yi_java3st_2team.ui.chart.PanelDPsLoanAllBarChart;
 import yi_java3st_2team.ui.chart.PanelEmpBarChartBonus;
@@ -63,9 +66,11 @@ import yi_java3st_2team.ui.chart.PanelMonthlySvOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelMonthlyWithDrawalOpenNumBarChart;
 import yi_java3st_2team.ui.chart.PanelPieChart;
 import yi_java3st_2team.ui.panel.BankBookCenterUIPanel;
+import yi_java3st_2team.ui.panel.BankBookStatisticWestPanel;
 import yi_java3st_2team.ui.panel.BankBookTransInfoNorthPanel;
 import yi_java3st_2team.ui.panel.BankBookTransInfoWestMenuPanel;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
+import yi_java3st_2team.ui.panel.CardStatisticWestPanel;
 import yi_java3st_2team.ui.panel.CardTransInfoNorthPanel;
 import yi_java3st_2team.ui.panel.CardTransInfoWestMenuPanel;
 import yi_java3st_2team.ui.panel.CustDWUIPanel;
@@ -81,8 +86,11 @@ import yi_java3st_2team.ui.panel.EmpCenterUIpanel2Work;
 import yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth;
 import yi_java3st_2team.ui.panel.EmpStatistic_WestPanel;
 import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
+import yi_java3st_2team.ui.panel.LoanStatisticWestPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
+import yi_java3st_2team.ui.table.DormantInfoTblPanel;
+import yi_java3st_2team.ui.table.TerminationInfoTblPanel;
 
 
 @SuppressWarnings("serial")
@@ -166,10 +174,13 @@ public class MainFrame extends JFrame implements ActionListener {
 	private PanelEmpPieChartForCountEmp panelEmpPieChartForCountEmp;
 	private PanelEmpBarChartBonus panelEmpBarChartBonus;
 	private PanelEmpBarChartSalary panelEmpBarChartSalary;
-	private BankBookTransInfoWestMenuPanel bankbook_statistic_west;
+	private BankBookTransInfoWestMenuPanel bankbook_transInfo_west;
+	private BankBookStatisticWestPanel bankbook_info_west;
 	private BankBookTransInfoNorthPanel transInfo_north_bankbook;
 	private CardTransInfoWestMenuPanel transInfo_west_card;
+	private CardStatisticWestPanel statistic_west_card;
 	private CardTransInfoNorthPanel transInfo_north_card;
+	private LoanStatisticWestPanel statistic_west_loan;
 	private PanelBarChartBankBookDepositDaily bankBook_barChart_Deposit_Daily;
 	private PanelBarChartBankBookDepositWeekly bankBook_barChart_Deposit_Weekly;
 	private PanelBarChartBankBookDepositMonthly bankBook_barChart_Deposit_Monthly;
@@ -190,6 +201,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	private PanelBarChartCardCreditWeekly card_barChart_credit_Weekly;
 	private PanelBarChartCardCreditMonthly card_barChart_credit_Monthly;
 	private PanelBarChartCardCreditYearly card_barChart_credit_Yearly;
+	private PanelBarChartCardStatisticInfo card_barChart_Statistic_Info;
+	private PanelBarChartLoanStatisticInfo loan_barChart_Statistic_Info;
 	private JPanel pcSouth;
 	
 	public MainFrame() {
@@ -773,7 +786,20 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
 		greeting = lblGreeting.getText();
-		contentPane.removeAll();
+		if(pWest!=null) {
+			contentPane.remove(pWest);
+		}
+		contentPane.remove(pCenter);
+		pCenter = new JPanel(new BorderLayout());
+		pWest = new JPanel(new BorderLayout());
+		pWest.setBackground(new Color(255,255,255));
+		statistic_west_card = new CardStatisticWestPanel();
+		JPanel[] panels = statistic_west_card.getPanels();
+		for(JPanel panel : panels) {
+			panel.addMouseListener(getMouseAdapter());
+		}
+		pWest.add(statistic_west_card,BorderLayout.CENTER);
+		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
@@ -813,12 +839,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		pCenter = new JPanel(new BorderLayout());
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
-		bankbook_statistic_west = new BankBookTransInfoWestMenuPanel();
-		JPanel[] panels = bankbook_statistic_west.getPanels();
+		bankbook_transInfo_west = new BankBookTransInfoWestMenuPanel();
+		JPanel[] panels = bankbook_transInfo_west.getPanels();
 		for(JPanel panel : panels) {
 			panel.addMouseListener(getMouseAdapter());
 		}
-		pWest.add(bankbook_statistic_west,BorderLayout.CENTER);
+		pWest.add(bankbook_transInfo_west,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -828,6 +854,16 @@ public class MainFrame extends JFrame implements ActionListener {
 			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
+		pCenter = new JPanel(new BorderLayout());
+		pWest = new JPanel(new BorderLayout());
+		pWest.setBackground(new Color(255,255,255));
+		bankbook_info_west = new BankBookStatisticWestPanel();
+		JPanel[] panels = bankbook_info_west.getPanels();
+		for(JPanel panel : panels) {
+			panel.addMouseListener(getMouseAdapter());
+		}
+		pWest.add(bankbook_info_west,BorderLayout.CENTER);
+		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
@@ -836,6 +872,16 @@ public class MainFrame extends JFrame implements ActionListener {
 			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
+		pCenter = new JPanel(new BorderLayout());
+		pWest = new JPanel(new BorderLayout());
+		pWest.setBackground(new Color(255,255,255));
+		statistic_west_loan = new LoanStatisticWestPanel();
+		JPanel[] panels = statistic_west_loan.getPanels();
+		for(JPanel panel : panels) {
+			panel.addMouseListener(getMouseAdapter());
+		}
+		pWest.add(statistic_west_loan,BorderLayout.CENTER);
+		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
@@ -996,7 +1042,27 @@ public class MainFrame extends JFrame implements ActionListener {
 					}
 					pCenter.add(transInfo_north_card,BorderLayout.NORTH);
 					break;
-				}
+				case "휴면 계좌 조회":
+					pCenter.removeAll();
+					DormantInfoTblPanel bankbook_dormant_info = new DormantInfoTblPanel();
+					bankbook_dormant_info.setBackground(new Color(255,255,255));
+					pCenter.add(bankbook_dormant_info,BorderLayout.CENTER);
+					break;
+				case "해지 계좌 조회":
+					pCenter.removeAll();
+					TerminationInfoTblPanel bankbook_termination_info = new TerminationInfoTblPanel();
+					bankbook_termination_info.setBackground(new Color(255,255,255));
+					pCenter.add(bankbook_termination_info,BorderLayout.CENTER);
+					break;
+				case "고객별 카드 보유 현황":
+					pCenter.removeAll();
+					pCenter.add(card_barChart_Statistic_Info,BorderLayout.CENTER);
+					break;
+				case "고객별 대출 현황":
+					pCenter.removeAll();
+					pCenter.add(loan_barChart_Statistic_Info,BorderLayout.CENTER);
+					break;
+				}	
 			}
 		};
 		return menuAdapter;
@@ -1056,6 +1122,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				card_barChart_credit_Weekly = new PanelBarChartCardCreditWeekly();
 				card_barChart_credit_Monthly = new PanelBarChartCardCreditMonthly();
 				card_barChart_credit_Yearly = new PanelBarChartCardCreditYearly();
+				card_barChart_Statistic_Info = new PanelBarChartCardStatisticInfo();
+				loan_barChart_Statistic_Info = new PanelBarChartLoanStatisticInfo();
 				
 				Platform.runLater(() -> initFX((InitScene) panelEmpPieChartForCountEmp));
 				Platform.runLater(() -> initFX((InitScene) panelEmpBarChartBonus));
@@ -1087,6 +1155,8 @@ public class MainFrame extends JFrame implements ActionListener {
 				Platform.runLater(() -> initFX((InitScene) card_barChart_credit_Weekly));
 				Platform.runLater(() -> initFX((InitScene) card_barChart_credit_Monthly));
 				Platform.runLater(() -> initFX((InitScene) card_barChart_credit_Yearly));
+				Platform.runLater(() -> initFX((InitScene) card_barChart_Statistic_Info));
+				Platform.runLater(() -> initFX((InitScene) loan_barChart_Statistic_Info));
 			}
 		});
 		return thread;

@@ -1,18 +1,33 @@
 package yi_java3st_2team.ui.table;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
+import yi_java3st_2team.ui.service.BankBookService;
 
 @SuppressWarnings({ "serial", "unused" })
 public class DormantInfoTblPanel extends AbsCenterTblPanel<AccountInfo> {
-	/**
-	 * Create the panel.
-	 */
+	private BankBookService service;
 	public DormantInfoTblPanel() {
-
+		service = new BankBookService();
+		try {
+			List<AccountInfo> list = service.showDormantAccountInfo();
+			if(list.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "해지 계좌가 존재하지 않습니다");
+			}
+			else {
+				loadTableData(list);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
