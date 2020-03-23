@@ -158,6 +158,92 @@ ALTER TABLE `bank`.`Performance`
 			`custCode`  -- 고객코드
 		);
 
+-- 퇴사사원
+CREATE TABLE `bank`.`deleted_employee` (
+	`empCode`  char(4)     NULL COMMENT '코드', -- 코드
+	`empName`  VARCHAR(5)  NULL COMMENT '이름', -- 이름
+	`empTitle` VARCHAR(10) NULL COMMENT '직책', -- 직책
+	`empTel`   char(13)    NULL COMMENT '연락처', -- 연락처
+	`deptNo`   INTEGER     NULL COMMENT '부서번호' -- 부서번호
+)
+COMMENT '퇴사사원';
+
+-- 고객입출금
+CREATE TABLE `bank`.`cust_DW_audit` (
+	`dw`               varchar(5) NULL COMMENT '입출금', -- 입출금
+	`custname`         VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`accountnum`       char(16)   NULL COMMENT '통장계좌번호', -- 통장계좌번호
+	`amount`           int(20)    NULL COMMENT '거래금액', -- 거래금액
+	`accountbalance`   BIGINT     NULL COMMENT '통장잔액', -- 통장잔액
+	`accountTransDate` DATETIME   NULL COMMENT '거래일자' -- 거래일자
+)
+COMMENT '고객입출금';
+
+-- 통장정보
+CREATE TABLE `bank`.`bankbookinfo` (
+	`custname`   VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`accountnum` char(16)   NULL COMMENT '계좌번호', -- 계좌번호
+	`transdate`  DATETIME   NULL COMMENT '거래일자' -- 거래일자
+)
+COMMENT '통장정보';
+
+-- 휴면계좌
+CREATE TABLE `bank`.`changebankbookdormantinfo` (
+	`custname`   VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`accountnum` char(16)   NULL COMMENT '계좌번호', -- 계좌번호
+	`changedate` DATETIME   NULL COMMENT '전환일자' -- 전환일자
+)
+COMMENT '휴면계좌';
+
+-- 해지계좌
+CREATE TABLE `bank`.`changebankbookterminationnfo` (
+	`custname`   VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`accountnum` char(16)   NULL COMMENT '계좌번호', -- 계좌번호
+	`changedate` DATETIME   NULL COMMENT '전환일자' -- 전환일자
+)
+COMMENT '해지계좌';
+
+-- 카드정보
+CREATE TABLE `bank`.`cardinfo` (
+	`custname`  VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`cardnum`   char(16)   NULL COMMENT '카드번호', -- 카드번호
+	`transdate` DATETIME   NULL COMMENT '거래일자' -- 거래일자
+)
+COMMENT '카드정보';
+
+-- 카드정보2
+CREATE TABLE `bank`.`cardinfo2` (
+	`custname`  VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
+	`cardnum`   char(16)   NULL COMMENT '카드번호', -- 카드번호
+	`transdate` DATETIME   NULL COMMENT '거래일자' -- 거래일자
+)
+COMMENT '카드정보2';
+
+-- 새 테이블
+CREATE TABLE `bank`.`TABLE` (
+)
+COMMENT '새 테이블';
+
+-- 공지사항
+CREATE TABLE `bank`.`notice` (
+	`no`         INTEGER     NOT NULL COMMENT '번호', -- 번호
+	`subject`    varchar(30) NULL     COMMENT '제목', -- 제목
+	`writer`     VARCHAR(5)  NULL     COMMENT '작성자', -- 작성자
+	`write_date` DATETIME    NULL     COMMENT '작성일자', -- 작성일자
+	`content`    TEXT        NULL     COMMENT '내용' -- 내용
+)
+COMMENT '공지사항';
+
+-- 공지사항
+ALTER TABLE `bank`.`notice`
+	ADD CONSTRAINT `PK_notice` -- 공지사항 기본키
+		PRIMARY KEY (
+			`no` -- 번호
+		);
+
+ALTER TABLE `bank`.`notice`
+	MODIFY COLUMN `no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '번호';
+
 -- 통장
 ALTER TABLE `bank`.`BankBook`
 	ADD CONSTRAINT `FK_Customer_TO_BankBook` -- 고객 -> 통장
@@ -257,17 +343,3 @@ ALTER TABLE `bank`.`Performance`
 		REFERENCES `bank`.`Plan` ( -- 고객상품
 			`planCode` -- 상품코드
 		);
-/*
-grant all privileges on *.* to 'root'@'%' identified by 'bank';
-create user if not exists 'hana'@'192.168.10.%';
-grant all privileges on bank.* to 'hana'@'192.168.10.%' identified by 'bank';
-flush privileges;
-
-create user if not exists 'hyeonseo'@'192.168.10.%';
-grant all privileges on bank.* to 'hyeonseo'@'192.168.10.%' identified by 'bank';
-flush privileges;
-
-create user if not exists 'insun'@'192.168.10.%';
-grant all privileges on bank.* to 'insun'@'192.168.10.%' identified by 'bank';
-flush privileges;
-*/
