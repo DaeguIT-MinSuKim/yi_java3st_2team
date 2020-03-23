@@ -33,6 +33,7 @@ CREATE TABLE `bank`.`Employee` (
 	`empId`     varchar(12) NULL     COMMENT '사원아이디', -- 사원아이디
 	`empPwd`    varchar(41) NULL     COMMENT '사원비밀번호', -- 사원비밀번호
 	`deptNo`    INTEGER     NOT NULL COMMENT '부서번호' -- 부서번호
+	`pic`       longblob    null 
 )
 COMMENT '사원';
 
