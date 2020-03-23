@@ -126,7 +126,7 @@ insert into loan values
 ('293133-11-000013','C005','C001',"2020-02-05 09:00:00",0.05,100000000,null),
 ('293133-12-000014','C005','C002',"2020-02-05 09:00:00",0.06,100000000,null),
 ('293133-13-000015','C005','C003',"2020-02-05 09:00:00",0.32,100000000,null);
-
+ 
 insert into performance values
 ('A001','B003','C001'),
 ('A002','B004','C001'),('A002','B004','C002'),('A002','B004','C003'),('A002','B004','C004'),('A002','B004','C005'),
@@ -138,7 +138,9 @@ insert into performance values
 ('C002','B007','C001'),('C002','B007','C002'),('C002','B007','C003'),('C002','B007','C004'),('C002','B007','C005'),
 ('C003','B007','C001'),('C003','B007','C002'),('C003','B007','C003'),('C003','B007','C004'),('C003','B007','C005');
 
-
+update bankbook b join performance p on b.accountplancode = p.plancode and b.custcode = p.custcode set b.empcode = p.empcode;
+update card c join performance p on c.plancode = p.plancode and c.custcode = p.custcode set c.empcode = p.empcode;
+update loan l join performance p on l.loanplancode = p.plancode and l.custCode = p.custcode set l.empcode = p.empcode;
 
 #statistic table 생성
 drop view if exists vipTable;  
