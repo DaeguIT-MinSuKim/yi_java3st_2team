@@ -43,6 +43,7 @@ public class DlgCustPlan extends JDialog  {
 	private JComboBox cmbCustPlanDiv;
 	private JTextArea textAreaPlanDesc;
 	private JLabel lblSelectPlease;
+	private Boolean selectCheck = true; 
 	
 	/**
 	 * Launch the application.
@@ -110,6 +111,15 @@ public class DlgCustPlan extends JDialog  {
 	}
 	
 	
+	
+
+	public Boolean getSelectCheck() {
+		return selectCheck;
+	}
+
+	public void setSelectCheck(Boolean selectCheck) {
+		this.selectCheck = selectCheck;
+	}
 
 	public JLabel getLblSelectPlease() {
 		return lblSelectPlease;
@@ -168,9 +178,12 @@ public class DlgCustPlan extends JDialog  {
 				JPanel panel = new JPanel();
 				upperPanel.add(panel);
 				{
+					
 					lblSelectPlease = new JLabel("상품 세부코드를 선택하세요.");
 					lblSelectPlease.setForeground(new Color(128, 0, 0));
 					lblSelectPlease.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+					
+					
 					panel.add(lblSelectPlease);
 				}
 			}

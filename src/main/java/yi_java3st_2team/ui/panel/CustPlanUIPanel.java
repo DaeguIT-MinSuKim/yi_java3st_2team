@@ -234,6 +234,7 @@ public class CustPlanUIPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
+				dlgcustplan.getLblSelectPlease().setText("");
 				dlgcustplan.getTfCustPlanCode().setEditable(false);
 				dlgcustplan.getTfCustDetail().setEditable(false);
 				dlgcustplan.getCmbCustPlanDiv().setEnabled(false);
