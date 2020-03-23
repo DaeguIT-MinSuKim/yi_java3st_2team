@@ -33,6 +33,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
 import yi_java3st_2team.ui.table.EmpCenterTblPanel;
 
 @SuppressWarnings("serial")
@@ -48,8 +49,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 	private JTextField tfEmpId;
 	private JTextField tfEmpPwd;
 	private JComboBox<Department> cmbDept;
-	
-	//	
+	private Employee emp;
 	private static DlgEmp dialog;
 	private JButton btnOk;
 	private JButton btnCancel;
@@ -228,6 +228,14 @@ public class DlgEmp extends JDialog implements ActionListener{
 		btnPic.addActionListener(this);
 	}
 	
+	public Employee getEmp() {
+		return emp;
+	}
+
+	public void setEmp(Employee emp) {
+		this.emp = emp;
+	}
+
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
@@ -297,6 +305,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		String empPwd = tfEmpPwd.getText().trim();
 		icon = (ImageIcon)lblPic.getIcon();
 		byte[] pic = getImage(icon);
+		JOptionPane.showMessageDialog(null, pic.length);
 		//lblPic.setIcon(new ImageIcon(pic));
 		
         

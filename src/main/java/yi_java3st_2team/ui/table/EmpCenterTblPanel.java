@@ -1,5 +1,6 @@
 package yi_java3st_2team.ui.table;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import yi_java3st_2team.dto.Department;
@@ -9,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
-	private Employee employee;
 	//private Department dept; 
 
 	public EmpCenterTblPanel() {
@@ -20,7 +20,6 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 		getTable().setBorder(null);
 		setBorder(new EmptyBorder(10, 50, 30, 50));
 	}
-
 	@Override
 	protected void setTblWidthAlign() {
 		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5,6,7,8);
@@ -36,7 +35,6 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
 	@Override
 	public Object[] toArray(Employee item) {
-		employee = item;
 		return new Object[] {
 				item.getEmpCode(),
 				item.getEmpName(),
