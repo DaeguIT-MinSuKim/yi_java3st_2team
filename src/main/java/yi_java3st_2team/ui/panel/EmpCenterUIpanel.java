@@ -211,6 +211,13 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	public DlgEmp getDlgEmp() {
 		return dlgEmp;
 	}
+	public EmpCenterTblPanel getpEmpTblPanel() {
+		return pEmpTblPanel;
+	}
+	public void setpEmpTblPanel(EmpCenterTblPanel pEmpTblPanel) {
+		this.pEmpTblPanel = pEmpTblPanel;
+	}
+
 
 
 			//다이얼로그의 버튼들에 액션리스너 달기
