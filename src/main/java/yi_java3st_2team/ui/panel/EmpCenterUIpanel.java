@@ -103,6 +103,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 							dlgEmp = new DlgEmp();
 							
 							dlgEmp.setEmpCode("A",pEmpTblPanel);
+							dlgEmp.getTfEmpCode().setEditable(false);
 							//부서 리스트 가져와서 콤보박스에 넣기 
 							dlgEmp.setCmbDeptList(service.showDeptList());
 							//부서 인사로 선택하도록 하기
@@ -117,6 +118,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 			
 							dlgEmp = new DlgEmp();
 							dlgEmp.setEmpCode("B",pEmpTblPanel);
+							dlgEmp.getTfEmpCode().setEditable(false);
 							//부서 리스트 가져와서 콤보박스에 넣기 
 							dlgEmp.setCmbDeptList(service.showDeptList()); 
 							dlgEmp.setComboDept(1);

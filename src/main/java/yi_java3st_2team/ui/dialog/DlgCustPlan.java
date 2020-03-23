@@ -27,6 +27,8 @@ import java.awt.Dimension;
 import javax.swing.JTextPane;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.Font;
+import java.awt.Color;
 
 public class DlgCustPlan extends JDialog  {
 
@@ -40,6 +42,7 @@ public class DlgCustPlan extends JDialog  {
 	private JComboBox cmbPlanDetail;
 	private JComboBox cmbCustPlanDiv;
 	private JTextArea textAreaPlanDesc;
+	private JLabel lblSelectPlease;
 	
 	/**
 	 * Launch the application.
@@ -105,6 +108,12 @@ public class DlgCustPlan extends JDialog  {
 	public JTextArea getTextAreaPlanDesc() {
 		return textAreaPlanDesc;
 	}
+	
+	
+
+	public JLabel getLblSelectPlease() {
+		return lblSelectPlease;
+	}
 
 	private void initialize() {
 		setBounds(100, 100, 450, 300);
@@ -149,6 +158,20 @@ public class DlgCustPlan extends JDialog  {
 					tfCustDetail = new JTextField();
 					upperDetail.add(tfCustDetail);
 					tfCustDetail.setColumns(10);
+				}
+			}
+			{
+				JPanel panel = new JPanel();
+				upperPanel.add(panel);
+			}
+			{
+				JPanel panel = new JPanel();
+				upperPanel.add(panel);
+				{
+					lblSelectPlease = new JLabel("상품 세부코드를 선택하세요.");
+					lblSelectPlease.setForeground(new Color(128, 0, 0));
+					lblSelectPlease.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+					panel.add(lblSelectPlease);
 				}
 			}
 			{

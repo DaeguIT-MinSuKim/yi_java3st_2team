@@ -56,6 +56,8 @@ public class DlgEmp extends JDialog implements ActionListener{
 
 	private Dimension picDimension=new Dimension(100, 150);
 	private String picPath;
+	
+	private int basicPic = getClass().getClassLoader().getResource("no-img.png").getPath().length();
 	/**
 	 * Launch the application.
 	 */
@@ -73,6 +75,10 @@ public class DlgEmp extends JDialog implements ActionListener{
 	 * Create the dialog.
 	 */
 	public DlgEmp() {
+//		JOptionPane.showMessageDialog(null, basicPic);
+//		int basicPic1 = getClass().getClassLoader().getResource("no-img.png").hashCode();
+//		int iconLength = icon.getClass().getClassLoader().hashCode();
+//		JOptionPane.showMessageDialog(null, basicPic1);
 		initialize();
 	}
 	private void initialize() {
@@ -289,8 +295,8 @@ public class DlgEmp extends JDialog implements ActionListener{
 		String empTel = tfEmpTel.getText().trim();
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
-		ImageIcon icon = (ImageIcon)lblPic.getIcon();
-		byte[] pic = getImage();
+		icon = (ImageIcon)lblPic.getIcon();
+		byte[] pic = getImage(icon);
 		//lblPic.setIcon(new ImageIcon(pic));
 		
         
@@ -308,9 +314,11 @@ public class DlgEmp extends JDialog implements ActionListener{
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept ,pic);
 	}
 	
-	private byte[] getImage() {
+	private byte[] getImage(ImageIcon icon) {
 		// 노이미지일때 기본 사진 가져오는것
-	  byte[] pic = null;
+	  
+	//if(icon != null)	
+	byte[] pic = null;
 	     File file = new File(picPath);
 	     try(InputStream is = new FileInputStream(file)){
 	    	 pic = new byte[is.available()]; //메모리 부족하면 반복문 돌려야한다 512바이트씩
@@ -328,48 +336,49 @@ public class DlgEmp extends JDialog implements ActionListener{
 	private JPanel pForPic;
 	private JLabel lblPic;
 	private JButton btnPic;
+	private ImageIcon icon;
 	
 	//다이얼로그의 값 update위해 가져오기
-		public Employee getItemForUpdate() {
-			String empCode = tfEmpCode.getText().trim();
-			String empName = tfEmpName.getText().trim();
-			int nameLength = empName.length();
-			if(nameLength >= 6) {
-				JOptionPane.showMessageDialog(null, "이름은 다섯자 이내입니다");
-				return null;
-			}
-			String empTitle = tfEmpTitle.getText().trim();
-			String empAuth = null;  //null로 넣어도 되는걸까
-			int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
-			String empTel = tfEmpTel.getText().trim();
-			String empId = tfEmpId.getText().trim();
-			String empPwd = tfEmpPwd.getText().trim();
-			
-			int deptNum = cmbDept.getSelectedIndex();
-			System.out.println(deptNum +"deptNum");
-			if(deptNum ==0) {
-				System.out.println("0번 선택됨");
-				dept = new Department(1);
-				dept.setDeptName("인사");
-				
-			}if(deptNum ==1) {
-				dept = new Department(2);
-			}
-			
-			
-			Department dept = (Department)cmbDept.getSelectedItem();
-			System.out.println(dept +"GETiTEM에서 DEPT는");
-
-			if(cmbDept.getSelectedIndex()== -1) {
-				JOptionPane.showMessageDialog(null, "부서를 선택하세요");
-				return null;
-			}
-			
-			
-			//byte[] pic = lblPic.getIcon().toString()
-			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
-		}
-	
+//		public Employee getItemForUpdate() {
+//			String empCode = tfEmpCode.getText().trim();
+//			String empName = tfEmpName.getText().trim();
+//			int nameLength = empName.length();
+//			if(nameLength >= 6) {
+//				JOptionPane.showMessageDialog(null, "이름은 다섯자 이내입니다");
+//				return null;
+//			}
+//			String empTitle = tfEmpTitle.getText().trim();
+//			String empAuth = null;  //null로 넣어도 되는걸까
+//			int empSalary = Integer.parseInt((tfEmpSalary.getText().trim()).replace(",", ""));
+//			String empTel = tfEmpTel.getText().trim();
+//			String empId = tfEmpId.getText().trim();
+//			String empPwd = tfEmpPwd.getText().trim();
+//			
+//			int deptNum = cmbDept.getSelectedIndex();
+//			System.out.println(deptNum +"deptNum");
+//			if(deptNum ==0) {
+//				System.out.println("0번 선택됨");
+//				dept = new Department(1);
+//				dept.setDeptName("인사");
+//				
+//			}if(deptNum ==1) {
+//				dept = new Department(2);
+//			}
+//			
+//			
+//			Department dept = (Department)cmbDept.getSelectedItem();
+//			System.out.println(dept +"GETiTEM에서 DEPT는");
+//
+//			if(cmbDept.getSelectedIndex()== -1) {
+//				JOptionPane.showMessageDialog(null, "부서를 선택하세요");
+//				return null;
+//			}
+//			
+//			
+//			//byte[] pic = lblPic.getIcon().toString()
+//			return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+//		}
+//	
 	
 
 	public void clearTf() {
@@ -457,5 +466,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		this.cmbDept.setSelectedIndex(deptno);
 		
 	}
+	
+	
 	
 }

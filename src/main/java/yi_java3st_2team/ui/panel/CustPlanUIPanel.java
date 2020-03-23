@@ -118,7 +118,11 @@ public class CustPlanUIPanel extends JPanel{
 				
 					@Override
 					public void itemStateChanged(ItemEvent e) {
-						
+						if(dlgcustplan.getCmbPlanDetail().getSelectedIndex()==-1) {
+							dlgcustplan.getLblSelectPlease().setText("상품 세부코드를 선택하세요.");
+						}else {
+							dlgcustplan.getLblSelectPlease().setText("");
+						}
 						try {
 							//다이얼로그 상품세부코드 선택 시 상품코드에 자동으로 다음 번호 부여
 							int planA = planService.showPlanA();

@@ -2,6 +2,7 @@ package yi_java3st_2team.ui.table;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
@@ -12,7 +13,8 @@ public class CustPlanCenterCenterTblPanel extends AbsCenterTblPanel<Plan> {
 	 * Create the panel.
 	 */
 	public CustPlanCenterCenterTblPanel() {
-
+		setBorder(new EmptyBorder(10, 50, 30, 50));
+		
 	}
 
 	@Override
@@ -49,7 +51,13 @@ public class CustPlanCenterCenterTblPanel extends AbsCenterTblPanel<Plan> {
 
 	@Override
 	public Plan getSelectedItem() {
-		int selectedIdx = getSelectedRowIdx();
+		//선택된 고객이 없을 경우 추상 패널에서 던지는 RuntimeException 에러 처리 
+		int selectedIdx = -1;
+		try {
+			selectedIdx = getSelectedRowIdx();
+		}catch(RuntimeException e) {
+			return null;
+		}
 		if(selectedIdx==-1) {
 			return null;
 		}else {
