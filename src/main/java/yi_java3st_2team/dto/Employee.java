@@ -17,6 +17,8 @@ public class Employee {
 	private int perf;
 	private int bonus;
 	private String vip;
+	private String pCode;
+	private String pName;
 	
 	public Employee() {
 		
@@ -50,12 +52,13 @@ public class Employee {
 		this.perf = perf;
 		this.bonus = bonus;
 		this.vip = vip;
+	
 	}
 
 
 
 	//실적테이블을 위한 생성자
-	public Employee(String empCode, String empName, String empTitle, int perf, int bonus, String vip) {
+	public Employee(String empCode, String empName, String empTitle, int perf, int bonus, String vip, String pCode, String pName) {
 		super();
 		this.empCode = empCode;
 		this.empName = empName;
@@ -63,6 +66,8 @@ public class Employee {
 		this.perf = perf;
 		this.bonus = bonus;
 		this.vip = vip;
+		this.pCode = pCode;
+		this.pName = pName;
 	}
 
     
@@ -90,6 +95,30 @@ public class Employee {
 		this.empSalary = empSalary;
 		this.empTel = empTel;
 		this.empId = empId;
+	}
+
+
+
+	public String getpCode() {
+		return pCode;
+	}
+
+
+
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
+	}
+
+
+
+	public String getpName() {
+		return pName;
+	}
+
+
+
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
 
 
