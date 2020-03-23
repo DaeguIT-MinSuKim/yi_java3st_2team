@@ -33,22 +33,29 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	protected Object[] toArray(Customer item) {
-		
-		String number = item.getBankbook().getAccountNum().substring(0, 9);
-		String account= number.substring(7);
-		if(account.equals("11")) {
-			account = "예금";
-		}else {
-			account = "적금";
+		String accountNum = item.getBankbook().getAccountNum();
+		if(accountNum != null) {
+			String number = item.getBankbook().getAccountNum().substring(0, 9);
+			
+			String account= number.substring(7);
+			if(account.equals("11")) {
+				account = "예금";
+			}else {
+				account = "적금";
+			}
+			return new Object[] {
+					item.getCustName(),
+					account,
+					item.getBankbook().getAccountNum(),
+					//item.getBankbook().getAccountBalance(),
+					String.format("%,d", item.getBankbook().getAccountBalance())
+					
+				};
 		}
-		return new Object[] {
-				item.getCustName(),
-				account,
-				item.getBankbook().getAccountNum(),
-				//item.getBankbook().getAccountBalance(),
-				String.format("%,d", item.getBankbook().getAccountBalance())
-				
-		};
+		else {
+			return null;
+		}
+		
 	}
 
 	@Override

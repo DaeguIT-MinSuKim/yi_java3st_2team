@@ -126,7 +126,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Customer> selectCustomerBalance() throws SQLException {
 		String sql = "select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c "
-				+ "left join bankbook b on c.custcode = b.custcode";
+				+ "join bankbook b on c.custcode = b.custcode";
 		List<Customer> list = new ArrayList<>();
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);

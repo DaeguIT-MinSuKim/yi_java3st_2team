@@ -101,6 +101,8 @@ select * from cust_DW_audit;
 desc cust_DW_audit ;
 show triggers;
 
+select c.custCode, c.custName, b.accountNum, b.accountBalance from customer c join bankbook b on c.custcode = b.custcode;
+
 #BSGPD
 select count(*) from customer where custRank = "B";
 
