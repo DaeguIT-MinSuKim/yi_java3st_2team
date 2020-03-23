@@ -232,6 +232,8 @@ create trigger tri_after_update_BankBook
    end $$
 delimiter ;
 
+select * from plan;
+
 -- 입금/출금 시 체크 카드 잔액 동시 변경
 drop trigger if exists tri_after_update_BankBook_card;
 delimiter $$
@@ -239,21 +241,8 @@ create trigger tri_after_update_BankBook_card
    after update on BankBook
    for each row 
    begin
-	  if(old.accountPlanCode="A001" || old.accountPlanCode="A004") then
-      update card set cardBalance = (select new.accountBalance from bankbook where custCode = new.custCode and accountPlanCode = new.accountPlanCode) where custCode = new.custCode and planCode="B001";
-	end if;
-   end $$
-delimiter ;
-
-#체크카드 잔액이 변경될 시 통장 잔액이 같이 변경 되게하는 트리거 - 버그 있어 수정 필요
-drop trigger if exists tri_before_update_card_bankbook;
-delimiter $$
-create trigger tri_before_update_card_bankbook
-   before update on card
-   for each row 
-   begin
-	  if(old.plancode = "B001") then
-      	update bankbook set accountBalance = (select new.cardbalance from card where custCode = new.custCode and plancode = new.plancode);
+	  if(old.accountbalance != new.accountbalance) then
+	  	update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = new.custcode and b.accountPlanCode = new.accountplancode) where custcode = new custcode;
 	  end if;
    end $$
 delimiter ;
