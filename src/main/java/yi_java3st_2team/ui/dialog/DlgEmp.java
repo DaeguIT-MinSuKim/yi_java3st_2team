@@ -305,7 +305,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		String empPwd = tfEmpPwd.getText().trim();
 		icon = (ImageIcon)lblPic.getIcon();
 		byte[] pic = getImage(icon);
-		JOptionPane.showMessageDialog(null, pic.length);
+		//JOptionPane.showMessageDialog(null, pic.length);
 		//lblPic.setIcon(new ImageIcon(pic));
 		
         

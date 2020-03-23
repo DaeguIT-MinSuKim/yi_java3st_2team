@@ -88,6 +88,7 @@ import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanStatisticWestPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
+import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.DormantInfoTblPanel;
 import yi_java3st_2team.ui.table.TerminationInfoTblPanel;
 
@@ -102,6 +103,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
 	private EmployeeService empService;
+	private EmployeeUIService empUIService;
 	private Employee empAuth;
 	private JPanel pImg;
 	private JPanel pEmp;
@@ -752,10 +754,15 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	//업무정보 조회 키 누르면 
 	protected void mntmWorkInfoActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+		//greeting = lblGreeting.getText();
 		//센터 지우고  센터에 패널 모프시키기 
 		if(pWest!=null) {
 			contentPane.remove(pWest);
+		}
+		if(emp_UIpanel2 !=null) {
+			emp_UIpanel2 = new EmpCenterUIpanel2Work();
+			emp_UIpanel2.repaint();
+			emp_UIpanel2.revalidate();
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
