@@ -375,7 +375,7 @@ public class BankBookDaoImpl implements BankBookDao {
 	private AccountInfo getAccountInfo(ResultSet rs) throws SQLException {
 		String custname = rs.getString("custname");
 		String accountnum = rs.getString("accountnum");
-		Date transDate = rs.getTimestamp("transDate");
+		Date transDate = rs.getTimestamp("changedate");
 		return new AccountInfo(custname, accountnum, transDate);
 	}
 

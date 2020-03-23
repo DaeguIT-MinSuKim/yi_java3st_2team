@@ -39,6 +39,7 @@ public class NoticeDetailPanel extends JPanel {
 		initialize();
 	}
 	private void initialize() {
+		setBorder(new EmptyBorder(10, 10, 10, 10));
 		setLayout(new BorderLayout(0, 0));
 		
 		pNorth = new JPanel();
@@ -75,6 +76,7 @@ public class NoticeDetailPanel extends JPanel {
 		pCenter.add(scrollPane, BorderLayout.CENTER);
 		
 		taContent = new JTextArea();
+		taContent.setLineWrap(true);
 		scrollPane.setViewportView(taContent);
 		
 		pBtns = new JPanel();
