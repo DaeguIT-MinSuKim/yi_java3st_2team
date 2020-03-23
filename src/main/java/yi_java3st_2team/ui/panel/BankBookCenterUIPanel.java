@@ -14,18 +14,19 @@ import javax.swing.JPopupMenu;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
+import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgBankBook;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.table.BankBookCenterTblPanel;
 
 @SuppressWarnings("serial")
 public class BankBookCenterUIPanel extends JPanel implements ActionListener {
+	private MainFrame main;
 	private BankBookCenterNorthSearchPanel pNorth;
 	private BankBookCenterTblPanel pCenter;
 	private BankBookService service;
 	private DlgBankBook dlgBankBook;
 	private int selIdx;
-
 	/**
 	 * Create the panel.
 	 */
@@ -53,7 +54,12 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
+	public MainFrame getMain() {
+		return main;
+	}
+	public void setMain(MainFrame main) {
+		this.main = main;
+	}
 	private JPopupMenu getTblPopMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 		ActionListener myDlgListener = new ActionListener() {
@@ -289,4 +295,5 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	
 }

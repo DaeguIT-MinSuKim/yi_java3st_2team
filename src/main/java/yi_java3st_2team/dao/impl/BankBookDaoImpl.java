@@ -465,4 +465,11 @@ public class BankBookDaoImpl implements BankBookDao {
 		}
 		return list;
 	}
+
+	@Override
+	public int insertBankBookPerformance(BankBook bankbook) throws SQLException {
+		int res = -1;
+		String sql = "";
+		return res;
+	}
 }
