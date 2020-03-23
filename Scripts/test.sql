@@ -8,6 +8,9 @@ select  * from performance p ;
 
 update employee set emppwd = 111 where `empName` ='test';
 
+select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, d.deptName
+			from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join department d on e.`deptNo` = d.`deptNo` left join plan pl on pl.`planCode` = p.`planCode`
+			where d.deptName ='고객' group by e.`empCode`;
 
 select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo  from employee e left join department d on e.deptNo = d.deptNo where d.deptName='인사';
 select  empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.deptName, d.deptNo from employee e left join department d on e.deptNo = d.deptNo  where empName like '%장%';
@@ -15,9 +18,9 @@ select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode))
 		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
 				where e.empName like '%황%' group by e.`empCode`;
 			
-select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip, d.deptName 
+select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, d.deptName 
 		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join department d on e.`deptNo` = d.`deptNo` 
-				where d.deptName ='인사' group by e.`empCode`;			
+		left join plan pl on pl.`planCode` = p.`planCode` where d.deptName ='고객' group by e.`empCode`;			
 
 select * from employee e2 ;
 select * from employee where empcode = 'B020';
@@ -39,8 +42,8 @@ select concat(count(*),'명(',`empTitle`,')') as '직급별사원수(직책)' fr
   group by `empCode`;
  
 -- 사원업무 조회에서 사용 //건수는 10건 이상 되어야 보너스 발생 
-select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
-from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
+select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip
+from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode` 
 group by e.`empCode`;
 
 -- 1인 평균 급여액
@@ -50,8 +53,8 @@ select (sum(empSalary))/(count(*))
    from employee e ;
   
 -- 우수사원
-create view ranking as select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
-from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
+create view ranking as select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip
+from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode` 
 group by e.`empCode`;
 
 
