@@ -1,19 +1,15 @@
 package yi_java3st_2team.ui.table;
 
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.ui.absPanel.AbsCenterTblPanel;
-import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
-
-	//private Department dept; 
-
 	public EmpCenterTblPanel() {
-		
 		initialize();
 	}
 	private void initialize() {
@@ -29,7 +25,6 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 
 	@Override
 	protected String[] getColumns() {
-		
 		return new String[] {"코드","이름","직책","권한","월급","연락처","아이디","비밀번호","부서"};
 	}
 
@@ -44,7 +39,6 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 				item.getEmpTel(), 
 				item.getEmpId(), 
 				item.getEmpPwd().replace(item.getEmpPwd(), "**********"), 
-				//String.format("%s(%s)",item.getDept().getDeptName(),item.getDept().getDeptNo())
 		        item.getDept()
 		};
 	}
@@ -76,7 +70,6 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 		String empId = (String) model.getValueAt(selIdx, 6);
 		String empPwd = (String) model.getValueAt(selIdx, 7);
 	    Department dept	= (Department) model.getValueAt(selIdx, 8);
-
 	    		 
 		
 //		String sDept= (String)model.getValueAt(selIdx, 8);

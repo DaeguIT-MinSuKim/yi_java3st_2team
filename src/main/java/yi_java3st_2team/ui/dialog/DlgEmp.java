@@ -418,7 +418,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		if(item.getPic() == null) {
 	    	setPic(getClass().getClassLoader().getResource("no-img.png").getPath());
 	    }else {
-	    setPic(item.getPic()); //메소드 오버로딩 필요  //이게 null일 수 있음 
+	    	setPic(item.getPic()); //메소드 오버로딩 필요  //이게 null일 수 있음 
 	    }
 		
 	}

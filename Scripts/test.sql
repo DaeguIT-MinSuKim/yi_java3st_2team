@@ -211,3 +211,4 @@ select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'd
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and month(transdate) = month(now()) group by cardnum;
 select * from performance;
 select * from bankbook;
+select * from employee;

@@ -157,6 +157,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 							dlgEmpForUpdate.dispose();
 						}
 						dlgEmpForUpdate = new DlgEmp();
+						dlgEmpForUpdate.setEmp(emp111);
 						dlgEmpForUpdate.setCmbDeptList(service.showDeptList());
 						dlgEmpForUpdate.setVisible(true);
 						dlgEmpForUpdate.setItem(emp111);
