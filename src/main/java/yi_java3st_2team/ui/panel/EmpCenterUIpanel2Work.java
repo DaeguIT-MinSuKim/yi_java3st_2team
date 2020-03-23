@@ -88,7 +88,7 @@ public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 			if(selectedOne.equals("사원이름")) {
 			  //list.add(service.showPickedEmp(empItem));
 			  list = service.showPickedEmpListForPerform(empItem);
-		    }else if(selectedOne.equals("부서")) {
+		    }else if(selectedOne.equals("부서 (인사  or 고객)")) {
 		      list = service.showPickedEmpByDeptForPerform(empItem);
 		    }else if(selectedOne.equals("사원번호")) {
 		      list = service.showPickedEmpByEmpNoForPerform(empItem);
