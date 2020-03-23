@@ -32,8 +32,8 @@ CREATE TABLE `bank`.`Employee` (
 	`empTel`    char(13)    NULL     COMMENT '사원연락처', -- 사원연락처
 	`empId`     varchar(12) NULL     COMMENT '사원아이디', -- 사원아이디
 	`empPwd`    varchar(41) NULL     COMMENT '사원비밀번호', -- 사원비밀번호
-	`deptNo`    INTEGER     NOT NULL COMMENT '부서번호' -- 부서번호
-	`pic`       longblob    null 
+	`deptNo`    INTEGER     NOT NULL COMMENT '부서번호', -- 부서번호
+	`pic`       LONGBLOB    NULL     COMMENT '사원사진' -- 사원사진
 )
 COMMENT '사원';
 
@@ -211,19 +211,6 @@ CREATE TABLE `bank`.`cardinfo` (
 	`transdate` DATETIME   NULL COMMENT '거래일자' -- 거래일자
 )
 COMMENT '카드정보';
-
--- 카드정보2
-CREATE TABLE `bank`.`cardinfo2` (
-	`custname`  VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
-	`cardnum`   char(16)   NULL COMMENT '카드번호', -- 카드번호
-	`transdate` DATETIME   NULL COMMENT '거래일자' -- 거래일자
-)
-COMMENT '카드정보2';
-
--- 새 테이블
-CREATE TABLE `bank`.`TABLE` (
-)
-COMMENT '새 테이블';
 
 -- 공지사항
 CREATE TABLE `bank`.`notice` (
