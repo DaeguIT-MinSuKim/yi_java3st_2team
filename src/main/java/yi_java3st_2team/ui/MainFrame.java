@@ -103,7 +103,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
 	private EmployeeService empService;
-	private EmployeeUIService empUIService;
 	private Employee empAuth;
 	private JPanel pImg;
 	private JPanel pEmp;
