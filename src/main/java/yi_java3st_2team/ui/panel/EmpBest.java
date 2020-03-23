@@ -24,10 +24,6 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.border.EmptyBorder;
 
-
-
-
-
 public class EmpBest extends JPanel {
 
    	
