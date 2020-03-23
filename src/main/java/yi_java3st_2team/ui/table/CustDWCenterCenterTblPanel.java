@@ -40,8 +40,10 @@ public class CustDWCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 			String account= number.substring(7);
 			if(account.equals("11")) {
 				account = "예금";
-			}else {
+			}else if(account.equals("12")){
 				account = "적금";
+			}else {
+				account = "마이너스 통장";
 			}
 			return new Object[] {
 					item.getCustName(),

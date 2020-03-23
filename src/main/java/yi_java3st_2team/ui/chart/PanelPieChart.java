@@ -49,8 +49,8 @@ public class PanelPieChart extends JFXPanel implements InitScene{
 	private ObservableList<Data> getChartData() {
 		ObservableList<Data> list = FXCollections.observableArrayList();
 		try {
-			PieChart.Data data = new PieChart.Data("고객(VIP제외)", (service.showNormalCustNum())*20);
-			PieChart.Data data2 = new PieChart.Data("VIP고객", (service.showVIPCustNum())*20);
+			PieChart.Data data = new PieChart.Data("고객(VIP제외)", (service.showNormalCustNum())*4);
+			PieChart.Data data2 = new PieChart.Data("VIP고객", (service.showVIPCustNum())*4);
 			list.addAll(data, data2);
 		} catch (SQLException e) {
 			e.printStackTrace();
