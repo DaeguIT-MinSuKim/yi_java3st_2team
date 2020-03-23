@@ -149,63 +149,8 @@ create view ranking as select e.empCode, e.empName, e.empTitle, count(if(p.custC
 from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
 group by e.`empCode`;
 
-create table deleted_employee (
- empCode char(4),
- empName varchar(5),
- empTitle varchar(20),
- empTel char(13),
- empId varchar(12),
- deptNo int
-);
-
-create table cust_DW_audit(
-	dw varchar(5),
-	custName varchar(5) not null,
-	accountNum char(16) not null,
-	amount int(20) not null,
-	accountBalance bigint(20) not null,
-	accountDate datetime not null
-);
-
-create table cardInfo(
-	custname varchar(5),
-	cardnum varchar(16),
-	transDate datetime
-);
-
-create table bankBookInfo(
-	custname varchar(5),
-	accountnum varchar(16),
-	transDate datetime
-);
-
-create table changeBankBookDormantInfo(
-	custname char(5),
-	accountnum varchar(16),
-	transDate datetime
-);
-
-create table changeBankBookTerminationInfo(
-	custname char(5),
-	accountnum varchar(16),
-	transDate datetime
-);
-
-#공지사항 테이블 생성
-create table notice(
-	no int auto_increment not null primary key,
-	subject varchar(30) not null, 
-	writer varchar(3) not null,
-	write_date datetime not null,
-	content text not null
-);
-
 insert into notice(subject,writer,write_date,content) 
-values("코로나19 다 함께 이겨냅시다!","작성자",now(),
-"YN BANK 직원 어려분 코로나 19 때문에 은행이 부도 위기에 처했지만, 
-여러분의 노고만이 회사를 살리는 유일한 길입니다. 
-저희 은행은 절대 직원 여러분을 버리지 않습니다. 
-다들 심기일전하여 코로나 19를 극복하고, YN BANK를 전세계 1위 은행으로 발돋움하게 노력합시다");
+values("코로나19 다 함께 이겨냅시다!","작성자",now(),"YN BANK 직원 어려분 코로나 19 때문에 은행이 부도 위기에 처했지만, 여러분의 노고만이 회사를 살리는 유일한 길입니다. 저희 은행은 절대 직원 여러분을 버리지 않습니다. 다들 심기일전하여 코로나 19를 극복하고, YN BANK를 전세계 1위 은행으로 발돋움하게 노력합시다");
 
 #statistic trigger 및 procedure
 drop procedure if exists proc_total_avg;
