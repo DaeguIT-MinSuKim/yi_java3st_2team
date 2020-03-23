@@ -9,7 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 
-	private Employee employee; 
+	private Employee employee;
+	private String ppName; 
 
 	public EmpCenterTblPanel2Work() {
 		
@@ -22,31 +23,66 @@ public class EmpCenterTblPanel2Work extends AbsCenterTblPanel<Employee> {
 
 	@Override
 	protected void setTblWidthAlign() {
-		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5 );
+		setColumnAlign(SwingConstants.CENTER,0,1,2,3,5,6 );
 		setColumnAlign(SwingConstants.RIGHT, 4);
-        setColumnWidth(70,70,70,70,100,100);		
+        setColumnWidth(70,70,70,70,100,100,100);		
 	}
 
 	@Override
 	protected String[] getColumns() {
 		
-		return new String[] {"사원코드","사원이름","직책","실적","보너스","담당VIP"} ;
+		return new String[] {"사원코드","사원이름","직책","실적","보너스","상품 종류","상품 이름"} ;
 	}
 
 	
 	//뷰테이블로 다시 만들어야함
 	@Override
 	public Object[] toArray(Employee item) {
-		employee = item;
+		//System.out.println(item.getpCode());
+		
+		
+		
 		return new Object[] {
 				item.getEmpCode(),
 				item.getEmpName(),
 				item.getEmpTitle(), 
 				item.getPerf(),
 				String.format("%,d", item.getBonus()), 
-				item.getVip()};
+				item.getpCode()==null?null:getName(item.getpCode()),
+				item.getpName()};
 	}
 
+	private Object getName(String getpCode) {
+		
+		//System.out.println(pName);
+		ppName = getpCode.substring(0, 2);
+		//System.out.println(ppName);
+       
+		if(ppName.equalsIgnoreCase("AA")) {
+			ppName = "예금통장";
+		}else if(ppName.equalsIgnoreCase("AB")) {
+			ppName = "적금통장";
+		}
+		else if(ppName.equalsIgnoreCase("AC")) {
+			ppName = "마이너스통장";
+		}
+		else if(ppName.equalsIgnoreCase("BA")) {
+			ppName = "체크카드";
+		}
+		else if(ppName.equalsIgnoreCase("BB")) {
+			ppName = "신용카드";
+		}
+		else if(ppName.equalsIgnoreCase("CA")) {
+			ppName = "일반대출";
+		}
+		else if(ppName.equalsIgnoreCase("CB")) {
+			ppName = "신용대출";
+		}
+		else if(ppName.equalsIgnoreCase("CC")) {
+			ppName = "카드론";
+		}
+		return ppName;
+	}
 	@Override
 	public void updateRow(Employee item, int updateIdx) {
 		model.setValueAt(item.getEmpCode(), updateIdx, 0);

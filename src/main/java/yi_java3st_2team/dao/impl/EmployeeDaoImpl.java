@@ -275,8 +275,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> selectEmployeeByPerform() {
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip\r\n" + 
-				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus,if(pl.`planDiv` ='V',vip,null) as vip, pl.`planDetail` as pCode, pl.`planName` as pName\r\n" + 
+				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode` \r\n" + 
 				"group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
@@ -302,7 +302,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		int perf = rs.getInt("perf");
 		int bonus = rs.getInt("bonus");
 		String vip = rs.getString("vip");
-		return new Employee(empCode, empName, empTitle, perf, bonus, vip);
+		String pCode= rs.getString("pCode");
+		String pName = rs.getString("pName");
+		return new Employee(empCode, empName, empTitle, perf, bonus, vip, pCode, pName);
 	}
 
 	@Override
@@ -334,7 +336,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee selectOneEmployeeByPerform(String empName) throws SQLException {
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip\r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, pl.`planDetail` as pCode, pl.`planName` as pName\r\n" + 
 				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
 				"where e.empName=? group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
@@ -563,7 +565,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmpByNameListForPerform(String empItem) throws SQLException {
 		List<Employee> list = new ArrayList<Employee>();
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip\r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, pl.`planDetail` as pCode, pl.`planName` as pName\r\n" + 
 				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
 				"where e.empName like ? group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
@@ -590,7 +592,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmpByDeptForPerform(String empItem) throws SQLException {
 		List<Employee> list = new ArrayList<Employee>();
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, d.deptName \r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, d.deptName, pl.`planDetail` as pCode, pl.`planName` as pName \r\n" + 
 				"		from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join department d on e.`deptNo` = d.`deptNo` left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
 				"				where d.deptName =? group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
@@ -617,7 +619,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmpByNoForPerform(String empItem) throws SQLException {
 		List<Employee> list = new ArrayList<Employee>();
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip\r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, pl.`planDetail` as pCode, pl.`planName` as pName\r\n" + 
 				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
 				"where e.empCode = ? group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
@@ -644,7 +646,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<Employee> selectEmpByTitleForPerform(String empItem) throws SQLException {
 		List<Employee> list = new ArrayList<Employee>();
-		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip\r\n" + 
+		String sql="select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, pl.`planDetail` as pCode, pl.`planName` as pName\r\n" + 
 				"from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode`\r\n" + 
 				"where e.empTitle = ? group by e.`empCode`";
 		try(Connection con = LocalDataSource.getConnection();
