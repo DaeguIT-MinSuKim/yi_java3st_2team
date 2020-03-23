@@ -9,6 +9,7 @@ public class BankBook {
 	private Date accountOpenDate;
 	private float accountInterest;
 	private long accountBalance;
+	private Employee employee;
 	public BankBook() {
 		
 	}
@@ -70,5 +71,10 @@ public class BankBook {
 	public void setAccountBalance(long accountBalance) {
 		this.accountBalance = accountBalance;
 	}
-	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 }

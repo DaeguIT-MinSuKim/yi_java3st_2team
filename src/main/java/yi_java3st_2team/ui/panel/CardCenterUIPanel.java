@@ -12,6 +12,7 @@ import java.util.List;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
+import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgCard;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.table.CardCenterTblPanel;
@@ -25,6 +26,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	private CardService service;
 	private DlgCard dlgCard;
 	private int selIdx;
+	private MainFrame main;
 
 	/**
 	 * Create the panel.
@@ -53,7 +55,12 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
+	public MainFrame getMain() {
+		return main;
+	}
+	public void setMain(MainFrame main) {
+		this.main = main;
+	}
 	private JPopupMenu getTblPopMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 		ActionListener myDlgListener = new ActionListener() {
@@ -93,6 +100,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				if(e.getActionCommand().equals("추가")) {
 					dlgCard = new DlgCard();
 					dlgCard.initCmbModel(service);
+					dlgCard.setEmp(main.getEmpAuth());
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.getBtnOk().setText(e.getActionCommand());
 					dlgCard.getBtnOk().addActionListener(myDlgListener);

@@ -10,6 +10,7 @@ public class Card {
 	private Date cardIssueDate;
 	private int cardLimit;
 	private long cardBalance;
+	private Employee employee;
 	public Card() {
 		
 	}
@@ -65,6 +66,13 @@ public class Card {
 	}
 	public void setCardBalance(long cardBalance) {
 		this.cardBalance = cardBalance;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	@Override
 	public String toString() {

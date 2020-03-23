@@ -73,7 +73,7 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int insertCard(Card card) throws SQLException {
 		int res = -1;
-		String sql = "insert into card values(?,?,?,?,?,?,?)";
+		String sql = "insert into card values(?,?,?,?,?,?,?,(select empcode from employee where empname = ?))";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCardNum());
@@ -83,6 +83,7 @@ public class CardDaoImpl implements CardDao {
 			pstmt.setTimestamp(5, new Timestamp(card.getCardIssueDate().getTime()));
 			pstmt.setInt(6, card.getCardLimit());
 			pstmt.setLong(7, card.getCardBalance());
+			pstmt.setString(8, card.getEmployee().getEmpName());
 			res = pstmt.executeUpdate();
 		}
 		return res;

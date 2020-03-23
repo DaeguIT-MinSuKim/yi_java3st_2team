@@ -556,6 +556,12 @@ public class MainFrame extends JFrame implements ActionListener {
 		menuThread.run();
 		paint.start();
 	}
+	public Employee getEmpAuth() {
+		return empAuth;
+	}
+	public void setEmpAuth(Employee empAuth) {
+		this.empAuth = empAuth;
+	}
 	public JButton getBtnMenuLogout() {
 		return btnMenuLogout;
 	}
@@ -781,6 +787,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		card_UIpanel.setMain(this);
 		pCenter.add(card_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -892,6 +899,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		loan_UIpanel.setMain(this);
 		pCenter.add(loan_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}

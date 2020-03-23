@@ -200,7 +200,7 @@ CREATE TABLE `bank`.`changebankbookdormantinfo` (
 COMMENT '휴면계좌';
 
 -- 해지계좌
-CREATE TABLE `bank`.`changebankbookterminationnfo` (
+CREATE TABLE `bank`.`changebankbookterminationinfo` (
 	`custname`   VARCHAR(5) NULL COMMENT '고객이름', -- 고객이름
 	`accountnum` char(16)   NULL COMMENT '계좌번호', -- 계좌번호
 	`changedate` DATETIME   NULL COMMENT '전환일자' -- 전환일자

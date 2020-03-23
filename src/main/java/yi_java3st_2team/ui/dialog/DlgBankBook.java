@@ -28,13 +28,13 @@ import com.toedter.calendar.JDateChooser;
 import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")
 public class DlgBankBook extends JDialog implements ActionListener {
-
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfAccountNum;
 	private JDateChooser tfAccountOpenDate;
@@ -43,7 +43,7 @@ public class DlgBankBook extends JDialog implements ActionListener {
 	private JButton btnCancel;
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
-	private DlgBankBook dlgBankBook;
+	private Employee emp;
 
 	public DlgBankBook() {
 		initialize();
@@ -119,14 +119,13 @@ public class DlgBankBook extends JDialog implements ActionListener {
 				buttonPane.add(btnCancel);
 			}
 		}
-		dlgBankBook = this;
 		
 	}
-	public DlgBankBook getDlgBankBook() {
-		return dlgBankBook;
+	public Employee getEmp() {
+		return emp;
 	}
-	public void setDlgBankBook(DlgBankBook dlgBankBook) {
-		this.dlgBankBook = dlgBankBook;
+	public void setEmp(Employee emp) {
+		this.emp = emp;
 	}
 	public JTextField getTfCardNum() {
 		return tfAccountNum;
@@ -212,7 +211,9 @@ public class DlgBankBook extends JDialog implements ActionListener {
 		Plan accountPlanCode = (Plan)cmbPlan.getSelectedItem();
 		Date accountOpenDate = tfAccountOpenDate.getDate();
 		Float accountInterest = Float.parseFloat(tfAccountInterest.getText());
-		return new BankBook(accountNum, custCode, accountPlanCode, accountOpenDate, accountInterest);
+		BankBook bankbook = new BankBook(accountNum, custCode, accountPlanCode, accountOpenDate, accountInterest);
+		bankbook.setEmployee(emp);
+		return bankbook;
 	}
 	public void setItem(BankBook bankbook) {
 		tfAccountNum.setText(bankbook.getAccountNum());

@@ -162,7 +162,6 @@ update card c set c.cardBalance = (select accountbalance from bankbook b where b
 update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C005' and b.accountPlanCode = 'A004') where plancode = 'B001';
 #테이블을 위한 카드 SQL
 select c.cardnum,cs.custname,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode;
-
 select * from plan;
 
 select count(transDate) from cardinfo where custname = '김가나' and date(transdate) = date(now());
@@ -184,7 +183,6 @@ select cs.custname,
 from loan l join customer cs on l.custCode = cs.custcode group by l.custcode;
 
 select * from changebankbookdormantinfo;
-select * from changebankbookterminationinfo;
 drop table changebankbookdormantinfo;
 drop table changebankbookterminationinfo;
 
@@ -202,7 +200,7 @@ select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.
 select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where c.cardnum like '%332%'; #신용카드
 
 select * from notice;
-
+select * from employee;
 select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = '김가나' and date(transdate) = date(now()) group by accountnum;
 select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = '김가나' and week(transdate,1) = week(now(),1) group by accountnum;
 select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = '김가나' and month(transdate) = month(now()) group by accountnum;
@@ -211,3 +209,5 @@ select * from cardinfo;
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and date(transdate) = date(now()) group by cardnum;
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and week(transdate,1) = week(now(),1) group by cardnum;
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and month(transdate) = month(now()) group by cardnum;
+select * from performance;
+select * from bankbook;

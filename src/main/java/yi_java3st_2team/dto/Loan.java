@@ -9,6 +9,7 @@ public class Loan {
 	private Date loanDate;
 	private float loanInterest;
 	private long loanBalance;
+	private Employee employee;
 	public Loan() {
 		
 	}
@@ -60,5 +61,10 @@ public class Loan {
 	public void setLoanBalance(long loanBalance) {
 		this.loanBalance = loanBalance;
 	}
-	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 }

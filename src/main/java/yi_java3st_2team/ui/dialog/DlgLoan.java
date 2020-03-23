@@ -23,6 +23,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.service.LoanService;
@@ -40,6 +41,7 @@ public class DlgLoan extends JDialog implements ActionListener {
 	private JComboBox<Plan> cmbPlan;
 	private JLabel lblLoanBalance;
 	private JTextField tfLoanBalance;
+	private Employee emp;
 
 	public DlgLoan() {
 		initialize();
@@ -127,6 +129,13 @@ public class DlgLoan extends JDialog implements ActionListener {
 		}
 		
 	}
+	
+	public Employee getEmp() {
+		return emp;
+	}
+	public void setEmp(Employee emp) {
+		this.emp = emp;
+	}
 	public JTextField getTfAccountNum() {
 		return tfAccountNum;
 	}
@@ -210,7 +219,9 @@ public class DlgLoan extends JDialog implements ActionListener {
 		Date loanDate = tfLoanDate.getDate();
 		float loanInterest = Float.parseFloat(tfLoanInterest.getText());
 		long loanBalance = Long.parseLong(tfLoanBalance.getText());
-		return new Loan(loanAccountNum, custCode, planCode, loanDate, loanInterest, loanBalance);
+		Loan loan = new Loan(loanAccountNum, custCode, planCode, loanDate, loanInterest, loanBalance);
+		loan.setEmployee(emp);
+		return loan;
 	}
 	public void setItem(Loan loan) {
 		tfAccountNum.setText(loan.getLoanAccountNum());

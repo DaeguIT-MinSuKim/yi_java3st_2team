@@ -62,8 +62,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		
 			public void run() {
 				try {
-
-
 					frame = new LoginFrame();
 					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					//UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

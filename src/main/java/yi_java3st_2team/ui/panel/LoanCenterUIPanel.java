@@ -13,6 +13,7 @@ import javax.swing.JPopupMenu;
 
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgLoan;
 import yi_java3st_2team.ui.service.LoanService;
 import yi_java3st_2team.ui.table.LoanCenterTblPanel;
@@ -24,6 +25,7 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 	private LoanService service;
 	private DlgLoan dlgLoan;
 	private int selIdx;
+	private MainFrame main;
 
 	/**
 	 * Create the panel.
@@ -52,7 +54,12 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
+	public MainFrame getMain() {
+		return main;
+	}
+	public void setMain(MainFrame main) {
+		this.main = main;
+	}
 	private JPopupMenu getTblPopMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 		ActionListener myDlgListener = new ActionListener() {
@@ -93,6 +100,7 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 				if(e.getActionCommand().equals("추가")) {
 					dlgLoan = new DlgLoan();
 					dlgLoan.initCmbModel(service);
+					dlgLoan.setEmp(main.getEmpAuth());
 					dlgLoan.setTitle("대출 " + e.getActionCommand());
 					dlgLoan.getBtnOk().setText(e.getActionCommand());
 					dlgLoan.getBtnOk().addActionListener(myDlgListener);

@@ -27,13 +27,13 @@ import com.toedter.calendar.JDateChooser;
 
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")
 public class DlgCard extends JDialog implements ActionListener {
-
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCardNum;
 	private JTextField tfCVS;
@@ -44,13 +44,12 @@ public class DlgCard extends JDialog implements ActionListener {
 	private JButton btnCancel;
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
-	private CardCenterUIPanel uiPanel;
+	private Employee emp;
 
 	public DlgCard() {
 		initialize();
 	}
 	private void initialize() {
-		uiPanel = new CardCenterUIPanel();
 		setBounds(100, 100, 450, 450);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -143,7 +142,12 @@ public class DlgCard extends JDialog implements ActionListener {
 		}
 		
 	}
-
+	public Employee getEmp() {
+		return emp;
+	}
+	public void setEmp(Employee emp) {
+		this.emp = emp;
+	}
 	public JTextField getTfCardNum() {
 		return tfCardNum;
 	}
@@ -251,6 +255,7 @@ public class DlgCard extends JDialog implements ActionListener {
 		else {
 			card.setCardLimit(tfCardLimit.getText().equals("")?Integer.parseInt("0"):Integer.parseInt(tfCardLimit.getText()));
 		}
+		card.setEmployee(emp);
 		return card;
 	}
 	public void setItem(Card card) {

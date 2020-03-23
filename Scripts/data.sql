@@ -320,3 +320,65 @@ begin
 	UPDATE notice SET no = @COUNT:=@COUNT+1;
 end!
 delimiter ;
+
+
+drop trigger if exists tri_insert_bankbook_performance;
+delimiter $
+create trigger tri_insert_bankbook_performance
+after insert on bankbook
+for each row 
+begin 
+	insert into performance values(new.accountplancode,new.empcode,new.custcode);
+end $
+delimiter ;
+
+#이 부분 상의해서 쓸지 말지를 결정할것
+drop trigger if exists tri_delete_bankbook_performance;
+delimiter $
+create trigger tri_delete_bankbook_performance
+before delete on bankbook
+for each row 
+begin 
+	delete from performance where plancode = old.accountplancode and empcode = old.empcode and custcode = old.custcode;
+end $
+delimiter ;
+
+drop trigger if exists tri_insert_card_performance;
+delimiter $
+create trigger tri_insert_card_performance
+after insert on card
+for each row 
+begin 
+	insert into performance values(new.plancode,new.empcode,new.custcode);
+end $
+delimiter ;
+
+drop trigger if exists tri_delete_card_performance;
+delimiter $
+create trigger tri_delete_card_performance
+before delete on card
+for each row 
+begin 
+	delete from performance where plancode = old.plancode and empcode = old.empcode and custcode = old.custcode;
+end $
+delimiter ;
+
+drop trigger if exists tri_insert_loan_performance;
+delimiter $
+create trigger tri_insert_loan_performance
+after insert on loan
+for each row 
+begin 
+	insert into performance values(new.loanplancode,new.empcode,new.custcode);
+end $
+delimiter ;
+
+drop trigger if exists tri_delete_loan_performance;
+delimiter $
+create trigger tri_delete_loan_performance
+before delete on loan
+for each row 
+begin 
+	delete from performance where plancode = old.loanplancode and empcode = old.empcode and custcode = old.custcode;
+end $
+delimiter ;
