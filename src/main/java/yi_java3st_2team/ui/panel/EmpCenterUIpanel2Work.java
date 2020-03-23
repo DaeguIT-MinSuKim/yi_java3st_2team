@@ -51,6 +51,12 @@ public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 	}
     
 
+	public EmpCenterTblPanel2Work getpEmpTblPanel() {
+		return pEmpTblPanel;
+	}
+	public void setpEmpTblPanel(EmpCenterTblPanel2Work pEmpTblPanel) {
+		this.pEmpTblPanel = pEmpTblPanel;
+	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pEmpSerch.getBtnSearch()) {
 			pEmpSerchBtnSearchActionPerformed(e);
