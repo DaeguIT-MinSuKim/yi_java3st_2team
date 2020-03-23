@@ -11,7 +11,8 @@ CREATE TABLE `bank`.`BankBook` (
 	`accountPlanCode` char(4)  NOT NULL COMMENT '통장상품코드', -- 통장상품코드
 	`accountOpenDate` DATETIME NOT NULL COMMENT '계좌개설일', -- 계좌개설일
 	`accountInterest` FLOAT    NOT NULL COMMENT '이자율', -- 이자율
-	`accountBalance`  BIGINT   NOT NULL COMMENT '잔액' -- 잔액
+	`accountBalance`  BIGINT   NOT NULL COMMENT '잔액', -- 잔액
+	`empCode`         char(4)  NULL     COMMENT '사원코드' -- 사원코드
 )
 COMMENT '통장';
 
@@ -112,7 +113,8 @@ CREATE TABLE `bank`.`Loan` (
 	`loanPlanCode`   char(4)  NOT NULL COMMENT '대출상품코드', -- 대출상품코드
 	`loanDate`       DATETIME NULL     COMMENT '대출날짜', -- 대출날짜
 	`loanInterest`   FLOAT    NULL     COMMENT '대출이자율', -- 대출이자율
-	`loanBalance`    BIGINT   NULL     COMMENT '대출잔액' -- 대출잔액
+	`loanBalance`    BIGINT   NULL     COMMENT '대출잔액', -- 대출잔액
+	`empCode`        char(4)  NULL     COMMENT '사원코드' -- 사원코드
 )
 COMMENT '대출';
 
@@ -131,7 +133,8 @@ CREATE TABLE `bank`.`Card` (
 	`cardSecuCode`  char(3)  NOT NULL COMMENT '카드보안코드', -- 카드보안코드
 	`cardIssueDate` DATETIME NULL     COMMENT '카드발급일', -- 카드발급일
 	`cardLimit`     INTEGER  NULL     COMMENT '카드한도', -- 카드한도
-	`cardBalance`   BIGINT   NULL     COMMENT '카드잔액' -- 카드잔액
+	`cardBalance`   BIGINT   NULL     COMMENT '카드잔액', -- 카드잔액
+	`empCode`       char(4)  NULL     COMMENT '사원코드' -- 사원코드
 )
 COMMENT '카드';
 
@@ -252,6 +255,16 @@ ALTER TABLE `bank`.`BankBook`
 			`planCode` -- 상품코드
 		);
 
+-- 통장
+ALTER TABLE `bank`.`BankBook`
+	ADD CONSTRAINT `FK_Employee_TO_BankBook` -- 사원 -> 통장
+		FOREIGN KEY (
+			`empCode` -- 사원코드
+		)
+		REFERENCES `bank`.`Employee` ( -- 사원
+			`empCode` -- 사원코드
+		);
+
 -- 사원
 ALTER TABLE `bank`.`Employee`
 	ADD CONSTRAINT `FK_Department_TO_Employee` -- 부서 -> 사원
@@ -282,6 +295,16 @@ ALTER TABLE `bank`.`Loan`
 			`planCode` -- 상품코드
 		);
 
+-- 대출
+ALTER TABLE `bank`.`Loan`
+	ADD CONSTRAINT `FK_Employee_TO_Loan` -- 사원 -> 대출
+		FOREIGN KEY (
+			`empCode` -- 사원코드
+		)
+		REFERENCES `bank`.`Employee` ( -- 사원
+			`empCode` -- 사원코드
+		);
+
 -- 카드
 ALTER TABLE `bank`.`Card`
 	ADD CONSTRAINT `FK_Customer_TO_Card` -- 고객 -> 카드
@@ -300,6 +323,16 @@ ALTER TABLE `bank`.`Card`
 		)
 		REFERENCES `bank`.`Plan` ( -- 고객상품
 			`planCode` -- 상품코드
+		);
+
+-- 카드
+ALTER TABLE `bank`.`Card`
+	ADD CONSTRAINT `FK_Employee_TO_Card` -- 사원 -> 카드
+		FOREIGN KEY (
+			`empCode` -- 사원코드
+		)
+		REFERENCES `bank`.`Employee` ( -- 사원
+			`empCode` -- 사원코드
 		);
 
 -- 실적

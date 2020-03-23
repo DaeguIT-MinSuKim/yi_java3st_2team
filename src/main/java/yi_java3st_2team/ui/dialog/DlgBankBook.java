@@ -43,6 +43,7 @@ public class DlgBankBook extends JDialog implements ActionListener {
 	private JButton btnCancel;
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
+	private DlgBankBook dlgBankBook;
 
 	public DlgBankBook() {
 		initialize();
@@ -118,9 +119,15 @@ public class DlgBankBook extends JDialog implements ActionListener {
 				buttonPane.add(btnCancel);
 			}
 		}
+		dlgBankBook = this;
 		
 	}
-
+	public DlgBankBook getDlgBankBook() {
+		return dlgBankBook;
+	}
+	public void setDlgBankBook(DlgBankBook dlgBankBook) {
+		this.dlgBankBook = dlgBankBook;
+	}
 	public JTextField getTfCardNum() {
 		return tfAccountNum;
 	}

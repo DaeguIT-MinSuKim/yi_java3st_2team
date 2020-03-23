@@ -827,6 +827,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		bankbook_UIpanel.setMain(this);
 		pCenter.add(bankbook_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}

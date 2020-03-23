@@ -35,4 +35,5 @@ public interface BankBookDao {
 	public abstract List<AccountInfo> showBankBookInfoYearly(String custname) throws SQLException;
 	public abstract List<AccountInfo> showBankBookDormantAccountInfo() throws SQLException;
 	public abstract List<AccountInfo> showBankBookTerminationAccountInfo() throws SQLException;
+	public int insertBankBookPerformance(BankBook bankbook) throws SQLException;
 }
