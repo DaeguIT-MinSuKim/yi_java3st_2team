@@ -46,6 +46,7 @@ select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode))
 from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip left join plan pl on pl.`planCode` = p.`planCode` 
 group by e.`empCode`;
 
+
 -- 1인 평균 급여액
 select sum(empSalary) 
    from employee e ;
@@ -87,7 +88,7 @@ select * from customer;
 select * from plan;
 select * from loan;
 select * from Performance p ;
-select * from Employee e ;
+select * from viptable;
 
 -- mysql 5.7 이상에서 group by 에러 처리
 
