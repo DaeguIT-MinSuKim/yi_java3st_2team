@@ -17,6 +17,7 @@ import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgLoan;
 import yi_java3st_2team.ui.service.LoanService;
 import yi_java3st_2team.ui.table.LoanCenterTblPanel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class LoanCenterUIPanel extends JPanel implements ActionListener {
@@ -45,6 +46,7 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 		add(pNorth, BorderLayout.NORTH);
 		
 		pCenter = new LoanCenterTblPanel();
+		pCenter.setBorder(new EmptyBorder(10, 50, 30, 50));
 		add(pCenter, BorderLayout.CENTER);
 		try {
 			pCenter.loadTableData(service.showLoans());
@@ -200,4 +202,8 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	public LoanCenterNorthSearchPanel getpNorth() {
+		return pNorth;
+	}
+	
 }

@@ -18,6 +18,7 @@ import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgBankBook;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.table.BankBookCenterTblPanel;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class BankBookCenterUIPanel extends JPanel implements ActionListener {
@@ -45,6 +46,7 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 		add(pNorth, BorderLayout.NORTH);
 		
 		pCenter = new BankBookCenterTblPanel();
+		pCenter.setBorder(new EmptyBorder(10, 50, 30, 50));
 		add(pCenter, BorderLayout.CENTER);
 		try {
 			pCenter.loadTableData(service.showBankBooks());
@@ -297,5 +299,10 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	public BankBookCenterNorthSearchPanel getpNorth() {
+		return pNorth;
+	}
+	
+	
 	
 }

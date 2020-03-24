@@ -111,4 +111,9 @@ public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 		}
 	
 	}
+	public EmpCenterNorthSearchPanel getpEmpSerch() {
+		return pEmpSerch;
+	}
+	
+	
 }
