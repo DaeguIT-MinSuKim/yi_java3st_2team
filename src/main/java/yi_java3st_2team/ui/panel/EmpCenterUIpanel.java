@@ -354,7 +354,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		List<Employee> list = new ArrayList<Employee>(); 
 		
 		try {
-			if(selectedOne.equals("통합검색")) {
+			if(selectedOne.equals("(검색할 조건을 선택해 주세요)")) {
 				JOptionPane.showMessageDialog(null, "검색할 조건을 선택해주세요");
 				return;
 			}
