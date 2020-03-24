@@ -84,6 +84,11 @@ public class EmployeeUIService {
     	empDao.updateEmployee(emp);
     }
     
+    //비밀번호 제외하고 업데이트
+    public void modifyEmpExceptForPwd(Employee emp) {
+    	empDao.updateEmployeeNotPw(emp);
+    }    
+    
     public void modifyEmpAuth(Employee emp) {
     	empDao.updateEmployeeAuth(emp);
     }

@@ -160,6 +160,30 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return 0;
 		
 	}
+	
+	@Override
+	public int updateEmployeeNotPw(Employee emp) {
+		String sql="update employee set empName=?,empTitle=?,empAuth=?,empSalary=?,empTel=?,empId=?, deptNo=?,pic=? where empCode=?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt= con.prepareStatement(sql)){
+			
+			pstmt.setString(1, emp.getEmpName());
+			pstmt.setString(2, emp.getEmpTitle());
+			pstmt.setString(3, emp.getEmpAuth());
+			pstmt.setInt(4, emp.getEmpSalary());
+			pstmt.setString(5, emp.getEmpTel());
+			pstmt.setString(6, emp.getEmpId());
+			pstmt.setInt(7, emp.getDept().getDeptNo());
+			pstmt.setBytes(8, emp.getPic());
+			pstmt.setString(9, emp.getEmpCode());
+
+			return pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 
 	@Override
 	public int deleteEmployee(Employee emp) {
@@ -729,6 +753,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		return new Employee(empCode, empName, empTitle, pic, perf, bonus);
 	}
 
+	
 	
 	
 	
