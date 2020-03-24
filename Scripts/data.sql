@@ -242,10 +242,12 @@ create trigger tri_after_update_BankBook_card
    for each row 
    begin
 	  if(old.accountbalance != new.accountbalance) then
-	  	update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = new.custcode and b.accountPlanCode = new.accountplancode) where custcode = new custcode;
+	  	update card c join bank b on c.custcode = b.custcode set cardbalance = 
 	  end if;
    end $$
 delimiter ;
+
+select * from card c join bankbook b on c.custcode = b.custcode;
 
 drop trigger if exists tri_update_card;
 delimiter $
