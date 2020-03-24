@@ -353,6 +353,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_info_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 개인 정보");
 				pCenter.add(cust_info_UIpanel,BorderLayout.CENTER);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
@@ -400,6 +401,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_plan_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 상품 관리");
 				pCenter.add(cust_plan_UIpanel,BorderLayout.CENTER);
 				pCenter = new CustPlanUIPanel();
 				contentPane.add(pCenter,BorderLayout.CENTER);
@@ -422,6 +424,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_DW_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 입출금 관리");
 				pCenter.add(cust_DW_UIpanel,BorderLayout.CENTER);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
