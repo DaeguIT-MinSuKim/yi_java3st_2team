@@ -29,13 +29,29 @@ public class CustInfoCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	protected Object[] toArray(Customer item) {
+		String rank;
+		if(item.getCustRank().equals("D")) {
+			rank = "Diamond";
+		}else if(item.getCustRank().equals("P")) {
+			rank = "Platinum";
+		}else if(item.getCustRank().equals("G")) {
+			rank = "Gold";
+		}else if(item.getCustRank().equals("S")) {
+			rank = "Silver";
+		}else{
+			rank = "Bronze";
+		}
+		String tel = item.getCustTel();
+		int lastIdx = tel.lastIndexOf("-");
+		String new_tel = tel.substring(0,lastIdx+1)+"****";
 		return new Object[] {
+				
 				item.getCustCode(),
 				item.getCustName(),
-				item.getCustRank(),
+				rank,
 				item.getCustCredit(),
 				item.getCustAddr(),
-				item.getCustTel()
+				new_tel
 		};
 	}
 

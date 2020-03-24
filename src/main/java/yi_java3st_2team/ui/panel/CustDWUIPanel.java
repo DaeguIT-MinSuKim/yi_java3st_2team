@@ -35,6 +35,13 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 
 		initialize();
 	}
+	
+	
+	public CustDWCenterNorthSearchPanel getPanel() {
+		return panel;
+	}
+
+
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		

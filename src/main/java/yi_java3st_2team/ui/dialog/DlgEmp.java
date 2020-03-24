@@ -487,6 +487,14 @@ public class DlgEmp extends JDialog implements ActionListener{
 		this.cmbDept.setSelectedIndex(deptno);
 		
 	}
+
+	public JTextField getTfEmpPwd() {
+		return tfEmpPwd;
+	}
+
+	public void setTfEmpPwd(JTextField tfEmpPwd) {
+		this.tfEmpPwd = tfEmpPwd;
+	}
 	
 	
 	

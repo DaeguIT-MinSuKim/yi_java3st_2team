@@ -286,8 +286,14 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 						if(updateEmp == null) {
 					    	return;
 					    }
-	                 
-					    service.modifyEmp(updateEmp);
+						
+						//다이얼로그에서 받아온 비밀번호 값이 기본값인 경우와 비밀번호도 수정한 경우 
+	                    if(dlgEmpForUpdate.getTfEmpPwd().getText().equals("**********")) {
+	                    	service.modifyEmpExceptForPwd(updateEmp);
+	                    }
+	                    else{
+	                    	service.modifyEmp(updateEmp);
+	                    }
 					    
 						pEmpTblPanel.loadTableData(service.showEmpList());
 						dlgEmpForUpdate.setVisible(false);
@@ -314,7 +320,8 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					}
 					
 					if(e.getActionCommand().contentEquals("닫기")) {
-						dlgEmp.setVisible(false);
+						//dlgEmp.setVisible(false);
+						dlgEmpForUpdate.dispose();
 					}
 					
 				}
@@ -378,5 +385,10 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 		}
 	
 	}
+	public EmpCenterNorthSearchPanel getpEmpSerch() {
+		return pEmpSerch;
+	}
+	
+	
 }	
 

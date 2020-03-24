@@ -88,7 +88,6 @@ import yi_java3st_2team.ui.panel.LoanCenterUIPanel;
 import yi_java3st_2team.ui.panel.LoanStatisticWestPanel;
 import yi_java3st_2team.ui.panel.NoticeUIPanel;
 import yi_java3st_2team.ui.service.EmployeeService;
-import yi_java3st_2team.ui.service.EmployeeUIService;
 import yi_java3st_2team.ui.table.DormantInfoTblPanel;
 import yi_java3st_2team.ui.table.TerminationInfoTblPanel;
 
@@ -353,6 +352,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_info_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 개인 정보");
 				pCenter.add(cust_info_UIpanel,BorderLayout.CENTER);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
@@ -400,6 +400,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_plan_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 상품 관리");
 				pCenter.add(cust_plan_UIpanel,BorderLayout.CENTER);
 				pCenter = new CustPlanUIPanel();
 				contentPane.add(pCenter,BorderLayout.CENTER);
@@ -422,6 +423,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
+				cust_DW_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 입출금 관리");
 				pCenter.add(cust_DW_UIpanel,BorderLayout.CENTER);
 				contentPane.add(pCenter,BorderLayout.CENTER);
 				revalidate();
@@ -761,6 +763,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		emp_UIpanel.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 검색");
 		pCenter.add(emp_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -773,11 +776,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		if(emp_UIpanel2 !=null) {
 			emp_UIpanel2 = new EmpCenterUIpanel2Work();
+			emp_UIpanel2.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 정보 > 사원 업무 정보 조회");
 			emp_UIpanel2.repaint();
 			emp_UIpanel2.revalidate();
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		emp_UIpanel2.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 정보 > 사원 업무 정보 조회");
 		pCenter.add(emp_UIpanel2,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -795,6 +800,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
+		emp_UIpanel_auth.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 권한");
 		pCenter.add(emp_UIpanel_auth,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -806,6 +812,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
 		card_UIpanel.setMain(this);
+		card_UIpanel.getpNorth().changeTitleBorder("카드 관리 > 카드 관리");
 		pCenter.add(card_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -853,6 +860,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
 		bankbook_UIpanel.setMain(this);
+		bankbook_UIpanel.getpNorth().changeTitleBorder("통장 관리 > 통장 관리");
 		pCenter.add(bankbook_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -918,6 +926,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
 		loan_UIpanel.setMain(this);
+		loan_UIpanel.getpNorth().changeTitleBorder("대출 관리 > 대출 관리");
 		pCenter.add(loan_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}

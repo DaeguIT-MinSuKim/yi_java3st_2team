@@ -20,6 +20,7 @@ import yi_java3st_2team.ui.service.CustomerService;
 import yi_java3st_2team.ui.table.CardCenterTblPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
 public class CardCenterUIPanel extends JPanel implements ActionListener {
@@ -52,6 +53,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		add(pNorth, BorderLayout.NORTH);
 		
 		pCenter = new CardCenterTblPanel();
+		pCenter.setBorder(new EmptyBorder(10, 50, 30, 50));
 		add(pCenter, BorderLayout.CENTER);
 		try {
 			pCenter.loadTableData(cardService.showCards());
@@ -281,4 +283,9 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
+	public CardCenterNorthSearchPanel getpNorth() {
+		return pNorth;
+	}
+	
+	
 }
