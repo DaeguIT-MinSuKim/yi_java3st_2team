@@ -18,7 +18,7 @@ public class CustomerService {
 		return dao.selectCustomerAll();
 	}
 	
-	public Customer showCustomerByName(String custName) throws SQLException{
+	public List<Customer> showCustomerByName(String custName) throws SQLException{
 		return dao.selectCustomerByName(custName);
 	}
 	
@@ -36,6 +36,10 @@ public class CustomerService {
 	
 	public List<Customer> showCustomerBankInfoByName(String custName) throws SQLException{
 		return dao.selectCustomerBankInfoByName(custName);
+	}
+	
+	public List<Customer> showCustomerBankInfoByAcc(String accountNum) throws SQLException{
+		return dao.selectCustomerBankInfoByAcc(accountNum);
 	}
 	
 	public int showNormalCustNum () throws SQLException{

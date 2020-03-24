@@ -9,10 +9,11 @@ public interface CustomerDao {
 	
 	abstract List<Customer> selectCustomerAll() throws SQLException;
 	abstract List<Customer> selectCustomerBalance() throws SQLException;
-	abstract Customer selectCustomerByName(String custName) throws SQLException;
+	abstract List<Customer> selectCustomerByName(String custName) throws SQLException;
 	abstract Customer selectCustomerByCode(String custCode) throws SQLException;
 	abstract Customer selectCustomerByTel(String custTel) throws SQLException;
 	abstract List<Customer> selectCustomerBankInfoByName (String custName) throws SQLException;
+	abstract List<Customer> selectCustomerBankInfoByAcc (String accountNum) throws SQLException;
 	abstract int selectNormalCustNum() throws SQLException; 
 	abstract int selectVIPCustNum() throws SQLException;
 	abstract int selectBRankCustNum() throws SQLException;

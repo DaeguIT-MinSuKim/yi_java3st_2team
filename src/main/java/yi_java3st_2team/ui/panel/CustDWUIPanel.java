@@ -19,8 +19,10 @@ import yi_java3st_2team.dto.Customer;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
-public class CustDWUIPanel extends JPanel {
+public class CustDWUIPanel extends JPanel implements ItemListener {
 	CustomerService custService = new CustomerService();
 	BankBookService bankService = new BankBookService();
 	private CustDWCenterCenterTblPanel panel_1;
@@ -34,6 +36,7 @@ public class CustDWUIPanel extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new CustDWCenterNorthSearchPanel();
+		panel.getCmbSearchList().addItemListener(this);
 		panel.getBtnCancel().addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -48,16 +51,31 @@ public class CustDWUIPanel extends JPanel {
 		panel.getBtnSearch().addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				String custName = panel.getTfSearch().getText().trim();
-				List<Customer> listForCustName = new ArrayList<>();
 				try {
+					String search = (String) panel.getCmbSearchList().getSelectedItem();
+					String text = panel.getTfSearch().getText().trim();
+					List<Customer> listForCustSearch = new ArrayList<>();
 					
-					listForCustName = custService.showCustomerBankInfoByName(custName);
-					if(listForCustName==null) {
-						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+					if(search.equals("검색 구분")) {
+						JOptionPane.showMessageDialog(null, "검색 범위를 선택하세요.");
 						return;
+					}else if(search.equals("고객명")) {
+						listForCustSearch = custService.showCustomerBankInfoByName(text);
+						if(listForCustSearch==null) {
+							JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+							return;
+						}
+					}else if(search.equals("계좌번호")) {
+						listForCustSearch = custService.showCustomerBankInfoByAcc(text);
+						
+						if(listForCustSearch==null) {
+							JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
+							return;
+						}
+
 					}
-					panel_1.loadTableData(listForCustName);
+					panel_1.loadTableData(listForCustSearch);
+					
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -126,6 +144,7 @@ public class CustDWUIPanel extends JPanel {
 									bankService.updateBankBalance(customer);
 									JOptionPane.showMessageDialog(null, "입금 되었습니다.");
 									panel_1.loadTableData(custService.showCustomersByBalance());
+									panel.getTfSearch().setText("");
 									dlgcustDW.dispose();
 								} catch (SQLException e1) {
 									e1.printStackTrace();
@@ -191,6 +210,7 @@ public class CustDWUIPanel extends JPanel {
 									bankService.updateBankBalance(customer);
 									JOptionPane.showMessageDialog(null, "출금 되었습니다.");
 									panel_1.loadTableData(custService.showCustomersByBalance());
+									panel.getTfSearch().setText("");
 									dlgcustDW.dispose();
 								}else {
 									JOptionPane.showMessageDialog(null, "잔액이 부족합니다.");
@@ -234,5 +254,23 @@ public class CustDWUIPanel extends JPanel {
 	
 		return popup;
 	}
+	
+	public void refreshTbl() throws SQLException {
+		List<Customer> list = custService.showCustomersByBalance();
+		panel_1.loadTableData(list);
+	}
 
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == panel.getCmbSearchList()) {
+			panelCmbSearchListItemStateChanged(e);
+		}
+	}
+	protected void panelCmbSearchListItemStateChanged(ItemEvent e) {
+		try {
+			refreshTbl();
+			panel.getTfSearch().setText("");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

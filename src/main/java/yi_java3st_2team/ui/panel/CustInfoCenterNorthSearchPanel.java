@@ -21,7 +21,7 @@ public class CustInfoCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Cu
 
 	@Override
 	public String[] setSearchList() {
-		String[] list = {"통합검색", "고객코드", "고객명","연락처"}; 
+		String[] list = {"검색 구분", "고객코드", "고객명","연락처"}; 
 		return list;
 	}
 

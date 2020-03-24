@@ -18,8 +18,10 @@ import yi_java3st_2team.dto.Customer;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
-public class CustInfoUIPanel extends JPanel implements ActionListener {
+public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListener {
 	CustomerService custService = new CustomerService();
 	private CustInfoCenterNorthSearchPanel panel;
 	private List<Customer> list = new ArrayList<>();
@@ -33,6 +35,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new CustInfoCenterNorthSearchPanel();
+		panel.getCmbSearchList().addItemListener(this);
 		panel.getBtnCancel().addActionListener(this);
 		panel.getBtnSearch().addActionListener(this);
 		add(panel, BorderLayout.NORTH);
@@ -198,7 +201,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		try {
 			String search = (String) panel.getCmbSearchList().getSelectedItem();
 			//경고창이 떠야할 때 : DB에서 받아오는 객체가 null 일 때 ,콤보박스에서 선택한 값이 통합검색 일 때
-			if(search.equals("통합검색")) {
+			if(search.equals("검색 구분")) {
 				JOptionPane.showMessageDialog(null, "검색 범위를 선택해주세요.");
 				return;
 			}
@@ -211,12 +214,12 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 					}
 					list.add(custByCode);
 				}else if(search.equals("고객명")) {
-					Customer custByName = custService.showCustomerByName(custInfo);
-					if(custByName==null) {
+					list = custService.showCustomerByName(custInfo);
+					if(list==null) {
 						JOptionPane.showMessageDialog(null, "해당 고객이 없습니다.");
 						return;
 					}
-					list.add(custByName);
+					
 				}else if(search.equals("연락처")) {
 					Customer custByTel = custService.showCustomerByTel(custInfo);
 					if(custByTel==null) {
@@ -257,4 +260,17 @@ public class CustInfoUIPanel extends JPanel implements ActionListener {
 		panel_1.loadTableData(list);
 	}
 	
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == panel.getCmbSearchList()) {
+			panelCmbSearchListItemStateChanged(e);
+		}
+	}
+	protected void panelCmbSearchListItemStateChanged(ItemEvent e) {
+		try {
+			refreshTbl();
+			panel.getTfSearch().setText("");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

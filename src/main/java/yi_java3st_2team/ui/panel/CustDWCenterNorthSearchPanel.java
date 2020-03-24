@@ -21,7 +21,7 @@ public class CustDWCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Cust
 
 	@Override
 	public String[] setSearchList() {
-		String[] list = {"통합검색", "고객명", "계좌번호"}; 
+		String[] list = {"검색 구분", "고객명", "계좌번호"}; 
 		return list;
 	}
 

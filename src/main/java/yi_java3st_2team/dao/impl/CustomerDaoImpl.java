@@ -52,17 +52,20 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	
-	//!!!!!!!!!! 한글 깨짐 문제로 고객명으로 검색이 안돼서 고객 코드 검색으로 임시변경함
 	@Override
-	public Customer selectCustomerByName(String custName) throws SQLException {
-		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName = ?";
+	public List<Customer> selectCustomerByName(String custName) throws SQLException {
+		String sql = "select custCode, custName, custRank, custCredit, custAddr, custTel from customer where custName like ?";
+		List<Customer> list = null;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, custName);
+			pstmt.setString(1, "%"+custName+"%");
 			try(ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
-					return getCustomer(rs);
+					list = new ArrayList<>();
+					do {
+						list.add(getCustomer(rs));
+					}while(rs.next());
 				}
 			}
 			
@@ -70,7 +73,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return list;
 	}
 
 	@Override
@@ -168,31 +171,29 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public List<Customer> selectCustomerBankInfoByName(String custName) throws SQLException {
-		String sql = "select custName, accountNum, accountBalance from customer c left join bankbook b on c.custcode = b.custCode where custName =?";
+		String sql = "select custName, accountNum, accountBalance from customer c join bankbook b on c.custcode = b.custCode where custName like ?";
 		List<Customer> list= null;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, custName);
+			pstmt.setString(1, "%"+custName+"%");
 			ResultSet rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
 					list = new ArrayList<>();
-					System.out.println(list.size());
 					do {
-						Customer customer= new Customer();
-						BankBook bankbook= new BankBook();
-						list.add(getCustBankInfo(customer, bankbook, rs));
-						System.out.println(list.size() + "!");
+						list.add(getCustBankInfo(rs));
 					}while(rs.next());
 				}
 				return list;
 		}
 	}
 
-	private Customer getCustBankInfo(Customer customer, BankBook bankbook, ResultSet rs) throws SQLException {
-		customer.setCustName(rs.getString("custName"));
-		bankbook.setAccountNum(rs.getString("accountNum"));
-		bankbook.setAccountBalance(Long.parseLong(rs.getString("accountBalance")));
+	private Customer getCustBankInfo(ResultSet rs) throws SQLException {
+		Customer customer= new Customer();
+		BankBook bankbook= new BankBook();
+		customer.setCustName(rs.getString(1));
+		bankbook.setAccountNum(rs.getString(2));
+		bankbook.setAccountBalance(Long.parseLong(rs.getString(3)));
 		customer.setBankbook(bankbook);
 		
 		return customer;
@@ -343,6 +344,36 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public List<Customer> selectCustomerBankInfoByAcc(String accountNum) throws SQLException {
+		String sql = "select * from customer c join bankbook b on c.custCode = b.custCode where accountNum = ?";
+		List<Customer> list = null;
+		try(Connection con = LocalDataSource.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, accountNum);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				list = new ArrayList<>();
+				do {
+					Customer customer = getCustomerByAcc(rs);
+					list.add(customer);
+				}while(rs.next());
+			}
+		}
+		return list;
+	}
+
+	private Customer getCustomerByAcc(ResultSet rs) throws SQLException {
+		Customer customer = new Customer();
+		BankBook bankbook = new BankBook();
+		customer.setCustCode(rs.getString(1));
+		customer.setCustName(rs.getString(2));
+		bankbook.setAccountNum(rs.getString(7));
+		bankbook.setAccountBalance(Long.parseLong(rs.getString(12)));
+		customer.setBankbook(bankbook);
+		return customer;
 	}
 
 	

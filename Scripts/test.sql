@@ -136,6 +136,8 @@ select * from plan;
 select planCode, planDetail, planName, planDesc, planDiv from plan where planCode like "A%";
 select planCode, planDetail, planName, planDesc, planDiv from plan where planDetail like "AB%";
 select * from cust_DW_audit cda ;
+select * from customer c join bankbook b on c.custCode = b.custCode where accountNum = "293133-11-000001";
+select custName, accountNum, accountBalance from customer c join bankbook b on c.custcode = b.custCode where custName like "%김%";
 
 #은행업무 - 박인선
 select * from plan where planCode like 'A%';

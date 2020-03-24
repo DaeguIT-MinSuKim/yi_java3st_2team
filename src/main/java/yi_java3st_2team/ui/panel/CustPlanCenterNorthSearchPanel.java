@@ -29,7 +29,7 @@ public class CustPlanCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Pl
 
 	@Override
 	public String[] setSearchList() {
-		String[] list = {"통합검색", "상품 코드(A)","상품 세부코드(AB)", "상품 이름"};
+		String[] list = {"검색 구분", "상품 코드(A)","상품 세부코드(AB)", "상품 이름"};
 		return list;
 	}
 
