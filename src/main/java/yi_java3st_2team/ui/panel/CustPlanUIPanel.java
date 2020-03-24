@@ -26,7 +26,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 
-public class CustPlanUIPanel extends JPanel{
+public class CustPlanUIPanel extends JPanel implements ItemListener{
 	PlanService planService = new PlanService();
 	private CustPlanCenterCenterTblPanel panel_1;
 	private CustPlanCenterNorthSearchPanel panel;
@@ -39,12 +39,13 @@ public class CustPlanUIPanel extends JPanel{
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new CustPlanCenterNorthSearchPanel();
+		panel.getCmbSearchList().addItemListener(this);
 		panel.getBtnSearch().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String search = (String) panel.getCmbSearchList().getSelectedItem();
-				if(search.equals("통합검색")) {
+				if(search.equals("검색 구분")) {
 					JOptionPane.showMessageDialog(null, "검색 범위를 선택하세요.");
 					return;
 				}
@@ -317,4 +318,17 @@ public class CustPlanUIPanel extends JPanel{
 		panel_1.loadTableData(list);
 	}
 
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == panel.getCmbSearchList()) {
+			panelCmbSearchListItemStateChanged(e);
+		}
+	}
+	protected void panelCmbSearchListItemStateChanged(ItemEvent e) {
+		try {
+			refreshTbl();
+			panel.getTfSearch().setText("");
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 }
