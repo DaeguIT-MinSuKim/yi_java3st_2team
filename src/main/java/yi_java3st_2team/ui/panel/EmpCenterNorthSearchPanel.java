@@ -21,7 +21,7 @@ public class EmpCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Employe
 	@Override
 	public String[] setSearchList() {
 	
-				String[] searchList = {"(검색할 조건을 선택해 주세요)","사원이름","부서 (인사  or 고객)","사원번호","직급"};
+				String[] searchList = {"검색구분","사원이름","부서 (인사  or 고객)","사원번호","직급"};
 				return searchList; 
 	
 	}
