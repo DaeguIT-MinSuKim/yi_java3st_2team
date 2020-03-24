@@ -1,12 +1,21 @@
 package yi_java3st_2team.ui.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +24,13 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageInputStream;
+import javax.imageio.stream.ImageOutputStream;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -53,7 +67,11 @@ public class DlgEmp extends JDialog implements ActionListener{
 	private static DlgEmp dialog;
 	private JButton btnOk;
 	private JButton btnCancel;
-
+	private Department dept;
+	private JPanel panel;
+	private JPanel pForPic;
+	private JLabel lblPic;
+	private JButton btnPic;
 	private Dimension picDimension=new Dimension(100, 150);
 	private String picPath;
 	
@@ -276,8 +294,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 			}
 			
 		}
-	};
-	
+	};
 	public JTextField getTextField() {
 		return tfEmpCode;
 	}
@@ -303,18 +320,11 @@ public class DlgEmp extends JDialog implements ActionListener{
 		String empTel = tfEmpTel.getText().trim();
 		String empId = tfEmpId.getText().trim();
 		String empPwd = tfEmpPwd.getText().trim();
-		icon = (ImageIcon)lblPic.getIcon();
-		byte[] pic = getImage(icon);
-		//JOptionPane.showMessageDialog(null, pic.length);
-		//lblPic.setIcon(new ImageIcon(pic));
+		getImage(lblPic);
 		
-        
-		setPic(pic);
-		//System.out.println(pic.hashCode()); //1255441253
-		//System.out.println(pic.toString()); //[B@4ad48365
-		//System.out.println(lblPic.getIcon().toString() +"이건?"); //javax.swing.ImageIcon@74ea2e99이건?
 		Department dept = (Department)cmbDept.getSelectedItem();
-
+		byte[] pic = getImage(lblPic);
+		JOptionPane.showMessageDialog(null, pic.length);
 
 		if(cmbDept.getSelectedIndex()== -1) {
 			JOptionPane.showMessageDialog(null, "부서를 선택하세요");
@@ -323,30 +333,32 @@ public class DlgEmp extends JDialog implements ActionListener{
 		return new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept ,pic);
 	}
 	
-	private byte[] getImage(ImageIcon icon) {
-		// 노이미지일때 기본 사진 가져오는것
-	  
-	//if(icon != null)	
-	byte[] pic = null;
-	     File file = new File(picPath);
-	     try(InputStream is = new FileInputStream(file)){
-	    	 pic = new byte[is.available()]; //메모리 부족하면 반복문 돌려야한다 512바이트씩
-	    	 is.read(pic); //읽어서 pic배열에 담아라
-	     } catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	    		
-		return pic;
+	private byte[] getImage(JLabel lblPic) {
+		try {
+	        Icon icons = lblPic.getIcon();
+	        BufferedImage bi = new BufferedImage(icons.getIconWidth(), icons.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+	        Graphics g = bi.createGraphics();
+	        icons.paintIcon(null, g, 0, 0);
+	        g.setColor(Color.WHITE);
+	        g.drawString(lblPic.getText(), 10, 20);
+	        g.dispose();
+
+	        ByteArrayOutputStream os = new ByteArrayOutputStream();
+	        ImageIO.write(bi, "jpg", os);
+	        InputStream fis = new ByteArrayInputStream(os.toByteArray());
+	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	        byte[] buf = new byte[1024];
+	        for (int readNum; (readNum = fis.read(buf)) != -1;) {
+	            bos.write(buf, 0, readNum);
+	        }
+	        byte[] bytes = bos.toByteArray();
+	        return bytes;
+	    } catch (IOException d) {
+	        JOptionPane.showMessageDialog(rootPane, d);
+	    }
+		return null;
 	}
-	private Department dept;
-	private JPanel panel;
-	private JPanel pForPic;
-	private JLabel lblPic;
-	private JButton btnPic;
-	private ImageIcon icon;
-	
+
 	//다이얼로그의 값 update위해 가져오기
 //		public Employee getItemForUpdate() {
 //			String empCode = tfEmpCode.getText().trim();
