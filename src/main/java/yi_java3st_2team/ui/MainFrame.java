@@ -91,7 +91,6 @@ import yi_java3st_2team.ui.service.EmployeeService;
 import yi_java3st_2team.ui.table.DormantInfoTblPanel;
 import yi_java3st_2team.ui.table.TerminationInfoTblPanel;
 
-
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame implements ActionListener {
 	private JPanel contentPane;

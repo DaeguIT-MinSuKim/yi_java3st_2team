@@ -10,6 +10,7 @@ public class BankBook {
 	private float accountInterest;
 	private long accountBalance;
 	private Employee employee;
+	private boolean connectChk;
 	public BankBook() {
 		
 	}
@@ -17,6 +18,11 @@ public class BankBook {
 		this.custCode = custCode;
 	}
 	
+	public BankBook(String accountNum, Customer custCode, boolean connectChk) {
+		this.accountNum = accountNum;
+		this.custCode = custCode;
+		this.connectChk = connectChk;
+	}
 	public BankBook(String accountNum, Customer custCode, Plan accountPlanCode, Date accountOpenDate,
 			float accountInterest) {
 		super();
@@ -77,4 +83,18 @@ public class BankBook {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	public boolean isConnectChk() {
+		return connectChk;
+	}
+	public void setConnectChk(boolean connectChk) {
+		this.connectChk = connectChk;
+	}
+	@Override
+	public String toString() {
+		return String.format(
+				"BankBook [accountNum=%s, custCode=%s, accountPlanCode=%s, accountOpenDate=%s, accountInterest=%s, accountBalance=%s, employee=%s, connectChk=%s]",
+				accountNum, custCode, accountPlanCode, accountOpenDate, accountInterest, accountBalance, employee,
+				connectChk);
+	}
+	
 }

@@ -11,6 +11,7 @@ public class Card {
 	private int cardLimit;
 	private long cardBalance;
 	private Employee employee;
+	private BankBook bankbook;
 	public Card() {
 		
 	}
@@ -74,10 +75,17 @@ public class Card {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	public BankBook getBankbook() {
+		return bankbook;
+	}
+	public void setBankbook(BankBook bankbook) {
+		this.bankbook = bankbook;
+	}
 	@Override
 	public String toString() {
 		return String.format(
-				"Card [cardNum=%s, custCode=%s, planCode=%s, cardSecuCode=%s, cardIssueDate=%s, cardLimit=%s, cardBalance=%s]",
-				cardNum, custCode, planCode, cardSecuCode, cardIssueDate, cardLimit, cardBalance);
+				"Card [cardNum=%s, custCode=%s, planCode=%s, cardSecuCode=%s, cardIssueDate=%s, cardLimit=%s, cardBalance=%s, employee=%s, bankbook=%s]",
+				cardNum, custCode, planCode, cardSecuCode, cardIssueDate, cardLimit, cardBalance, employee, bankbook);
 	}
+	
 }

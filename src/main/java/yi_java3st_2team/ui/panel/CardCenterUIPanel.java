@@ -9,11 +9,13 @@ import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.List;
 
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgCard;
+import yi_java3st_2team.ui.dialog.DlgConnectBankBookInfo;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.CustomerService;
@@ -29,6 +31,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	private CustomerService customerService;
 	private CardService cardService;
 	private DlgCard dlgCard;
+	private DlgConnectBankBookInfo dlgInfo;
 	private int selIdx;
 	private MainFrame main;
 
@@ -80,14 +83,30 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		ActionListener myDlgListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Card card = dlgCard.getItem();
 				if(e.getActionCommand().equals("추가")) {
 					try {
-						Card card = dlgCard.getItem();
-						pCenter.addItem(card);
-						cardService.insertCard(card);
-						pCenter.loadTableData(cardService.showCards());
-						JOptionPane.showMessageDialog(null, "추가되었습니다");
-						dlgCard.dispose();
+						JOptionPane.showMessageDialog(null, card.getCardNum().substring(6, 7));
+						if(card.getCardNum().substring(6,7).equals("1")) {
+							if(cardService.showBankBookIsConnect(card).size()==0) {
+								JOptionPane.showMessageDialog(null, "선택할 수 있는 예금 계좌가 없습니다. 통장을 먼저 만드세요");
+								return;
+							}
+							else {
+								dlgInfo = new DlgConnectBankBookInfo();
+								List<BankBook> list = cardService.showBankBookIsConnect(card);
+								dlgInfo.getPanel().loadTableData(list);
+								dlgInfo.setDlgCard(dlgCard);
+								dlgInfo.setModal(true);
+								dlgInfo.setVisible(true);
+							}
+						}
+						else {
+							cardService.insertCardCredit(card);
+							dlgCard.dispose();
+							JOptionPane.showMessageDialog(null, "추가되었습니다");
+							pCenter.loadTableData(cardService.showCards());
+						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -95,7 +114,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
-						Card card = dlgCard.getItem();
 						cardService.updateCard(card);
 						cardService.updateAccountBalance(card);
 						main.getCust_DW_UIpanel().getPanel_1().loadTableData(customerService.showCustomersByBalance());
@@ -116,6 +134,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				if(e.getActionCommand().equals("추가")) {
 					dlgCard = new DlgCard();
 					dlgCard.initCmbModel(cardService);
+					setUIPanel();
 					dlgCard.setEmp(main.getEmpAuth());
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.getBtnOk().setText(e.getActionCommand());
@@ -158,6 +177,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 							try {
 								pCenter.removeItem(selIdx);
 								cardService.deleteCard(selCard);
+								cardService.updateConnectChk(selCard);
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -285,6 +305,9 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	}
 	public CardCenterNorthSearchPanel getpNorth() {
 		return pNorth;
+	}
+	private void setUIPanel() {
+		dlgCard.setUiPanel(this);
 	}
 	
 	

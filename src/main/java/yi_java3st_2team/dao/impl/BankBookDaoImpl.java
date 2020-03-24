@@ -13,6 +13,7 @@ import yi_java3st_2team.dao.BankBookDao;
 import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.BankBook;
+import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 
@@ -474,6 +475,58 @@ public class BankBookDaoImpl implements BankBookDao {
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareCall(sql)) {
 			pstmt.setLong(1, customer.getBankbook().getAccountBalance());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public List<BankBook> showBankBookByIsConnect(Card card) throws SQLException {
+		List<BankBook> list = new ArrayList<>();
+		String sql = "select * from bankbook_deposit_connect_to_card_info where custcode = (select custcode from customer where custname = ?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, card.getCustCode().getCustName());
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getBankBookConnect(rs));
+				}
+			}
+			return list;
+		}
+				
+	}
+
+	private BankBook getBankBookConnect(ResultSet rs) throws SQLException {
+		String accountNum = rs.getString("accountnum");
+		Customer custCode = new Customer(rs.getString("custcode"));
+		boolean connectChk = rs.getInt("connectChk")==0?false:true;
+		return new BankBook(accountNum, custCode, connectChk);
+	}
+	//내일 와서 update 문 에러 확인할것(무슨 문제인지 확인이 안되네 에러도 안찍히고)
+	@Override
+	public int updateConnectChk(Card card) throws SQLException {
+		int res = -1;
+		String sql = "update bankbook set connectchk = ? from bankbook where custcode = (select custcode from customer where custname = ?) and accountnum = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, card.getBankbook().isConnectChk()==true?1:0);
+			pstmt.setString(2, card.getBankbook().getCustCode().getCustName());
+			pstmt.setString(3, card.getBankbook().getAccountNum());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+
+	@Override
+	public int updateCardBalanceByAccountBalance(Card card) throws SQLException {
+		int res = -1;
+		String sql = "update card set cardbalance = (select accountbalance from bankbook where accountnum = ?) where cardnum = ? and custcode = (select custcode from customer where custname = ?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1,card.getBankbook().getAccountNum());
+			pstmt.setString(2, card.getCardNum());
+			pstmt.setString(3, card.getCustCode().getCustName());
 			res = pstmt.executeUpdate();
 		}
 		return res;

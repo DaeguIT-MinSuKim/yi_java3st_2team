@@ -204,10 +204,6 @@ select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'd
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and month(transdate) = month(now()) group by cardnum;
 select * from performance;
 
-select * from bankbook;
-insert into bankbook values ('293133-11-000001','C001','A001',now(),0.10,0,'B001');
-insert into card values ('2931331000000010','C001','B001',111,now(),0,(select accountbalance from bankbook where custcode ='C001' and accountplancode = 'A001'),'B001',(select accountnum from bankbook where custcode = 'C001' and accountplancode = 'A001'));
-select * from card;
-
-
-drop procedure if exists change_bankbalance;
+insert into bankbook values ('293133-11-000001','C001','A001',now(),0.10,0,'B001',0);
+create view bankbook_deposit_connect_to_card_info as select accountnum,custcode,connectchk from bankbook where substring(accountnum,9,1)='1' and connectchk = 0;
+update bankbook set connectchk = 0 where custcode = 'C001' and accountnum = '293133-11-000001';

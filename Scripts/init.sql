@@ -6,13 +6,14 @@ CREATE SCHEMA `bank`;
 
 -- 통장
 CREATE TABLE `bank`.`BankBook` (
-	`accountNum`      char(16) NOT NULL COMMENT '계좌번호', -- 계좌번호
-	`custCode`        char(4)  NOT NULL COMMENT '고객코드', -- 고객코드
-	`accountPlanCode` char(4)  NOT NULL COMMENT '통장상품코드', -- 통장상품코드
-	`accountOpenDate` DATETIME NOT NULL COMMENT '계좌개설일', -- 계좌개설일
-	`accountInterest` FLOAT    NOT NULL COMMENT '이자율', -- 이자율
-	`accountBalance`  BIGINT   NOT NULL COMMENT '잔액', -- 잔액
-	`empCode`         char(4)  NULL     COMMENT '사원코드' -- 사원코드
+	`accountNum`      char(16)   NOT NULL COMMENT '계좌번호', -- 계좌번호
+	`custCode`        char(4)    NOT NULL COMMENT '고객코드', -- 고객코드
+	`accountPlanCode` char(4)    NOT NULL COMMENT '통장상품코드', -- 통장상품코드
+	`accountOpenDate` DATETIME   NOT NULL COMMENT '계좌개설일', -- 계좌개설일
+	`accountInterest` FLOAT      NOT NULL COMMENT '이자율', -- 이자율
+	`accountBalance`  BIGINT     NOT NULL COMMENT '잔액', -- 잔액
+	`empCode`         char(4)    NULL     COMMENT '사원코드', -- 사원코드
+	`connectChk`      TINYINT(1) NULL     COMMENT '체크카드여부' -- 체크카드여부
 )
 COMMENT '통장';
 

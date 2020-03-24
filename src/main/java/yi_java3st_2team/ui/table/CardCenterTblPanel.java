@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
@@ -71,6 +72,7 @@ public class CardCenterTblPanel extends AbsCenterTblPanel<Card> {
 			int limit = Integer.parseInt(limitStr.replaceAll("[\\,]", ""));
 			card.setCardLimit(limit);
 		}
+		card.setBankbook(new BankBook());
 		return card;
 	}
 

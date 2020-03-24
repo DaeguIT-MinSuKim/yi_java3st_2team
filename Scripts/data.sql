@@ -80,11 +80,8 @@ insert into plan values("A001", "AA001", "슈퍼정기예금", "가입자 맞춤
 					   ("C004", "CA002", "패밀리 대출", "YN은행 임직원을 위한 무서류 일반대출", "N"), -- 일반/일반대출
 					   ("C005", "CB002", "아파트 소유자 대출", "본인명의 아파트 소유자를 위한 신용 대출", "N"), -- 일반/신용대출
 					   ("C006", "CC002", "YN Go Anywhere", "refresh 여행을 위한 빠른 카드 대출", "N"); -- 일반/카드대출						   			   				   
-
-update bankbook b join performance p on b.accountplancode = p.plancode and b.custcode = p.custcode set b.empcode = p.empcode;
-update card c join performance p on c.plancode = p.plancode and c.custcode = p.custcode set c.empcode = p.empcode;
-update loan l join performance p on l.loanplancode = p.plancode and l.custCode = p.custcode set l.empcode = p.empcode;
-
+				   
+#통장 테이블 
 #statistic table 생성
 drop view if exists vipTable;  
 create view vipTable as select custCode as vip from customer c where `custRank`="D";
@@ -196,8 +193,6 @@ begin
 	update card c join bankbook b on c.accountnum = b.accountnum set c.cardbalance = in_accountbalance;
 end!
 delimiter ;
-
-select * from card c join bankbook b on c.custcode = b.custcode;
 
 drop trigger if exists tri_update_card;
 delimiter $

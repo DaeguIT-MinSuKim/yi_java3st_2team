@@ -45,6 +45,7 @@ public class DlgCard extends JDialog implements ActionListener {
 	private JComboBox<Customer> cmbCust;
 	private JComboBox<Plan> cmbPlan;
 	private Employee emp;
+	private CardCenterUIPanel uiPanel;
 
 	public DlgCard() {
 		initialize();
@@ -141,6 +142,13 @@ public class DlgCard extends JDialog implements ActionListener {
 			}
 		}
 		
+	}
+	
+	public CardCenterUIPanel getUiPanel() {
+		return uiPanel;
+	}
+	public void setUiPanel(CardCenterUIPanel uiPanel) {
+		this.uiPanel = uiPanel;
 	}
 	public Employee getEmp() {
 		return emp;

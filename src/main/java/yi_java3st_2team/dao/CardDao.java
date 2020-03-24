@@ -13,7 +13,8 @@ public interface CardDao {
 	public abstract List<Card> showCardByPlanName(Card card) throws SQLException;
 	public abstract List<Card> showCardByCheckCard() throws SQLException;
 	public abstract List<Card> showCardByCreditCard() throws SQLException;
-	public abstract int insertCard(Card card) throws SQLException;
+	public abstract int insertCardCheck(Card card) throws SQLException;
+	public abstract int insertCardCredit(Card card) throws SQLException;
 	public abstract int updateCard(Card card) throws SQLException;
 	public abstract int deleteCard(Card card) throws SQLException;
 	public abstract List<CardInfo> showCardInfoDaily(String custname) throws SQLException;

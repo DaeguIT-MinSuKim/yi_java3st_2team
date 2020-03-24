@@ -71,9 +71,28 @@ public class CardDaoImpl implements CardDao {
 	}
 
 	@Override
-	public int insertCard(Card card) throws SQLException {
+	public int insertCardCheck(Card card) throws SQLException {
 		int res = -1;
-		String sql = "insert into card values(?,?,?,?,?,?,?,(select empcode from employee where empname = ?))";
+		String sql = "insert into card values(?,?,?,?,?,?,?,(select empcode from employee where empname = ?),?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, card.getCardNum());
+			pstmt.setString(2, card.getCustCode().getCustCode());
+			pstmt.setString(3, card.getPlanCode().getPlanCode());
+			pstmt.setString(4, card.getCardSecuCode());
+			pstmt.setTimestamp(5, new Timestamp(card.getCardIssueDate().getTime()));
+			pstmt.setInt(6, card.getCardLimit());
+			pstmt.setLong(7, card.getCardBalance());
+			pstmt.setString(8, card.getEmployee().getEmpName());
+			pstmt.setString(9, card.getBankbook().getAccountNum());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
+	@Override
+	public int insertCardCredit(Card card) throws SQLException {
+		int res = -1;
+		String sql = "insert into card values(?,?,?,?,?,?,?,?)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCardNum());

@@ -3,12 +3,15 @@ package yi_java3st_2team.ui.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import yi_java3st_2team.dao.BankBookDao;
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.dao.CustomerDao;
 import yi_java3st_2team.dao.PlanDao;
+import yi_java3st_2team.dao.impl.BankBookDaoImpl;
 import yi_java3st_2team.dao.impl.CardDaoImpl;
 import yi_java3st_2team.dao.impl.CustomerDaoImpl;
 import yi_java3st_2team.dao.impl.PlanDaoImpl;
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Customer;
@@ -18,11 +21,13 @@ public class CardService {
 	private CardDao cardDao;
 	private CustomerDao custDao;
 	private PlanDao planDao;
+	private BankBookDao bankbookDao;
 
 	public CardService() {
 		cardDao = CardDaoImpl.getInstance();
 		custDao = CustomerDaoImpl.getInstance();
 		planDao = PlanDaoImpl.getInstance();
+		bankbookDao = BankBookDaoImpl.getInstance();
 	}
 	public List<Card> showCards() throws SQLException {
 		return cardDao.showCards();
@@ -39,8 +44,11 @@ public class CardService {
 	public List<Card> showCardByCreditCard() throws SQLException {
 		return cardDao.showCardByCreditCard();
 	}
-	public int insertCard(Card card) throws SQLException {
-		return cardDao.insertCard(card);
+	public int insertCardCheck(Card card) throws SQLException {
+		return cardDao.insertCardCheck(card);
+	}
+	public int insertCardCredit(Card card) throws SQLException {
+		return cardDao.insertCardCredit(card);
 	}
 	public int updateCard(Card card) throws SQLException {
 		return cardDao.updateCard(card);
@@ -71,6 +79,15 @@ public class CardService {
 	}
 	public int updateAccountBalance(Card card) throws SQLException {
 		return cardDao.updateAccountBalance(card);
+	}
+	public List<BankBook> showBankBookIsConnect(Card card) throws SQLException {
+		return bankbookDao.showBankBookByIsConnect(card);
+	}
+	public int updateConnectChk(Card card) throws SQLException {
+		return bankbookDao.updateConnectChk(card);
+	}
+	public int updateCardBalanceByAccountBalance(Card card) throws SQLException {
+		return bankbookDao.updateCardBalanceByAccountBalance(card);
 	}
 }
 
