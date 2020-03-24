@@ -134,7 +134,8 @@ CREATE TABLE `bank`.`Card` (
 	`cardIssueDate` DATETIME NULL     COMMENT '카드발급일', -- 카드발급일
 	`cardLimit`     INTEGER  NULL     COMMENT '카드한도', -- 카드한도
 	`cardBalance`   BIGINT   NULL     COMMENT '카드잔액', -- 카드잔액
-	`empCode`       char(4)  NULL     COMMENT '사원코드' -- 사원코드
+	`empCode`       char(4)  NULL     COMMENT '사원코드', -- 사원코드
+	`accountNum`    char(16) NULL     COMMENT '계좌번호' -- 계좌번호
 )
 COMMENT '카드';
 
@@ -333,6 +334,16 @@ ALTER TABLE `bank`.`Card`
 		)
 		REFERENCES `bank`.`Employee` ( -- 사원
 			`empCode` -- 사원코드
+		);
+
+-- 카드
+ALTER TABLE `bank`.`Card`
+	ADD CONSTRAINT `FK_BankBook_TO_Card` -- 통장 -> 카드
+		FOREIGN KEY (
+			`accountNum` -- 계좌번호
+		)
+		REFERENCES `bank`.`BankBook` ( -- 통장
+			`accountNum` -- 계좌번호
 		);
 
 -- 실적

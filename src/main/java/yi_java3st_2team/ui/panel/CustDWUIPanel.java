@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgCustDW;
 import yi_java3st_2team.ui.service.BankBookService;
+import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.CustomerService;
 import yi_java3st_2team.ui.table.CustDWCenterCenterTblPanel;
 import yi_java3st_2team.dto.BankBook;
@@ -25,9 +27,10 @@ import java.awt.event.ItemEvent;
 public class CustDWUIPanel extends JPanel implements ItemListener {
 	CustomerService custService = new CustomerService();
 	BankBookService bankService = new BankBookService();
+	CardService cardService = new CardService();
 	private CustDWCenterCenterTblPanel panel_1;
 	private CustDWCenterNorthSearchPanel panel;
-	
+	private MainFrame main;
 	public CustDWUIPanel() {
 
 		initialize();
@@ -96,6 +99,20 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 		}
 		add(panel_1, BorderLayout.CENTER);
 	}
+	
+	public MainFrame getMain() {
+		return main;
+	}
+	public void setMain(MainFrame main) {
+		this.main = main;
+	}
+	
+	public CustDWCenterCenterTblPanel getPanel_1() {
+		return panel_1;
+	}
+	public void setPanel_1(CustDWCenterCenterTblPanel panel_1) {
+		this.panel_1 = panel_1;
+	}
 	private JPopupMenu createPopup() {
 		JPopupMenu popup = new JPopupMenu();
 		
@@ -142,6 +159,8 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 								
 								try {
 									bankService.updateBankBalance(customer);
+									bankService.updateCardBalance(customer);
+									main.getCard_UIpanel().getpCenter().loadTableData(cardService.showCards());
 									JOptionPane.showMessageDialog(null, "입금 되었습니다.");
 									panel_1.loadTableData(custService.showCustomersByBalance());
 									panel.getTfSearch().setText("");
@@ -208,6 +227,8 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 							try {
 								if(customer.getBankbook().getAccountBalance() >= 0) {
 									bankService.updateBankBalance(customer);
+									bankService.updateCardBalance(customer);
+									main.getCard_UIpanel().getpCenter().loadTableData(cardService.showCards());
 									JOptionPane.showMessageDialog(null, "출금 되었습니다.");
 									panel_1.loadTableData(custService.showCustomersByBalance());
 									panel.getTfSearch().setText("");

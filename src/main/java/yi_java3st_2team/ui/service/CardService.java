@@ -69,5 +69,8 @@ public class CardService {
 	public List<CardInfo> showCardInfo() throws SQLException {
 		return cardDao.showCardInfo();
 	}
+	public int updateAccountBalance(Card card) throws SQLException {
+		return cardDao.updateAccountBalance(card);
+	}
 }
 

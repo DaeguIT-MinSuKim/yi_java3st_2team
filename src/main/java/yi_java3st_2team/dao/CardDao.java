@@ -21,4 +21,5 @@ public interface CardDao {
 	public abstract List<CardInfo> showCardInfoMonthly(String custname) throws SQLException;
 	public abstract List<CardInfo> showCardInfoYearly(String custname) throws SQLException;
 	public abstract List<CardInfo> showCardInfo() throws SQLException;
+	public abstract int updateAccountBalance(Card card) throws SQLException;
 }

@@ -247,5 +247,16 @@ public class CardDaoImpl implements CardDao {
 		}
 		return list;
 	}
+	@Override
+	public int updateAccountBalance(Card card) throws SQLException {
+		int res = 0;
+		String sql = "call change_bankbalance(?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareCall(sql)) {
+			pstmt.setLong(1, card.getCardBalance());
+			res = pstmt.executeUpdate();
+		}
+		return res;
+	}
 
 }

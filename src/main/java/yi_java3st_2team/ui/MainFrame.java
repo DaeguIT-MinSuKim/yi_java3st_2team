@@ -689,6 +689,19 @@ public class MainFrame extends JFrame implements ActionListener {
 	public JButton getBtnLogout() {
 		return btnLogout;
 	}
+	
+	public CustDWUIPanel getCust_DW_UIpanel() {
+		return cust_DW_UIpanel;
+	}
+	public void setCust_DW_UIpanel(CustDWUIPanel cust_DW_UIpanel) {
+		this.cust_DW_UIpanel = cust_DW_UIpanel;
+	}
+	public CardCenterUIPanel getCard_UIpanel() {
+		return card_UIpanel;
+	}
+	public void setCard_UIpanel(CardCenterUIPanel card_UIpanel) {
+		this.card_UIpanel = card_UIpanel;
+	}
 	public void initEmpAuth(String empName) {
 		try {
 			Employee emp = new Employee();
@@ -1094,6 +1107,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				cust_DW_UIpanel = new CustDWUIPanel();
 				bankbook_UIpanel = new BankBookCenterUIPanel();
 				card_UIpanel = new CardCenterUIPanel();
+				setMain();
 				loan_UIpanel = new LoanCenterUIPanel();
 			}
 		});
@@ -1387,6 +1401,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			}
 		};
 		return northBtnListener;
+	}
+	private void setMain() {
+		cust_DW_UIpanel.setMain(this);
+		card_UIpanel.setMain(this);
 	}
 	javax.swing.Timer paint = new javax.swing.Timer(1, new ActionListener() {
         public void actionPerformed(ActionEvent e) {

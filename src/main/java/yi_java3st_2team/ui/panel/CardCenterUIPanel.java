@@ -14,7 +14,9 @@ import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgCard;
+import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CardService;
+import yi_java3st_2team.ui.service.CustomerService;
 import yi_java3st_2team.ui.table.CardCenterTblPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,7 +25,8 @@ import java.awt.event.ActionEvent;
 public class CardCenterUIPanel extends JPanel implements ActionListener {
 	private CardCenterNorthSearchPanel pNorth;
 	private CardCenterTblPanel pCenter;
-	private CardService service;
+	private CustomerService customerService;
+	private CardService cardService;
 	private DlgCard dlgCard;
 	private int selIdx;
 	private MainFrame main;
@@ -35,8 +38,11 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
-		if(service==null) {
-			service = new CardService();
+		if(customerService==null) {
+			customerService = new CustomerService();
+		}
+		if(cardService==null) {
+			cardService = new CardService();
 		}
 		setLayout(new BorderLayout(0, 0));
 		
@@ -48,12 +54,18 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		pCenter = new CardCenterTblPanel();
 		add(pCenter, BorderLayout.CENTER);
 		try {
-			pCenter.loadTableData(service.showCards());
+			pCenter.loadTableData(cardService.showCards());
 			pCenter.setPopupMenu(getTblPopMenu());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public CardCenterTblPanel getpCenter() {
+		return pCenter;
+	}
+	public void setpCenter(CardCenterTblPanel pCenter) {
+		this.pCenter = pCenter;
 	}
 	public MainFrame getMain() {
 		return main;
@@ -70,8 +82,8 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 					try {
 						Card card = dlgCard.getItem();
 						pCenter.addItem(card);
-						service.insertCard(card);
-						pCenter.loadTableData(service.showCards());
+						cardService.insertCard(card);
+						pCenter.loadTableData(cardService.showCards());
 						JOptionPane.showMessageDialog(null, "추가되었습니다");
 						dlgCard.dispose();
 					} catch (SQLException e1) {
@@ -82,8 +94,10 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				else {
 					try {
 						Card card = dlgCard.getItem();
-						service.updateCard(card);
-						pCenter.loadTableData(service.showCards());
+						cardService.updateCard(card);
+						cardService.updateAccountBalance(card);
+						main.getCust_DW_UIpanel().getPanel_1().loadTableData(customerService.showCustomersByBalance());
+						pCenter.loadTableData(cardService.showCards());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
 						dlgCard.dispose();
 					} catch (SQLException e1) {
@@ -99,7 +113,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					dlgCard = new DlgCard();
-					dlgCard.initCmbModel(service);
+					dlgCard.initCmbModel(cardService);
 					dlgCard.setEmp(main.getEmpAuth());
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.getBtnOk().setText(e.getActionCommand());
@@ -112,7 +126,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						selIdx = pCenter.getSelectedRowIdx();
 						Card selCard = pCenter.getSelectedItem();
 						dlgCard = new DlgCard();
-						dlgCard.initCmbModel(service);
+						dlgCard.initCmbModel(cardService);
 						dlgCard.setTitle("카드" + e.getActionCommand());
 						dlgCard.getBtnOk().setText(e.getActionCommand());
 						dlgCard.getBtnOk().addActionListener(myDlgListener);
@@ -141,7 +155,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						if(res==0) {
 							try {
 								pCenter.removeItem(selIdx);
-								service.deleteCard(selCard);
+								cardService.deleteCard(selCard);
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -191,7 +205,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				Card card = new Card();
 				card.setCustCode(cust);
 				try {
-					List<Card> list = service.showCardByCustName(card);
+					List<Card> list = cardService.showCardByCustName(card);
 					if(list.size()==0) {
 						JOptionPane.showMessageDialog(null, "그런 고객을 찾을 수 없습니다");
 						return;
@@ -214,7 +228,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				Card card = new Card();
 				card.setPlanCode(plan);	
 				try {
-					List<Card> list = service.showCardByPlanName(card);
+					List<Card> list = cardService.showCardByPlanName(card);
 					if(list.size()==0) {
 						JOptionPane.showMessageDialog(null, "그런 상품을 찾을 수 없습니다");
 						return;
@@ -233,7 +247,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		case "카드구분":
 			if(pNorth.getTfSearch().getText().trim().equals("체크카드")) { 
 				try {
-					List<Card> list = service.showCardByCheckCard();
+					List<Card> list = cardService.showCardByCheckCard();
 					pCenter.loadTableData(list);
 					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
 				} catch (SQLException e1) {
@@ -243,7 +257,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			}
 			else if(pNorth.getTfSearch().getText().trim().equals("신용카드")) {
 				try {
-					List<Card> list = service.showCardByCreditCard();
+					List<Card> list = cardService.showCardByCreditCard();
 					pCenter.loadTableData(list);
 					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
 				} catch (SQLException e1) {
@@ -260,7 +274,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
 		try {
 			pNorth.tfClear();
-			List<Card> list = service.showCards();
+			List<Card> list = cardService.showCards();
 			pCenter.loadTableData(list);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block

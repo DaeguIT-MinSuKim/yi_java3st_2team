@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import yi_java3st_2team.dto.BankBook;
+import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.Customer;
 
@@ -35,5 +36,5 @@ public interface BankBookDao {
 	public abstract List<AccountInfo> showBankBookInfoYearly(String custname) throws SQLException;
 	public abstract List<AccountInfo> showBankBookDormantAccountInfo() throws SQLException;
 	public abstract List<AccountInfo> showBankBookTerminationAccountInfo() throws SQLException;
-	public int insertBankBookPerformance(BankBook bankbook) throws SQLException;
+	public abstract int updateCardBalance(Customer customer) throws SQLException;
 }

@@ -149,19 +149,7 @@ select * from plan where planCode like 'C%';
 #3등급 : 8,000,000
 #4등급 : 7,000,000
 #5등급 : 6,000,000
-update card set cardLimit = 10000000 where custCode = 'C001' and plancode = 'B002';
-update card set cardLimit = 9000000 where custCode = 'C002' and plancode = 'B002';
-update card set cardLimit = 8000000 where custCode = 'C003' and plancode = 'B002';
-update card set cardLimit = 7000000 where custCode = 'C004' and plancode = 'B002';
-update card set cardLimit = 6000000 where custCode = 'C005' and plancode = 'B002';
-#체크 카드 통장에 있는 잔액에 따라 업데이트
-select * from bankbook where custcode = 'C002';
-select * from card where plancode = 'B001';
-update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C001' and b.accountPlanCode = 'A001') where plancode = 'B001';
-update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C002' and b.accountPlanCode = 'A004') where plancode = 'B001';
-update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C003' and b.accountPlanCode = 'A004') where plancode = 'B001';
-update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C004' and b.accountPlanCode = 'A004') where plancode = 'B001';
-update card c set c.cardBalance = (select accountbalance from bankbook b where b.custCode = 'C005' and b.accountPlanCode = 'A004') where plancode = 'B001';
+
 #테이블을 위한 카드 SQL
 select c.cardnum,cs.custname,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode;
 select * from plan;
@@ -202,6 +190,9 @@ select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.
 select c.cardnum,cs.custcode,cs.custname,p.plancode,p.planname,c.cardsecucode,c.cardissuedate,c.cardlimit,c.cardbalance from card c left join customer cs on c.custcode = cs.custcode left join plan p on p.planCode = c.plancode where c.cardnum like '%332%'; #신용카드
 
 select * from notice;
+
+
+
 select * from employee;
 select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = '김가나' and date(transdate) = date(now()) group by accountnum;
 select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = '김가나' and week(transdate,1) = week(now(),1) group by accountnum;
@@ -212,5 +203,11 @@ select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'd
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and week(transdate,1) = week(now(),1) group by cardnum;
 select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where custname = '김가나' and month(transdate) = month(now()) group by cardnum;
 select * from performance;
+
 select * from bankbook;
-select * from employee;
+insert into bankbook values ('293133-11-000001','C001','A001',now(),0.10,0,'B001');
+insert into card values ('2931331000000010','C001','B001',111,now(),0,(select accountbalance from bankbook where custcode ='C001' and accountplancode = 'A001'),'B001',(select accountnum from bankbook where custcode = 'C001' and accountplancode = 'A001'));
+select * from card;
+
+
+drop procedure if exists change_bankbalance;

@@ -118,4 +118,7 @@ public class BankBookService {
 	public List<BankBook> showBankBookByMinus() throws SQLException {
 		return bankBookDao.showBankBooksByMinus();
 	}
+	public int updateCardBalance(Customer customer) throws SQLException {
+		return bankBookDao.updateCardBalance(customer);
+	}
 }
