@@ -35,6 +35,13 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 
 		initialize();
 	}
+	
+	
+	public CustPlanCenterNorthSearchPanel getPanel() {
+		return panel;
+	}
+
+
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		

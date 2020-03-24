@@ -50,6 +50,11 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 		}
 		add(panel_1, BorderLayout.CENTER);
 	}
+	
+	
+	public CustInfoCenterNorthSearchPanel getPanel() {
+		return panel;
+	}
 	private JPopupMenu createPopup() {
 		JPopupMenu popup = new JPopupMenu();
 		
@@ -97,10 +102,12 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 											dlgCustInfo.dispose();
 										}else {
 											JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
+											return;
 										}
 										
 									} catch (SQLException e1) {
-										e1.printStackTrace();
+										JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
+										return;
 									}
 						}
 						
