@@ -45,6 +45,8 @@ public interface EmployeeDao {
     
 	int insertEmployee(Employee emp);
 	int updateEmployee(Employee emp);
+	//비밀번호 빼고 업데이트
+	int updateEmployeeNotPw(Employee emp);
 	int deleteEmployee(Employee emp);
 	
 	int updateEmployeeAuth(Employee emp);
