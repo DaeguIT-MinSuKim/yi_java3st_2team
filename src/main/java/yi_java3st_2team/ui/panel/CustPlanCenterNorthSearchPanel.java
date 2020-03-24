@@ -12,7 +12,7 @@ import java.awt.Font;
 public class CustPlanCenterNorthSearchPanel extends AbsCenterNorthSearchPanel<Plan> {
 
 	public CustPlanCenterNorthSearchPanel() {
-
+		
 	}
 
 

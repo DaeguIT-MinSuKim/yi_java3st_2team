@@ -33,7 +33,7 @@ public class DlgCustInfo extends JDialog {
 	private JComboBox cmbCustRank;
 	private JComboBox cmbCustCredit;
 	private CustInfoUIPanel custInfoUI = new CustInfoUIPanel();
-	private String[] rankList = {"B", "S", "G", "P", "D"};
+	private String[] rankList = {"Bronze", "Silver", "Gold", "Platinum", "Diamond"};
 	private String[] creditList = {"1","2","3","4","5"};
 	private JButton okButton;	
 	
@@ -201,13 +201,27 @@ public class DlgCustInfo extends JDialog {
 	}
 	
 	public Customer getItem() {
+		
 		String custCode = tfCustCode.getText();
 		String custName = tfCustName.getText();
-		String custRank = (String) cmbCustRank.getSelectedItem();
+		//String custRank = (String) cmbCustRank.getSelectedItem();
+		String rank = (String) cmbCustRank.getSelectedItem();
+		String new_rank;
+		if(rank.equals("Diamond")) {
+			new_rank = "D";
+		}else if(rank.equals("Platinum")) {
+			new_rank = "P";
+		}else if(rank.equals("Gold")) {
+			new_rank = "G";
+		}else if(rank.equals("Silver")) {
+			new_rank = "S";
+		}else{
+			new_rank = "B";
+		}
 		int custCredit = Integer.parseInt((String)cmbCustCredit.getSelectedItem());
 		String custAddr = tfCustAddr.getText();
 		String custTel = tfCustTel.getText();
-		return new Customer(custCode, custName, custRank, custCredit, custAddr, custTel);
+		return new Customer(custCode, custName, new_rank, custCredit, custAddr, custTel);
 	}
 	
 	public void setItem(Customer customer) {

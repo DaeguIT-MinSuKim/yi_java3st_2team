@@ -183,6 +183,7 @@ delimiter $
     end $
 delimiter ;
 
+-- 필요한지 확인하고 필요없으면 지우기 (트리거 겹쳐서 신규 고객 추가 안됨)
 drop trigger if exists vip_trigger;
 delimiter $
  create trigger vip_trigger

@@ -106,7 +106,8 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 										}
 										
 									} catch (SQLException e1) {
-										JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
+										//JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
+										e1.printStackTrace();
 										return;
 									}
 						}

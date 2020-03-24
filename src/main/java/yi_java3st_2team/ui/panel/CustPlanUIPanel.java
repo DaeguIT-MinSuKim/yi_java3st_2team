@@ -46,6 +46,7 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 		setLayout(new BorderLayout(0, 0));
 		
 		panel = new CustPlanCenterNorthSearchPanel();
+		panel.changeTitleBorder("고객 정보 관리 > 고객 상품 관리");
 		panel.getCmbSearchList().addItemListener(this);
 		panel.getBtnSearch().addActionListener(new ActionListener() {
 
