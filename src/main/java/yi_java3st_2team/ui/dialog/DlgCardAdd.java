@@ -32,7 +32,7 @@ import yi_java3st_2team.ui.panel.bankbook.CardCenterUIPanel;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")
-public class DlgCard extends JDialog implements ActionListener, ItemListener {
+public class DlgCardAdd extends JDialog implements ActionListener, ItemListener {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCardNum;
 	private JTextField tfCVS;
@@ -46,8 +46,10 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 	private Employee emp;
 	private CardCenterUIPanel uiPanel;
 	private CardService service;
+	private JLabel lblCardBalance;
+	private JLabel lblCardLimit;
 
-	public DlgCard() {
+	public DlgCardAdd() {
 		initialize();
 	}
 	private void initialize() {
@@ -85,6 +87,7 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 		}
 		{
 			cmbPlan = new JComboBox<>();
+			cmbPlan.addItemListener(this);
 			cmbPlan.setEditable(true);
 			contentPanel.add(cmbPlan);
 		}
@@ -108,7 +111,7 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 			contentPanel.add(tfCardIssueDate);
 		}
 		{
-			JLabel lblCardLimit = new JLabel("카드한도");
+			lblCardLimit = new JLabel("카드한도");
 			lblCardLimit.setHorizontalAlignment(SwingConstants.RIGHT);
 			contentPanel.add(lblCardLimit);
 		}
@@ -118,7 +121,8 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 			contentPanel.add(tfCardLimit);
 		}
 		{
-			JLabel lblCardBalance = new JLabel("카드잔액");
+			lblCardBalance = new JLabel("카드잔액");
+			lblCardBalance.setVisible(false);
 			lblCardBalance.setHorizontalAlignment(SwingConstants.RIGHT);
 			contentPanel.add(lblCardBalance);
 		}
@@ -241,12 +245,24 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
+	
+	public JLabel getLblCardBalance() {
+		return lblCardBalance;
+	}
+	public void setLblCardBalance(JLabel lblCardBalance) {
+		this.lblCardBalance = lblCardBalance;
+	}
+	public JLabel getLblCardLimit() {
+		return lblCardLimit;
+	}
+	public void setLblCardLimit(JLabel lblCardLimit) {
+		this.lblCardLimit = lblCardLimit;
+	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
 		}
 	}
-
 	public Card getItem() {
 		String cardNum = tfCardNum.getText();
 		Customer custCode = (Customer)cmbCust.getSelectedItem();
@@ -283,6 +299,9 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 		tfCardBalance.setText("");
 	}
 	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cmbPlan) {
+			cmbPlanItemStateChanged(e);
+		}
 		if (e.getSource() == cmbCust) {
 			cmbCustItemStateChanged(e);
 		}
@@ -307,6 +326,14 @@ public class DlgCard extends JDialog implements ActionListener, ItemListener {
 			}
 			catch(SQLException e1) {
 				e1.printStackTrace();
+			}
+		}
+	}
+	protected void cmbPlanItemStateChanged(ItemEvent e) {
+		if(e.getStateChange()==ItemEvent.SELECTED) {
+			if(tfCardNum.getText().substring(6, 7).equals("2")) {
+				lblCardLimit.setVisible(true);
+				tfCardLimit.setVisible(true);
 			}
 		}
 	}

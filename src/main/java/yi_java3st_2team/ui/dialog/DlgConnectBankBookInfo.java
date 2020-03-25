@@ -23,7 +23,7 @@ import yi_java3st_2team.ui.table.BankBookAvailableDepositPanel;
 
 @SuppressWarnings("serial")
 public class DlgConnectBankBookInfo extends JDialog implements ActionListener {
-	private DlgCard dlgCard;
+	private DlgCardAdd dlgCard;
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
 	private BankBookAvailableDepositPanel panel;
@@ -75,11 +75,11 @@ public class DlgConnectBankBookInfo extends JDialog implements ActionListener {
 		}
 	}
 
-	public DlgCard getDlgCard() {
+	public DlgCardAdd getDlgCard() {
 		return dlgCard;
 	}
 
-	public void setDlgCard(DlgCard dlgCard) {
+	public void setDlgCard(DlgCardAdd dlgCard) {
 		this.dlgCard = dlgCard;
 	}
 	public BankBookAvailableDepositPanel getPanel() {

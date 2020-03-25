@@ -17,7 +17,8 @@ import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.MainFrame;
-import yi_java3st_2team.ui.dialog.DlgCard;
+import yi_java3st_2team.ui.dialog.DlgCardAdd;
+import yi_java3st_2team.ui.dialog.DlgCardMod;
 import yi_java3st_2team.ui.dialog.DlgConnectBankBookInfo;
 import yi_java3st_2team.ui.service.CardService;
 import yi_java3st_2team.ui.service.CustomerService;
@@ -29,7 +30,8 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	private CardCenterTblPanel pCenter;
 	private CustomerService customerService;
 	private CardService cardService;
-	private DlgCard dlgCard;
+	private DlgCardAdd dlgCard;
+	private DlgCardMod dlgCardMod;
 	private DlgConnectBankBookInfo dlgInfo;
 	private int selIdx;
 	private MainFrame main;
@@ -117,7 +119,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						main.getCust_DW_UIpanel().getPanel_1().loadTableData(customerService.showCustomersByBalance());
 						pCenter.loadTableData(cardService.showCards());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
-						dlgCard.dispose();
+						dlgCardMod.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block  
 						e1.printStackTrace();
@@ -130,12 +132,16 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
-					dlgCard = new DlgCard();
+					dlgCard = new DlgCardAdd();
 					setUIPanel();
 					dlgCard.setEmp(main.getEmpAuth());
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.getBtnOk().setText(e.getActionCommand());
 					dlgCard.getBtnOk().addActionListener(myDlgListener);
+					dlgCard.getTfCardBalance().setVisible(false);
+					dlgCard.getTfCardBalance().setVisible(false);
+					dlgCard.getLblCardLimit().setVisible(false);
+					dlgCard.getLblCardBalance().setVisible(false);
 					dlgCard.setModal(true);
 					dlgCard.setVisible(true);	
 				}
@@ -143,22 +149,22 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 					try {
 						selIdx = pCenter.getSelectedRowIdx();
 						Card selCard = pCenter.getSelectedItem();
-						dlgCard = new DlgCard();
-						dlgCard.setTitle("카드" + e.getActionCommand());
-						dlgCard.getBtnOk().setText(e.getActionCommand());
-						dlgCard.getBtnOk().addActionListener(myDlgListener);
-						dlgCard.getCmbCust().setEnabled(false);
-						dlgCard.getTfCardNum().setEditable(false);
-						dlgCard.getCmbPlan().setEnabled(false);
-						if(selCard.getCardBalance()==0) {
-							dlgCard.getTfCardBalance().setEditable(false);
+						dlgCardMod = new DlgCardMod();
+						dlgCardMod.setTitle("카드" + e.getActionCommand());
+						dlgCardMod.getBtnOk().setText(e.getActionCommand());
+						dlgCardMod.getBtnOk().addActionListener(myDlgListener);
+						dlgCardMod.getCmbCust().setEnabled(false);
+						dlgCardMod.getTfCardNum().setEditable(false);
+						dlgCardMod.getCmbPlan().setEnabled(false);
+						if(selCard.getCardNum().substring(6, 7).equals("1")) {
+							dlgCardMod.getTfCardLimit().setEditable(false);
 						}
 						else {
-							dlgCard.getTfCardLimit().setEditable(false);
+							dlgCardMod.getTfCardBalance().setEditable(false);
 						}
-						dlgCard.setItem(selCard);
-						dlgCard.setModal(true);
-						dlgCard.setVisible(true);
+						//dlgCard.setItem(selCard);
+						dlgCardMod.setModal(true);
+						dlgCardMod.setVisible(true);
 					}
 					catch(RuntimeException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());

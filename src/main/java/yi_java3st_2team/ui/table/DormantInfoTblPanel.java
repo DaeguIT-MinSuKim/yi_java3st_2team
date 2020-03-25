@@ -19,7 +19,7 @@ public class DormantInfoTblPanel extends AbsCenterTblPanel<AccountInfo> {
 		try {
 			List<AccountInfo> list = service.showDormantAccountInfo();
 			if(list.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "해지 계좌가 존재하지 않습니다");
+				JOptionPane.showMessageDialog(null, "휴면 계좌가 존재하지 않습니다");
 			}
 			else {
 				loadTableData(list);
