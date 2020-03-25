@@ -1,5 +1,7 @@
 package yi_java3st_2team.ui.panel.emp;
 
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +17,7 @@ public class EmpStatistic_WestPanel extends AbsCenterStatisticWestPanel implemen
 	public EmpStatistic_WestPanel() {
 		setLabelInit(this.menu1, this.menu2, this.menu3, this.menu4, this.menu5, this.menu6, this.menu7);
 		setPanelInit(this.panel1, this.panel2, this.panel3, this.panel4, this.panel5, this.panel6, this.panel7);
+		this.panel1.setBackground(new Color(254,208,64));
 	}
 
 	@Override

@@ -290,6 +290,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				pCenter.setBackground(Color.white);
+				pCenter.add(panelEmpPieChartForCountEmp,BorderLayout.CENTER);
 				emp_statistic_west = new EmpStatistic_WestPanel();
 				pWest = new JPanel(new BorderLayout());
 				JPanel[] menuPanels = emp_statistic_west.getPanels();
@@ -371,11 +372,17 @@ public class MainFrame extends JFrame implements ActionListener {
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				pCenter.setBackground(Color.WHITE);
+				pCenter.add(panel_chart_DPsLoan,BorderLayout.CENTER);
 				cust_statistic_west = new CustStatistic_WestPanel();
 				pWest = new JPanel(new BorderLayout());
 				JPanel[] menuPanels = cust_statistic_west.getPanels();
 				for(JPanel pMenu : menuPanels) {
 					pMenu.addMouseListener(menuAdapter);
+					/*
+					 * JLabel label = (JLabel) pMenu.getComponent(0); String text =label.getText();
+					 * if(text.equals("예금/적금/대출 총 금액")) { label.getParent().setBackground(new
+					 * Color(254,208,64)); }
+					 */
 				}
 				pWest.add(cust_statistic_west, BorderLayout.WEST);
 				contentPane.add(pWest,BorderLayout.WEST);
