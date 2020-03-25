@@ -42,10 +42,10 @@ public class PanelEmpPieChartForCountEmp extends JFXPanel implements InitScene{
 		
 		
 		pieChart = new PieChart();
-		pieChart.setPrefSize(1000, 600);
+		pieChart.setPrefSize(1000, 550);
 		pieChart.setData(getChartData());
 		pieChart.setTitle(subject+"\n"+totalEmp+totalnum+"명");
-		pieChart.setLegendVisible(false);	// 범례 표시 유무
+		pieChart.setLegendVisible(true);	// 범례 표시 유무
 		pieChart.setLegendSide(Side.BOTTOM);// 범례 위치
 		pieChart.setLabelLineLength(30);	// 원의 둘레 가장자리와 라벨간의 거리 지정
 		pieChart.setClockwise(true); 		// 시계방향 배치여부
@@ -72,7 +72,7 @@ public class PanelEmpPieChartForCountEmp extends JFXPanel implements InitScene{
 
 //	public static void main(String[] args) {
 //	  JFrame frame = new JFrame();
-//	  frame.setSize(600,600);
+//	  frame.setSize(1500,1500);
 //	  PanelEmpPieChartForCountEmp panel = new PanelEmpPieChartForCountEmp();
 //	  frame.getContentPane().add(panel);
 //	  Platform.runLater(() -> initFX(panel));

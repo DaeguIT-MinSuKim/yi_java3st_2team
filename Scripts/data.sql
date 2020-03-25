@@ -11,8 +11,8 @@ insert into employee values
 ('A003','이상원','과장','HR',4000000,'010-1549-1111','HRid3',password('testforHR3'),1,null),
 ('A004','서지수','대리','HR',3000000,'010-3296-1111','HRid4',password('testforHR4'),1,null),
 ('A005','박민호','사원','HR',2000000,'010-1597-1111','HRid5',password('testforHR5'),1,null),
-('A006','고희연','사원','HR',2000000,'010-6444-1111','HRid5',password('testforHR5'),1,null),
-('A007','정윤호','사원','HR',2000000,'010-7423-1111','HRid5',password('testforHR5'),1,null),
+('A006','고희연','사원','HR',2000000,'010-6444-1111','HRid6',password('testforHR6'),1,null),
+('A007','정윤호','사원','HR',2000000,'010-7423-1111','HRid7',password('testforHR7'),1,null),
 -- 고객팀
 ('B001','나지점','지점장','AD',10000000,'010-1234-1234','ADid',password('testforAD'),2,null),
 ('B002','장현서','부지점장','CS',8000000,'010-4444-7767','CSid1',password('testforCS'),2,null),
