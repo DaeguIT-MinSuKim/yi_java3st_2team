@@ -832,11 +832,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
 		statistic_west_card = new CardStatisticWestPanel();
-		JPanel[] panels = statistic_west_card.getPanels();
-		for(JPanel panel : panels) {
-			panel.addMouseListener(getMouseAdapter());
-		}
 		pWest.add(statistic_west_card,BorderLayout.CENTER);
+		pCenter.add(card_barChart_Statistic_Info,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -916,11 +913,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
 		statistic_west_loan = new LoanStatisticWestPanel();
-		JPanel[] panels = statistic_west_loan.getPanels();
-		for(JPanel panel : panels) {
-			panel.addMouseListener(getMouseAdapter());
-		}
 		pWest.add(statistic_west_loan,BorderLayout.CENTER);
+		pCenter.add(loan_barChart_Statistic_Info,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -1042,46 +1036,61 @@ public class MainFrame extends JFrame implements ActionListener {
 					for(JButton btn : buttons_transInfo) {
 						btn.addActionListener(northBankBookBtnListener);
 					}
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					break;
 				case "적금":
 					pCenter.removeAll();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
 					transInfo_north_bankbook.setBackground(new Color(255,255,255));
 					buttons_transInfo = transInfo_north_bankbook.getBtns();
 					for(JButton btn : buttons_transInfo) {
 						btn.addActionListener(northBankBookBtnListener);
 					}
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
 					break;
 				case "마이너스":
 					pCenter.removeAll();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
 					transInfo_north_bankbook.setBackground(new Color(255,255,255));
 					buttons_transInfo = transInfo_north_bankbook.getBtns();
 					for(JButton btn : buttons_transInfo) {
 						btn.addActionListener(northBankBookBtnListener);
 					}
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
 					break;
 				case "체크카드":
 					pCenter.removeAll();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					transInfo_north_card = new CardTransInfoNorthPanel();
 					transInfo_north_card.setBackground(new Color(255,255,255));
 					buttons_transInfo = transInfo_north_card.getBtns();
 					for(JButton btn : buttons_transInfo) {
 						btn.addActionListener(northBankBookBtnListener);
 					}
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.add(transInfo_north_card,BorderLayout.NORTH);
 					break;
 				case "신용카드":
 					pCenter.removeAll();
+					pcCenter = new JPanel();
+					pcCenter.setBackground(Color.white);
 					transInfo_north_card = new CardTransInfoNorthPanel();
 					transInfo_north_card.setBackground(new Color(255,255,255));
 					buttons_transInfo = transInfo_north_card.getBtns();
 					for(JButton btn : buttons_transInfo) {
 						btn.addActionListener(northBankBookBtnListener);
 					}
+					pCenter.add(pcCenter,BorderLayout.CENTER);
 					pCenter.add(transInfo_north_card,BorderLayout.NORTH);
 					break;
 				case "휴면 계좌 조회":
@@ -1095,14 +1104,6 @@ public class MainFrame extends JFrame implements ActionListener {
 					TerminationInfoTblPanel bankbook_termination_info = new TerminationInfoTblPanel();
 					bankbook_termination_info.setBackground(new Color(255,255,255));
 					pCenter.add(bankbook_termination_info,BorderLayout.CENTER);
-					break;
-				case "고객별 카드 보유 현황":
-					pCenter.removeAll();
-					pCenter.add(card_barChart_Statistic_Info,BorderLayout.CENTER);
-					break;
-				case "고객별 대출 현황":
-					pCenter.removeAll();
-					pCenter.add(loan_barChart_Statistic_Info,BorderLayout.CENTER);
 					break;
 				}	
 			}

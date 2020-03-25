@@ -36,7 +36,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class DlgBankBook extends JDialog implements ActionListener, ItemListener {
+public class DlgBankBookMod extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfAccountNum;
 	private JDateChooser tfAccountOpenDate;
@@ -48,7 +48,7 @@ public class DlgBankBook extends JDialog implements ActionListener, ItemListener
 	private Employee emp;
 	private BankBookService service;
 	private List<Customer> custList;
-	public DlgBankBook() {
+	public DlgBankBookMod() {
 		initialize();
 	}
 	private void initialize() {
@@ -65,7 +65,6 @@ public class DlgBankBook extends JDialog implements ActionListener, ItemListener
 		}
 		{
 			cmbCust = new JComboBox<>();
-			cmbCust.addItemListener(this);
 			cmbCust.setEditable(true);
 			contentPanel.add(cmbCust);
 		}
@@ -114,20 +113,20 @@ public class DlgBankBook extends JDialog implements ActionListener, ItemListener
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
 				btnOk = new JButton();
-				btnOk.addActionListener(this);
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
 				btnCancel = new JButton("취소");
-				btnCancel.addActionListener(this);
 				buttonPane.add(btnCancel);
 			}
 			try {
 				custList = service.showCustomers();
 				DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
 				cmbCust.setModel(cmbCustModel);
-				cmbCust.setSelectedIndex(-1);
+				List<Plan> planList = service.showPlanByBankBook();
+				DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+				cmbPlan.setModel(cmbPlanModel);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -231,32 +230,5 @@ public class DlgBankBook extends JDialog implements ActionListener, ItemListener
 		tfAccountOpenDate.setDate(new Date());
 		tfAccountInterest.setText("");
 
-	}
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cmbCust) {
-			cmbCustItemStateChanged(e);
-		}
-	}
-	protected void cmbCustItemStateChanged(ItemEvent e) {
-		if(e.getStateChange()== ItemEvent.SELECTED) {
-			try {
-				Customer cust = (Customer)cmbCust.getSelectedItem();
-				if(cust.getCustRank().equals("D")) {
-					List<Plan> planList = service.showPlanByBankBook();
-					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-					cmbPlan.setModel(cmbPlanModel);
-					cmbPlan.setSelectedIndex(0);
-				}
-				else {
-					List<Plan> planList = service.showPlanByBankBookNormal();
-					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-					cmbPlan.setModel(cmbPlanModel);
-					cmbPlan.setSelectedIndex(0);
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
 	}
 }

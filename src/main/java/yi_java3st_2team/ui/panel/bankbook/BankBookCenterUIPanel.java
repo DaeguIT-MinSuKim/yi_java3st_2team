@@ -15,7 +15,8 @@ import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.MainFrame;
-import yi_java3st_2team.ui.dialog.DlgBankBook;
+import yi_java3st_2team.ui.dialog.DlgBankBookAdd;
+import yi_java3st_2team.ui.dialog.DlgBankBookMod;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.table.BankBookCenterTblPanel;
 import javax.swing.border.EmptyBorder;
@@ -26,7 +27,8 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 	private BankBookCenterNorthSearchPanel pNorth;
 	private BankBookCenterTblPanel pCenter;
 	private BankBookService service;
-	private DlgBankBook dlgBankBook;
+	private DlgBankBookAdd dlgBankBookAdd;
+	private DlgBankBookMod dlgBankBookMod;
 	private int selIdx;
 	/**
 	 * Create the panel.
@@ -69,12 +71,12 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					try {
-						BankBook bankbook = dlgBankBook.getItem();
+						BankBook bankbook = dlgBankBookAdd.getItem();
 						pCenter.addItem(bankbook);
 						service.insertBankBook(bankbook);
 						pCenter.loadTableData(service.showBankBooks());
 						JOptionPane.showMessageDialog(null, "추가되었습니다");
-						dlgBankBook.dispose();
+						dlgBankBookAdd.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -82,12 +84,12 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
-						BankBook bankbook = dlgBankBook.getItem();
+						BankBook bankbook = dlgBankBookAdd.getItem();
 						pCenter.updateRow(bankbook, pCenter.getSelectedRowIdx());
 						service.updateBankBook(bankbook);
 						pCenter.loadTableData(service.showBankBooks());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
-						dlgBankBook.dispose();
+						dlgBankBookAdd.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block  
 						e1.printStackTrace();
@@ -100,28 +102,28 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
-					dlgBankBook = new DlgBankBook();
-					dlgBankBook.setEmp(main.getEmpAuth());
-					dlgBankBook.setTitle("통장 " + e.getActionCommand());
-					dlgBankBook.getBtnOk().setText(e.getActionCommand());
-					dlgBankBook.getBtnOk().addActionListener(myDlgListener);
-					dlgBankBook.setModal(true);
-					dlgBankBook.setVisible(true);	
+					dlgBankBookAdd = new DlgBankBookAdd();
+					dlgBankBookAdd.setEmp(main.getEmpAuth());
+					dlgBankBookAdd.setTitle("통장 " + e.getActionCommand());
+					dlgBankBookAdd.getBtnOk().setText(e.getActionCommand());
+					dlgBankBookAdd.getBtnOk().addActionListener(myDlgListener);
+					dlgBankBookAdd.setModal(true);
+					dlgBankBookAdd.setVisible(true);	
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					try {
 						BankBook bankbook = pCenter.getSelectedItem();
-						dlgBankBook = new DlgBankBook();
-						dlgBankBook.setEmp(main.getEmpAuth());
-						dlgBankBook.setTitle("통장" + e.getActionCommand());
-						dlgBankBook.getBtnOk().setText(e.getActionCommand());
-						dlgBankBook.getBtnOk().addActionListener(myDlgListener);
-						dlgBankBook.getTfCardNum().setEditable(false);
-						dlgBankBook.getCmbCust().setEnabled(false);
-						dlgBankBook.getCmbPlan().setEnabled(false);
-						dlgBankBook.setItem(bankbook);
-						dlgBankBook.setModal(true);
-						dlgBankBook.setVisible(true);
+						dlgBankBookMod = new DlgBankBookMod();
+						dlgBankBookMod.setEmp(main.getEmpAuth());
+						dlgBankBookMod.setTitle("통장" + e.getActionCommand());
+						dlgBankBookMod.getBtnOk().setText(e.getActionCommand());
+						dlgBankBookMod.getBtnOk().addActionListener(myDlgListener);
+						dlgBankBookMod.getTfCardNum().setEditable(false);
+						dlgBankBookMod.getCmbCust().setEnabled(false);
+						dlgBankBookMod.getCmbPlan().setEnabled(false);
+						dlgBankBookMod.setItem(bankbook);
+						dlgBankBookMod.setModal(true);
+						dlgBankBookMod.setVisible(true);
 					}
 					catch(RuntimeException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());
