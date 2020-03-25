@@ -1,6 +1,7 @@
-package yi_java3st_2team.ui.chart.emp;
+package yi_java3st_2team.ui.chart;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -15,11 +16,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.dto.Employee;
-import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.EmployeeUIService;
  
-public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
+public class PanelEmpBarChartSalary extends JFXPanel  implements InitScene {
 
 	private static BarChart<String, Number> barChart;
 	private static EmployeeUIService service = new EmployeeUIService();
@@ -28,7 +28,7 @@ public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
 	private static double numOfHR;
 	private static int totalnum;
 	
-	public PanelEmpBarChartBonus() {
+	public PanelEmpBarChartSalary() {
 	}
 
 
@@ -41,7 +41,7 @@ public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
 
 		//막 대형 차트의 X 축과 Y 축을 정의하고 레이블을 설정
 		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("사원");
+		xAxis.setLabel("");
 
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("금액");
@@ -50,9 +50,9 @@ public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
 		//yAxis.setTickUnit(1);
 
 		barChart = new BarChart<>(xAxis, yAxis);
-		barChart.setTitle("보너스현황");
+		barChart.setTitle("전체/인당 평균 급여액");
 		
-		barChart.setPrefSize(800, 600);
+		barChart.setPrefSize(800, 550);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);
@@ -60,29 +60,30 @@ public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
 		return scene;
 	}
 
-	public static XYChart.Series<String, Number> getBarChartData(Employee emp) {
-         XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
+	public static XYChart.Series<String, Number> getBarChartData(List list) {
+XYChart.Series<String, Number> dataSeries = new Series<String, Number>();
 		
-		dataSeries.setName(emp.getEmpName());
-		dataSeries.getData().add(new XYChart.Data<>("보너스",emp.getBonus()));
+		dataSeries.setName(list.toString());
+		
+		dataSeries.getData().add(new XYChart.Data<>(list.get(0).toString(),service.totalSalary()));
+		dataSeries.getData().add(new XYChart.Data<>(list.get(1).toString(),service.avgOfSalary()));
+		
+
 		return dataSeries;
 	
 	}
 	
 	private static ObservableList<XYChart.Series<String, Number>> getChartData() {
-		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();
+		ObservableList<XYChart.Series<String, Number>> list = FXCollections.observableArrayList();	
+		List<String> strList = new ArrayList<String>();
+	
+		strList.add("전체 월급");
+		strList.add("1인당 월급");
 		
-		List<Employee> empList = service.showEmpPerformance();
-		for(int i=0; i<empList.size(); i++) {
-			Employee emp = empList.get(i);
-			if(emp.getBonus() != 0) {
-			  list.add(getBarChartData(emp));
-			}
-		}
+		list.add(getBarChartData(strList));
 		
 		return list;
 	}
-
 
 	public void initAndShowGUI() {
 		// TODO Auto-generated method stub
