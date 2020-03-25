@@ -503,15 +503,14 @@ public class BankBookDaoImpl implements BankBookDao {
 		boolean connectChk = rs.getInt("connectChk")==0?false:true;
 		return new BankBook(accountNum, custCode, connectChk);
 	}
-	//내일 와서 update 문 에러 확인할것(무슨 문제인지 확인이 안되네 에러도 안찍히고)
 	@Override
 	public int updateConnectChk(Card card) throws SQLException {
 		int res = -1;
-		String sql = "update bankbook set connectchk = ? from bankbook where custcode = (select custcode from customer where custname = ?) and accountnum = ?";
+		String sql = "update bankbook set connectchk = ? where custcode = (select custcode from customer where custname = ?) and accountnum = ?";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setInt(1, card.getBankbook().isConnectChk()==true?1:0);
-			pstmt.setString(2, card.getBankbook().getCustCode().getCustName());
+			pstmt.setBoolean(1, card.getBankbook().isConnectChk());
+			pstmt.setString(2, card.getCustCode().getCustName());
 			pstmt.setString(3, card.getBankbook().getAccountNum());
 			res = pstmt.executeUpdate();
 		}
@@ -530,6 +529,5 @@ public class BankBookDaoImpl implements BankBookDao {
 			res = pstmt.executeUpdate();
 		}
 		return res;
-	}	
-	
+	}
 }

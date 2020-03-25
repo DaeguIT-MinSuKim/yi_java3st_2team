@@ -101,9 +101,7 @@ public class DlgConnectBankBookInfo extends JDialog implements ActionListener {
 			Card card = dlgCard.getItem();
 			card.setBankbook(bankbook);
 			try {
-				service.insertCardCheck(card);
-				service.updateConnectChk(card);
-				service.updateCardBalanceByAccountBalance(card);
+				service.insertCheckCardProcedure(card);
 				JOptionPane.showMessageDialog(null, "추가되었습니다");
 				dlgCard.getUiPanel().getpCenter().loadTableData(service.showCards());
 				dispose();

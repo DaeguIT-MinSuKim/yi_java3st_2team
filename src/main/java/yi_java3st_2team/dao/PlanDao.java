@@ -29,7 +29,9 @@ public interface PlanDao {
 	abstract List<Plan> selectPlanByCode(String planCode) throws SQLException;
 	abstract List<Plan> selectPlanByDetail(String planDetail) throws SQLException;
 	abstract List<Plan> selectPlanByBankBook() throws SQLException;
+	abstract List<Plan> selectPlanByBankBookNormal() throws SQLException;
 	abstract List<Plan> selectPlanByCard() throws SQLException;
+	abstract List<Plan> selectPlanByCardNormal() throws SQLException;
 	abstract List<Plan> selectPlanByLoan() throws SQLException;
-	
+	abstract List<Plan> selectPlanByLoanNormal() throws SQLException;
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.ds.LocalDataSource;
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Customer;
@@ -276,6 +277,28 @@ public class CardDaoImpl implements CardDao {
 			res = pstmt.executeUpdate();
 		}
 		return res;
+	}
+	@Override
+	public Card showCardByAccountNum(Card card) throws SQLException {
+		String sql = "select accountnum from card where custcode = (select custcode from customer where custname = ?)";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, card.getCustCode().getCustName());
+			try(ResultSet rs = pstmt.executeQuery()) {
+				if(rs.next()) {
+					return getCardbyAccountNum(rs);
+				}
+				
+			}
+			return null;
+		}
+	}
+	private Card getCardbyAccountNum(ResultSet rs) throws SQLException {
+		Card card = new Card();
+		BankBook bankbook = new BankBook();
+		bankbook.setAccountNum(rs.getString("accountnum"));
+		card.setBankbook(bankbook);
+		return card;
 	}
 
 }

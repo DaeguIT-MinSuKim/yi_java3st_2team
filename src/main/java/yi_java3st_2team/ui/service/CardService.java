@@ -3,6 +3,8 @@ package yi_java3st_2team.ui.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import yi_java3st_2team.dao.BankBookDao;
 import yi_java3st_2team.dao.CardDao;
 import yi_java3st_2team.dao.CustomerDao;
@@ -44,9 +46,6 @@ public class CardService {
 	public List<Card> showCardByCreditCard() throws SQLException {
 		return cardDao.showCardByCreditCard();
 	}
-	public int insertCardCheck(Card card) throws SQLException {
-		return cardDao.insertCardCheck(card);
-	}
 	public int insertCardCredit(Card card) throws SQLException {
 		return cardDao.insertCardCredit(card);
 	}
@@ -61,6 +60,9 @@ public class CardService {
 	}
 	public List<Plan> showPlansByCard() throws SQLException {
 		return planDao.selectPlanByCard();
+	}
+	public List<Plan> showPlansByCardNormal() throws SQLException {
+		return planDao.selectPlanByCardNormal();
 	}
 	public List<CardInfo> cardInfoDaily(String custname) throws SQLException {
 		return cardDao.showCardInfoDaily(custname);
@@ -83,11 +85,43 @@ public class CardService {
 	public List<BankBook> showBankBookIsConnect(Card card) throws SQLException {
 		return bankbookDao.showBankBookByIsConnect(card);
 	}
-	public int updateConnectChk(Card card) throws SQLException {
-		return bankbookDao.updateConnectChk(card);
+	public int insertCheckCardProcedure(Card card) throws SQLException {
+		try {
+			int res = 0;
+			res += cardDao.insertCardCheck(card);
+			res += bankbookDao.updateConnectChk(card);
+			res += bankbookDao.updateCardBalanceByAccountBalance(card);
+			if(res==3) {
+				return res;
+			}
+			else {
+				new RuntimeException();
+			}
+		}
+		catch(RuntimeException e) {
+			JOptionPane.showMessageDialog(null, "실패하였습니다");
+		}
+		return -1;
 	}
-	public int updateCardBalanceByAccountBalance(Card card) throws SQLException {
-		return bankbookDao.updateCardBalanceByAccountBalance(card);
+	public int deleteCheckCardProcedure(Card card) throws SQLException {
+		try {
+			int res = 0;
+			res += cardDao.deleteCard(card);
+			res += bankbookDao.updateConnectChk(card);
+			if(res==2) {
+				return res;
+			}
+			else {
+				new RuntimeException();
+			}
+		}
+		catch(RuntimeException e) {
+			JOptionPane.showMessageDialog(null, "실패하였습니다");
+		}
+		return -1;
+	}
+	public Card showCardByAccountnum(Card card) throws SQLException {
+		return cardDao.showCardByAccountNum(card);
 	}
 }
 

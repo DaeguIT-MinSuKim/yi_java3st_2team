@@ -80,7 +80,24 @@ insert into plan values("A001", "AA001", "슈퍼정기예금", "가입자 맞춤
 					   ("C004", "CA002", "패밀리 대출", "YN은행 임직원을 위한 무서류 일반대출", "N"), -- 일반/일반대출
 					   ("C005", "CB002", "아파트 소유자 대출", "본인명의 아파트 소유자를 위한 신용 대출", "N"), -- 일반/신용대출
 					   ("C006", "CC002", "YN Go Anywhere", "refresh 여행을 위한 빠른 카드 대출", "N"); -- 일반/카드대출						   			   				   
-				   
+desc bankbook;
+desc card;
+desc loan;
+
+insert into bankbook values
+('293133-11-000001','C001','A001',now(),0.15,0,'B008',1),
+('293133-12-000002','C001','A002',now(),0.10,0,'B008',0),
+('293133-13-000003','C001','A003',now(),0.01,0,'B008',0);
+
+insert into card values
+('2931331000000010','C001','B001',111,now(),null,(select accountbalance from bankbook where custcode = 'C001' and accountnum = '293133-11-000001'),'B008','293133-11-000001'),
+('2931332000000020','C001','B002',222,now(),10000000,null,'B008','293133-11-000001');
+
+insert loan values
+('293133-11-000001','C001','C001',now(),0.05,100000000,'B008'),
+('293133-12-000002','C001','C002',now(),0.06,100000000,'B008'),
+('293133-13-000003','C001','C003',now(),0.07,100000000,'B008');
+					   
 #통장 테이블 
 #statistic table 생성
 drop view if exists vipTable;  
@@ -90,6 +107,9 @@ create view vipTable as select custCode as vip from customer c where `custRank`=
 create view ranking as select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(p.`planCode`='A001',vip,null) as vip
 from employee e left join performance p on e.`empCode` = p.`empCode`  left join customer c on p.`custCode`=c.`custCode` left join viptable v on p.`custCode`= v.vip
 group by e.`empCode`;
+
+#예금계좌 정보
+create view bankbook_deposit_connect_to_card_info as select accountnum,custcode,connectchk from bankbook where substring(accountnum,9,1)='1' and connectchk = 0;
 
 insert into notice(subject,writer,write_date,content) 
 values("코로나19 다 함께 이겨냅시다!","작성자",now(),"YN BANK 직원 어려분 코로나 19 때문에 은행이 부도 위기에 처했지만, 여러분의 노고만이 회사를 살리는 유일한 길입니다. 저희 은행은 절대 직원 여러분을 버리지 않습니다. 다들 심기일전하여 코로나 19를 극복하고, YN BANK를 전세계 1위 은행으로 발돋움하게 노력합시다");

@@ -101,7 +101,6 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					dlgLoan = new DlgLoan();
-					dlgLoan.initCmbModel(service);
 					dlgLoan.setEmp(main.getEmpAuth());
 					dlgLoan.setTitle("대출 " + e.getActionCommand());
 					dlgLoan.getBtnOk().setText(e.getActionCommand());
@@ -114,7 +113,6 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 						selIdx = pCenter.getSelectedRowIdx();
 						Loan loan = pCenter.getSelectedItem();
 						dlgLoan = new DlgLoan();
-						dlgLoan.initCmbModel(service);
 						dlgLoan.setTitle("대출" + e.getActionCommand());
 						dlgLoan.getBtnOk().setText(e.getActionCommand());
 						dlgLoan.getBtnOk().addActionListener(myDlgListener);

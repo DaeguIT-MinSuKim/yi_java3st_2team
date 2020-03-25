@@ -385,4 +385,52 @@ public class PlanDaoImpl implements PlanDao {
 		return list;
 	}
 
+	@Override
+	public List<Plan> selectPlanByBankBookNormal() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ? and plandiv = 'N'";
+		try(Connection con = LocalDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "A%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Plan> selectPlanByCardNormal() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ? and plandiv = 'N'";
+		try(Connection con = LocalDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "B%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Plan> selectPlanByLoanNormal() throws SQLException {
+		List<Plan> list = new ArrayList<>();
+		String sql = "select * from plan where planCode like ? and plandiv = 'N'";
+		try(Connection con = LocalDataSource.getConnection(); 
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "C%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getPlan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
 }

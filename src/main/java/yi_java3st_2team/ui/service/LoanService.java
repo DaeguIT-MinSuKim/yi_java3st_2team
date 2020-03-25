@@ -44,6 +44,9 @@ public class LoanService {
 	public List<Plan> showPlanByLoan() throws SQLException {
 		return planDao.selectPlanByLoan();
 	}
+	public List<Plan> showPlanByLoanNormal() throws SQLException {
+		return planDao.selectPlanByLoanNormal();
+	}
 	public List<LoanInfo> showLoanInfo() throws SQLException {
 		return loanDao.showLoanInfo();
 	}

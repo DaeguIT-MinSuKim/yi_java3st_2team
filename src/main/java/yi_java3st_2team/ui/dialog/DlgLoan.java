@@ -27,9 +27,11 @@ import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.service.LoanService;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class DlgLoan extends JDialog implements ActionListener {
+public class DlgLoan extends JDialog implements ActionListener, ItemListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfAccountNum;
@@ -42,11 +44,13 @@ public class DlgLoan extends JDialog implements ActionListener {
 	private JLabel lblLoanBalance;
 	private JTextField tfLoanBalance;
 	private Employee emp;
+	private LoanService service;
 
 	public DlgLoan() {
 		initialize();
 	}
 	private void initialize() {
+		service = new LoanService();
 		setBounds(100, 100, 450, 450);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -59,6 +63,7 @@ public class DlgLoan extends JDialog implements ActionListener {
 		}
 		{
 			cmbCust = new JComboBox<>();
+			cmbCust.addItemListener(this);
 			cmbCust.setEditable(true);
 			contentPanel.add(cmbCust);
 		}
@@ -126,6 +131,16 @@ public class DlgLoan extends JDialog implements ActionListener {
 				btnCancel.addActionListener(this);
 				buttonPane.add(btnCancel);
 			}
+			try {
+				List<Customer> custList = service.showCust();
+				DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
+				cmbCust.setModel(cmbCustModel);
+				cmbCust.setSelectedIndex(-1);
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 	}
@@ -193,19 +208,6 @@ public class DlgLoan extends JDialog implements ActionListener {
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
-	public void initCmbModel(LoanService service) {
-		try {
-			List<Customer> custList = service.showCust();
-			List<Plan> planList = service.showPlanByLoan();
-			DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
-			DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-			cmbCust.setModel(cmbCustModel);
-			cmbPlan.setModel(cmbPlanModel);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
@@ -239,5 +241,37 @@ public class DlgLoan extends JDialog implements ActionListener {
 		tfLoanDate.setDate(new Date());
 		tfLoanInterest.setText("");
 		tfLoanBalance.setText("");
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cmbCust) {
+			cmbCustItemStateChanged(e);
+		}
+	}
+	protected void cmbCustItemStateChanged(ItemEvent e) {
+		if(e.getStateChange()==ItemEvent.SELECTED) {
+			Customer cust = (Customer)cmbCust.getSelectedItem();
+			if(cust.getCustRank().equals("D")) {
+				try {
+					List<Plan> planList = service.showPlanByLoan();
+					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+					cmbPlan.setModel(cmbPlanModel);
+					cmbPlan.setSelectedIndex(0);
+				}
+				catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+			else {
+				try {
+					List<Plan> planList = service.showPlanByLoanNormal();
+					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+					cmbPlan.setModel(cmbPlanModel);
+					cmbPlan.setSelectedIndex(0);
+				}
+				catch(SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
 	}
 }

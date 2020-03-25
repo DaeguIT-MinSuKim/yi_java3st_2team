@@ -31,9 +31,13 @@ import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.panel.CardCenterUIPanel;
 import yi_java3st_2team.ui.service.CardService;
+import yi_java3st_2team.ui.service.LoanService;
+
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class DlgCard extends JDialog implements ActionListener {
+public class DlgCard extends JDialog implements ActionListener, ItemListener {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfCardNum;
 	private JTextField tfCVS;
@@ -46,11 +50,13 @@ public class DlgCard extends JDialog implements ActionListener {
 	private JComboBox<Plan> cmbPlan;
 	private Employee emp;
 	private CardCenterUIPanel uiPanel;
+	private CardService service;
 
 	public DlgCard() {
 		initialize();
 	}
 	private void initialize() {
+		service = new CardService();
 		setBounds(100, 100, 450, 450);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -63,6 +69,7 @@ public class DlgCard extends JDialog implements ActionListener {
 		}
 		{
 			cmbCust = new JComboBox<>();
+			cmbCust.addItemListener(this);
 			cmbCust.setEditable(true);
 			contentPanel.add(cmbCust);
 		}
@@ -141,7 +148,15 @@ public class DlgCard extends JDialog implements ActionListener {
 				buttonPane.add(btnCancel);
 			}
 		}
-		
+		try {
+			List<Customer> custList = service.showCusts();
+			DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
+			cmbCust.setModel(cmbCustModel);
+			cmbCust.setSelectedIndex(-1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	public CardCenterUIPanel getUiPanel() {
@@ -231,19 +246,6 @@ public class DlgCard extends JDialog implements ActionListener {
 	public JPanel getContentPanel() {
 		return contentPanel;
 	}
-	public void initCmbModel(CardService service) {
-		try {
-			List<Customer> custList = service.showCusts();
-			List<Plan> planList = service.showPlansByCard();
-			DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
-			DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-			cmbCust.setModel(cmbCustModel);
-			cmbPlan.setModel(cmbPlanModel);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancel) {
 			btnCancelActionPerformed(e);
@@ -284,5 +286,33 @@ public class DlgCard extends JDialog implements ActionListener {
 		tfCardIssueDate.setDate(new Date());
 		tfCardLimit.setText("");
 		tfCardBalance.setText("");
+	}
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getSource() == cmbCust) {
+			cmbCustItemStateChanged(e);
+		}
+	}
+	protected void cmbCustItemStateChanged(ItemEvent e) {
+		if(e.getStateChange()==ItemEvent.SELECTED) {
+			try {
+				Customer cust = (Customer)cmbCust.getSelectedItem();
+				if(cust.getCustRank().equals("D")) {
+					List<Plan> planList = service.showPlansByCard();
+					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+					cmbPlan.setModel(cmbPlanModel);
+					cmbPlan.setSelectedIndex(0);
+				}
+				else {
+					List<Plan> planList = service.showPlansByCardNormal();
+					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+					cmbPlan.setModel(cmbPlanModel);
+					cmbPlan.setSelectedIndex(0);
+				}
+				
+			}
+			catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 }

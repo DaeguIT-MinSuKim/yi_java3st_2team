@@ -205,5 +205,21 @@ select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'd
 select * from performance;
 
 insert into bankbook values ('293133-11-000001','C001','A001',now(),0.10,0,'B001',0);
-create view bankbook_deposit_connect_to_card_info as select accountnum,custcode,connectchk from bankbook where substring(accountnum,9,1)='1' and connectchk = 0;
+
+set autocommit = false;
+insert into card values('2931331000000010','C001','A001',111,now(),null,null,(select empcode from employee where empname = '테스트'),'293133-11-000001');
+update bankbook set connectchk = 1 where custcode = 'C001' and accountnum = '293133-11-000001';
+update card set cardbalance = (select accountbalance from bankbook where accountnum = '293133-11-000001') where cardnum = '2931331000000010' and custcode = (select custcode from customer where custname = '김서형');
+set autocommit = true;
+
+delete from card;
 update bankbook set connectchk = 0 where custcode = 'C001' and accountnum = '293133-11-000001';
+
+
+create view bankbook_deposit_connect_to_card_info as select accountnum,custcode,connectchk from bankbook where substring(accountnum,9,1)='1' and connectchk = 0;
+select * from customer;
+select * from bankbook_deposit_connect_to_card_info;
+select * from card;
+delete from card;
+delete from bankbook;
+desc card;

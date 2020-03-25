@@ -101,7 +101,6 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					dlgBankBook = new DlgBankBook();
-					dlgBankBook.initCmbModel(service);
 					dlgBankBook.setEmp(main.getEmpAuth());
 					dlgBankBook.setTitle("통장 " + e.getActionCommand());
 					dlgBankBook.getBtnOk().setText(e.getActionCommand());
@@ -113,7 +112,6 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 					try {
 						BankBook bankbook = pCenter.getSelectedItem();
 						dlgBankBook = new DlgBankBook();
-						dlgBankBook.initCmbModel(service);
 						dlgBankBook.setEmp(main.getEmpAuth());
 						dlgBankBook.setTitle("통장" + e.getActionCommand());
 						dlgBankBook.getBtnOk().setText(e.getActionCommand());

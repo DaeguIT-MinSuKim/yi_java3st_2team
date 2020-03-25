@@ -86,7 +86,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				Card card = dlgCard.getItem();
 				if(e.getActionCommand().equals("추가")) {
 					try {
-						JOptionPane.showMessageDialog(null, card.getCardNum().substring(6, 7));
 						if(card.getCardNum().substring(6,7).equals("1")) {
 							if(cardService.showBankBookIsConnect(card).size()==0) {
 								JOptionPane.showMessageDialog(null, "선택할 수 있는 예금 계좌가 없습니다. 통장을 먼저 만드세요");
@@ -133,7 +132,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					dlgCard = new DlgCard();
-					dlgCard.initCmbModel(cardService);
 					setUIPanel();
 					dlgCard.setEmp(main.getEmpAuth());
 					dlgCard.setTitle("카드 " + e.getActionCommand());
@@ -147,7 +145,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						selIdx = pCenter.getSelectedRowIdx();
 						Card selCard = pCenter.getSelectedItem();
 						dlgCard = new DlgCard();
-						dlgCard.initCmbModel(cardService);
 						dlgCard.setTitle("카드" + e.getActionCommand());
 						dlgCard.getBtnOk().setText(e.getActionCommand());
 						dlgCard.getBtnOk().addActionListener(myDlgListener);
@@ -175,9 +172,11 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 						int res = JOptionPane.showConfirmDialog(null, "정말 삭제하시겠습니까?");
 						if(res==0) {
 							try {
+								Card card = cardService.showCardByAccountnum(selCard);
+								selCard.setBankbook(card.getBankbook());
 								pCenter.removeItem(selIdx);
-								cardService.deleteCard(selCard);
-								cardService.updateConnectChk(selCard);
+								selCard.getBankbook().setConnectChk(false);
+								cardService.deleteCheckCardProcedure(selCard);
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
