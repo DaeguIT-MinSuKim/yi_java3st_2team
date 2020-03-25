@@ -138,7 +138,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 					dlgCard.setTitle("카드 " + e.getActionCommand());
 					dlgCard.getBtnOk().setText(e.getActionCommand());
 					dlgCard.getBtnOk().addActionListener(myDlgListener);
-					dlgCard.getTfCardBalance().setVisible(false);
+					dlgCard.getTfCardLimit().setVisible(false);
 					dlgCard.getTfCardBalance().setVisible(false);
 					dlgCard.getLblCardLimit().setVisible(false);
 					dlgCard.getLblCardBalance().setVisible(false);

@@ -93,7 +93,7 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int insertCardCredit(Card card) throws SQLException {
 		int res = -1;
-		String sql = "insert into card values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into card values(?,?,?,?,?,?,?,(select empcode from employee where empname = ?),null)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, card.getCardNum());

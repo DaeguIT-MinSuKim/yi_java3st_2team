@@ -331,7 +331,7 @@ public class DlgCardAdd extends JDialog implements ActionListener, ItemListener 
 	}
 	protected void cmbPlanItemStateChanged(ItemEvent e) {
 		if(e.getStateChange()==ItemEvent.SELECTED) {
-			if(tfCardNum.getText().substring(6, 7).equals("2")) {
+			if(tfCardNum.getText().substring(6,7).equals("2")) {
 				lblCardLimit.setVisible(true);
 				tfCardLimit.setVisible(true);
 			}
