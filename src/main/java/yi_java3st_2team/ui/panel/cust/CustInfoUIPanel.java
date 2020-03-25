@@ -154,6 +154,26 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 				if(customer!=null) {
 					dlgCustInfo.setItem(customer);
 					dlgCustInfo.setActiontoEdit();
+					dlgCustInfo.getCmbCustRank().addItemListener(new ItemListener() {
+
+						@Override
+						public void itemStateChanged(ItemEvent e) {
+							String selItem = (String) e.getItem();
+							if(selItem.equals("Diamond")) {
+								dlgCustInfo.getLblCustCreditRank().setText("1등급");
+							}else if(selItem.equals("Platinum")) {
+								dlgCustInfo.getLblCustCreditRank().setText("2등급");
+							}else if(selItem.equals("Gold")) {
+								dlgCustInfo.getLblCustCreditRank().setText("3등급");
+							}else if(selItem.equals("Silver")) {
+								dlgCustInfo.getLblCustCreditRank().setText("4등급");
+							}else if(selItem.equals("Bronze")) {
+								dlgCustInfo.getLblCustCreditRank().setText("5등급");
+							}
+							
+						}
+						
+					});
 					dlgCustInfo.getOkButton().addActionListener(new ActionListener() {
 	
 						@Override
