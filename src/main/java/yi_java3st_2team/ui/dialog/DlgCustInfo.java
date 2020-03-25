@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 import com.sun.javafx.scene.control.SelectedCellsMap;
 
 import yi_java3st_2team.dto.Customer;
-import yi_java3st_2team.ui.panel.CustInfoUIPanel;
+import yi_java3st_2team.ui.panel.cust.CustInfoUIPanel;
 import yi_java3st_2team.ui.service.CustomerService;
 
 import java.awt.GridLayout;

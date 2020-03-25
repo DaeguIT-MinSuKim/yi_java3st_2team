@@ -29,7 +29,7 @@ import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Plan;
-import yi_java3st_2team.ui.panel.CardCenterUIPanel;
+import yi_java3st_2team.ui.panel.bankbook.CardCenterUIPanel;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")

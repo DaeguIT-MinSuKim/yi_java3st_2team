@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="yi_java3st_2team.ui.panel.EmpCenterUIpanelAuth" project="yi_java3st_2team" 
-    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/EmpCenterUIpanelAuth.java" binary="false" 
+  <class id="1" language="java" name="yi_java3st_2team.ui.panel.emp.EmpCenterUIpanelAuth" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/emp/EmpCenterUIpanelAuth.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="696" y="252"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -11,8 +11,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="yi_java3st_2team.ui.panel.EmpCenterNorthSearchPanel" project="yi_java3st_2team" 
-    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/EmpCenterNorthSearchPanel.java" binary="false" 
+  <class id="2" language="java" name="yi_java3st_2team.ui.panel.emp.EmpCenterNorthSearchPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/emp/EmpCenterNorthSearchPanel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="254" y="127"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -43,26 +44,38 @@
   </class>  
   <association id="5">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="6" name="service"/>      
-      <multiplicity id="7" minimum="0" maximum="1"/>    
+      <attribute id="6" name="pEmpSerch">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="7" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="8">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="9" name="pEmpTblPanel"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
+      <attribute id="9" name="pEmpTblPanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="10" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="11">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="12" name="pEmpSerch"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
+      <attribute id="12" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

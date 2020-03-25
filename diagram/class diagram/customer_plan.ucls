@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="yi_java3st_2team.ui.panel.CustPlanCenterNorthSearchPanel" 
+  <class id="1" language="java" name="yi_java3st_2team.ui.panel.cust.CustPlanCenterNorthSearchPanel" 
     project="yi_java3st_2team" 
-    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/CustPlanCenterNorthSearchPanel.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/cust/CustPlanCenterNorthSearchPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="203" y="371"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -13,7 +13,7 @@
     </display>  
   </class>  
   <class id="2" language="java" name="yi_java3st_2team.ui.panel.CustPlanUIPanel" project="yi_java3st_2team" 
-    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/CustPlanUIPanel.java" binary="false" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/cust/CustPlanUIPanel.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="323" y="136"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -34,16 +34,24 @@
   </class>  
   <association id="4">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="5" name="panel"/>      
-      <multiplicity id="6" minimum="0" maximum="1"/>    
+      <attribute id="5" name="panel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="6" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="7">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="8" name="panel_1"/>      
-      <multiplicity id="9" minimum="0" maximum="1"/>    
+      <attribute id="8" name="panel_1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="9" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
