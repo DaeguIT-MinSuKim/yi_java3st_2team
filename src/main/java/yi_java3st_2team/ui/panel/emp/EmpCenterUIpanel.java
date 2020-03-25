@@ -75,7 +75,9 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				
 				
 				if(e.getActionCommand()=="추가") {
-					
+					if(dlgEmpForUpdate !=null) {
+						dlgEmpForUpdate.dispose();
+					}
 					if(selectedOne.equals("부서 (인사  or 고객)") == false 
 							|| (selectedOne.equals("부서 (인사  or 고객)")&& sDeptName.equals("")) 
 //							|| (selectedOne.equals("부서")&& (sDeptName.equals("인사")==false))
@@ -136,7 +138,9 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				}if(e.getActionCommand()=="수정") {
 					//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
 					
-					    
+					    if(dlgEmp !=null) {
+					    	dlgEmp.dispose();
+					    }
 						
 					
 						try {

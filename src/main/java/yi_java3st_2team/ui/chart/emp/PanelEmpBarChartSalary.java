@@ -1,4 +1,4 @@
-package yi_java3st_2team.ui.chart;
+package yi_java3st_2team.ui.chart.emp;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
 import yi_java3st_2team.dto.Employee;
+import yi_java3st_2team.ui.chart.InitScene;
 import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.EmployeeUIService;
  
