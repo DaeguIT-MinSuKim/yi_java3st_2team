@@ -16,7 +16,7 @@ import yi_java3st_2team.ds.LocalDataSource;
 import yi_java3st_2team.ds.MySqlDataSource;
 import yi_java3st_2team.dto.Department;
 import yi_java3st_2team.dto.Employee;
-import yi_java3st_2team.ui.panel.EmpCenterUIpanel;
+import yi_java3st_2team.ui.panel.emp.EmpCenterUIpanel;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	
