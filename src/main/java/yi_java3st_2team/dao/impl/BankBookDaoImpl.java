@@ -69,7 +69,7 @@ public class BankBookDaoImpl implements BankBookDao {
 	@Override
 	public int insertBankBook(BankBook bankbook) throws SQLException {
 		int res = -1;
-		String sql = "insert into BankBook values(?,?,?,?,?,?,(select empcode from employee where empname = ?))";
+		String sql = "insert into BankBook values(?,?,?,?,?,?,(select empcode from employee where empname = ?),?)";
 		try(Connection con = LocalDataSource.getConnection(); 
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			pstmt.setString(1, bankbook.getAccountNum());
@@ -79,6 +79,7 @@ public class BankBookDaoImpl implements BankBookDao {
 			pstmt.setFloat(5, bankbook.getAccountInterest());
 			pstmt.setLong(6, bankbook.getAccountBalance()==0?0:bankbook.getAccountBalance());
 			pstmt.setString(7, bankbook.getEmployee().getEmpName());
+			pstmt.setBoolean(8, bankbook.isConnectChk());
 			res = pstmt.executeUpdate();
 		}
 		return res;

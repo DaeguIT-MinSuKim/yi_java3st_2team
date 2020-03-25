@@ -52,7 +52,7 @@ public class PanelBarChartLoanStatisticInfo extends JFXPanel implements InitScen
 		yAxis.setTickLabelFont(new javafx.scene.text.Font(15));
 
 		barChart = new BarChart<String, Number>(xAxis, yAxis);
-		barChart.setTitle("고객별 카드 보유 현황");
+		barChart.setTitle("고객별 대출 보유 현황");
 		barChart.setPrefSize(1000, 500);
 		barChart.setStyle("-fx-font-size: " + 20 + "px;");
 		barChart.setData(getChartData());

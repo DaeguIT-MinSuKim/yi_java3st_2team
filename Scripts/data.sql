@@ -143,16 +143,7 @@ delimiter $
     end $
 delimiter ;
 
--- 필요한지 확인하고 필요없으면 지우기 (트리거 겹쳐서 신규 고객 추가 안됨)
-drop trigger if exists vip_trigger;
-delimiter $
- create trigger vip_trigger
- after insert on customer
- for each row 
- begin 
-	 insert into viptable values(new.custCode);
- end $
-delimiter ;
+
 
 drop trigger if exists deleted_emp_trigger;
 delimiter $
