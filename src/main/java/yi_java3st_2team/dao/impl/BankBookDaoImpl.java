@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -275,6 +276,7 @@ public class BankBookDaoImpl implements BankBookDao {
 					list.add(getBankBookInfo(rs));
 				}
 			}
+			for(AccountInfo info : list) System.out.println(info);
 		}
 		return list;
 	}

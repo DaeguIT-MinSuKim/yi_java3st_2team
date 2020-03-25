@@ -71,11 +71,11 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 		AccountInfo accountInfo4 = null;
 		AccountInfo accountInfo5 = null;
 		try {
-			list1 = service.bankBookInfoWeekly("김가나");
-			list2 = service.bankBookInfoWeekly("김다라");
-			list3 = service.bankBookInfoWeekly("김마바");
-			list4 = service.bankBookInfoWeekly("김사아");
-			list5 = service.bankBookInfoWeekly("김자차");
+			list1 = service.bankBookInfoDaily("김가나");
+			list2 = service.bankBookInfoDaily("김다라");
+			list3 = service.bankBookInfoDaily("김마바");
+			list4 = service.bankBookInfoDaily("김사아");
+			list5 = service.bankBookInfoDaily("김자차");
 			if(list1.size()==0) {
 				accountInfo1 = new AccountInfo("김가나", 0);
 			}
@@ -147,7 +147,6 @@ public class PanelBarChartBankBookDepositDaily extends JFXPanel implements InitS
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		XYChart.Series<String, Number> series = new Series<String, Number>();

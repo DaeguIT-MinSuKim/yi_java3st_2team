@@ -84,12 +84,12 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
-						BankBook bankbook = dlgBankBookAdd.getItem();
+						BankBook bankbook = dlgBankBookMod.getItem();
 						pCenter.updateRow(bankbook, pCenter.getSelectedRowIdx());
 						service.updateBankBook(bankbook);
 						pCenter.loadTableData(service.showBankBooks());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
-						dlgBankBookAdd.dispose();
+						dlgBankBookMod.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block  
 						e1.printStackTrace();

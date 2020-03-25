@@ -957,6 +957,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			panel.addMouseListener(getMouseAdapter());
 		}
 		pWest.add(bankbook_info_west,BorderLayout.CENTER);
+		
+		DormantInfoTblPanel bankbook_dormant_info = new DormantInfoTblPanel();
+		bankbook_dormant_info.setBackground(new Color(255,255,255));
+		pCenter.add(bankbook_dormant_info,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
@@ -1189,7 +1193,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	private Thread initChartThread() {
 		Thread thread = new Thread(new Runnable() {
 			@Override
-			public void run() {		
+			public void run() {	
 				//사원
 				panelEmpPieChartForCountEmp = new PanelEmpPieChartForCountEmp();
 				panelEmpBarChartBonus = new PanelEmpBarChartBonus();
@@ -1441,6 +1445,8 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 
 	private void divBankWorkDaily(String command) {
+		chartThread.interrupt();
+		chartThread.run();
 		switch(command) {
 		case "예금":
 			pCenter.remove(pcCenter);
