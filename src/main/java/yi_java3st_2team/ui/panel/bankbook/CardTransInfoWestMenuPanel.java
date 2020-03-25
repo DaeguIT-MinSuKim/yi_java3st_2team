@@ -19,6 +19,7 @@ public class CardTransInfoWestMenuPanel extends AbsCenterStatisticWestPanel {
 	private void initialize() {
 		setPanelInit(this.panel1, this.panel2, this.panel3, this.panel4, this.panel5, this.panel6, this.panel7);
 		setLabelInit(this.menu1, this.menu2, this.menu3, this.menu4, this.menu5, this.menu6, this.menu7);
+		this.panel1.setBackground(new Color(254,208,64));
 	}
 
 	@Override

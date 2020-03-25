@@ -101,7 +101,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.WHITE);
 		pCenter.setBorder(new EmptyBorder(20, 20, 20, 20));

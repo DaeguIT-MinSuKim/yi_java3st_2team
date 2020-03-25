@@ -744,7 +744,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			mntmBankBookStatisticActionPerformed(e);
 		}
 		if (e.getSource() == mntmBankBooTransInfo) {
-			mntmBankBooTransInfoActionPerformed(e);
+			mntmBankBookTransInfoActionPerformed(e);
 		}
 		if (e.getSource() == mntmBankBook) {
 			mntmBankBookActionPerformed(e);
@@ -843,7 +843,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
+		pcCenter = new JPanel();
+		pcCenter.setBackground(Color.white);
 		pCenter = new JPanel(new BorderLayout());
+		pCenter.setBackground(new Color(255,255,255));
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
 		transInfo_west_card = new CardTransInfoWestMenuPanel();
@@ -851,6 +854,32 @@ public class MainFrame extends JFrame implements ActionListener {
 		for(JPanel panel : panels) {
 			panel.addMouseListener(getMouseAdapter());
 		}
+		transInfo_north_card = new CardTransInfoNorthPanel();
+		transInfo_north_card.setBackground(new Color(255,255,255));
+		JButton[] buttons_transInfo = transInfo_north_card.getBtns();
+		for(JButton btn : buttons_transInfo) {
+			btn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					switch(e.getActionCommand()) {
+					case "일간 거래 내역":
+						divBankWorkDaily("체크카드");
+						break;
+					case "주간 거래 내역":
+						divBankWorkWeekly("체크카드");
+						break;
+					case "월간 거래 내역":
+						divBankWorkMonthly("체크카드");
+						break;
+					case "연간 거래 내역":
+						divBankWorkYearly("체크카드");
+						break;
+					}
+				}
+			});
+		}
+		pCenter.add(transInfo_north_card,BorderLayout.NORTH);
+		pCenter.add(pcCenter,BorderLayout.CENTER);
 		pWest.add(transInfo_west_card,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -867,20 +896,48 @@ public class MainFrame extends JFrame implements ActionListener {
 		pCenter.add(bankbook_UIpanel,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
-	protected void mntmBankBooTransInfoActionPerformed(ActionEvent e) {
+	protected void mntmBankBookTransInfoActionPerformed(ActionEvent e) {
+		transInfo_north_bankbook = new BankBookTransInfoNorthPanel();
+		JButton[] buttons_transInfo = transInfo_north_bankbook.getBtns();
+		for(JButton btn : buttons_transInfo) {
+			btn.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					switch(e.getActionCommand()) {
+					case "일간 거래 내역":
+						divBankWorkDaily("예금");
+						break;
+					case "주간 거래 내역":
+						divBankWorkWeekly("예금");
+						break;
+					case "월간 거래 내역":
+						divBankWorkMonthly("예금");
+						break;
+					case "연간 거래 내역":
+						divBankWorkYearly("예금");
+						break;
+					}
+				}
+			});
+		}
 		greeting = lblGreeting.getText();
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
 		contentPane.remove(pCenter);
+		pcCenter = new JPanel();
+		pcCenter.setBackground(Color.white);
 		pCenter = new JPanel(new BorderLayout());
 		pWest = new JPanel(new BorderLayout());
 		pWest.setBackground(new Color(255,255,255));
+		pCenter.setBackground(Color.white);
 		bankbook_transInfo_west = new BankBookTransInfoWestMenuPanel();
 		JPanel[] panels = bankbook_transInfo_west.getPanels();
 		for(JPanel panel : panels) {
 			panel.addMouseListener(getMouseAdapter());
 		}
+		pCenter.add(transInfo_north_bankbook,BorderLayout.NORTH);
+		pCenter.add(pcCenter,BorderLayout.CENTER);
 		pWest.add(bankbook_transInfo_west,BorderLayout.CENTER);
 		contentPane.add(pWest,BorderLayout.WEST);
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -1245,146 +1302,6 @@ public class MainFrame extends JFrame implements ActionListener {
 					break;
 				}
 			}
-
-			private void divBankWorkYearly(String command) {
-				switch(command) {
-				case "예금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Deposit_Yearly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "적금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Saving_Yearly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "마이너스":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Minus_Yearly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "체크카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_check_Yearly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "신용카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_credit_Yearly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				}
-			}
-
-			private void divBankWorkMonthly(String command) {
-				switch(command) {
-				case "예금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Deposit_Monthly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "적금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Saving_Monthly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "마이너스":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Minus_Monthly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "체크카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_check_Monthly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "신용카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_credit_Monthly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				}
-			}
-
-			private void divBankWorkWeekly(String command) {
-				switch(command) {
-				case "예금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Deposit_Weekly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "적금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Saving_Weekly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "마이너스":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Minus_Weekly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "체크카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_check_Weekly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "신용카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_credit_Weekly,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				}
-			}
-
-			private void divBankWorkDaily(String command) {
-				switch(command) {
-				case "예금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Deposit_Daily,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "적금":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Saving_Daily,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "마이너스":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(bankBook_barChart_Minus_Daily,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "체크카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_check_Daily,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				case "신용카드":
-					pCenter.remove(pcCenter);
-					pcCenter = new JPanel(new BorderLayout());
-					pcCenter.add(card_barChart_credit_Daily,BorderLayout.CENTER);
-					pCenter.add(pcCenter);
-					break;
-				}
-			}
 		};
 		return butonBankBookActionListner;
 	}
@@ -1417,6 +1334,145 @@ public class MainFrame extends JFrame implements ActionListener {
 			}
 		};
 		return northBtnListener;
+	}
+	private void divBankWorkYearly(String command) {
+		switch(command) {
+		case "예금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Deposit_Yearly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "적금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Saving_Yearly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "마이너스":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Minus_Yearly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "체크카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_check_Yearly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "신용카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_credit_Yearly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		}
+	}
+
+	private void divBankWorkMonthly(String command) {
+		switch(command) {
+		case "예금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Deposit_Monthly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "적금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Saving_Monthly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "마이너스":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Minus_Monthly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "체크카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_check_Monthly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "신용카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_credit_Monthly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		}
+	}
+
+	private void divBankWorkWeekly(String command) {
+		switch(command) {
+		case "예금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Deposit_Weekly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "적금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Saving_Weekly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "마이너스":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Minus_Weekly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "체크카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_check_Weekly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "신용카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_credit_Weekly,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		}
+	}
+
+	private void divBankWorkDaily(String command) {
+		switch(command) {
+		case "예금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Deposit_Daily,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "적금":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Saving_Daily,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "마이너스":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(bankBook_barChart_Minus_Daily,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "체크카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_check_Daily,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		case "신용카드":
+			pCenter.remove(pcCenter);
+			pcCenter = new JPanel(new BorderLayout());
+			pcCenter.add(card_barChart_credit_Daily,BorderLayout.CENTER);
+			pCenter.add(pcCenter);
+			break;
+		}
 	}
 	private void setMain() {
 		cust_DW_UIpanel.setMain(this);
