@@ -324,7 +324,7 @@ public class DlgEmp extends JDialog implements ActionListener{
 		
 		Department dept = (Department)cmbDept.getSelectedItem();
 		byte[] pic = getImage(lblPic);
-		JOptionPane.showMessageDialog(null, pic.length);
+		//JOptionPane.showMessageDialog(null, pic.length);
 
 		if(cmbDept.getSelectedIndex()== -1) {
 			JOptionPane.showMessageDialog(null, "부서를 선택하세요");

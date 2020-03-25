@@ -52,7 +52,7 @@ public class PanelEmpBarChartSalary extends JFXPanel  implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("전체/인당 평균 급여액");
 		
-		barChart.setPrefSize(800, 600);
+		barChart.setPrefSize(800, 550);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

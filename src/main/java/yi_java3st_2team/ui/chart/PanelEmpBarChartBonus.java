@@ -51,7 +51,7 @@ public class PanelEmpBarChartBonus extends JFXPanel  implements InitScene {
 		barChart = new BarChart<>(xAxis, yAxis);
 		barChart.setTitle("보너스현황");
 		
-		barChart.setPrefSize(800, 600);
+		barChart.setPrefSize(800, 550);
 		barChart.setData(getChartData());
 		
 		root.getChildren().add(barChart);

@@ -80,6 +80,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		initialize(); 
 	}
 	private void initialize() {
+		setResizable(false);
 		service = new LoginService();
 		main = new MainFrame();
 		main.setResizable(false);
