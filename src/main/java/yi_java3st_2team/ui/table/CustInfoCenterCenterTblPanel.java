@@ -24,7 +24,7 @@ public class CustInfoCenterCenterTblPanel extends AbsCenterTblPanel<Customer> {
 
 	@Override
 	protected String[] getColumns() { 
-		return new String[] {"고객 코드","고객 이름", "고객 등급", "고객 신용등급", "고객 주소", "고객 연락처"};
+		return new String[] {"고객 코드","고객 이름", "고객 등급명", "고객 신용등급", "고객 주소", "고객 연락처"};
 	}
 
 	@Override

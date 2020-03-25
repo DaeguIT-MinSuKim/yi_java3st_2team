@@ -65,6 +65,26 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 			public void actionPerformed(ActionEvent e) {
 				DlgCustInfo dlgCustInfo = new DlgCustInfo();
 				dlgCustInfo.setActiontoAdd();
+				dlgCustInfo.getCmbCustRank().addItemListener(new ItemListener() {
+
+					@Override
+					public void itemStateChanged(ItemEvent e) {
+						String selItem = (String) e.getItem();
+						if(selItem.equals("Diamond")) {
+							dlgCustInfo.getLblCustCreditRank().setText("1등급");
+						}else if(selItem.equals("Platinum")) {
+							dlgCustInfo.getLblCustCreditRank().setText("2등급");
+						}else if(selItem.equals("Gold")) {
+							dlgCustInfo.getLblCustCreditRank().setText("3등급");
+						}else if(selItem.equals("Silver")) {
+							dlgCustInfo.getLblCustCreditRank().setText("4등급");
+						}else if(selItem.equals("Bronze")) {
+							dlgCustInfo.getLblCustCreditRank().setText("5등급");
+						}
+						
+					}
+					
+				});
 				try {
 					List<Customer> list = custService.showCustomers();
 					dlgCustInfo.getTfCustCode().setText("C"+String.format("%03d",list.size()+1));
@@ -76,7 +96,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						if(dlgCustInfo.getTfCustCode()==null || dlgCustInfo.getTfCustName()==null || dlgCustInfo.getCmbCustRank().getSelectedIndex()==-1
-								  || dlgCustInfo.getCmbCustCredit().getSelectedIndex()==-1 || dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
+								  ||  dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
 									JOptionPane.showMessageDialog(null, "빈 칸을 모두 입력해주세요.");
 								}
 						if(e.getActionCommand().equals("추가")) {
@@ -139,7 +159,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							if(dlgCustInfo.getTfCustCode()==null || dlgCustInfo.getTfCustName()==null || dlgCustInfo.getCmbCustRank().getSelectedIndex()==-1
-									  || dlgCustInfo.getCmbCustCredit().getSelectedIndex()==-1 || dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
+									  || dlgCustInfo.getTfCustAddr()==null || dlgCustInfo.getTfCustTel()==null) {
 										JOptionPane.showMessageDialog(null, "빈 칸을 모두 입력해주세요.");
 									}
 							if(e.getActionCommand().equals("수정")) {

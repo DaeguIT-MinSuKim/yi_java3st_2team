@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.javafx.scene.control.SelectedCellsMap;
+
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.ui.panel.CustInfoUIPanel;
 import yi_java3st_2team.ui.service.CustomerService;
@@ -22,6 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.Font;
 
 public class DlgCustInfo extends JDialog {
 
@@ -31,11 +36,12 @@ public class DlgCustInfo extends JDialog {
 	private JTextField tfCustAddr;
 	private JTextField tfCustTel;
 	private JComboBox cmbCustRank;
-	private JComboBox cmbCustCredit;
 	private CustInfoUIPanel custInfoUI = new CustInfoUIPanel();
 	private String[] rankList = {"Bronze", "Silver", "Gold", "Platinum", "Diamond"};
 	private String[] creditList = {"1","2","3","4","5"};
-	private JButton okButton;	
+	private JButton okButton;
+	private JLabel lblCustCredit;
+	private JLabel lblCustCreditRank;	
 	
 	/**
 	 * Launch the application.
@@ -91,9 +97,6 @@ public class DlgCustInfo extends JDialog {
 		return cmbCustRank;
 	}
 
-	public JComboBox getCmbCustCredit() {
-		return cmbCustCredit;
-	}
 
 	public CustInfoUIPanel getCustInfoUI() {
 		return custInfoUI;
@@ -105,6 +108,12 @@ public class DlgCustInfo extends JDialog {
 
 	public String[] getCreditList() {
 		return creditList;
+	}
+	
+	
+
+	public JLabel getLblCustCreditRank() {
+		return lblCustCreditRank;
 	}
 
 	private void initialize() {
@@ -141,19 +150,21 @@ public class DlgCustInfo extends JDialog {
 		}
 		{
 			cmbCustRank = new JComboBox(rankList);
+			cmbCustRank.setEditable(true);
 			cmbCustRank.setSelectedIndex(-1);
 			
 			contentPanel.add(cmbCustRank);
 		}
 		{
-			JLabel lblCustCredit = new JLabel("신용등급");
+			lblCustCredit = new JLabel("신용등급");
 			lblCustCredit.setHorizontalAlignment(SwingConstants.CENTER);
 			contentPanel.add(lblCustCredit);
 		}
 		{
-			cmbCustCredit = new JComboBox(creditList);
-			cmbCustCredit.setSelectedIndex(-1);
-			contentPanel.add(cmbCustCredit);
+			lblCustCreditRank = new JLabel("");
+			lblCustCreditRank.setFont(new Font("굴림", Font.BOLD, 12));
+			lblCustCreditRank.setHorizontalAlignment(SwingConstants.CENTER);
+			contentPanel.add(lblCustCreditRank);
 		}
 		{
 			JLabel lblCustAddr = new JLabel("주소");
@@ -218,7 +229,7 @@ public class DlgCustInfo extends JDialog {
 		}else{
 			new_rank = "B";
 		}
-		int custCredit = Integer.parseInt((String)cmbCustCredit.getSelectedItem());
+		int custCredit = Integer.parseInt(lblCustCreditRank.getText().substring(0,1));
 		String custAddr = tfCustAddr.getText();
 		String custTel = tfCustTel.getText();
 		return new Customer(custCode, custName, new_rank, custCredit, custAddr, custTel);
@@ -228,7 +239,8 @@ public class DlgCustInfo extends JDialog {
 		tfCustCode.setText(customer.getCustCode());
 		tfCustName.setText(customer.getCustName());
 		cmbCustRank.setSelectedItem(customer.getCustRank());
-		cmbCustCredit.setSelectedItem(Integer.toString(customer.getCustCredit()));
+		lblCustCreditRank.setText(Integer.toString(customer.getCustCredit()));
+		//cmbCustCredit.setSelectedItem(Integer.toString(customer.getCustCredit()));
 		tfCustAddr.setText(customer.getCustAddr());
 		tfCustTel.setText(customer.getCustTel());
 	}
@@ -240,5 +252,6 @@ public class DlgCustInfo extends JDialog {
 	public void setActiontoEdit() {
 		okButton.setActionCommand("수정");
 	}
+
 
 }
