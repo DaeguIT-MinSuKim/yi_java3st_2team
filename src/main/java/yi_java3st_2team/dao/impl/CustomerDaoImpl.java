@@ -292,7 +292,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<String> selectCustExistChk() throws SQLException {
 		List<String> list = null;
-		String sql = "select custCode from customer";
+		String sql = "select custName from customer";
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();){
