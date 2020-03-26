@@ -14,7 +14,8 @@ import javax.swing.JPopupMenu;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Loan;
 import yi_java3st_2team.ui.MainFrame;
-import yi_java3st_2team.ui.dialog.DlgLoan;
+import yi_java3st_2team.ui.dialog.DlgLoanAdd;
+import yi_java3st_2team.ui.dialog.DlgLoanMod;
 import yi_java3st_2team.ui.service.LoanService;
 import yi_java3st_2team.ui.table.LoanCenterTblPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,7 +25,8 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 	private LoanCenterNorthSearchPanel pNorth;
 	private LoanCenterTblPanel pCenter;
 	private LoanService service;
-	private DlgLoan dlgLoan;
+	private DlgLoanAdd dlgLoanAdd;
+	private DlgLoanMod dlgLoanMod;
 	private int selIdx;
 	private MainFrame main;
 
@@ -69,12 +71,12 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
 					try {
-						Loan loan = dlgLoan.getItem();
+						Loan loan = dlgLoanAdd.getItem();
 						pCenter.addItem(loan);
 						service.insertLoan(loan);
 						pCenter.loadTableData(service.showLoans());
 						JOptionPane.showMessageDialog(null, "추가되었습니다");
-						dlgLoan.dispose();
+						dlgLoanAdd.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -82,12 +84,12 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
-						Loan loan = dlgLoan.getItem();
+						Loan loan = dlgLoanMod.getItem();
 						pCenter.updateRow(loan, pCenter.getSelectedRowIdx());
 						service.updateLoan(loan);
 						pCenter.loadTableData(service.showLoans());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
-						dlgLoan.dispose();
+						dlgLoanMod.dispose();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block  
 						e1.printStackTrace();
@@ -100,28 +102,28 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("추가")) {
-					dlgLoan = new DlgLoan();
-					dlgLoan.setEmp(main.getEmpAuth());
-					dlgLoan.setTitle("대출 " + e.getActionCommand());
-					dlgLoan.getBtnOk().setText(e.getActionCommand());
-					dlgLoan.getBtnOk().addActionListener(myDlgListener);
-					dlgLoan.setModal(true);
-					dlgLoan.setVisible(true);	
+					dlgLoanAdd = new DlgLoanAdd();
+					dlgLoanAdd.setEmp(main.getEmpAuth());
+					dlgLoanAdd.setTitle("대출 " + e.getActionCommand());
+					dlgLoanAdd.getBtnOk().setText(e.getActionCommand());
+					dlgLoanAdd.getBtnOk().addActionListener(myDlgListener);
+					dlgLoanAdd.setModal(true);
+					dlgLoanAdd.setVisible(true);	
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					try {
 						selIdx = pCenter.getSelectedRowIdx();
 						Loan loan = pCenter.getSelectedItem();
-						dlgLoan = new DlgLoan();
-						dlgLoan.setTitle("대출" + e.getActionCommand());
-						dlgLoan.getBtnOk().setText(e.getActionCommand());
-						dlgLoan.getBtnOk().addActionListener(myDlgListener);
-						dlgLoan.getTfAccountNum().setEnabled(false);
-						dlgLoan.getCmbCust().setEnabled(false);
-						dlgLoan.getCmbPlan().setEditable(false);
-						dlgLoan.setItem(loan);
-						dlgLoan.setModal(true);
-						dlgLoan.setVisible(true);
+						dlgLoanMod = new DlgLoanMod();
+						dlgLoanMod.setTitle("대출" + e.getActionCommand());
+						dlgLoanMod.getBtnOk().setText(e.getActionCommand());
+						dlgLoanMod.getBtnOk().addActionListener(myDlgListener);
+						dlgLoanMod.getTfAccountNum().setEnabled(false);
+						dlgLoanMod.getCmbCust().setEnabled(false);
+						dlgLoanMod.getCmbPlan().setEnabled(false);
+						dlgLoanMod.setItem(loan);
+						dlgLoanMod.setModal(true);
+						dlgLoanMod.setVisible(true);
 					}
 					catch(RuntimeException e1) {
 						JOptionPane.showMessageDialog(null, e1.getMessage());

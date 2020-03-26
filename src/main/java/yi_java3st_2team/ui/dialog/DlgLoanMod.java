@@ -31,7 +31,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 @SuppressWarnings("serial")
-public class DlgLoan extends JDialog implements ActionListener, ItemListener {
+public class DlgLoanMod extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField tfAccountNum;
@@ -46,7 +46,7 @@ public class DlgLoan extends JDialog implements ActionListener, ItemListener {
 	private Employee emp;
 	private LoanService service;
 
-	public DlgLoan() {
+	public DlgLoanMod() {
 		initialize();
 	}
 	private void initialize() {
@@ -63,7 +63,6 @@ public class DlgLoan extends JDialog implements ActionListener, ItemListener {
 		}
 		{
 			cmbCust = new JComboBox<>();
-			cmbCust.addItemListener(this);
 			cmbCust.setEditable(true);
 			contentPanel.add(cmbCust);
 		}
@@ -122,20 +121,20 @@ public class DlgLoan extends JDialog implements ActionListener, ItemListener {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 			{
 				btnOk = new JButton();
-				btnOk.addActionListener(this);
 				buttonPane.add(btnOk);
 				getRootPane().setDefaultButton(btnOk);
 			}
 			{
 				btnCancel = new JButton("취소");
-				btnCancel.addActionListener(this);
 				buttonPane.add(btnCancel);
 			}
 			try {
 				List<Customer> custList = service.showCust();
 				DefaultComboBoxModel<Customer> cmbCustModel = new DefaultComboBoxModel<Customer>(new Vector<>(custList));
 				cmbCust.setModel(cmbCustModel);
-				cmbCust.setSelectedIndex(-1);
+				List<Plan> planList = service.showPlanByLoan();
+				DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
+				cmbPlan.setModel(cmbPlanModel);
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -241,37 +240,5 @@ public class DlgLoan extends JDialog implements ActionListener, ItemListener {
 		tfLoanDate.setDate(new Date());
 		tfLoanInterest.setText("");
 		tfLoanBalance.setText("");
-	}
-	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cmbCust) {
-			cmbCustItemStateChanged(e);
-		}
-	}
-	protected void cmbCustItemStateChanged(ItemEvent e) {
-		if(e.getStateChange()==ItemEvent.SELECTED) {
-			Customer cust = (Customer)cmbCust.getSelectedItem();
-			if(cust.getCustRank().equals("D")) {
-				try {
-					List<Plan> planList = service.showPlanByLoan();
-					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-					cmbPlan.setModel(cmbPlanModel);
-					cmbPlan.setSelectedIndex(0);
-				}
-				catch(SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-			else {
-				try {
-					List<Plan> planList = service.showPlanByLoanNormal();
-					DefaultComboBoxModel<Plan> cmbPlanModel = new DefaultComboBoxModel<Plan>(new Vector<>(planList));
-					cmbPlan.setModel(cmbPlanModel);
-					cmbPlan.setSelectedIndex(0);
-				}
-				catch(SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
 	}
 }

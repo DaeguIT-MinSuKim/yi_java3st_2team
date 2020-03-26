@@ -52,7 +52,10 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel panel_1;
 	private static LoginFrame frame;
 	private String mainMessage;
-	private JPanel pNorthForLogo;
+	private
+	
+	
+	JPanel pNorthForLogo;
 	private JLabel lblLogoImg;
 	private JPanel panel_2;
 	private JPanel panel_3;
@@ -63,6 +66,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					frame = new LoginFrame();
+					
+					
 					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					//UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					frame.setVisible(true);
