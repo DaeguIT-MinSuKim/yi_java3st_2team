@@ -42,7 +42,7 @@ public class PanelDPsLoanAllBarChart extends JFXPanel  implements InitScene {
 		barChart.setTitle("항목별 총 금액");
 		
 		barChart.setPrefSize(1000, 500);
-		System.out.println(barChart.getOpaqueInsets());
+		//System.out.println(barChart.getOpaqueInsets());
 		
 		//barChart.getData().add(getBarChartData());
 		barChart.setData(getChartData());
