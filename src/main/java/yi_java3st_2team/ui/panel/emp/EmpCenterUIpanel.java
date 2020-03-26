@@ -237,6 +237,10 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	
 					    try{
 					    	addEmp = dlgEmp.getItem();
+					    	if(service.showPickedEmp(addEmp.getEmpName())!=null) {
+					    		JOptionPane.showMessageDialog(null, "사원이름 중복입니다. 구분이 필요합니다");
+					    		return;
+					    	}
 					    	service.addEmp(addEmp);
 					           //  JOptionPane.showMessageDialog(null, "추가되었습니다");
 								

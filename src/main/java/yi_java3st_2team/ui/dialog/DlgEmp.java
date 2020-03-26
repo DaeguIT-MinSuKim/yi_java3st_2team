@@ -308,7 +308,9 @@ public class DlgEmp extends JDialog implements ActionListener{
 	//다이얼로그의 값 insert위해 가져오기
 	public Employee getItem() {
 		String empCode = tfEmpCode.getText().trim();
+		
 		String empName = tfEmpName.getText().trim();
+
 		int nameLength = empName.length();
 		if(nameLength >= 6) {
 			JOptionPane.showMessageDialog(null, "이름은 다섯자 이내입니다");
