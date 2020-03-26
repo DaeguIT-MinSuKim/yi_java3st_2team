@@ -180,12 +180,28 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 					if(selectedOne.equals("사원이름")) {
 					  //list.add(service.showPickedEmp(empItem));
 					  list = service.showPickedEmpList(empItem);
+					  if(list.size()==0) {
+						  JOptionPane.showMessageDialog(null, "해당하는 사원이 없습니다");
+						  return;
+					  }
 				    }else if(selectedOne.equals("부서 (인사  or 고객)")) {
 				      list = service.showPickedEmpByDept(empItem);
+				      if(list.size()==0) {
+						  JOptionPane.showMessageDialog(null, "해당하는 사원이 없습니다");
+						  return;
+					  }
 				    }else if(selectedOne.equals("사원번호")) {
 				      list = service.showPickedEmpByEmpNo(empItem);
+				      if(list.size()==0) {
+						  JOptionPane.showMessageDialog(null, "해당하는 사원이 없습니다");
+						  return;
+					  }
 				    }else if(selectedOne.equals("직급")) {
 				      list = service.showPickedEmpByTitle(empItem);
+				      if(list.size()==0) {
+						  JOptionPane.showMessageDialog(null, "해당하는 사원이 없습니다");
+						  return;
+					  }
 				    }
 					
 					
