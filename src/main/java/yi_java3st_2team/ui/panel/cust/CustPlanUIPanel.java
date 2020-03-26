@@ -200,11 +200,11 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 								return;
 							}
 							if(e.getActionCommand().equals("추가")) {
-								String code = plan.getPlanCode();
+								String name = plan.getPlanName();
 								List<String> list = planService.planExistChk();
 								Boolean falsechk = false;
 									for(int i=0; i<list.size(); i++) {											
-										if(code.equals(list.get(i))) {												
+										if(name.equals(list.get(i))) {												
 											falsechk = false;
 											break;
 										}else {											
@@ -219,6 +219,7 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 										refreshTbl();
 									}else {
 										JOptionPane.showMessageDialog(null, "이미 등록된 상품입니다.");
+										return;
 									}
 							
 							}
