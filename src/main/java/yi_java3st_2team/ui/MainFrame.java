@@ -1484,7 +1484,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		cust_DW_UIpanel.setMain(this);
 		card_UIpanel.setMain(this);
 	}
-	javax.swing.Timer paint = new javax.swing.Timer(1, new ActionListener() {
+	javax.swing.Timer paint = new javax.swing.Timer(100, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	repaint();
         	revalidate();

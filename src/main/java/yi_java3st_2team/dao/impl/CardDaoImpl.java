@@ -189,7 +189,7 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public List<CardInfo> showCardInfoYearly() throws SQLException {
 		List<CardInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo wher year(transdate) = year(now()) group by cardnum";
+		String sql = "select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where year(transdate) = year(now()) group by cardnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
 			try(ResultSet rs = pstmt.executeQuery()) {

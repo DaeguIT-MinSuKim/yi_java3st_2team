@@ -84,9 +84,9 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 		ActionListener myDlgListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Card card = dlgCard.getItem();
 				if(e.getActionCommand().equals("추가")) {
 					try {
+						Card card = dlgCard.getItem();
 						if(card.getCardNum().substring(6,7).equals("1")) {
 							if(cardService.showBankBookIsConnect(card).size()==0) {
 								JOptionPane.showMessageDialog(null, "선택할 수 있는 예금 계좌가 없습니다. 통장을 먼저 만드세요");
@@ -114,6 +114,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else {
 					try {
+						Card card = dlgCardMod.getItem();
 						cardService.updateCard(card);
 						cardService.updateAccountBalance(card);
 						main.getCust_DW_UIpanel().getPanel_1().loadTableData(customerService.showCustomersByBalance());
@@ -147,9 +148,10 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				}
 				else if(e.getActionCommand().equals("수정")) {
 					try {
-						selIdx = pCenter.getSelectedRowIdx();
 						Card selCard = pCenter.getSelectedItem();
+						JOptionPane.showMessageDialog(null, selCard);
 						dlgCardMod = new DlgCardMod();
+						dlgCardMod.setItem(selCard);
 						dlgCardMod.setTitle("카드" + e.getActionCommand());
 						dlgCardMod.getBtnOk().setText(e.getActionCommand());
 						dlgCardMod.getBtnOk().addActionListener(myDlgListener);

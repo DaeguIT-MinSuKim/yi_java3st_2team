@@ -223,3 +223,4 @@ select * from card;
 delete from card;
 select * from bankbookinfo;
 desc card;
+select custname,if(substring(cardnum,7,1)=1,'체크카드','신용카드') as 'div',count(transDate) as 'count' from cardinfo where year(transdate) = year(now()) group by cardnum
