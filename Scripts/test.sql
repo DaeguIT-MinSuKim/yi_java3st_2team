@@ -67,7 +67,7 @@ group by e.`empCode`;
 
 
 select * from ranking ;
-select e.empCode, e.empName, e.empTitle, e.pic, r.perf, r.bonus  from employee e left join ranking r on e.`empCode` =r.empCode order by bonus desc;
+select e.empCode, e.empName, e.empTitle, e.pic, r.perf, r.bonus  from employee e left join ranking r on e.`empCode` =r.empCode where e.`deptNo` =2 order by bonus desc;
 
   
 #고객 - 황하나

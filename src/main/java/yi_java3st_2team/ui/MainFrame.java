@@ -346,7 +346,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				greeting = lblGreeting.getText();
+				
 				if(pWest!=null) {
 					contentPane.remove(pWest);
 				}
@@ -400,7 +400,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				greeting = lblGreeting.getText();
+		
 				if(pWest!=null) {
 					contentPane.remove(pWest);
 				}
@@ -423,7 +423,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				greeting = lblGreeting.getText();
+		
 				if(pWest!=null) {
 					contentPane.remove(pWest);
 				}
@@ -669,9 +669,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		pCenter = new JPanel();
 		pCenter.setLayout(new BorderLayout());
 		pCenter.setBackground(Color.white);
-		pcNorth = getLoginPanel();
+		//pcNorth = getLoginPanel();
 		pcCenter = getMainLogoPanel();
-		pCenter.add(pcNorth,BorderLayout.NORTH);
+		//pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
 		contentPane.add(pNorth,BorderLayout.NORTH);
 		contentPane.add(pCenter,BorderLayout.CENTER);
@@ -762,7 +762,7 @@ public class MainFrame extends JFrame implements ActionListener {
 	}
 	
 	protected void mntmEmpSearchActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		//센터 지우고  센터에 패널 모프시키기 
 		if(pWest!=null) {
 			contentPane.remove(pWest);
@@ -799,7 +799,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "권한이 없습니다. HR부서 차장급 이상 접속가능");
 			return;
 		}
-		greeting = lblGreeting.getText();
+
 		//센터 지우고  센터에 패널 모프시키기 
 		if(pWest!=null) {
 			contentPane.remove(pWest);
@@ -811,7 +811,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmCardActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -823,7 +823,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmCardStatisticActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -838,7 +838,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmCardTransInfoActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -885,7 +885,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmBankBookActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -920,7 +920,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				}
 			});
 		}
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -943,7 +943,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmBankBookStatisticActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -965,7 +965,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmLoanSearchActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -980,7 +980,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}
 	protected void mntmLoanActionPerformed(ActionEvent e) {
-		greeting = lblGreeting.getText();
+
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
@@ -1280,11 +1280,11 @@ public class MainFrame extends JFrame implements ActionListener {
 		contentPane.remove(pCenter);
 		pCenter = new JPanel();
 		pCenter.setBackground(Color.white);
-		pcNorth = getLoginPanel();
-		greeting = empAuth.getEmpName() + "님 환영합니다~";
-		lblGreeting.setText(greeting);
+		//pcNorth = getLoginPanel();
+		//greeting = empAuth.getEmpName() + "님 환영합니다~";
+		//lblGreeting.setText(greeting);
 		pcCenter = getMainLogoPanel();		
-		pCenter.add(pcNorth,BorderLayout.NORTH);
+		//pCenter.add(pcNorth,BorderLayout.NORTH);
 		pCenter.add(pcCenter,BorderLayout.CENTER);
 		contentPane.add(pCenter,BorderLayout.CENTER);
 	}

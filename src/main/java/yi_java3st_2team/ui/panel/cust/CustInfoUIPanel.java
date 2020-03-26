@@ -102,12 +102,12 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 						if(e.getActionCommand().equals("추가")) {
 									try {
 										boolean falsechk = false;
-										String custCode = dlgCustInfo.getItem().getCustCode();
+										String custName = dlgCustInfo.getItem().getCustName();
 										//등록된 고객인지 확인
 										List<String> list = custService.custExistChk();
 										dlgCustInfo.getTfCustCode().setText("C"+String.format("%03d",list.size()+1));
 										for(int i=0; i<list.size(); i++) {											
-											if(custCode.equals(list.get(i))) {												
+											if(custName.equals(list.get(i))) {												
 												falsechk = false;
 												break;
 											}else {											
@@ -126,7 +126,6 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 										}
 										
 									} catch (SQLException e1) {
-										//JOptionPane.showMessageDialog(null, "이미 등록된 고객입니다.");
 										e1.printStackTrace();
 										return;
 									}
