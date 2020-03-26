@@ -1014,7 +1014,8 @@ public class MainFrame extends JFrame implements ActionListener {
 					//총 고객숫자 아래에 여백을 위한 패널
 					JPanel pcNull = new JPanel();
 					pcNull.setBackground(Color.white);
-					
+					statistic_CustNumAll = new PanelCustNumAll();
+					statistic_CustNumAll.setBackground(new Color(255,255,255));
 					pcCenter.setBackground(Color.white);
 					pcSouth.add(statistic_CustNumAll, BorderLayout.CENTER);
 					pcSouth.add(pcNull, BorderLayout.SOUTH);
@@ -1144,8 +1145,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				panel_chart_DPsLoan = new PanelDPsLoanAllBarChart();
 				panel_chart_custRankNum = new PanelBarChart();
 				panel_chart_custVIP = new PanelPieChart();
-				statistic_CustNumAll = new PanelCustNumAll();
-				statistic_CustNumAll.setBackground(new Color(255,255,255));
+				
 				//은행업무
 				bankBook_barChart_Deposit_Daily = new PanelBarChartBankBookDepositDaily();
 				bankBook_barChart_Deposit_Weekly = new PanelBarChartBankBookDepositWeekly();

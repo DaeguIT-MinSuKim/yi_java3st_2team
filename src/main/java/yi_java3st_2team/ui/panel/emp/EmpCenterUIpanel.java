@@ -178,7 +178,6 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					
 					//선택한 위치의  employee객체를 구하고 그걸 데이터에서 삭제 
 					Employee emp = pEmpTblPanel.getSelectedItem();
-					         
 					
 					int res = JOptionPane.showConfirmDialog(null, emp.getEmpName()+"님의 정보를 정말 삭제하시겠습니까?");
 					if(res ==0) {
