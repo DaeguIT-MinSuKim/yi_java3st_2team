@@ -1206,6 +1206,7 @@ public class MainFrame extends JFrame implements ActionListener {
 				panel_chart_DPsLoan = new PanelDPsLoanAllBarChart();
 				panel_chart_custRankNum = new PanelBarChart();
 				panel_chart_custVIP = new PanelPieChart();
+				
 				//은행업무
 				bankBook_barChart_Deposit_Daily = new PanelBarChartBankBookDepositDaily();
 				bankBook_barChart_Deposit_Weekly = new PanelBarChartBankBookDepositWeekly();
