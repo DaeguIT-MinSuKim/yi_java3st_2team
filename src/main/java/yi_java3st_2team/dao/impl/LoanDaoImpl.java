@@ -139,4 +139,52 @@ public class LoanDaoImpl implements LoanDao {
 		return new LoanInfo(custname, normal, credit, card);
 	}
 
+	@Override
+	public List<Loan> searchLoanAccountNums(Loan loan) throws SQLException {
+		List<Loan> list = new ArrayList<>();
+		String sql = "select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode where l.loanaccountnum like ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "%" + loan.getLoanAccountNum() + "%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getLoan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Loan> searchLoanCustNames(Loan loan) throws SQLException {
+		List<Loan> list = new ArrayList<>();
+		String sql = "select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode where c.custname like ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "%" + loan.getCustCode().getCustName() + "%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getLoan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public List<Loan> searchLoanPlanNames(Loan loan) throws SQLException {
+		List<Loan> list = new ArrayList<>();
+		String sql = "select l.loanAccountNum,c.custName,p.planName,l.loanDate,l.loanInterest,l.loanBalance from loan l left join customer c on l.custCode = c.custCode left join plan p on l.loanPlanCode = p.planCode where p.planname like ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, "%" + loan.getPlanCode().getPlanName() + "%");
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					list.add(getLoan(rs));
+				}
+			}
+		}
+		return list;
+	}
+
 }

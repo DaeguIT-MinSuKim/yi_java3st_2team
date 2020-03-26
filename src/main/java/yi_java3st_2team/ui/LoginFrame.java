@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import yi_java3st_2team.dto.Employee;
@@ -63,10 +62,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					frame = new LoginFrame();
-					
-					
-					//UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					//UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -107,9 +107,9 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 							JOptionPane.showMessageDialog(null, "추가되었습니다");
 							pCenter.loadTableData(cardService.showCards());
 						}
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "카드번호가 중복되었습니다 다시 한번 확인해주세요");
+						return;
 					}
 				}
 				else {

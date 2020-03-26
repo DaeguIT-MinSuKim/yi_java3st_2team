@@ -106,8 +106,9 @@ public class DlgConnectBankBookInfo extends JDialog implements ActionListener {
 				dlgCard.getUiPanel().getpCenter().loadTableData(service.showCards());
 				dispose();
 				dlgCard.dispose();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "계좌번호가 중복되었습니다 다시 한번 확인해주세요");
+				return;
 			}
 		}
 		catch(RuntimeException e1) {

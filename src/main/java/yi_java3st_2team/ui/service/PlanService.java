@@ -11,7 +11,7 @@ public class PlanService {
 	private PlanDao dao;
 	
 	public PlanService() {
-		dao = new PlanDaoImpl().getInstance();
+		dao = PlanDaoImpl.getInstance();
 	}
 	
 	public List<Plan> showPlans() throws SQLException{

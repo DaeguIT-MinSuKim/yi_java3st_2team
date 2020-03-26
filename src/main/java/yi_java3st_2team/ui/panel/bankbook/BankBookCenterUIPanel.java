@@ -77,9 +77,9 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 						pCenter.loadTableData(service.showBankBooks());
 						JOptionPane.showMessageDialog(null, "추가되었습니다");
 						dlgBankBookAdd.dispose();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "계좌번호가 중복되었습니다 다시 한번 확인해주세요");
+						return;
 					}
 				}
 				else {

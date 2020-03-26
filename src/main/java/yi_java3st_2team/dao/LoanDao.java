@@ -13,4 +13,7 @@ public interface LoanDao {
 	public int updateLoan(Loan loan) throws SQLException;
 	public int deleteLoan(Loan loan) throws SQLException;
 	public List<LoanInfo> showLoanInfo() throws SQLException;
+	public List<Loan> searchLoanAccountNums(Loan loan) throws SQLException;
+	public List<Loan> searchLoanCustNames(Loan loan) throws SQLException;
+	public List<Loan> searchLoanPlanNames(Loan loan) throws SQLException;
 }

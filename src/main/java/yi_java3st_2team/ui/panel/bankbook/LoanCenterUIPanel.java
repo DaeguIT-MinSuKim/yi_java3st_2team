@@ -74,14 +74,14 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 				if(e.getActionCommand().equals("추가")) {
 					try {
 						Loan loan = dlgLoanAdd.getItem();
-						pCenter.addItem(loan);
 						service.insertLoan(loan);
+						pCenter.addItem(loan);
 						pCenter.loadTableData(service.showLoans());
 						JOptionPane.showMessageDialog(null, "추가되었습니다");
 						dlgLoanAdd.dispose();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					} catch (Exception e1) {
+						JOptionPane.showMessageDialog(null, "계좌번호가 중복되었습니다 다시 한번 확인해주세요");
+						return;
 					}
 				}
 				else {
@@ -184,12 +184,59 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 			JOptionPane.showMessageDialog(null, "검색할 구분을 선택하세요");
 			break;
 		case "계좌번호":
+			Loan loan = new Loan();
+			loan.setLoanAccountNum(pNorth.getTfSearch().getText().trim());
+			try {
+				List<Loan> list = service.searchLoanAccountNum(loan);
+				if(list.size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 계좌번호를 찾을 수 없습니다");
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+				}
+			}
+			catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "고객이름":
+			loan = new Loan();
+			Customer customer = new Customer();
+			customer.setCustName(pNorth.getTfSearch().getText().trim());
+			loan.setCustCode(customer);
+			try {
+				List<Loan> list = service.searchLoanCustName(loan);
+				if(list.size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 고객을 찾을 수 없습니다");
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+				}
+			}
+			catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		case "상품명":
-			break;
-		case "상품이름":
+			loan = new Loan();
+			Plan plan = new Plan();
+			plan.setPlanName(pNorth.getTfSearch().getText().trim());
+			loan.setPlanCode(plan);
+			try {
+				List<Loan> list = service.searchLoanPlanName(loan);
+				if(list.size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 상품을 찾을 수 없습니다");
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+				}
+			}
+			catch(SQLException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		}
 	}
