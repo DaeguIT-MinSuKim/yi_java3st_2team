@@ -57,7 +57,7 @@
     project="yi_java3st_2team" 
     file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/cust/PanelMonthlySvOpenNumBarChart.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="575" y="343"/>    
+    <position height="-1" width="-1" x="547" y="334"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
