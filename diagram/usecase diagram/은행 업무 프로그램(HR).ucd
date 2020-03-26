@@ -133,8 +133,8 @@
                         <constraint>
                           <height>52</height>
                           <width>178</width>
-                          <x>82</x>
-                          <y>320</y>
+                          <x>86</x>
+                          <y>151</y>
                         </constraint>
                         <sourceConnections>
                           <net.java.amateras.uml.model.AnchorModel>
@@ -164,7 +164,7 @@
                                 </java.beans.PropertyChangeSupport>
                               </listeners>
                               <constraint>
-                                <height>283</height>
+                                <height>286</height>
                                 <width>315</width>
                                 <x>923</x>
                                 <y>382</y>
@@ -246,8 +246,8 @@ C : 대출&#xd;
                               <constraint>
                                 <height>47</height>
                                 <width>147</width>
-                                <x>542</x>
-                                <y>487</y>
+                                <x>536</x>
+                                <y>547</y>
                               </constraint>
                               <sourceConnections>
                                 <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel reference="../../.."/>
@@ -977,8 +977,8 @@ N : normal등급(일반회원 및 VIP 회원상품)</old>
                                           <constraint>
                                             <height>56</height>
                                             <width>142</width>
-                                            <x>353</x>
-                                            <y>898</y>
+                                            <x>376</x>
+                                            <y>773</y>
                                           </constraint>
                                           <sourceConnections>
                                             <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel reference="../../.."/>
@@ -1020,8 +1020,8 @@ N : normal등급(일반회원 및 VIP 회원상품)</old>
                                                 <constraint>
                                                   <height>49</height>
                                                   <width>194</width>
-                                                  <x>350</x>
-                                                  <y>1350</y>
+                                                  <x>275</x>
+                                                  <y>1297</y>
                                                 </constraint>
                                                 <sourceConnections>
                                                   <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel>
@@ -1253,10 +1253,10 @@ N : normal등급(일반회원 및 VIP 회원상품)</old>
                                                         </java.beans.PropertyChangeSupport>
                                                       </listeners>
                                                       <constraint>
-                                                        <height>238</height>
+                                                        <height>255</height>
                                                         <width>237</width>
-                                                        <x>332</x>
-                                                        <y>1411</y>
+                                                        <x>249</x>
+                                                        <y>1368</y>
                                                       </constraint>
                                                       <sourceConnections>
                                                         <net.java.amateras.uml.model.AnchorModel reference="../../.."/>
@@ -1278,16 +1278,16 @@ N : normal등급(일반회원 및 VIP 회원상품)</old>
 상품 코드 : 상품 정보의 상품 코드와 동일&#xd;
 대출 날짜 : 날짜&#xd;
 이자율 : 통장 정보의 이자율과 동일&#xd;
-대출 잔액 : 통장 정보의 잔액과 동일</content>
+대출 잔액 : 통장 정보의 잔액과 동일&#xd;
+사원코드 : 사원 정보의 사원코드와 동일</content>
                                                       <old>[대출 정보 구성]&#xd;
 대출 계좌 번호&#xd;
 6자리 : 지점번호&#xd;
 1자리 : dash 기호( - )&#xd;
 2자리 : 계좌 분류 번호&#xd;
-Major number : 계좌 상태 정보&#xd;
-(1 : 일반계좌, 2 : 휴면계좌, 3: 해지계좌) &#xd;
-Minor number : 통장 상태 정보 &#xd;
-(1 : 예금, 2: 적금, 3: 마이너스)&#xd;
+01 : 일반대출&#xd;
+02 : 신용대출&#xd;
+03 : 카드론&#xd;
 1자리 : dash 기호( - )&#xd;
 6자리 : 등록번호&#xd;
 고객 코드 : 고객 정보의 고객 코드와 동일&#xd;
@@ -1343,8 +1343,8 @@ Minor number : 통장 상태 정보 &#xd;
                                                 <constraint>
                                                   <height>49</height>
                                                   <width>194</width>
-                                                  <x>117</x>
-                                                  <y>1229</y>
+                                                  <x>154</x>
+                                                  <y>1212</y>
                                                 </constraint>
                                                 <sourceConnections>
                                                   <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel>
@@ -1384,12 +1384,110 @@ Minor number : 통장 상태 정보 &#xd;
                                                       <constraint>
                                                         <height>49</height>
                                                         <width>194</width>
-                                                        <x>465</x>
-                                                        <y>1065</y>
+                                                        <x>473</x>
+                                                        <y>1064</y>
                                                       </constraint>
                                                       <sourceConnections/>
                                                       <targetConnections>
                                                         <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel reference="../../.."/>
+                                                        <net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel>
+                                                          <showIcon>true</showIcon>
+                                                          <listeners serialization="custom">
+                                                            <java.beans.PropertyChangeSupport>
+                                                              <default>
+                                                                <source class="net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel" reference="../../../.."/>
+                                                                <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                                              </default>
+                                                              <null/>
+                                                            </java.beans.PropertyChangeSupport>
+                                                          </listeners>
+                                                          <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel">
+                                                            <backgroundColor>
+                                                              <red>255</red>
+                                                              <green>255</green>
+                                                              <blue>206</blue>
+                                                            </backgroundColor>
+                                                            <foregroundColor>
+                                                              <red>0</red>
+                                                              <green>0</green>
+                                                              <blue>0</blue>
+                                                            </foregroundColor>
+                                                            <showIcon>true</showIcon>
+                                                            <parent class="net.java.amateras.uml.usecasediagram.model.UsecaseRootModel" reference="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.."/>
+                                                            <listeners serialization="custom">
+                                                              <java.beans.PropertyChangeSupport>
+                                                                <default>
+                                                                  <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../.."/>
+                                                                  <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                                                </default>
+                                                                <null/>
+                                                              </java.beans.PropertyChangeSupport>
+                                                            </listeners>
+                                                            <constraint>
+                                                              <height>49</height>
+                                                              <width>194</width>
+                                                              <x>790</x>
+                                                              <y>1119</y>
+                                                            </constraint>
+                                                            <sourceConnections>
+                                                              <net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel reference="../../.."/>
+                                                            </sourceConnections>
+                                                            <targetConnections>
+                                                              <net.java.amateras.uml.model.AnchorModel>
+                                                                <showIcon>true</showIcon>
+                                                                <listeners serialization="custom">
+                                                                  <java.beans.PropertyChangeSupport>
+                                                                    <default>
+                                                                      <source class="net.java.amateras.uml.model.AnchorModel" reference="../../../.."/>
+                                                                      <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                                                    </default>
+                                                                    <null/>
+                                                                  </java.beans.PropertyChangeSupport>
+                                                                </listeners>
+                                                                <source class="net.java.amateras.uml.model.NoteModel">
+                                                                  <backgroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../backgroundColor"/>
+                                                                  <foregroundColor reference="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../foregroundColor"/>
+                                                                  <showIcon>true</showIcon>
+                                                                  <parent class="net.java.amateras.uml.usecasediagram.model.UsecaseRootModel" reference="../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../.."/>
+                                                                  <listeners serialization="custom">
+                                                                    <java.beans.PropertyChangeSupport>
+                                                                      <default>
+                                                                        <source class="net.java.amateras.uml.model.NoteModel" reference="../../../.."/>
+                                                                        <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                                                      </default>
+                                                                      <null/>
+                                                                    </java.beans.PropertyChangeSupport>
+                                                                  </listeners>
+                                                                  <constraint>
+                                                                    <height>96</height>
+                                                                    <width>314</width>
+                                                                    <x>1035</x>
+                                                                    <y>1129</y>
+                                                                  </constraint>
+                                                                  <sourceConnections>
+                                                                    <net.java.amateras.uml.model.AnchorModel reference="../../.."/>
+                                                                  </sourceConnections>
+                                                                  <targetConnections/>
+                                                                  <children/>
+                                                                  <filterProperty/>
+                                                                  <content>추가하려는것이 체크카드일때, 고객의 예금 계좌가 &#xd;
+있는지 없는지 조회하고, 없을땐 &quot;계좌가 존재하지 &#xd;
+않습니다&quot; 메시지가 출력이 되고, 예금 계좌가 있을땐&#xd;
+예금 게좌를 선택할 수 있는 다이얼로그가 나타나고&#xd;
+선택하여 확인 버튼을 누를때 카드가 추가가 됨</content>
+                                                                  <old></old>
+                                                                </source>
+                                                                <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                                                                <bendpoints/>
+                                                              </net.java.amateras.uml.model.AnchorModel>
+                                                            </targetConnections>
+                                                            <children/>
+                                                            <filterProperty/>
+                                                            <name>연결 예금 계좌 선택</name>
+                                                          </source>
+                                                          <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                                                          <bendpoints/>
+                                                        </net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel>
                                                       </targetConnections>
                                                       <children/>
                                                       <filterProperty/>
@@ -1676,10 +1774,10 @@ Minor number : 통장 상태 정보 &#xd;
                                                         </java.beans.PropertyChangeSupport>
                                                       </listeners>
                                                       <constraint>
-                                                        <height>235</height>
+                                                        <height>281</height>
                                                         <width>235</width>
-                                                        <x>94</x>
-                                                        <y>1314</y>
+                                                        <x>0</x>
+                                                        <y>1272</y>
                                                       </constraint>
                                                       <sourceConnections>
                                                         <net.java.amateras.uml.model.AnchorModel reference="../../.."/>
@@ -1700,12 +1798,16 @@ Minor number : 통장 상태 정보 &#xd;
 카드 발급일 : 날짜&#xd;
 카드 한도 : 숫자(신용카드만 해당)&#xd;
 카드 잔액 : 통장 정보의 잔액과 동일&#xd;
-(체크 카드만 해당)</content>
+(체크 카드만 해당)&#xd;
+사원코드 : 사원 정보의 사원코드와 동일&#xd;
+계좌번호 : 체크카드일때만 사용(신용카드는 null)</content>
                                                       <old>[카드 정보 구성]&#xd;
 카드번호 : 16자리 문자&#xd;
 6자리 : BIN(Bank Identification Number)&#xd;
 9자리 : 임의의 규칙을 정할 것&#xd;
 16번째 자리 : 검증 번호&#xd;
+고객 코드 : 고객 정보의 고객 코드와 동일&#xd;
+상품 코드 : 상품 정보의 상품 코드와 동일&#xd;
 카드 보안 코드 :  3자리 문자&#xd;
 (Card Security Code)&#xd;
 카드 이름 : 고객 상품 정보의 상품 이름과 동일&#xd;
@@ -1761,8 +1863,8 @@ Minor number : 통장 상태 정보 &#xd;
                                                 <constraint>
                                                   <height>49</height>
                                                   <width>194</width>
-                                                  <x>73</x>
-                                                  <y>601</y>
+                                                  <x>31</x>
+                                                  <y>814</y>
                                                 </constraint>
                                                 <sourceConnections>
                                                   <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel>
@@ -1803,7 +1905,7 @@ Minor number : 통장 상태 정보 &#xd;
                                                         <height>49</height>
                                                         <width>194</width>
                                                         <x>548</x>
-                                                        <y>821</y>
+                                                        <y>831</y>
                                                       </constraint>
                                                       <sourceConnections/>
                                                       <targetConnections>
@@ -1852,8 +1954,8 @@ Minor number : 통장 상태 정보 &#xd;
                                                       <constraint>
                                                         <height>49</height>
                                                         <width>194</width>
-                                                        <x>549</x>
-                                                        <y>887</y>
+                                                        <x>550</x>
+                                                        <y>885</y>
                                                       </constraint>
                                                       <sourceConnections/>
                                                       <targetConnections>
@@ -1903,7 +2005,7 @@ Minor number : 통장 상태 정보 &#xd;
                                                         <height>49</height>
                                                         <width>194</width>
                                                         <x>548</x>
-                                                        <y>944</y>
+                                                        <y>937</y>
                                                       </constraint>
                                                       <sourceConnections/>
                                                       <targetConnections>
@@ -1952,8 +2054,8 @@ Minor number : 통장 상태 정보 &#xd;
                                                       <constraint>
                                                         <height>49</height>
                                                         <width>194</width>
-                                                        <x>552</x>
-                                                        <y>1011</y>
+                                                        <x>553</x>
+                                                        <y>989</y>
                                                       </constraint>
                                                       <sourceConnections/>
                                                       <targetConnections>
@@ -2086,10 +2188,10 @@ Minor number : 통장 상태 정보 &#xd;
                                                         </java.beans.PropertyChangeSupport>
                                                       </listeners>
                                                       <constraint>
-                                                        <height>265</height>
-                                                        <width>237</width>
-                                                        <x>51</x>
-                                                        <y>751</y>
+                                                        <height>291</height>
+                                                        <width>250</width>
+                                                        <x>14</x>
+                                                        <y>912</y>
                                                       </constraint>
                                                       <sourceConnections>
                                                         <net.java.amateras.uml.model.AnchorModel reference="../../.."/>
@@ -2112,9 +2214,11 @@ Minor number : 통장 상태 정보 &#xd;
 상품 코드 : 상품 정보의 상품 코드와 동일&#xd;
 개설일 : 날짜&#xd;
 이자율 : 숫자(소수점 2자리)&#xd;
-잔액 : 숫자</content>
+잔액 : 숫자&#xd;
+사원코드 : 사원 정보의 사원코드와 동일&#xd;
+연결여부 : 숫자(0,1) - 체크카드 여부를 확인</content>
                                                       <old>[통장 정보 구성]&#xd;
-계좌 번호 : 문자 16자리&#xd;
+통장 계좌 번호 : 문자 16자리&#xd;
 6자리 : 지점번호&#xd;
 1자리 : dash 기호( - )&#xd;
 2자리 : 계좌 분류 번호&#xd;
@@ -2128,7 +2232,8 @@ Minor number : 통장 상태 정보 &#xd;
 상품 코드 : 상품 정보의 상품 코드와 동일&#xd;
 개설일 : 날짜&#xd;
 이자율 : 숫자(소수점 2자리)&#xd;
-잔액 : 숫자</old>
+잔액 : 숫자&#xd;
+사원코드 : 사원 정보의 사원코드와 동일</old>
                                                     </source>
                                                     <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
                                                     <bendpoints/>
@@ -2195,8 +2300,8 @@ Minor number : 통장 상태 정보 &#xd;
                         <constraint>
                           <height>51</height>
                           <width>179</width>
-                          <x>83</x>
-                          <y>139</y>
+                          <x>89</x>
+                          <y>73</y>
                         </constraint>
                         <sourceConnections/>
                         <targetConnections>
@@ -2413,6 +2518,207 @@ Minor number : 통장 상태 정보 &#xd;
                         <name>사원 권한</name>
                       </net.java.amateras.uml.usecasediagram.model.UsecaseModel>
                       <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../../.."/>
+                      <net.java.amateras.uml.usecasediagram.model.UsecaseModel>
+                        <backgroundColor>
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>206</blue>
+                        </backgroundColor>
+                        <foregroundColor>
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                        </foregroundColor>
+                        <showIcon>true</showIcon>
+                        <parent class="net.java.amateras.uml.usecasediagram.model.SystemModel" reference="../../.."/>
+                        <listeners serialization="custom">
+                          <java.beans.PropertyChangeSupport>
+                            <default>
+                              <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../.."/>
+                              <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                            </default>
+                            <null/>
+                          </java.beans.PropertyChangeSupport>
+                        </listeners>
+                        <constraint>
+                          <height>52</height>
+                          <width>178</width>
+                          <x>83</x>
+                          <y>233</y>
+                        </constraint>
+                        <sourceConnections/>
+                        <targetConnections>
+                          <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel>
+                            <showIcon>true</showIcon>
+                            <listeners serialization="custom">
+                              <java.beans.PropertyChangeSupport>
+                                <default>
+                                  <source class="net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel" reference="../../../.."/>
+                                  <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                </default>
+                                <null/>
+                              </java.beans.PropertyChangeSupport>
+                            </listeners>
+                            <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../../../../../../.."/>
+                            <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                            <bendpoints/>
+                          </net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel>
+                        </targetConnections>
+                        <children/>
+                        <filterProperty/>
+                        <name>우수 사원</name>
+                      </net.java.amateras.uml.usecasediagram.model.UsecaseModel>
+                      <net.java.amateras.uml.usecasediagram.model.UsecaseModel>
+                        <backgroundColor>
+                          <red>255</red>
+                          <green>255</green>
+                          <blue>206</blue>
+                        </backgroundColor>
+                        <foregroundColor>
+                          <red>0</red>
+                          <green>0</green>
+                          <blue>0</blue>
+                        </foregroundColor>
+                        <showIcon>true</showIcon>
+                        <parent class="net.java.amateras.uml.usecasediagram.model.SystemModel" reference="../../.."/>
+                        <listeners serialization="custom">
+                          <java.beans.PropertyChangeSupport>
+                            <default>
+                              <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../.."/>
+                              <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                            </default>
+                            <null/>
+                          </java.beans.PropertyChangeSupport>
+                        </listeners>
+                        <constraint>
+                          <height>52</height>
+                          <width>178</width>
+                          <x>86</x>
+                          <y>328</y>
+                        </constraint>
+                        <sourceConnections/>
+                        <targetConnections>
+                          <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel>
+                            <showIcon>true</showIcon>
+                            <listeners serialization="custom">
+                              <java.beans.PropertyChangeSupport>
+                                <default>
+                                  <source class="net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel" reference="../../../.."/>
+                                  <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                </default>
+                                <null/>
+                              </java.beans.PropertyChangeSupport>
+                            </listeners>
+                            <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../../../../../../.."/>
+                            <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                            <bendpoints/>
+                          </net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel>
+                          <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel>
+                            <showIcon>true</showIcon>
+                            <listeners serialization="custom">
+                              <java.beans.PropertyChangeSupport>
+                                <default>
+                                  <source class="net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel" reference="../../../.."/>
+                                  <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                </default>
+                                <null/>
+                              </java.beans.PropertyChangeSupport>
+                            </listeners>
+                            <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel">
+                              <backgroundColor>
+                                <red>255</red>
+                                <green>255</green>
+                                <blue>206</blue>
+                              </backgroundColor>
+                              <foregroundColor>
+                                <red>0</red>
+                                <green>0</green>
+                                <blue>0</blue>
+                              </foregroundColor>
+                              <showIcon>true</showIcon>
+                              <parent class="net.java.amateras.uml.usecasediagram.model.UsecaseRootModel" reference="../../../../../../../../../../../../../../.."/>
+                              <listeners serialization="custom">
+                                <java.beans.PropertyChangeSupport>
+                                  <default>
+                                    <source class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../../.."/>
+                                    <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                  </default>
+                                  <null/>
+                                </java.beans.PropertyChangeSupport>
+                              </listeners>
+                              <constraint>
+                                <height>52</height>
+                                <width>178</width>
+                                <x>114</x>
+                                <y>507</y>
+                              </constraint>
+                              <sourceConnections>
+                                <net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel reference="../../.."/>
+                              </sourceConnections>
+                              <targetConnections/>
+                              <children/>
+                              <filterProperty/>
+                              <name>공지사항 보기</name>
+                            </source>
+                            <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                            <bendpoints/>
+                          </net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel>
+                          <net.java.amateras.uml.model.AnchorModel>
+                            <showIcon>true</showIcon>
+                            <listeners serialization="custom">
+                              <java.beans.PropertyChangeSupport>
+                                <default>
+                                  <source class="net.java.amateras.uml.model.AnchorModel" reference="../../../.."/>
+                                  <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                </default>
+                                <null/>
+                              </java.beans.PropertyChangeSupport>
+                            </listeners>
+                            <source class="net.java.amateras.uml.model.NoteModel">
+                              <backgroundColor reference="../../../../../../../../../../../../../../../backgroundColor"/>
+                              <foregroundColor reference="../../../../../../../../../../../../../../../foregroundColor"/>
+                              <showIcon>true</showIcon>
+                              <parent class="net.java.amateras.uml.usecasediagram.model.UsecaseRootModel" reference="../../../../../../../../../../../../../../.."/>
+                              <listeners serialization="custom">
+                                <java.beans.PropertyChangeSupport>
+                                  <default>
+                                    <source class="net.java.amateras.uml.model.NoteModel" reference="../../../.."/>
+                                    <propertyChangeSupportSerializedDataVersion>2</propertyChangeSupportSerializedDataVersion>
+                                  </default>
+                                  <null/>
+                                </java.beans.PropertyChangeSupport>
+                              </listeners>
+                              <constraint>
+                                <height>127</height>
+                                <width>135</width>
+                                <x>166</x>
+                                <y>358</y>
+                              </constraint>
+                              <sourceConnections>
+                                <net.java.amateras.uml.model.AnchorModel reference="../../.."/>
+                              </sourceConnections>
+                              <targetConnections/>
+                              <children/>
+                              <filterProperty/>
+                              <content>공지사항 메뉴가 사원의 등급에 따라 변경&#xd;
+AD : 공지사항 추가,수정,삭제가 가능&#xd;
+HR : 공지사항 보기만 가능&#xd;
+CS : 공지사항 보기만 가능&#xd;
+</content>
+                              <old>공지사항 메뉴가 사원의 등급에 따라 변경&#xd;
+AD : 공지사항 추가,수정,삭제가 가능&#xd;
+HR : 공지사항 보기만 가능&#xd;
+CS : 공지사항 보기화면만 나옴&#xd;
+</old>
+                            </source>
+                            <target class="net.java.amateras.uml.usecasediagram.model.UsecaseModel" reference="../../.."/>
+                            <bendpoints/>
+                          </net.java.amateras.uml.model.AnchorModel>
+                        </targetConnections>
+                        <children/>
+                        <filterProperty/>
+                        <name>공지사항</name>
+                      </net.java.amateras.uml.usecasediagram.model.UsecaseModel>
                     </children>
                     <filterProperty/>
                     <name>은행 업무 관리 프로그램</name>
@@ -2484,7 +2790,8 @@ CS(Customer Service) : 고객팀&#xd;
 사원 연락처 : 13자리 문자( ex)010-4175-3675)&#xd;
 사원 아이디 : 8-12 자리 영어와 숫자만 허용&#xd;
 사원 비밀번호 : 41자리 문자(41자리 해시코드)&#xd;
-부서 번호 : 부서 정보의 부서 번호와 같음</content>
+부서 번호 : 부서 정보의 부서 번호와 같음&#xd;
+사원 사진 : 사원 사진을 등록하기 위한 정보(LONGBLOB)</content>
                         <old>[사원 정보 구성]&#xd;
 사원 코드 : 4자리 문자&#xd;
 사원 이름 : 최대 5자리 문자(가-힣 사이의 한글만 가능)&#xd;
@@ -2497,7 +2804,7 @@ CS(Customer Service) : 고객팀&#xd;
 사원 월급 : 숫자만 가능&#xd;
 사원 연락처 : 13자리 문자( ex)010-4175-3675)&#xd;
 사원 아이디 : 8-12 자리 영어와 숫자만 허용&#xd;
-사원 비밀번호 : 41자리 문자(password 함수 사용)&#xd;
+사원 비밀번호 : 41자리 문자(41자리 해시코드)&#xd;
 부서 번호 : 부서 정보의 부서 번호와 같음</old>
                       </target>
                       <bendpoints/>
@@ -2531,8 +2838,8 @@ CS(Customer Service) : 고객팀&#xd;
                         <constraint>
                           <height>67</height>
                           <width>173</width>
-                          <x>521</x>
-                          <y>147</y>
+                          <x>187</x>
+                          <y>0</y>
                         </constraint>
                         <sourceConnections/>
                         <targetConnections>
@@ -3074,8 +3381,8 @@ CS(Customer Service) : 고객팀&#xd;
                   <constraint>
                     <height>123</height>
                     <width>197</width>
-                    <x>83</x>
-                    <y>62</y>
+                    <x>67</x>
+                    <y>73</y>
                   </constraint>
                   <sourceConnections/>
                   <targetConnections>
@@ -3096,6 +3403,8 @@ NE : 사원 관리의 사원 정보 조회, 고객정보관리, 은행 업무 �
                 </target>
                 <bendpoints/>
               </net.java.amateras.uml.model.AnchorModel>
+              <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel[4]/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel"/>
+              <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel[5]/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel"/>
             </sourceConnections>
             <targetConnections>
               <net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel reference="../../.."/>
@@ -3168,8 +3477,8 @@ NE : 사원 관리의 사원 정보 조회, 고객정보관리, 은행 업무 �
                         <constraint>
                           <height>140</height>
                           <width>154</width>
-                          <x>101</x>
-                          <y>354</y>
+                          <x>6</x>
+                          <y>360</y>
                         </constraint>
                         <sourceConnections/>
                         <targetConnections>
@@ -3209,7 +3518,7 @@ NE : 사원 관리의 사원 정보 조회, 고객정보관리, 은행 업무 �
       <targetConnections/>
       <children/>
       <filterProperty/>
-      <name>인사팀</name>
+      <name>관리자</name>
     </net.java.amateras.uml.usecasediagram.model.UsecaseActorModel>
     <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target"/>
     <net.java.amateras.uml.model.NoteModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel/source/sourceConnections/net.java.amateras.uml.model.AnchorModel/target"/>
@@ -3271,6 +3580,10 @@ NE : 사원 관리의 사원 정보 조회, 고객정보관리, 은행 업무 �
     <net.java.amateras.uml.model.NoteModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.model.AnchorModel[2]/target"/>
     <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/source"/>
     <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[6]/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[2]/source"/>
+    <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel[5]/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/source"/>
+    <net.java.amateras.uml.model.NoteModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel[5]/targetConnections/net.java.amateras.uml.model.AnchorModel/source"/>
+    <net.java.amateras.uml.usecasediagram.model.UsecaseModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[6]/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[2]/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[2]/source/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/target/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel/source"/>
+    <net.java.amateras.uml.model.NoteModel reference="../net.java.amateras.uml.usecasediagram.model.UsecaseActorModel/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseRelationModel/target/parent/children/net.java.amateras.uml.usecasediagram.model.UsecaseModel/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[6]/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[2]/source/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel[2]/source/sourceConnections/net.java.amateras.uml.usecasediagram.model.UsecaseExtendModel/target/targetConnections/net.java.amateras.uml.usecasediagram.model.UsecaseIncludeModel/source/targetConnections/net.java.amateras.uml.model.AnchorModel/source"/>
   </children>
   <filterProperty/>
 </net.java.amateras.uml.usecasediagram.model.UsecaseRootModel>
