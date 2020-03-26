@@ -119,7 +119,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 		pCenter.add(pcNorth, BorderLayout.NORTH);
 		
 		lblBankImg = new JLabel("");
-		lblBankImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/file/images/bank.png"));
+		lblBankImg.setIcon(new ImageIcon(System.getProperty("user.dir")+"/images/bank.png"));
 		lblBankImg.setBackground(Color.WHITE);
 		lblBankImg.setSize(new Dimension(100, 50));
 		lblBankImg.setPreferredSize(new Dimension(100, 50));
