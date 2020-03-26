@@ -42,7 +42,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JLabel lblPass;
 	private JPasswordField pfPass;
 	private JButton btnLogin;
-	private JButton btnCheck;
 	private JPanel panel;
 	private LoginService service;
 	private boolean chkLogin;

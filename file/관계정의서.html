@@ -102,6 +102,36 @@ tr.last-row td,tr.last-row th {
 	<table class="root header">
 		<tr class="first-row">
 			<th class="right-line under-line">관계명</th>
+			<td class="right-line under-line"">FK_Employee_TO_BankBook</td>
+			<th class="right-line under-line"" >부모 테이블</th>
+			<td class="under-line right-line">Employee</td>
+			<th class="right-line under-line"" >자식 테이블</th>
+			<td class="under-line">BankBook</td>
+		</tr> 
+		<tr class="last-row">
+			<th class="right-line">식별 유형</th>
+			<td class="right-line">비식별</td>
+			<th class="right-line">부모 차수</th>
+			<td class="right-line">EXACTLY_ONE</td>
+			<th class="right-line">자식 차수</th>
+			<td>ZERO_OR_MORE</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr class="last-row">
+			<th class="right-line under-line">부모 컬럼</th>
+			<th class="right-line under-line">자식 컬럼</th>
+			<th class="under-line">데이터 타입</th>
+		</tr>
+		<tr>
+			<td class="right-line">empCode</td>
+			<td class="right-line">empCode</td>
+			<td>char(4)</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">관계명</th>
 			<td class="right-line under-line"">FK_Department_TO_Employee</td>
 			<th class="right-line under-line"" >부모 테이블</th>
 			<td class="under-line right-line">Department</td>
@@ -192,6 +222,36 @@ tr.last-row td,tr.last-row th {
 	<table class="root header">
 		<tr class="first-row">
 			<th class="right-line under-line">관계명</th>
+			<td class="right-line under-line"">FK_Employee_TO_Loan</td>
+			<th class="right-line under-line"" >부모 테이블</th>
+			<td class="under-line right-line">Employee</td>
+			<th class="right-line under-line"" >자식 테이블</th>
+			<td class="under-line">Loan</td>
+		</tr> 
+		<tr class="last-row">
+			<th class="right-line">식별 유형</th>
+			<td class="right-line">비식별</td>
+			<th class="right-line">부모 차수</th>
+			<td class="right-line">EXACTLY_ONE</td>
+			<th class="right-line">자식 차수</th>
+			<td>ZERO_OR_MORE</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr class="last-row">
+			<th class="right-line under-line">부모 컬럼</th>
+			<th class="right-line under-line">자식 컬럼</th>
+			<th class="under-line">데이터 타입</th>
+		</tr>
+		<tr>
+			<td class="right-line">empCode</td>
+			<td class="right-line">empCode</td>
+			<td>char(4)</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">관계명</th>
 			<td class="right-line under-line"">FK_Customer_TO_Card</td>
 			<th class="right-line under-line"" >부모 테이블</th>
 			<td class="under-line right-line">Customer</td>
@@ -247,6 +307,66 @@ tr.last-row td,tr.last-row th {
 			<td class="right-line">planCode</td>
 			<td class="right-line">planCode</td>
 			<td>char(4)</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">관계명</th>
+			<td class="right-line under-line"">FK_Employee_TO_Card</td>
+			<th class="right-line under-line"" >부모 테이블</th>
+			<td class="under-line right-line">Employee</td>
+			<th class="right-line under-line"" >자식 테이블</th>
+			<td class="under-line">Card</td>
+		</tr> 
+		<tr class="last-row">
+			<th class="right-line">식별 유형</th>
+			<td class="right-line">비식별</td>
+			<th class="right-line">부모 차수</th>
+			<td class="right-line">EXACTLY_ONE</td>
+			<th class="right-line">자식 차수</th>
+			<td>ZERO_OR_MORE</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr class="last-row">
+			<th class="right-line under-line">부모 컬럼</th>
+			<th class="right-line under-line">자식 컬럼</th>
+			<th class="under-line">데이터 타입</th>
+		</tr>
+		<tr>
+			<td class="right-line">empCode</td>
+			<td class="right-line">empCode</td>
+			<td>char(4)</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">관계명</th>
+			<td class="right-line under-line"">FK_BankBook_TO_Card</td>
+			<th class="right-line under-line"" >부모 테이블</th>
+			<td class="under-line right-line">BankBook</td>
+			<th class="right-line under-line"" >자식 테이블</th>
+			<td class="under-line">Card</td>
+		</tr> 
+		<tr class="last-row">
+			<th class="right-line">식별 유형</th>
+			<td class="right-line">비식별</td>
+			<th class="right-line">부모 차수</th>
+			<td class="right-line">EXACTLY_ONE</td>
+			<th class="right-line">자식 차수</th>
+			<td>ZERO_OR_MORE</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr class="last-row">
+			<th class="right-line under-line">부모 컬럼</th>
+			<th class="right-line under-line">자식 컬럼</th>
+			<th class="under-line">데이터 타입</th>
+		</tr>
+		<tr>
+			<td class="right-line">accountNum</td>
+			<td class="right-line">accountNum</td>
+			<td>char(16)</td>
 		</tr>
 	</table>
 	<table class="root header">

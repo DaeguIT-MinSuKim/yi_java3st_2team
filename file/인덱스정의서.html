@@ -102,6 +102,36 @@ tr.last-row td,tr.last-row th {
 	<table class="root header">
 		<tr class="first-row">
 			<th class="right-line under-line">엔티티</th>
+			<td class="right-line under-line"">사원</td>
+			<th class="right-line under-line"" >인덱스명</th>
+			<td colspan="4" class="under-line">UIX_Employee</td>
+		</tr>
+		<tr class="last-row">
+			<th class="right-line">테이블명</th>
+			<td class="right-line">Employee</td>
+			<th class="right-line">유형</th>
+			<td class="right-line">UNIQUE</td>
+			<th class="right-line">구분</th>
+			<td>INDEX</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr>
+			<th class="right-line under-line">속성명</th>
+			<th class="right-line under-line">컬럼명</th>
+			<th class="right-line under-line">데이터 타입</th>
+			<th class="under-line">정렬</th>
+		</tr>
+		<tr>
+			<td class="right-line">사원이름</td>
+			<td class="right-line">empName</td>
+			<td class="right-line">VARCHAR(5)</td>
+			<td>ASC</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">엔티티</th>
 			<td class="right-line under-line"">부서</td>
 			<th class="right-line under-line"" >인덱스명</th>
 			<td colspan="4" class="under-line">PK_Department</td>
@@ -156,6 +186,36 @@ tr.last-row td,tr.last-row th {
 			<td class="right-line">고객코드</td>
 			<td class="right-line">custCode</td>
 			<td class="right-line">char(4)</td>
+			<td>ASC</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">엔티티</th>
+			<td class="right-line under-line"">고객</td>
+			<th class="right-line under-line"" >인덱스명</th>
+			<td colspan="4" class="under-line">UIX_Customer</td>
+		</tr>
+		<tr class="last-row">
+			<th class="right-line">테이블명</th>
+			<td class="right-line">Customer</td>
+			<th class="right-line">유형</th>
+			<td class="right-line">UNIQUE</td>
+			<th class="right-line">구분</th>
+			<td>INDEX</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr>
+			<th class="right-line under-line">속성명</th>
+			<th class="right-line under-line">컬럼명</th>
+			<th class="right-line under-line">데이터 타입</th>
+			<th class="under-line">정렬</th>
+		</tr>
+		<tr>
+			<td class="right-line">고객이름</td>
+			<td class="right-line">custName</td>
+			<td class="right-line">VARCHAR(5)</td>
 			<td>ASC</td>
 		</tr>
 	</table>
@@ -288,6 +348,60 @@ tr.last-row td,tr.last-row th {
 			<td class="right-line">고객코드</td>
 			<td class="right-line">custCode</td>
 			<td class="right-line">char(4)</td>
+			<td>ASC</td>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">엔티티</th>
+			<td class="right-line under-line"">퇴사사원</td>
+			<th class="right-line under-line"" >인덱스명</th>
+			<td colspan="4" class="under-line">PK_deleted_employee</td>
+		</tr>
+		<tr class="last-row">
+			<th class="right-line">테이블명</th>
+			<td class="right-line">deleted_employee</td>
+			<th class="right-line">유형</th>
+			<td class="right-line">UNIQUE</td>
+			<th class="right-line">구분</th>
+			<td>PK</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr>
+			<th class="right-line under-line">속성명</th>
+			<th class="right-line under-line">컬럼명</th>
+			<th class="right-line under-line">데이터 타입</th>
+			<th class="under-line">정렬</th>
+		</tr>
+	</table>
+	<table class="root header">
+		<tr class="first-row">
+			<th class="right-line under-line">엔티티</th>
+			<td class="right-line under-line"">공지사항</td>
+			<th class="right-line under-line"" >인덱스명</th>
+			<td colspan="4" class="under-line">PK_notice</td>
+		</tr>
+		<tr class="last-row">
+			<th class="right-line">테이블명</th>
+			<td class="right-line">notice</td>
+			<th class="right-line">유형</th>
+			<td class="right-line">UNIQUE</td>
+			<th class="right-line">구분</th>
+			<td>PK</td>
+		</tr>
+	</table>
+	<table class="root footter">
+		<tr>
+			<th class="right-line under-line">속성명</th>
+			<th class="right-line under-line">컬럼명</th>
+			<th class="right-line under-line">데이터 타입</th>
+			<th class="under-line">정렬</th>
+		</tr>
+		<tr>
+			<td class="right-line">번호</td>
+			<td class="right-line">no</td>
+			<td class="right-line">INTEGER</td>
 			<td>ASC</td>
 		</tr>
 	</table>
