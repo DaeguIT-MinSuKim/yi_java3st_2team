@@ -116,7 +116,8 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 					try {
 						Card card = dlgCardMod.getItem();
 						cardService.updateCard(card);
-						cardService.updateAccountBalance(card);
+						Card upCard = cardService.showCardByCheckAccountNum(card);
+						cardService.updateAccountBalance(upCard);
 						main.getCust_DW_UIpanel().getPanel_1().loadTableData(customerService.showCustomersByBalance());
 						pCenter.loadTableData(cardService.showCards());
 						JOptionPane.showMessageDialog(null, "수정되었습니다");
@@ -149,7 +150,6 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 				else if(e.getActionCommand().equals("수정")) {
 					try {
 						Card selCard = pCenter.getSelectedItem();
-						JOptionPane.showMessageDialog(null, selCard);
 						dlgCardMod = new DlgCardMod();
 						dlgCardMod.setItem(selCard);
 						dlgCardMod.setTitle("카드" + e.getActionCommand());

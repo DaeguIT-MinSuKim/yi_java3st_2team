@@ -469,10 +469,12 @@ public class BankBookDaoImpl implements BankBookDao {
 	@Override
 	public int updateCardBalance(Customer customer) throws SQLException {
 		int res = -1;
-		String sql = "call change_cardbalance(?)";
+		String sql = "call change_cardbalance(?,?,?)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareCall(sql)) {
-			pstmt.setLong(1, customer.getBankbook().getAccountBalance());
+			pstmt.setString(1, customer.getCustName());
+			pstmt.setLong(2, customer.getBankbook().getAccountBalance());
+			pstmt.setString(3, customer.getBankbook().getAccountNum());
 			res = pstmt.executeUpdate();
 		}
 		return res;

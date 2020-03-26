@@ -15,6 +15,7 @@ import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Card;
 import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.dto.Customer;
+import yi_java3st_2team.dto.Employee;
 import yi_java3st_2team.dto.Plan;
 
 public class CardDaoImpl implements CardDao {
@@ -266,10 +267,12 @@ public class CardDaoImpl implements CardDao {
 	@Override
 	public int updateAccountBalance(Card card) throws SQLException {
 		int res = 0;
-		String sql = "call change_bankbalance(?)";
+		String sql = "call change_bankbalance(?,?,?)";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareCall(sql)) {
-			pstmt.setLong(1, card.getCardBalance());
+			pstmt.setString(1, card.getCustCode().getCustCode());
+			pstmt.setLong(2, card.getCardBalance());
+			pstmt.setString(3, card.getBankbook().getAccountNum());
 			res = pstmt.executeUpdate();
 		}
 		return res;
@@ -295,6 +298,34 @@ public class CardDaoImpl implements CardDao {
 		bankbook.setAccountNum(rs.getString("accountnum"));
 		card.setBankbook(bankbook);
 		return card;
+	}
+	@Override
+	public Card showCardByCheckAccountNum(Card card) throws SQLException {
+		String sql = "select * from card where custcode = (select custcode from customer where custname = ?) and cardnum = ?";
+		try(Connection con = LocalDataSource.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, card.getCustCode().getCustName());
+			pstmt.setString(2, card.getCardNum());
+			try(ResultSet rs = pstmt.executeQuery()) {
+				while(rs.next()) {
+					return getCardByAccountNum(rs);
+				}	
+			}
+			return null;
+		}
+	}
+	private Card getCardByAccountNum(ResultSet rs) throws SQLException {
+		String cardNum = rs.getString("cardnum");
+		Customer custCode = new Customer(rs.getString("custcode"));
+		Plan planCode = new Plan(rs.getString("plancode"));
+		String cardSecuCode = rs.getString("cardsecucode");
+		Date cardIssueDate = rs.getTimestamp("cardissuedate");
+		int cardLimit = rs.getInt("cardlimit");
+		long cardBalance = rs.getLong("cardbalance");
+		Employee employee = new Employee(rs.getString("empcode"));
+		BankBook bankbook = new BankBook();
+		bankbook.setAccountNum(rs.getString("accountnum"));
+		return new Card(cardNum, custCode, planCode, cardSecuCode, cardIssueDate, cardLimit, cardBalance, employee, bankbook);
 	}
 
 }

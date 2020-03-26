@@ -26,6 +26,19 @@ public class Card {
 		this.cardSecuCode = cardSecuCode;
 		this.cardIssueDate = cardIssueDate;
 	}
+	
+	public Card(String cardNum, Customer custCode, Plan planCode, String cardSecuCode, Date cardIssueDate,
+			int cardLimit, long cardBalance, Employee employee, BankBook bankbook) {
+		this.cardNum = cardNum;
+		this.custCode = custCode;
+		this.planCode = planCode;
+		this.cardSecuCode = cardSecuCode;
+		this.cardIssueDate = cardIssueDate;
+		this.cardLimit = cardLimit;
+		this.cardBalance = cardBalance;
+		this.employee = employee;
+		this.bankbook = bankbook;
+	}
 	public String getCardNum() {
 		return cardNum;
 	}

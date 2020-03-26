@@ -97,11 +97,11 @@ insert into bankbook values
 insert into card values
 ('2931331000000010','C001','B001',111,now(),null,(select accountbalance from bankbook where custcode = 'C001' and accountnum = '293133-11-000001'),'B008','293133-11-000001'),
 ('2931332000000020','C001','B002',222,now(),10000000,null,'B008',null),
-('2931331000000030','C002','B001',111,now(),null,(select accountbalance from bankbook where custcode = 'C002' and accountnum = '293133-11-000001'),'B007','293133-11-000001'),
-('2931332000000040','C002','B002',222,now(),10000000,null,'B007',null),
-('2931332000000050','C003','B002',222,now(),10000000,null,'B001',null),
-('2931332000000060','C004','B002',222,now(),10000000,null,'B001',null),
-('2931332000000070','C005','B002',222,now(),10000000,null,'B002',null);
+('2931331000000030','C002','B001',333,now(),null,(select accountbalance from bankbook where custcode = 'C002' and accountnum = '293133-11-000004'),'B007','293133-11-000004'),
+('2931332000000040','C002','B002',444,now(),10000000,null,'B007',null),
+('2931332000000050','C003','B002',555,now(),10000000,null,'B001',null),
+('2931332000000060','C004','B002',666,now(),10000000,null,'B001',null),
+('2931332000000070','C005','B002',777,now(),10000000,null,'B002',null);
 
 insert into loan values
 ('293133-11-000001','C001','C001',now(),0.05,100000000,'B007'),
@@ -214,12 +214,15 @@ insert into cust_DW_audit values("입금", "김서형", "293133-11-000001", 100,
 insert into cust_DW_audit values("출금", "김서형", "293133-11-000001", 100, 0, now());
 
 #통장 잔액이 변경될때, 카드 잔액이 카드 잔액이 변경될때 통장 잔액이 변경되는 프로시저
+drop procedure if exists change_bankbalance;
 delimiter !
 create procedure change_bankbalance(
-	in in_cardbalance bigint
+	in in_custcode varchar(4),
+	in in_cardbalance bigint,
+	in in_accountnum char(16)
 )
 begin
-	update bankbook b join card c on b.accountnum = c.accountnum set b.accountbalance = in_cardbalance;
+	update bankbook set accountbalance = in_cardbalance where custcode = in_custcode and accountnum = in_accountnum;
 end!
 delimiter ;
 
@@ -227,10 +230,12 @@ drop procedure if exists change_cardbalance;
 
 delimiter !
 create procedure change_cardbalance(
-	in in_accountbalance bigint
+	in in_custname varchar(5),
+	in in_accountbalance bigint,
+	in in_accountnum char(16)
 )
 begin
-	update card c join bankbook b on c.accountnum = b.accountnum set c.cardbalance = in_accountbalance;
+	update card set cardbalance = in_accountbalance where custcode = (select custcode from customer where custname = in_custname) and accountnum = in_accountnum;
 end!
 delimiter ;
 
@@ -253,7 +258,7 @@ begin
 	insert into bankbookInfo values((select custname from customer where custcode = new.custcode),new.accountnum,now());
 end $
 delimiter ;
-#테스트 해서 수정 필요
+
 drop procedure if exists make_dormant;
 
 delimiter !

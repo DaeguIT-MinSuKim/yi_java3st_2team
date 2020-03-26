@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
+import yi_java3st_2team.dto.BankBook;
 import yi_java3st_2team.dto.Customer;
 import yi_java3st_2team.dto.Loan;
+import yi_java3st_2team.dto.Plan;
 import yi_java3st_2team.ui.MainFrame;
 import yi_java3st_2team.ui.dialog.DlgLoanAdd;
 import yi_java3st_2team.ui.dialog.DlgLoanMod;
@@ -175,21 +177,20 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void pNorthBtnSearchActionPerformed(ActionEvent e) {
-		Customer cust = new Customer();
-		cust.setCustName(pNorth.getTfSearch().getText());
-		Loan loan = new Loan();
-		loan.setCustCode(cust);
-		try {
-			List<Loan> list = service.showLoanByCustName(loan);
-			if(list.size()==0) {
-				JOptionPane.showMessageDialog(null, "그런 고객을 찾을 수 없습니다");
-				return;
-			}
-			pCenter.loadTableData(list);
-			JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		String searchMenu = (String)pNorth.getCmbSearchList().getSelectedItem();
+		switch(searchMenu) {
+		case "검색구분":
+			pNorth.tfClear();
+			JOptionPane.showMessageDialog(null, "검색할 구분을 선택하세요");
+			break;
+		case "계좌번호":
+			break;
+		case "고객이름":
+			break;
+		case "상품명":
+			break;
+		case "상품이름":
+			break;
 		}
 	}
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {

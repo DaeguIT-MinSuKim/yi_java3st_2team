@@ -215,12 +215,20 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			BankBook bankbook = new BankBook();
 			bankbook.setAccountNum(pNorth.getTfSearch().getText().trim());
 			try {
-				pCenter.loadTableData(service.showBankBookByAccoutNum(bankbook));
-				JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
-				pNorth.tfClear();
-			} catch (SQLException e1) {
+				List<BankBook>list = service.showBankBookByAccoutNum(bankbook);
+				if(service.showBankBookByAccoutNum(bankbook).size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 계좌번호는 찾을 수 없습니다");
+					return;
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+					pNorth.tfClear();
+
+				}
+			} catch (SQLException e2) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				e2.printStackTrace();
 			}
 			break;
 		case "고객이름":
@@ -228,9 +236,15 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			cust.setCustName(pNorth.getTfSearch().getText().trim());
 			bankbook = new BankBook(cust);
 			try {
-				pCenter.loadTableData(service.showBankBookByCustName(bankbook));
-				JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
-				pNorth.tfClear();
+				List<BankBook> list = service.showBankBookByCustName(bankbook);
+				if(list.size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 고객을 찾을 수 없습니다");
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+					pNorth.tfClear();
+				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -242,9 +256,16 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 			bankbook = new BankBook();
 			bankbook.setAccountPlanCode(plan);
 			try {
-				pCenter.loadTableData(service.showBankBookByPlanName(bankbook));
-				JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
-				pNorth.tfClear();
+				List<BankBook> list = service.showBankBookByPlanName(bankbook);
+				if(list.size()==0) {
+					JOptionPane.showMessageDialog(null, "그런 상품은 없습니다 다시 검색하세요");
+				}
+				else {
+					pCenter.loadTableData(list);
+					JOptionPane.showMessageDialog(null, "검색이 완료되었습니다");
+					pNorth.tfClear();
+				}
+				
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

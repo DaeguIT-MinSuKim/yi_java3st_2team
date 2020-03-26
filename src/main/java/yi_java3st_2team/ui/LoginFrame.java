@@ -51,10 +51,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 	private JPanel panel_1;
 	private static LoginFrame frame;
 	private String mainMessage;
-	private
-	
-	
-	JPanel pNorthForLogo;
+	private JPanel pNorthForLogo;
 	private JLabel lblLogoImg;
 	private JPanel panel_2;
 	private JPanel panel_3;
