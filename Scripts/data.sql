@@ -156,7 +156,7 @@ delimiter $
  before delete on employee
  for each row 
  begin 
-	 insert into deleted_employee values(old.empCode, old.empName, old.empTitle, old.empTel, old.empId, old.deptNo);
+	 insert into deleted_employee (`empCode` ,`empName` ,`empTitle` ,`empTel` ,`deptNo` )values(old.empCode, old.empName, old.empTitle, old.empTel, old.deptNo);
  end $
 delimiter ;
 

@@ -5,9 +5,14 @@ use bank;
 alter table employee add column pic LONGBLOB;
 select * from employee e ;
 select  * from performance p ;
+
 delete from employee where empCode ="B022";
 select * from customer;
 delete from customer where custCode ="C030";
+
+select * from deleted_employee de ;
+delete from employee where empCode= 'B021';
+>>>>>>> refs/heads/HS0326
 update employee set emppwd = 111 where `empName` ='test';
 
 select e.empCode, e.empName, e.empTitle, count(if(p.custCode=null,0,p.custCode)) as perf , if(count(if(p.custCode=null,0,p.custCode))>=10,e.`empSalary`*0.1,0) as bonus, if(pl.`planDiv` ='V',vip,null) as vip, d.deptName

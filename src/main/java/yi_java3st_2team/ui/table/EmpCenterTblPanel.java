@@ -70,7 +70,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 		String empId = (String) model.getValueAt(selIdx, 6);
 		String empPwd = (String) model.getValueAt(selIdx, 7);
 	    Department dept	= (Department) model.getValueAt(selIdx, 8);
-	    		 
+	    byte[] pic = null;
 		
 //		String sDept= (String)model.getValueAt(selIdx, 8);
 //		
@@ -84,7 +84,7 @@ public class EmpCenterTblPanel extends AbsCenterTblPanel<Employee> {
 //		  }
 	//	Department dept = new Department(index-2); //)앞의 숫자를 넣는다.. 
 	//	System.out.println(dept);
-		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept);
+		Employee emp = new Employee(empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, dept, pic);
 		
 		return emp;
 	}
