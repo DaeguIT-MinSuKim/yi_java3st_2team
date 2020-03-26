@@ -265,18 +265,16 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public List<AccountInfo> showBankBookInfoDaily(String custname) throws SQLException {
+	public List<AccountInfo> showBankBookInfoDaily() throws SQLException {
 		List<AccountInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and date(transdate) = date(now()) group by accountnum";
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where date(transdate) = date(now()) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
 					list.add(getBankBookInfo(rs));
 				}
 			}
-			for(AccountInfo info : list) System.out.println(info);
 		}
 		return list;
 	}
@@ -289,12 +287,11 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public List<AccountInfo> showBankBookInfoWeekly(String custname) throws SQLException {
+	public List<AccountInfo> showBankBookInfoWeekly() throws SQLException {
 		List<AccountInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname= ? and week(transdate,1) = week(now(),1) group by accountnum";
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where week(transdate,1) = week(now(),1) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
 					list.add(getBankBookInfo(rs));
@@ -305,12 +302,11 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public List<AccountInfo> showBankBookInfoMonthly(String custname) throws SQLException {
+	public List<AccountInfo> showBankBookInfoMonthly() throws SQLException {
 		List<AccountInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and month(transdate) = month(now()) group by accountnum";
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where month(transdate) = month(now()) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
 					list.add(getBankBookInfo(rs));
@@ -321,12 +317,11 @@ public class BankBookDaoImpl implements BankBookDao {
 	}
 
 	@Override
-	public List<AccountInfo> showBankBookInfoYearly(String custname) throws SQLException {
+	public List<AccountInfo> showBankBookInfoYearly() throws SQLException {
 		List<AccountInfo> list = new ArrayList<>();
-		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where custname = ? and year(transdate) = year(now()) group by accountnum";
+		String sql = "select custname,if(substring(accountnum,9,1)=1,'예금',if(substring(accountnum,9,1)=2,'적금','마이너스')) as 'div',count(transDate) as 'count' from bankbookinfo where year(transdate) = year(now()) group by accountnum";
 		try(Connection con = LocalDataSource.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)) {
-			pstmt.setString(1, custname);
 			try(ResultSet rs = pstmt.executeQuery()) {
 				while(rs.next()) {
 					list.add(getBankBookInfo(rs));

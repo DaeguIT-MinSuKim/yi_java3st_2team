@@ -64,17 +64,17 @@ public class CardService {
 	public List<Plan> showPlansByCardNormal() throws SQLException {
 		return planDao.selectPlanByCardNormal();
 	}
-	public List<CardInfo> cardInfoDaily(String custname) throws SQLException {
-		return cardDao.showCardInfoDaily(custname);
+	public List<CardInfo> cardInfoDaily() throws SQLException {
+		return cardDao.showCardInfoDaily();
 	}
-	public List<CardInfo> cardInfoWeekly(String custname) throws SQLException {
-		return cardDao.showCardInfoWeekly(custname);
+	public List<CardInfo> cardInfoWeekly() throws SQLException {
+		return cardDao.showCardInfoWeekly();
 	}
-	public List<CardInfo> cardInfoMonthly(String custname) throws SQLException {
-		return cardDao.showCardInfoMonthly(custname);
+	public List<CardInfo> cardInfoMonthly() throws SQLException {
+		return cardDao.showCardInfoMonthly();
 	}
-	public List<CardInfo> cardInfoYearly(String custname) throws SQLException {
-		return cardDao.showCardInfoYearly(custname);
+	public List<CardInfo> cardInfoYearly() throws SQLException {
+		return cardDao.showCardInfoYearly();
 	}
 	public List<CardInfo> showCardInfo() throws SQLException {
 		return cardDao.showCardInfo();

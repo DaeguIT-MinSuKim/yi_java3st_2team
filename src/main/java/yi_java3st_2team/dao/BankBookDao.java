@@ -30,10 +30,10 @@ public interface BankBookDao {
 	public abstract int insertTerminationAccountProcedure(BankBook bankbook) throws SQLException;
 	public abstract int deleteBankBook(BankBook bankbook) throws SQLException;
 	public abstract int updateBankBalance(Customer customer) throws SQLException;
-	public abstract List<AccountInfo> showBankBookInfoDaily(String custname) throws SQLException;
-	public abstract List<AccountInfo> showBankBookInfoWeekly(String custname) throws SQLException;
-	public abstract List<AccountInfo> showBankBookInfoMonthly(String custname) throws SQLException;
-	public abstract List<AccountInfo> showBankBookInfoYearly(String custname) throws SQLException;
+	public abstract List<AccountInfo> showBankBookInfoDaily() throws SQLException;
+	public abstract List<AccountInfo> showBankBookInfoWeekly() throws SQLException;
+	public abstract List<AccountInfo> showBankBookInfoMonthly() throws SQLException;
+	public abstract List<AccountInfo> showBankBookInfoYearly() throws SQLException;
 	public abstract List<AccountInfo> showBankBookDormantAccountInfo() throws SQLException;
 	public abstract List<AccountInfo> showBankBookTerminationAccountInfo() throws SQLException;
 	public abstract int updateCardBalance(Customer customer) throws SQLException;

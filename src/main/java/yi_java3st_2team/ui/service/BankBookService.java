@@ -88,17 +88,17 @@ public class BankBookService {
 	public List<String> showWithdrawalMonth() throws SQLException{
 		return bankBookDao.showWithDrawalMonth();
 	}
-	public List<AccountInfo> bankBookInfoDaily(String custname) throws SQLException {
-		return bankBookDao.showBankBookInfoDaily(custname);
+	public List<AccountInfo> bankBookInfoDaily() throws SQLException {
+		return bankBookDao.showBankBookInfoDaily();
 	}
-	public List<AccountInfo> bankBookInfoWeekly(String custname) throws SQLException {
-		return bankBookDao.showBankBookInfoWeekly(custname);
+	public List<AccountInfo> bankBookInfoWeekly() throws SQLException {
+		return bankBookDao.showBankBookInfoWeekly();
 	}
-	public List<AccountInfo> bankBookInfoMonthly(String custname) throws SQLException {
-		return bankBookDao.showBankBookInfoMonthly(custname);
+	public List<AccountInfo> bankBookInfoMonthly() throws SQLException {
+		return bankBookDao.showBankBookInfoMonthly();
 	}
-	public List<AccountInfo> bankBookInfoYearly(String custname) throws SQLException {
-		return bankBookDao.showBankBookInfoYearly(custname);
+	public List<AccountInfo> bankBookInfoYearly() throws SQLException {
+		return bankBookDao.showBankBookInfoYearly();
 	}
 	public List<AccountInfo> showDormantAccountInfo() throws SQLException {
 		return bankBookDao.showBankBookDormantAccountInfo();

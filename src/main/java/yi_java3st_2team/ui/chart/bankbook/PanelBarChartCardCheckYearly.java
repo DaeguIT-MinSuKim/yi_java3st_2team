@@ -62,134 +62,19 @@ public class PanelBarChartCardCheckYearly extends JFXPanel implements InitScene{
 	private ObservableList<XYChart.Series<String, Number>> getChartData() {
 		ObservableList<Series<String, Number>> list = FXCollections.observableArrayList();
 		service = new CardService();
-		List<CardInfo> list1 = null;
-		List<CardInfo> list2 = null;
-		List<CardInfo> list3 = null;
-		List<CardInfo> list4 = null;
-		List<CardInfo> list5 = null;
-		AccountInfo accountInfo1 = null;
-		AccountInfo accountInfo2 = null;
-		AccountInfo accountInfo3 = null;
-		AccountInfo accountInfo4 = null;
-		AccountInfo accountInfo5 = null;
+		List<CardInfo> infoList = null;
 		try {
-			list1 = service.cardInfoWeekly("김가나");
-			list2 = service.cardInfoWeekly("김다라");
-			list3 = service.cardInfoWeekly("김마바");
-			list4 = service.cardInfoWeekly("김사아");
-			list5 = service.cardInfoWeekly("김자차");
-			if(list1.size()==0) {
-				accountInfo1 = new AccountInfo("김가나", 0);
-			}
-			else {
-				for(CardInfo info : list1) {
-					if(info.getDiv().equals("체크카드")) {
-						accountInfo1 = new AccountInfo(info.getCustName(), info.getCount());
-						break;
-					}
-					else {
-						accountInfo1 = new AccountInfo("김가나", 0);
-					}
-				}
-			}
-			if(list2.size()==0) {
-				accountInfo2 = new AccountInfo("김다라", 0);
-			}
-			else {
-				for(CardInfo info : list2) {
-					if(info.getDiv().equals("체크카드")) {
-						accountInfo2 = new AccountInfo(info.getCustName(), info.getCount());
-						break;
-					}
-					else {
-						accountInfo2 = new AccountInfo("김다라", 0);
-					}
-				}
-			}
-			if(list3.size()==0) {
-				accountInfo3 = new AccountInfo("김마바", 0);
-			}
-			else {
-				for(CardInfo info : list3) {
-					if(info.getDiv().equals("체크카드")) {
-						accountInfo3 = new AccountInfo(info.getCustName(), info.getCount());
-						break;
-					}
-					else {
-						accountInfo3 = new AccountInfo("김마바", 0);
-					}
-				}
-			}
-			if(list4.size()==0) {
-				accountInfo4 = new AccountInfo("김사아", 0);
-			}
-			else {
-				for(CardInfo info : list4) {
-					if(info.getDiv().equals("체크카드")) {
-						accountInfo4 = new AccountInfo(info.getCustName(), info.getCount());
-						break;
-					}
-					else {
-						accountInfo4 = new AccountInfo("김사아", 0);
-					}
-				}
-			}
-			if(list5.size()==0) {
-				accountInfo5 = new AccountInfo("김자차", 0);
-			}
-			else {
-				for(CardInfo info : list5) {
-					if(info.getDiv().equals("체크카드")) {
-						accountInfo5 = new AccountInfo(info.getCustName(), info.getCount());
-						break;
-					}
-					else {
-						accountInfo5 = new AccountInfo("김자차", 0);
-					}
-				}
-			}
+			infoList = service.cardInfoYearly();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		XYChart.Series<String, Number> series = new Series<String, Number>();
-		series.getData().add(new Data<String, Number>(accountInfo1.getCustName(), accountInfo1.getCount()));
-		series.getData().add(new Data<String, Number>(accountInfo2.getCustName(), accountInfo2.getCount()));
-		series.getData().add(new Data<String, Number>(accountInfo3.getCustName(), accountInfo3.getCount()));
-		series.getData().add(new Data<String, Number>(accountInfo4.getCustName(), accountInfo4.getCount()));
-		series.getData().add(new Data<String, Number>(accountInfo5.getCustName(), accountInfo5.getCount()));
-		
-		series.getData().get(0).nodeProperty().addListener(new ChangeListener<Node>() {
-			@Override
-			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
-				newValue.setStyle("-fx-bar-fill: red;");
+		for(CardInfo c : infoList) {
+			if(c.getDiv().equals("체크카드")) {
+				series.getData().add(new Data<String, Number>(c.getCustName(),c.getCount()));
 			}
-		});
-		series.getData().get(1).nodeProperty().addListener(new ChangeListener<Node>() {
-			@Override
-			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
-				newValue.setStyle("-fx-bar-fill: orange;");
-			}
-		});
-		series.getData().get(2).nodeProperty().addListener(new ChangeListener<Node>() {
-			@Override
-			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
-				newValue.setStyle("-fx-bar-fill: yellow;");
-			}
-		});
-		series.getData().get(3).nodeProperty().addListener(new ChangeListener<Node>() {
-			@Override
-			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
-				newValue.setStyle("-fx-bar-fill: green;");
-			}
-		});
-		series.getData().get(4).nodeProperty().addListener(new ChangeListener<Node>() {
-			@Override
-			public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newValue) {
-				newValue.setStyle("-fx-bar-fill: blue;");
-			}
-		});
-		
+		}
 		list.add(series);
 		return list;
 	}
