@@ -249,9 +249,9 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 								//리스트 다시 불러오기 
 								pEmpTblPanel.loadTableData(service.showEmpList());
 								//창 닫기
-								
-								JOptionPane.showMessageDialog(null,addEmp.getEmpName()+"님이 사원리스트에 추가되었습니다");
 								dlgEmp.setVisible(false);
+								JOptionPane.showMessageDialog(null,addEmp.getEmpName()+"님이 사원리스트에 추가되었습니다");
+								
 								
 								
 								
