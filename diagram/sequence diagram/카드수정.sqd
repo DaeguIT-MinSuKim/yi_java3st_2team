@@ -1758,7 +1758,7 @@
                                       <movable>true</movable>
                                     </target>
                                     <bendpoints/>
-                                    <name>정말 수정하시겠습니까라는 메시지 창이 나오고 확인 버튼 클릭시 화면에 카드 정보가 수정된다</name>
+                                    <name>&apos;수정되었습니다&apos;라는 메세지창이 뜨고 화면에 카드 정보가 수정된다</name>
                                     <direction>false</direction>
                                     <order>6</order>
                                     <oldOrder>6</oldOrder>
@@ -1825,7 +1825,7 @@
                                 <movable>true</movable>
                               </target>
                               <bendpoints/>
-                              <name>고객 코드를 입력하고 확인을 누르게 되면 고객이 가지고 있는 카드 정보가 화면에 나타난다</name>
+                              <name>검색 구분에서 검색 조건을 선택, 검색어를 입력 후 조회 버튼을 클릭하면 카드 확인 가능</name>
                               <direction>true</direction>
                               <order>3</order>
                               <oldOrder>3</oldOrder>
