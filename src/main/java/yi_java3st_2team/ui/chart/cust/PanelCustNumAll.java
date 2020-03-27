@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import yi_java3st_2team.ui.service.CustomerService;
 
 public class PanelCustNumAll extends JPanel {
-	private final JLabel lblTitle = new JLabel("총 고객숫자");
+	private final JLabel lblTitle = new JLabel("총 고객수");
 	private CustomerService service = new CustomerService();
 	
 	public PanelCustNumAll() {

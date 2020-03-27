@@ -75,12 +75,14 @@ public class EmpCenterUIpanelAuth extends JPanel implements ActionListener {
 			//수정일때
 			if(e.getActionCommand()=="수정") {
 				//선택한 위치의 employee객체를 구하고 그 데이터를 다이얼로그에 세팅
-					Employee emp = pEmpTblPanel.getSelectedItem();
+					
 					
 					try {
+						Employee emp = pEmpTblPanel.getSelectedItem();
 						emp111 = service.showPikedEmpByCode(emp.getEmpCode());
 					}catch (Exception e1) {
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "선택해주세요");
+						return;
 					}
 					if(dlgEmpAuth == null) {
 						dlgEmpAuth = new DlgEmpAuth();
