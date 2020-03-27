@@ -178,6 +178,7 @@ create trigger tri_after_update_BankBook
    end $$
 delimiter ;
 
+
 -- 통계 조회를 위해서 미리 넣어두는 데이터
 insert into cust_DW_audit values("입금", "김서형", "293133-11-000001", 100, 100, now());
 insert into cust_DW_audit values("출금", "김서형", "293133-11-000001", 100, 0, now());
