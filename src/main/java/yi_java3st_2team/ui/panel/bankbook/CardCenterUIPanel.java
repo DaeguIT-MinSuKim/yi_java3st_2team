@@ -302,6 +302,7 @@ public class CardCenterUIPanel extends JPanel implements ActionListener {
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
 		try {
 			pNorth.tfClear();
+			pNorth.getCmbSearchList().setSelectedIndex(0);
 			List<Card> list = cardService.showCards();
 			pCenter.loadTableData(list);
 		} catch (SQLException e1) {

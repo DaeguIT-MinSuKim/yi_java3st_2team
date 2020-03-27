@@ -287,6 +287,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 	}
 	protected void panelBtnCancelActionPerformed(ActionEvent e) {
 		panel.tfClear();
+		panel.getCmbSearchList().setSelectedIndex(0);
 		try {
 			panel_1.loadTableData(custService.showCustomers());
 		} catch (SQLException e1) {

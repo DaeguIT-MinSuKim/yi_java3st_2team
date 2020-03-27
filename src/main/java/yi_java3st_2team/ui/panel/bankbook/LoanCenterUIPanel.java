@@ -243,6 +243,7 @@ public class LoanCenterUIPanel extends JPanel implements ActionListener {
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
 		try {
 			pNorth.tfClear();
+			pNorth.getCmbSearchList().setSelectedIndex(0);
 			List<Loan> list = service.showLoans();
 			pCenter.loadTableData(list);
 		} catch (SQLException e1) {

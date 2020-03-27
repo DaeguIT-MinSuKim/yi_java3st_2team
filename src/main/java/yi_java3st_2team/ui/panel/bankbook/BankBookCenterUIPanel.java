@@ -313,6 +313,7 @@ public class BankBookCenterUIPanel extends JPanel implements ActionListener {
 	protected void pNorthBtnCancelActionPerformed(ActionEvent e) {
 		try {
 			pNorth.tfClear();
+			pNorth.getCmbSearchList().setSelectedIndex(0);
 			List<BankBook> list = service.showBankBooks();
 			pCenter.loadTableData(list);
 		} catch (SQLException e1) {

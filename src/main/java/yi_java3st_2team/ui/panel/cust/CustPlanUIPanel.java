@@ -90,6 +90,7 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				panel.tfClear();
+				panel.getCmbSearchList().setSelectedIndex(0);
 				try {
 					panel_1.loadTableData(planService.showPlans());
 				} catch (SQLException e1) {
