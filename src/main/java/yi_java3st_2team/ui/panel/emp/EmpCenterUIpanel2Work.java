@@ -67,6 +67,7 @@ public class EmpCenterUIpanel2Work extends JPanel implements ActionListener {
 	}
 	protected void pEmpSerchBtnCancelActionPerformed(ActionEvent e) {
 		//취소누르면
+		pEmpSerch.getCmbSearchList().setSelectedIndex(0);
 		pEmpSerch.getTfSearch().setText("");
 		pEmpTblPanel.loadTableData(service.showEmpPerformance());
 	}

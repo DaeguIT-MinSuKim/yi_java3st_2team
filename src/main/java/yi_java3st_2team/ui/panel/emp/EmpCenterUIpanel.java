@@ -74,6 +74,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				sDeptName = pEmpSerch.getTfSearch().getText().trim();
 				
 				
+				
 				if(e.getActionCommand()=="추가") {
 					if(dlgEmpForUpdate !=null) {
 						dlgEmpForUpdate.dispose();
@@ -347,6 +348,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 	}
 	protected void pEmpSerchBtnCancelActionPerformed(ActionEvent e) {
 		//취소누르면
+		pEmpSerch.getCmbSearchList().setSelectedIndex(0);
 		pEmpSerch.getTfSearch().setText("");
 		pEmpTblPanel.loadTableData(service.showEmpList());
 	}

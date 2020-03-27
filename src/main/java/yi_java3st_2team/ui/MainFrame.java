@@ -97,7 +97,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel pCenter;
 	private JPanel pWest;
 	private JPanel pNorth;
-	private JPanel pcNorth;
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
 	private EmployeeService empService;
@@ -135,7 +134,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmCardStatistic;
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
-	private String greeting;
 	private JButton btnLogout;
 	private LoginFrame loginFrame;
 	private JPanel pLogout;
