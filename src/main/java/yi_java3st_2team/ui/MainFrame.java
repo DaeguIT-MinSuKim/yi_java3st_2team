@@ -767,6 +767,13 @@ public class MainFrame extends JFrame implements ActionListener {
 		if(pWest!=null) {
 			contentPane.remove(pWest);
 		}
+		
+		if(emp_UIpanel !=null) {
+			emp_UIpanel = new EmpCenterUIpanel();
+			emp_UIpanel.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 검색");
+			emp_UIpanel.repaint();
+			emp_UIpanel.revalidate();
+		}
 		contentPane.remove(pCenter);
 		pCenter = new JPanel(new BorderLayout());
 		emp_UIpanel.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 검색");
