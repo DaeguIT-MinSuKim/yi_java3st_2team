@@ -799,7 +799,12 @@ public class MainFrame extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "권한이 없습니다. HR부서 차장급 이상 접속가능");
 			return;
 		}
-
+        if(emp_UIpanel_auth !=null) {
+        	emp_UIpanel_auth = new EmpCenterUIpanelAuth();
+        	emp_UIpanel_auth.getpEmpSerch().changeTitleBorder("사원 관리 > 사원 권한");
+        	emp_UIpanel_auth.repaint();
+        	emp_UIpanel_auth.revalidate();
+        }
 		//센터 지우고  센터에 패널 모프시키기 
 		if(pWest!=null) {
 			contentPane.remove(pWest);

@@ -247,12 +247,12 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 					    	   pEmpSerch.getCmbSearchList().setSelectedIndex(0);
 							   pEmpSerch.getTfSearch().setText("");
 								//리스트 다시 불러오기 
-								pEmpTblPanel.loadTableData(service.showEmpList());
+								
 								//창 닫기
 								dlgEmp.setVisible(false);
 								JOptionPane.showMessageDialog(null,addEmp.getEmpName()+"님이 사원리스트에 추가되었습니다");
-								
-								
+								pEmpTblPanel.loadTableData(service.showEmpList());
+							
 								
 								
 					    }catch(Exception e4){
