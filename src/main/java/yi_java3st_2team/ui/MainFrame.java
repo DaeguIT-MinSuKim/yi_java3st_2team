@@ -350,6 +350,13 @@ public class MainFrame extends JFrame implements ActionListener {
 				if(pWest!=null) {
 					contentPane.remove(pWest);
 				}
+				if(cust_info_UIpanel!=null) {
+					cust_info_UIpanel = new CustInfoUIPanel();
+					cust_info_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 개인 정보");
+					pCenter.add(cust_info_UIpanel,BorderLayout.CENTER);
+					revalidate();
+					repaint();
+				}
 				contentPane.remove(pCenter);
 				pCenter = new JPanel(new BorderLayout());
 				cust_info_UIpanel.getPanel().changeTitleBorder("고객 정보 관리 > 고객 개인 정보");
@@ -1497,7 +1504,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		cust_DW_UIpanel.setMain(this);
 		card_UIpanel.setMain(this);
 	}
-	javax.swing.Timer paint = new javax.swing.Timer(100, new ActionListener() {
+	javax.swing.Timer paint = new javax.swing.Timer(1, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	repaint();
         	revalidate();

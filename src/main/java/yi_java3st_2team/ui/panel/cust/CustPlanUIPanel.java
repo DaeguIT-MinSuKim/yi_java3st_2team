@@ -123,6 +123,7 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
 				dlgcustplan.setActiontoAdd();
+				dlgcustplan.setTitle("신규 상품 추가");
 				dlgcustplan.getCmbPlanDetail().addItemListener(new ItemListener() {
 				
 					@Override
@@ -244,6 +245,7 @@ public class CustPlanUIPanel extends JPanel implements ItemListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustPlan dlgcustplan = new DlgCustPlan();
+				dlgcustplan.setTitle("상품 정보 수정");
 				dlgcustplan.getLblSelectPlease().setText("");
 				dlgcustplan.getTfCustPlanCode().setEditable(false);
 				dlgcustplan.getTfCustDetail().setEditable(false);

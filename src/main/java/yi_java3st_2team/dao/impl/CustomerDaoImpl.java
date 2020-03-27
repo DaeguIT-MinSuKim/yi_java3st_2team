@@ -96,7 +96,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int updateCustomer(Customer customer) throws SQLException {
-		String sql = "update customer set custCode = ?, custName =?, custRank=?, custCredit=?, custAddr=?, custTel=? where custName=? ";
+		String sql = "update customer set custCode = ?, custName =?, custRank=?, custCredit=?, custAddr=?, custTel=? where custCode=? ";
 		int res = -1;
 		try(Connection con = LocalDataSource.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -106,7 +106,7 @@ public class CustomerDaoImpl implements CustomerDao {
 			pstmt.setInt(4, customer.getCustCredit());
 			pstmt.setString(5, customer.getCustAddr());
 			pstmt.setString(6, customer.getCustTel());
-			pstmt.setString(7, customer.getCustName());
+			pstmt.setString(7, customer.getCustCode());
 			
 			res = pstmt.executeUpdate();
 		}

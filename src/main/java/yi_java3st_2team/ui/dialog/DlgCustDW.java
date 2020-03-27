@@ -27,6 +27,7 @@ public class DlgCustDW extends JDialog {
 		try {
 			DlgCustDW dialog = new DlgCustDW();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setTitle("입/출금");
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

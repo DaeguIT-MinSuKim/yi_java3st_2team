@@ -65,6 +65,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 			public void actionPerformed(ActionEvent e) {
 				DlgCustInfo dlgCustInfo = new DlgCustInfo();
 				dlgCustInfo.setActiontoAdd();
+				dlgCustInfo.setTitle("신규 고객 추가");
 				dlgCustInfo.getCmbCustRank().addItemListener(new ItemListener() {
 
 					@Override
@@ -149,6 +150,7 @@ public class CustInfoUIPanel extends JPanel implements ActionListener, ItemListe
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustInfo dlgCustInfo = new DlgCustInfo();
+				dlgCustInfo.setTitle("고객 정보 수정");
 				Customer customer = panel_1.getSelectedItem();
 				if(customer!=null) {
 					dlgCustInfo.setItem(customer);

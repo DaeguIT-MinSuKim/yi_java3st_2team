@@ -128,6 +128,7 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustDW dlgcustDW = new DlgCustDW();
+				dlgcustDW.setTitle("입금");
 				dlgcustDW.getLblAmount().setText("입금 금액");
 				
 				Customer customer = panel_1.getSelectedItem();
@@ -206,6 +207,7 @@ public class CustDWUIPanel extends JPanel implements ItemListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DlgCustDW dlgcustDW = new DlgCustDW();
+				dlgcustDW.setTitle("출금");
 				dlgcustDW.getLblAmount().setText("출금 금액");
 				
 				Customer customer = panel_1.getSelectedItem();

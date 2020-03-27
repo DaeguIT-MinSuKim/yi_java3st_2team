@@ -50,6 +50,7 @@ public class DlgCustInfo extends JDialog {
 		try {
 			DlgCustInfo dialog = new DlgCustInfo();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setTitle("고객 정보");
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
