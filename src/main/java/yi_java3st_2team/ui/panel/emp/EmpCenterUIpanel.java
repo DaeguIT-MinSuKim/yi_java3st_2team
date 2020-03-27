@@ -74,6 +74,7 @@ public class EmpCenterUIpanel extends JPanel implements ActionListener {
 				sDeptName = pEmpSerch.getTfSearch().getText().trim();
 				
 				
+				
 				if(e.getActionCommand()=="추가") {
 					if(dlgEmpForUpdate !=null) {
 						dlgEmpForUpdate.dispose();
