@@ -97,7 +97,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JPanel pCenter;
 	private JPanel pWest;
 	private JPanel pNorth;
-	private JPanel pcNorth;
 	private JPanel pcCenter;
 	private JLabel lblGreeting;
 	private EmployeeService empService;
@@ -135,7 +134,6 @@ public class MainFrame extends JFrame implements ActionListener {
 	private JMenuItem mntmCardStatistic;
 	private JMenuItem mntmLoan;
 	private JMenuItem mntmLoanSearch;
-	private String greeting;
 	private JButton btnLogout;
 	private LoginFrame loginFrame;
 	private JPanel pLogout;
@@ -1485,7 +1483,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		cust_DW_UIpanel.setMain(this);
 		card_UIpanel.setMain(this);
 	}
-	javax.swing.Timer paint = new javax.swing.Timer(100, new ActionListener() {
+	javax.swing.Timer paint = new javax.swing.Timer(1, new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         	repaint();
         	revalidate();
