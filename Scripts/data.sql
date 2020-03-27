@@ -138,36 +138,6 @@ create view bankbook_deposit_connect_to_card_info as select accountnum,custcode,
 insert into notice(subject,writer,write_date,content) 
 values("코로나19 다 함께 이겨냅시다!","작성자",now(),"YN BANK 직원 어려분 코로나 19 때문에 은행이 부도 위기에 처했지만, 여러분의 노고만이 회사를 살리는 유일한 길입니다. 저희 은행은 절대 직원 여러분을 버리지 않습니다. 다들 심기일전하여 코로나 19를 극복하고, YN BANK를 전세계 1위 은행으로 발돋움하게 노력합시다");
 
-#statistic trigger 및 procedure
-drop procedure if exists proc_total_avg;
-delimiter $
-  create procedure proc_total_avg()
-    begin 
-	    declare empSalary1 int default 0;
-	    declare empCnt int default -1;
-	    declare empTotalSalary int default 0;
-	    declare endOfRow boolean default false;
-	    
-	   declare salaryCursor cursor for
-	      select empSalary from bank.employee;
-	     
-	     declare continue handler for not found set endOfRow = true;
-	    
-	    open salaryCursor;
-	   
-	   while(!endOfRow) do 
-	     set empCnt = empCnt +1;
-	     set empTotalSalary = empTotalSalary + empSalary1;
-	     fetch salaryCursor into empSalary1;
-	   end while;
-	  
-	  select concat('모든사원의 총 급여-->',empTotalSalary) as total,concat('모든사원의 평균 급여-->',empTotalSalary/empSalary1) as average;
-	  
-	 close salaryCursor;
-    end $
-delimiter ;
-
-
 
 drop trigger if exists deleted_emp_trigger;
 delimiter $
@@ -209,11 +179,11 @@ create trigger tri_after_update_BankBook
 delimiter ;
 
 -- 통계 조회를 위해서 미리 넣어두는 데이터
-select * from cust_DW_audit;
 insert into cust_DW_audit values("입금", "김서형", "293133-11-000001", 100, 100, now());
 insert into cust_DW_audit values("출금", "김서형", "293133-11-000001", 100, 0, now());
 
-#통장 잔액이 변경될때, 카드 잔액이 카드 잔액이 변경될때 통장 잔액이 변경되는 프로시저
+#bankbook -- card 
+#카드 잔액->통장 잔액
 drop procedure if exists change_bankbalance;
 delimiter !
 create procedure change_bankbalance(
@@ -226,6 +196,7 @@ begin
 end!
 delimiter ;
 
+## 통장잔액 -> 카드 잔액
 drop procedure if exists change_cardbalance;
 
 delimiter !
@@ -239,6 +210,7 @@ begin
 end!
 delimiter ;
 
+##카드 수정이되면 카드 거래실적 (통계)
 drop trigger if exists tri_update_card;
 delimiter $
 create trigger tri_update_card
@@ -249,6 +221,7 @@ begin
 end $
 delimiter ;
 
+## 통장이 수정되면  통장 정보 테이블로  통장 거래실적 (통계)
 drop trigger if exists tri_update_bankbook;
 delimiter $
 create trigger tri_update_bankbook
@@ -259,6 +232,7 @@ begin
 end $
 delimiter ;
 
+##휴면 계좌 전환
 drop procedure if exists make_dormant;
 
 delimiter !
@@ -275,6 +249,7 @@ begin
 end!
 delimiter ;
 
+## 해지계좌
 drop procedure if exists make_termination;
 
 delimiter !
@@ -291,6 +266,7 @@ begin
 end!
 delimiter ;
 
+## 공지사항 삭제했을 때 번호 리셋
 drop procedure if exists reset_autoincrement_notice
 
 delimiter !
@@ -302,7 +278,7 @@ begin
 end!
 delimiter ;
 
-
+## 통장 추가했을 때 실적 테이블
 drop trigger if exists tri_insert_bankbook_performance;
 delimiter $
 create trigger tri_insert_bankbook_performance
@@ -313,6 +289,7 @@ begin
 end $
 delimiter ;
 
+##통장 삭제될 때 실적 테이블에도 삭제
 drop trigger if exists tri_delete_bankbook_performance;
 delimiter $
 create trigger tri_delete_bankbook_performance
@@ -323,6 +300,7 @@ begin
 end $
 delimiter ;
 
+##카드 추가할 때 실적 테이블 추가 
 drop trigger if exists tri_insert_card_performance;
 delimiter $
 create trigger tri_insert_card_performance
@@ -333,6 +311,7 @@ begin
 end $
 delimiter ;
 
+##카드 삭제할 때 실적 테이블에서 삭제 
 drop trigger if exists tri_delete_card_performance;
 delimiter $
 create trigger tri_delete_card_performance
@@ -343,6 +322,7 @@ begin
 end $
 delimiter ;
 
+##대출 추가할 때 실적 테이블 추가 
 drop trigger if exists tri_insert_loan_performance;
 delimiter $
 create trigger tri_insert_loan_performance
@@ -353,6 +333,7 @@ begin
 end $
 delimiter ;
 
+##대출 삭제할 때 실적 테이블에서 삭제 
 drop trigger if exists tri_delete_loan_performance;
 delimiter $
 create trigger tri_delete_loan_performance
