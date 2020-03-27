@@ -239,7 +239,20 @@ public class DlgCustInfo extends JDialog {
 		tfCustCode.setText(customer.getCustCode());
 		tfCustName.setText(customer.getCustName());
 		cmbCustRank.setSelectedItem(customer.getCustRank());
-		lblCustCreditRank.setText(Integer.toString(customer.getCustCredit()));
+		String custCredit = Integer.toString(customer.getCustCredit());
+		if(custCredit.equals("1")) {
+			custCredit = "1등급";
+		}else if(custCredit.equals("2")) {
+			custCredit = "2등급";
+		}else if(custCredit.equals("3")) {
+			custCredit = "3등급";
+		}else if(custCredit.equals("4")) {
+			custCredit = "4등급";
+		}else {
+			custCredit = "5등급";
+		}
+		
+		lblCustCreditRank.setText(custCredit);
 		//cmbCustCredit.setSelectedItem(Integer.toString(customer.getCustCredit()));
 		tfCustAddr.setText(customer.getCustAddr());
 		tfCustTel.setText(customer.getCustTel());
