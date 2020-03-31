@@ -13,6 +13,7 @@ public class Employee {
 	private String empPwd;
 	private Department dept;
 	private byte[] pic;
+	private boolean empRetire;
 	
 	private int perf;
 	private int bonus;
@@ -155,6 +156,19 @@ public class Employee {
 
 	public void setVip(String vip) {
 		this.vip = vip;
+	}
+	
+
+
+
+	public boolean isEmpRetire() {
+		return empRetire;
+	}
+
+
+
+	public void setEmpRetire(boolean empRetire) {
+		this.empRetire = empRetire;
 	}
 
 

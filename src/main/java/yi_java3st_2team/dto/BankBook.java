@@ -9,6 +9,8 @@ public class BankBook {
 	private Date accountOpenDate;
 	private float accountInterest;
 	private long accountBalance;
+	private boolean accountDormant;
+	private boolean accountTermination;
 	private Employee employee;
 	private boolean connectChk;
 	public BankBook() {
@@ -88,6 +90,19 @@ public class BankBook {
 	}
 	public void setConnectChk(boolean connectChk) {
 		this.connectChk = connectChk;
+	}
+	
+	public boolean isAccountDormant() {
+		return accountDormant;
+	}
+	public void setAccountDormant(boolean accountDormant) {
+		this.accountDormant = accountDormant;
+	}
+	public boolean isAccountTermination() {
+		return accountTermination;
+	}
+	public void setAccountTermination(boolean accountTermination) {
+		this.accountTermination = accountTermination;
 	}
 	@Override
 	public String toString() {
