@@ -7,6 +7,9 @@ public class CardInfo {
 	private String div;
 	private Date transDate;
 	private long cardbalance;
+	private int count;
+	private int check;
+	private int credit;
 	public CardInfo() {
 		
 	}
@@ -39,5 +42,31 @@ public class CardInfo {
 	public void setCardbalance(long cardbalance) {
 		this.cardbalance = cardbalance;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public int getCheck() {
+		return check;
+	}
+
+	public void setCheck(int check) {
+		this.check = check;
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+	
+	
 	
 }
