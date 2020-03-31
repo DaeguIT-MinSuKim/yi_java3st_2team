@@ -140,10 +140,7 @@ public class CardDaoImpl implements CardDao {
 		return res;
 	}
 	private CardInfo getCard(ResultSet rs) throws SQLException {
-		String custname = rs.getString("custname");
-		String div = rs.getString("div");
-		int count = rs.getInt("count");
-		return new CardInfo(custname, div, count);
+		return null; //추후 구현 필요
 	}
 	@Override
 	public List<CardInfo> showCardInfoDaily() throws SQLException {
@@ -218,10 +215,7 @@ public class CardDaoImpl implements CardDao {
 		return list;
 	}
 	private CardInfo getCardDivInfo(ResultSet rs) throws SQLException {
-		String custname = rs.getString("cs.custname");
-		int check = rs.getInt("check");
-		int credit = rs.getInt("credit");
-		return new CardInfo(custname, check, credit);
+		return null;//추후 구현 필요
 	}
 	@Override
 	public List<Card> showCardByPlanName(Card card) throws SQLException {
