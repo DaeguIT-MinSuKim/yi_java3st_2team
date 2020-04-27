@@ -3,13 +3,10 @@ package yi_java3st_2team.ui.chart.bankbook;
 import java.sql.SQLException;
 import java.util.List;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -18,10 +15,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.paint.Color;
-import yi_java3st_2team.dto.AccountInfo;
 import yi_java3st_2team.dto.CardInfo;
 import yi_java3st_2team.ui.chart.InitScene;
-import yi_java3st_2team.ui.service.BankBookService;
 import yi_java3st_2team.ui.service.CardService;
 
 @SuppressWarnings("serial")

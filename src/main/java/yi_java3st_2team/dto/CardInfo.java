@@ -1,32 +1,29 @@
 package yi_java3st_2team.dto;
 
+import java.util.Date;
+
 public class CardInfo {
 	private String custName;
 	private String div;
+	private Date transDate;
+	private long cardbalance;
 	private int count;
 	private int check;
 	private int credit;
 	public CardInfo() {
 		
 	}
-	public int getCount() {
-		return count;
+	
+	public Date getTransDate() {
+		return transDate;
 	}
-	public void setCount(int count) {
-		this.count = count;
+
+
+	public void setTransDate(Date transDate) {
+		this.transDate = transDate;
 	}
-	public int getCheck() {
-		return check;
-	}
-	public void setCheck(int check) {
-		this.check = check;
-	}
-	public int getCredit() {
-		return credit;
-	}
-	public void setCredit(int credit) {
-		this.credit = credit;
-	}
+
+
 	public String getCustName() {
 		return custName;
 	}
@@ -39,15 +36,37 @@ public class CardInfo {
 	public void setDiv(String div) {
 		this.div = div;
 	}
-	public CardInfo(String custName, String div, int count) {
-		this.custName = custName;
-		this.div = div;
+	public long getCardbalance() {
+		return cardbalance;
+	}
+	public void setCardbalance(long cardbalance) {
+		this.cardbalance = cardbalance;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
 		this.count = count;
 	}
-	public CardInfo(String custName, int check, int credit) {
-		this.custName = custName;
+
+	public int getCheck() {
+		return check;
+	}
+
+	public void setCheck(int check) {
 		this.check = check;
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
+	
+	
 	
 }

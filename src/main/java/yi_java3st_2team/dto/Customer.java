@@ -12,6 +12,7 @@ public class Customer {
 	private Date lastAccountDate;
 	private String lastAccount;
 	private BankBook bankbook;
+	private boolean custDiv;
 	public Customer() {
 		
 	}
@@ -113,6 +114,17 @@ public class Customer {
 
 	public void setLastAccount(String lastAccount) {
 		this.lastAccount = lastAccount;
+	}
+	
+
+	public boolean isCustDiv() {
+		return custDiv;
+	}
+
+
+
+	public void setCustDiv(boolean custDiv) {
+		this.custDiv = custDiv;
 	}
 
 

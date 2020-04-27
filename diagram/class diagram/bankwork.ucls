@@ -1,0 +1,2095 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="yi_java3st_2team.dao.BankBookDao" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/BankBookDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="621" width="319" x="1" y="238"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="false" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="yi_java3st_2team.dao.CardDao" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/CardDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="295" y="549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="yi_java3st_2team.dao.LoanDao" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/LoanDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="484" y="551"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="yi_java3st_2team.dao.PlanDao" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/PlanDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="681" y="555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="yi_java3st_2team.dao.impl.BankBookDaoImpl" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/impl/BankBookDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="134" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="yi_java3st_2team.dao.impl.CardDaoImpl" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/impl/CardDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="322" y="699"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="yi_java3st_2team.dao.impl.LoanDaoImpl" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/impl/LoanDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="514" y="692"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="yi_java3st_2team.dao.impl.PlanDaoImpl" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/dao/impl/PlanDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="703" y="688"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="yi_java3st_2team.ui.service.CardService" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/service/CardService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="202" y="198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="yi_java3st_2team.ui.service.BankBookService" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/service/BankBookService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="395" y="198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="yi_java3st_2team.ui.service.LoanService" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/service/LoanService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="582" y="197"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="yi_java3st_2team.ui.absPanel.AbsCenterNorthSearchPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/absPanel/AbsCenterNorthSearchPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1528" y="205"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="yi_java3st_2team.ui.absPanel.AbsCenterStatisticNorthPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/absPanel/AbsCenterStatisticNorthPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1981" y="207"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="yi_java3st_2team.ui.absPanel.AbsCenterStatisticWestPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/absPanel/AbsCenterStatisticWestPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1764" y="204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="yi_java3st_2team.ui.absPanel.AbsCenterTblPanel.NotEditableModel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/absPanel/AbsCenterTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="925" y="709"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="yi_java3st_2team.ui.absPanel.AbsCenterTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/absPanel/AbsCenterTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="913" y="555"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="yi_java3st_2team.ui.table.BankBookAvailableDepositPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/BankBookAvailableDepositPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="902" y="255"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="yi_java3st_2team.ui.table.BankBookCenterTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/BankBookCenterTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1120" y="262"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="yi_java3st_2team.ui.table.CardCenterTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/CardCenterTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="709" y="334"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="yi_java3st_2team.ui.table.DormantInfoTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/DormantInfoTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1145" y="458"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="yi_java3st_2team.ui.table.LoanCenterTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/LoanCenterTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1111" y="644"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="yi_java3st_2team.ui.table.TerminationInfoTblPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/table/TerminationInfoTblPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1315" y="267"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="yi_java3st_2team.ui.panel.bankbook.BankBookCenterNorthSearchPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/BankBookCenterNorthSearchPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1532" y="321"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="yi_java3st_2team.ui.panel.bankbook.LoanCenterNorthSearchPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/LoanCenterNorthSearchPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1182" y="87"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="yi_java3st_2team.ui.panel.bankbook.CardCenterNorthSearchPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/CardCenterNorthSearchPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1403" y="67"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="yi_java3st_2team.ui.panel.bankbook.BankBookStatisticWestPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/BankBookStatisticWestPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1754" y="315"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="yi_java3st_2team.ui.panel.bankbook.BankBookTransInfoWestMenuPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/BankBookTransInfoWestMenuPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1975" y="325"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="yi_java3st_2team.ui.panel.bankbook.CardStatisticWestPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/CardStatisticWestPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1599" y="70"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="yi_java3st_2team.ui.panel.bankbook.CardTransInfoNorthPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/CardTransInfoNorthPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1985" y="85"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="yi_java3st_2team.ui.panel.bankbook.CardTransInfoWestMenuPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/CardTransInfoWestMenuPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1793" y="62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="yi_java3st_2team.ui.panel.bankbook.BankBookTransInfoNorthPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/BankBookTransInfoNorthPanel.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1962" y="461"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="yi_java3st_2team.ui.panel.bankbook.LoanStatisticWestPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/LoanStatisticWestPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1759" y="461"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="yi_java3st_2team.ui.panel.bankbook.BankBookCenterUIPanel" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/BankBookCenterUIPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1422" y="560"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="yi_java3st_2team.ui.panel.bankbook.CardCenterUIPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/CardCenterUIPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1437" y="915"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="yi_java3st_2team.ui.panel.bankbook.LoanCenterUIPanel" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/panel/bankbook/LoanCenterUIPanel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1751" y="693"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="yi_java3st_2team.ui.LoginFrame" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/LoginFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1733" y="1176"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="yi_java3st_2team.ui.MainFrame" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/MainFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2369" y="1142"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="yi_java3st_2team.ui.dialog.DlgBankBookAdd" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgBankBookAdd.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="558" y="1199"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="yi_java3st_2team.ui.dialog.DlgBankBookMod" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgBankBookMod.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="776" y="1192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="yi_java3st_2team.ui.dialog.DlgCardAdd" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgCardAdd.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="954" y="1192"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="yi_java3st_2team.ui.dialog.DlgCardMod" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgCardMod.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1143" y="1186"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="yi_java3st_2team.ui.dialog.DlgConnectBankBookInfo" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgConnectBankBookInfo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1147" y="888"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="yi_java3st_2team.ui.dialog.DlgLoanAdd" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgLoanAdd.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1310" y="1186"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="yi_java3st_2team.ui.dialog.DlgLoanMod" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/dialog/DlgLoanMod.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1501" y="1183"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="45" language="java" name="yi_java3st_2team.ui.chart.InitScene" project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/InitScene.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="300" y="815"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="46" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookDepositDaily" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookDepositDaily.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="171" y="1441"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookDepositMonthly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookDepositMonthly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="168" y="1581"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookDepositWeekly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookDepositWeekly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="784" y="1704"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookDepositYearly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookDepositYearly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1079" y="1710"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookMinusDaily" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookMinusDaily.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1357" y="1710"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookMinusMonthly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookMinusMonthly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1241" y="1806"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookMinusWeekly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookMinusWeekly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1511" y="1805"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookMinusYearly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookMinusYearly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="507" y="1446"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookSavingDaily" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookSavingDaily.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="799" y="1451"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookSavingMonthly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookSavingMonthly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1055" y="1588"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookSavingWeekly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookSavingWeekly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1337" y="1594"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartBankBookSavingYearly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartBankBookSavingYearly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="792" y="1586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCheckDaily" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCheckDaily.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="504" y="1699"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCheckMonthly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCheckMonthly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="512" y="1593"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCheckWeekly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCheckWeekly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="993" y="1808"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCheckYearly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCheckYearly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="752" y="1810"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCreditDaily" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCreditDaily.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1074" y="1456"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCreditMonthly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCreditMonthly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1342" y="1463"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCreditWeekly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCreditWeekly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1596" y="1596"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardCreditYearly" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardCreditYearly.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1592" y="1471"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartCardStatisticInfo" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartCardStatisticInfo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="502" y="1802"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="yi_java3st_2team.ui.chart.bankbook.PanelBarChartLoanStatisticInfo" 
+    project="yi_java3st_2team" 
+    file="/yi_java3st_2team/src/main/java/yi_java3st_2team/ui/chart/bankbook/PanelBarChartLoanStatisticInfo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1848" y="1602"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="68">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="69">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="70" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="71" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="73" name="dlgCardMod">        
+        <position height="0" width="0" x="255" y="-33"/>      
+      </attribute>      
+      <multiplicity id="74" minimum="0" maximum="1">        
+        <position height="0" width="0" x="255" y="-33"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="76" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="77" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="79" name="dlgBankBookAdd">        
+        <position height="0" width="0" x="456" y="80"/>      
+      </attribute>      
+      <multiplicity id="80" minimum="0" maximum="1">        
+        <position height="0" width="0" x="456" y="80"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="82" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="84">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="85">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="86" name="transInfo_north_bankbook">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="89" name="bankBook_barChart_Saving_Daily">        
+        <position height="0" width="0" x="-96" y="-478"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-96" y="-478"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="92" name="card_UIpanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="95" name="bankBook_barChart_Deposit_Daily">        
+        <position height="0" width="0" x="32" y="-219"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="0" width="0" x="32" y="-219"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="46" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="98" name="loan_barChart_Statistic_Info">        
+        <position height="0" width="0" x="295" y="-678"/>      
+      </attribute>      
+      <multiplicity id="99" minimum="0" maximum="1">        
+        <position height="0" width="0" x="295" y="-678"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="67" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="101" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="104" name="pCenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="106">    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="107">    
+    <end type="SOURCE" refId="67"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="108">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="109" name="bankBook_barChart_Minus_Monthly">        
+        <position height="0" width="0" x="1099" y="-609"/>      
+      </attribute>      
+      <multiplicity id="110" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1099" y="-609"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="51" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="111">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="112" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="113" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="114">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="115" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="116" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="118" name="bankBook_barChart_Saving_Yearly">        
+        <position height="0" width="0" x="218" y="-585"/>      
+      </attribute>      
+      <multiplicity id="119" minimum="0" maximum="1">        
+        <position height="0" width="0" x="218" y="-585"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="120">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="121">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="122">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="123" name="dlgCard">        
+        <position height="0" width="0" x="331" y="-52"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="1">        
+        <position height="0" width="0" x="331" y="-52"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="126" name="dlgInfo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="127" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="129" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="130" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="131">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="132" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="133" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="134">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <generalization id="135">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="136">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="137" name="bankbook_UIpanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="138" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="140" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="141" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="143" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="144" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="146" name="bankBookDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="148">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <generalization id="149">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <realization id="150">    
+    <end type="SOURCE" refId="61"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="151">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="152">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="153" name="bankBook_barChart_Saving_Weekly">        
+        <position height="0" width="0" x="449" y="-516"/>      
+      </attribute>      
+      <multiplicity id="154" minimum="0" maximum="1">        
+        <position height="0" width="0" x="449" y="-516"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="155">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <generalization id="156">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <realization id="157">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="158">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="159" name="main">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </attribute>      
+      <multiplicity id="160" minimum="0" maximum="1">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="161">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="162" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="163" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="164">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="165">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="166" name="planDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="167" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <end type="SOURCE" refId="48" navigable="false">      
+      <attribute id="169" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="170" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="171">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <realization id="172">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="173">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="174" name="card_barChart_check_Yearly">        
+        <position height="0" width="0" x="-135" y="-617"/>      
+      </attribute>      
+      <multiplicity id="175" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-135" y="-617"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="176">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="177" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="178" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="179">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="180" name="frame">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="181" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="182">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="183">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="184" name="bankBook_barChart_Deposit_Yearly">        
+        <position height="0" width="0" x="942" y="-410"/>      
+      </attribute>      
+      <multiplicity id="185" minimum="0" maximum="1">        
+        <position height="0" width="0" x="942" y="-410"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="187" name="card_barChart_check_Monthly">        
+        <position height="0" width="0" x="-371" y="-678"/>      
+      </attribute>      
+      <multiplicity id="188" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-371" y="-678"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="189">    
+    <end type="SOURCE" refId="56"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="190">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="191">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="192" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="193" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="194">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="195" name="pNorth">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="196" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="197">    
+    <end type="SOURCE" refId="52"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="198">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="199" name="uiPanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="200" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="202" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="203" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="205" name="bankBook_barChart_Deposit_Monthly">        
+        <position height="0" width="0" x="31" y="-233"/>      
+      </attribute>      
+      <multiplicity id="206" minimum="0" maximum="1">        
+        <position height="0" width="0" x="31" y="-233"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="47" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="208" name="main">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </attribute>      
+      <multiplicity id="209" minimum="0" maximum="1">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="211" name="dlgCard">        
+        <position height="0" width="0" x="331" y="-52"/>      
+      </attribute>      
+      <multiplicity id="212" minimum="0" maximum="1">        
+        <position height="0" width="0" x="331" y="-52"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="213">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="214" name="bankbook_transInfo_west">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="215" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="216">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="217">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="218" name="statistic_west_card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="219" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="220">    
+    <end type="SOURCE" refId="60"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="221">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="222" name="pNorth">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="223" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="224">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="225" name="loginFrame">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="226" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="228" name="bankbookDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="229" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="230">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="231" name="loan_UIpanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="232" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="233">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="234" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="235" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="236">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="237" name="bankBook_barChart_Saving_Monthly">        
+        <position height="0" width="0" x="477" y="-425"/>      
+      </attribute>      
+      <multiplicity id="238" minimum="0" maximum="1">        
+        <position height="0" width="0" x="477" y="-425"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="239">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="240">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="241" name="pNorth">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="242" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="243">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="244" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="245" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="246">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="247" name="panel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="248" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="249">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="250" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="251" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="252">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <realization id="253">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="254">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="255" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="256" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="257">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="258" name="bankBook_barChart_Minus_Yearly">        
+        <position height="0" width="0" x="-65" y="-376"/>      
+      </attribute>      
+      <multiplicity id="259" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-65" y="-376"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="53" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="260">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <realization id="261">    
+    <end type="SOURCE" refId="64"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="262">    
+    <end type="SOURCE" refId="57"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="263">    
+    <end type="SOURCE" refId="56" navigable="false">      
+      <attribute id="264" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="265" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="266">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="267">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="268" name="model">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="269" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="270">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="271">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="272" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="273" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="274">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="275" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="276" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="277">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="278" name="bankBook_barChart_Minus_Weekly">        
+        <position height="0" width="0" x="1369" y="-758"/>      
+      </attribute>      
+      <multiplicity id="279" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1369" y="-758"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="280">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="281" name="pCenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="282" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="283">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="284" name="main">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </attribute>      
+      <multiplicity id="285" minimum="0" maximum="1">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="286">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="287" name="uiPanel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="288" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="289">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="290" name="cardDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="291" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="292">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="293" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="294" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="295">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="296" name="card_barChart_Statistic_Info">        
+        <position height="0" width="0" x="-711" y="-481"/>      
+      </attribute>      
+      <multiplicity id="297" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-711" y="-481"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="298">    
+    <end type="SOURCE" refId="66"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="299">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="300" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="301" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="302">    
+    <end type="SOURCE" refId="62"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="303">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="304" name="planDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="305" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="306">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="307" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="308" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="309">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="310" name="planDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="311" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="312">    
+    <end type="SOURCE" refId="63"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="313">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="314" name="card_barChart_credit_Monthly">        
+        <position height="0" width="0" x="-206" y="-484"/>      
+      </attribute>      
+      <multiplicity id="315" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-206" y="-484"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="63" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="316">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="317" name="bankBook_barChart_Deposit_Weekly">        
+        <position height="0" width="0" x="645" y="-263"/>      
+      </attribute>      
+      <multiplicity id="318" minimum="0" maximum="1">        
+        <position height="0" width="0" x="645" y="-263"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="48" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="319">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="320" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="321" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="322">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="323">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="324" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="325" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="326">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="327" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="328" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="329">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="330" name="card_barChart_check_Weekly">        
+        <position height="0" width="0" x="424" y="-665"/>      
+      </attribute>      
+      <multiplicity id="331" minimum="0" maximum="1">        
+        <position height="0" width="0" x="424" y="-665"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="332">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <association id="333">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="334" name="transInfo_west_card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="335" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="336">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="337" name="card_barChart_credit_Daily">        
+        <position height="0" width="0" x="-147" y="-491"/>      
+      </attribute>      
+      <multiplicity id="338" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-147" y="-491"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="62" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="339">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="340" name="statistic_west_loan">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="341" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="342">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="343" name="card_barChart_check_Daily">        
+        <position height="0" width="0" x="-69" y="-624"/>      
+      </attribute>      
+      <multiplicity id="344" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-69" y="-624"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="345">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="346" name="pCenter">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="347" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="348">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="349" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="350" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="351">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="352">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="353" name="main">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </attribute>      
+      <multiplicity id="354" minimum="0" maximum="1">        
+        <position height="0" width="0" x="63" y="-12"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="355">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="356" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="357" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="358">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="359" name="dlgLoanMod">        
+        <position height="0" width="0" x="76" y="-273"/>      
+      </attribute>      
+      <multiplicity id="360" minimum="0" maximum="1">        
+        <position height="0" width="0" x="76" y="-273"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="361">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="362" name="transInfo_north_card">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="363" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="364">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="365">    
+    <end type="SOURCE" refId="39" navigable="false">      
+      <attribute id="366" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="367" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="368">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="369">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="370" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="371" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="372">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="373" name="bankBook_barChart_Minus_Daily">        
+        <position height="0" width="0" x="1216" y="-556"/>      
+      </attribute>      
+      <multiplicity id="374" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1216" y="-556"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="375">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="376" name="card_barChart_credit_Yearly">        
+        <position height="0" width="0" x="39" y="-633"/>      
+      </attribute>      
+      <multiplicity id="377" minimum="0" maximum="1">        
+        <position height="0" width="0" x="39" y="-633"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="65" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="378">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <association id="379">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="380" name="dlgLoanAdd">        
+        <position height="0" width="0" x="163" y="-281"/>      
+      </attribute>      
+      <multiplicity id="381" minimum="0" maximum="1">        
+        <position height="0" width="0" x="163" y="-281"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="382">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="383">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="384" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="385" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="386">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="387" name="card_barChart_credit_Weekly">        
+        <position height="0" width="0" x="379" y="-512"/>      
+      </attribute>      
+      <multiplicity id="388" minimum="0" maximum="1">        
+        <position height="0" width="0" x="379" y="-512"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="64" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="389">    
+    <end type="SOURCE" refId="67" navigable="false">      
+      <attribute id="390" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="391" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="392">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="16"/>  
+  </generalization>  
+  <association id="393">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="394" name="dlgBankBookMod">        
+        <position height="0" width="0" x="417" y="89"/>      
+      </attribute>      
+      <multiplicity id="395" minimum="0" maximum="1">        
+        <position height="0" width="0" x="417" y="89"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="396">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="397" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="398" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="399">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="400" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="401" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="402">    
+    <end type="SOURCE" refId="37" navigable="false">      
+      <attribute id="403" name="bankbook_info_west">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="404" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="405">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="406" name="loanDao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="407" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="408">    
+    <end type="SOURCE" refId="44" navigable="false">      
+      <attribute id="409" name="service">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="410" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="411">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="412" name="cardService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="413" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
