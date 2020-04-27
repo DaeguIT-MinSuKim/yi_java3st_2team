@@ -38,7 +38,9 @@ select empCode, empName, empTitle, empAuth, empSalary, empTel, empId, empPwd, d.
 -- 전체직원수
 select count(*) from bank.employee;  -- 3출력
 -- 부서별 직원수
-select count(*) from bank.employee where deptNo =1; -- 1명
+select count(*) from bank.employee where deptNo =1; -- // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+1명
 select count(*) from bank.employee where deptNo =2; -- 2명
 -- 직급별 직원수(등급 같이 표시)
 select concat(count(*),'명(',`empTitle`,')') as '직급별사원수(직책)' from bank.employee 

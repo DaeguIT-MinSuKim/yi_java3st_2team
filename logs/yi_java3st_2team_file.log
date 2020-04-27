@@ -29,3 +29,9 @@
 [TRACE] [2020-02-26 20:22:03] testGetConnection()
 [TRACE] [2020-02-26 20:22:26] tearDown()
 [TRACE] [2020-02-26 20:22:26] tearDownAfterClass()
+[TRACE] [2020-04-01 16:18:25] setUpBeforeClass()
+[TRACE] [2020-04-01 16:18:25] setUp()
+[TRACE] [2020-04-01 16:18:25] testGetConnection()
+[TRACE] [2020-04-01 16:18:25] HikariProxyConnection@1466101865 wrapping com.mysql.jdbc.JDBC4Connection@28e2375e
+[TRACE] [2020-04-01 16:18:25] tearDown()
+[TRACE] [2020-04-01 16:18:25] tearDownAfterClass()
